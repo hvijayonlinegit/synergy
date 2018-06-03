@@ -4,8 +4,8 @@ var router = express.Router();
 
 const pg = require('pg');
 const path = require('path');
-const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5433/todo';
-
+const connectionString = process.env.DATABASE_URL || 'postgres://ebsibdphtesvlf:d19fe91759068da262861ecd484e5317d9f7ae94a852797cadea213a4b6a47dd@ec2-54-204-46-236.compute-1.amazonaws.com:5432/d1jm11r40pu698?ssl=true';
+console.log('connectionString'+connectionString);
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -16,6 +16,7 @@ router.post('/api/v1/todos', (req, res, next) => {
   // Grab data from http request
   const data = {text: req.body.text, complete: req.body.complete};
   // Get a Postgres client from the connection pool
+  console.log('VVVVV'+data.text+data.complete)
   pg.connect(connectionString, (err, client, done) => {
     // Handle connection errors
     if(err) {
