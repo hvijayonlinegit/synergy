@@ -7,15 +7,15 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
+import { browserHistory} from 'react-router'
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import Hidden from '@material-ui/core/Hidden';
 
 const styles = {
   root: {
     flexGrow: 1,
+
   },
   flex: {
     flex: 1,
@@ -39,11 +39,18 @@ class MenuAppBar extends React.Component {
   handleMenu = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
-
   handleClose = () => {
+
     this.setState({ anchorEl: null });
   };
-
+  handleAdd = () => {
+    browserHistory.push(`/clients/new`);
+    this.setState({ anchorEl: null });
+  };
+  handleClients =() => {
+    browserHistory.push(`/clients`);
+    this.setState({ anchorEl: null });
+  };
   render() {
     const { classes } = this.props;
     const { auth, anchorEl } = this.state;
@@ -65,19 +72,31 @@ class MenuAppBar extends React.Component {
     };
     return (
       <div className={classes.root}>
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Switch checked={auth} onChange={this.handleChange} aria-label="LoginSwitch" />
-            }
-            label={auth ? 'Logout' : 'Login'}
-          />
-        </FormGroup>
+
         <AppBar position="static">
 
           <Toolbar>
             <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-              <MenuIcon />
+              <MenuIcon  onClick={this.handleMenu} />
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={open}
+                onClose={this.handleClose}
+              >
+                <MenuItem onClick={this.handleClients}>Clients</MenuItem>
+                <Hidden smDown>
+                  <MenuItem onClick={this.handleAdd}>Add New Client</MenuItem>
+                </Hidden>
+              </Menu>
             </IconButton>
             <Typography variant="title" color="inherit" className={classes.flex}>
               RecuPro
@@ -87,47 +106,16 @@ class MenuAppBar extends React.Component {
                 <IconButton
                   aria-owns={open ? 'menu-appbar' : null}
                   aria-haspopup="true"
-                  onClick={this.handleMenu}
+                  //onClick={this.handleMenu}
                   color="inherit"
                 >
                   <AccountCircle />
                 </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={open}
-                  onClose={this.handleClose}
-                >
-                  <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={this.handleClose}>My account</MenuItem>
-                  <MenuItem onClick={this.handleClose}>Settings</MenuItem>
-                </Menu>
+
               </div>
             )}
           </Toolbar>
         </AppBar>
-        <AppBar
-          style={{...styles, ...style.appBar}}
-
-          iconElementLeft={
-              <IconButton style={style.menuButton} onClick={handleChangeRequestNavDrawer}>
-                <Menu />
-              </IconButton>
-          }
-          iconElementRight={
-            <div style={style.iconsRightContainer}>
-
-            </div>
-          }
-        />
       </div>
     );
   }
