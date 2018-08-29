@@ -6,7 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
 //Spinner Imports
-import { Loader } from 'react-overlay-loader';
+//import { Loader } from 'react-overlay-loader';
 import 'react-overlay-loader/styles.css';
 
 const styles = theme => ({
@@ -16,28 +16,30 @@ const styles = theme => ({
 });
 
 class NestedList extends React.Component {
-  
-  handleMoreinfo(id , docname,token ){
-    this.props.onDocuments(id, docname,token);
-    // this.download();
+  constructor(props) {
+    super(props);
+    // Initialize a state which contain the index of clicked element (initially -1)
+    this.state = { indexOfClickedItem: -1};
     
+}
+
+  
+  handleMoreinfo(id , docname,token, index ){
+    this.setState({indexOfClickedItem: index});
+    this.props.onDocuments(id, docname,token);
   }
-  // download() {
-  //   // fake server request, getting the file url as response
-  //   setTimeout(() => {
-  //     const response = {
-  //       file: 'http://releases.ubuntu.com/12.04.5/ubuntu-12.04.5-alternate-amd64.iso',
-  //     };
-  //     // server sent the url to the file!
-  //     // now, let's download:
-  //     window.location.href = response.file;
-  //     // you could also do:
-  //      //window.open(response.file);
-  //   }, 100);
-  // }
+  
   
   render() {
-    const { classes, to } = this.props;
+    const { to } = this.props;
+    const styles = {
+      listItem: {
+    },
+    listItemClicked: {
+      backgroundColor: '#f0f8ff',
+      borderBottom: '1px solid red'
+    },
+    };
     function isEmpty(obj) {
         return Object.keys(obj).length === 0;
       }
@@ -51,14 +53,14 @@ class NestedList extends React.Component {
     return (
         <List component="div" disablePadding>
             {
-                this.props.candidate.documents.map(n => {
+                this.props.candidate.documents.map((n,index) => {
                   let id = n.key.split('/',1);
                   var  docname = n.key.split('/').pop();
                   let token = localStorage.getItem('token');
-                  let boundMoreInfo = this.handleMoreinfo.bind(this, id, docname,token);
+                  let boundMoreInfo = this.handleMoreinfo.bind(this, id, docname,token,index);
                 return(
                   
-                  <ListItem button  to={to} activeclassname={classes.active}  divider= {true} onClick={boundMoreInfo} >
+                  <ListItem button style= {this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem}  to={to}  divider= {true} onClick={boundMoreInfo} >
                      <ListItemText primary={n.bucketName} secondary={n.key} /> 
                   </ListItem>
                 );

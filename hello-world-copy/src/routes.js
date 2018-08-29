@@ -9,14 +9,10 @@ import RequireAuth from './containers/auth/require_auth';
 import Signin from './containers/auth/signin';
 import Signout from './containers/auth/signout';
 import Signup from './containers/auth/signup';
-import Welcome from './components/welcome';
-import ClientsContainer from './components/ClientsContainer'
+
 export default (
   <div>
     <Route path="/" component={App}>
-      <Route exact path="/Example" component={ClientsContainer}>
-      </Route>
-      <Route exact path="/Welcome" component={Welcome} />
       <Route exact path="/signin" component={Signin} />
       <Route exact path="/signout" component={Signout} />
       <Route exact path="/signup" component={Signup} />

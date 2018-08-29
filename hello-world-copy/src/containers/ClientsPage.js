@@ -4,8 +4,6 @@ import {connect} from 'react-redux'
 import {browserHistory} from 'react-router'
 import ClientsContainer from '../components/ClientsContainer';
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button'
-import AddIcon from '@material-ui/icons/Add'
 import AddClientModal from '../components/clients/CreateClientModal'
 import {bindActionCreators} from 'redux';
 import * as courseActions from '../actions/clientActions';
@@ -14,7 +12,6 @@ import * as reqmoreinfoActions from '../actions/reqmoreinfoActions';
 import * as candmoreinfoActions from '../actions/candmoreinfoActions';
 import * as docmoreinfoActions from '../actions/docmoreinfoActions';
 import  '../components/clients/clientspage.css'
-import { loadRequirement } from '../actions/requirementActions';
 class ClientsPage extends React.Component {
 
   constructor(props) {
@@ -96,9 +93,7 @@ handleMoreInfo(link ,client, e ){
     const reqmoreinfo = this.props.reqmoreinfo;
     const candmoreinfo = this.props.candmoreinfo;
     return (
-  
       <div >  
-           
           <ClientsContainer
           clients={clients}
           moreinfo={moreinfo}
@@ -110,13 +105,6 @@ handleMoreInfo(link ,client, e ){
           onDelete={this.handleDeleteClient}
           onMoreInfo={this.handleMoreInfo}
           />
-        
-        <Button variant="fab" color="primary" aria-label="add" style={{ position: 'fixed', bottom: 50, right: 50 }} onClick={ this.handleModalOpen } >
-          <AddIcon />
-        </Button>
-        
-          
-          
           <AddClientModal
             client={this.state.client}
             onSave={this.saveCat}

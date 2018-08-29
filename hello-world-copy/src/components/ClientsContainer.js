@@ -8,10 +8,11 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+
 //Spinner Imports
 
 import ClientList from './clients/ClientList'
-import ClientDetails from './clients/ExampleForm';
+import ClientDetails from './clients/ClientDetails';
 import RequirementList from './requirements/RequirementList'
 import CandidateList from './candidates/CandidateList'
 import RequirementDetails from './requirements/RequirementDetails'

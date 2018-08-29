@@ -3,7 +3,7 @@ import initialState from './initialState';
 import {browserHistory} from 'react-router';
 
 
-export default function catReducer(state = initialState.clients, action) {
+export default function catReducer(state = initialState.clients.accountses, action) {
   // state variable here reps just an array of courses
   switch(action.type) {
     case types.LOAD_CATS_SUCCESS:

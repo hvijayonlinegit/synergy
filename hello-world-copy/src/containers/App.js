@@ -211,7 +211,7 @@ class App extends React.Component {
                 <Tab value="requirements" label="Requirements" />
                 <Tab value="candidates" label="Candidates" />
             </Tabs>
-            </div>
+          </div>
         ):(
           <Typography variant="title" color="inherit" className={classes.flex}>
               Recupro

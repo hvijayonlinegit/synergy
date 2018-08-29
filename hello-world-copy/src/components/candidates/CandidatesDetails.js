@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Save from '@material-ui/icons/Save';
-import classNames from 'classnames';
+// import Button from '@material-ui/core/Button';
+// import Save from '@material-ui/icons/Save';
+// import classNames from 'classnames';
 const styles = theme => ({
     root: {
         width: '100%',
@@ -85,18 +85,8 @@ class TextFields extends React.Component {
         return (
             <div className={classes.root}>
               <form className={classes.container} noValidate autoComplete="off">
-              <h4 className={classes.header}>requirement Details: </h4>
+              {/* <h4 className={classes.header}>requirement Details: </h4> */}
               <div className={classes.padder}>
-              <TextField
-                     margin="dense"
-                     placeholder="Enter requirement name"
-                     name="account_name"
-                     label="name"
-                     fullWidth
-                     className={classes.textField}
-                     value = { this.props.candidate.firstname }
-                     onChange={ this.handleChange('name')} />
-                
                 <TextField
                      margin="dense"
                      placeholder="Enter requirement name"
@@ -156,13 +146,13 @@ class TextFields extends React.Component {
                      onChange={ this.handleChange('name')}  />
                      
                </div>
-               <Button variant="contained"  className={classes.button}>
+               {/* <Button variant="contained"  className={classes.button}>
                             Update
                     </Button>
                     <Button variant="contained" size="small" className={classes.button}>
                             <Save className={classNames(classes.leftIcon, classes.iconSmall)} />
                             fffSave
-                        </Button>
+                        </Button> */}
               </form>
              </div>
             );
