@@ -1,8 +1,8 @@
 import * as types from './actionTypes';
 import clientsApi from '../api/clientsApi';
 import * as moreinfoActions from '../actions/moreinfoActions';
-export function loadCatsSuccess(clients) {
-  return {type: types.LOAD_CATS_SUCCESS, clients};
+export function loadCatsSuccess(clients, self) {
+  return {type: types.LOAD_CATS_SUCCESS, clients , self};
 }
 
 export function updateCatSuccess(cat) {
@@ -28,14 +28,15 @@ export function loadClients() {
   return function(dispatch) {
     return clientsApi.getAllClients().then(clients => {
     // Code changes for default loading
-      //   clients._embedded.accountses.map((n,index) => {
-      //     const link= n._links.requirements.href
-      //     if(index ===0){
-      //       dispatch(moreinfoActions.loadMoreinfo(link, n));
-      //     }
-      //     return '';
-      //   }
-      // );
+        clients._embedded.accountses.map((n,index) => {
+          const link= n._links.requirements.href
+          if(index ===0){
+            dispatch(moreinfoActions.loadMoreinfo(link, n));
+           //dispatch(loadCatsSuccess(clients._embedded, n));
+          }
+          return '';
+        }
+      );
       dispatch(loadCatsSuccess(clients._embedded));
     }).catch(error => {
       throw(error);
