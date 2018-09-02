@@ -20,7 +20,8 @@ import {connect} from 'react-redux'
 
 import { compose } from '../../node_modules/redux';
 import 'font-awesome/css/font-awesome.min.css';
-
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import theme from '../components/theme';
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -186,6 +187,7 @@ class App extends React.Component {
       const {  anchorEl  } = this.state;
     const open = Boolean(anchorEl);
     return (
+      <MuiThemeProvider theme={theme}>
       <div className={classes.root}>
       
         <AppBar
@@ -266,6 +268,8 @@ class App extends React.Component {
           {this.props.children}
         </main>
       </div>
+      </MuiThemeProvider>
+
     );
   }
 }

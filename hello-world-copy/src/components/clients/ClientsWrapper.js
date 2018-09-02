@@ -11,13 +11,13 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 
 //Spinner Imports
 
-import ClientList from './clients/ClientList'
-import ClientDetails from './clients/ClientDetails';
-import RequirementList from './requirements/RequirementList'
-import CandidateList from './candidates/CandidateList'
-import RequirementDetails from './requirements/RequirementDetails'
-import CandidateDetails from './candidates/CandidatesDetails'
-import DocumentsList from './documents/DocumentsList'
+import ClientList from './ClientList'
+import ClientDetails from './ClientDetails';
+import RequirementList from '../requirements/RequirementList'
+import CandidateList from '../candidates/CandidateList'
+import RequirementDetails from '../requirements/RequirementDetails'
+import CandidateDetails from '../candidates/CandidatesDetails'
+import DocumentsList from '../documents/DocumentsList'
 const styles = theme => ({
     card: {
         marginTop: '30%',
@@ -83,6 +83,7 @@ class ExampleGrid extends React.Component {
                                             onRequirements={this.handleRequirements}
                                             onDelete={this.handleDeleteClient}
                                             onMoreInfo={this.props.onMoreInfo}
+                                            handleModalOpen={this.props.handleModalOpen}
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={9}>
@@ -149,12 +150,14 @@ class ExampleGrid extends React.Component {
                             <ExpansionPanelDetails>
                                 <Grid container spacing={24}>
                                     <Grid item xs={12} sm={12} className={classes.pos}>
+                                    {this.props.candmoreinfo.candidate && this.props.candmoreinfo.candidate.documents.length > 0 ?
                                     <DocumentsList
                                             candidate={this.props.candmoreinfo.candidate}
                                             onDocuments={this.props.onDocuments}
                                             onDelete={this.handleDeleteClient}
                                             onMoreInfo={this.props.onMoreInfo}
-                                        />
+                                    /> : <span></span>
+                                    }
                                     </Grid>
                                 </Grid>
                             </ExpansionPanelDetails>
@@ -175,7 +178,8 @@ ExampleGrid.propTypes = {
     reqmoreinfo: PropTypes.object.isRequired,
     candmoreinfo: PropTypes.object.isRequired,
     onCandidates: PropTypes.func.isRequired,
-    onDocuments:PropTypes.func.isRequired
+    onDocuments:PropTypes.func.isRequired,
+    handleModalOpen: PropTypes.func.isRequired
 
 };
 

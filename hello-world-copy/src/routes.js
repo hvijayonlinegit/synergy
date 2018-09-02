@@ -2,9 +2,8 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import App from './containers/App';
 import ClientsPage from './containers/ClientsPage';
-import RequirementsPage from './components/clients/RequirementsPage';
-import CandidatesPage from './components/clients/CandidatesPage';
-import NewClientPage from './components/clients/NewClientPage';
+import RequirementsPage from './containers/RequirementsPage';
+import CandidatesPage from './containers/CandidatesPage';
 import RequireAuth from './containers/auth/require_auth';
 import Signin from './containers/auth/signin';
 import Signout from './containers/auth/signout';
@@ -20,7 +19,6 @@ export default (
       </Route>
       <Route path="/requirements" component = {RequirementsPage}></Route>
       <Route path="/candidates" component = {CandidatesPage}></Route>
-      <Route path="/clients/new" component={NewClientPage} />
   </Route> 
   </div>
 );

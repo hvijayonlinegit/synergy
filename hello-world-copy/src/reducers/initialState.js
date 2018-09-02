@@ -1,5 +1,4 @@
 export default {
-  
   clients: {
       accountses: {},
       moreinfo :{
@@ -19,22 +18,5 @@ export default {
     }
   },
   requirements: {},
-  candidates : {},
-  moreinfo :{
-    client: {
-      requirements: {}
-    }
-  },
-  reqmoreinfo :{
-    requirement: {
-      candidates: [],
-    }
-  },
-  candmoreinfo :{
-    candidate: {
-      documents: [],
-    }
-  },
-  cats: [],
-  hobbies: []
+  candidates : {}
 }

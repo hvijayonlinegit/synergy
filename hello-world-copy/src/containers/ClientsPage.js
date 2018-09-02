@@ -2,16 +2,18 @@ import React from 'react'
 
 import {connect} from 'react-redux'
 import {browserHistory} from 'react-router'
-import ClientsContainer from '../components/ClientsContainer';
 import PropTypes from 'prop-types';
-import AddClientModal from '../components/clients/CreateClientModal'
 import {bindActionCreators} from 'redux';
+
 import * as courseActions from '../actions/clientActions';
 import * as moreinfoActions from '../actions/moreinfoActions';
 import * as reqmoreinfoActions from '../actions/reqmoreinfoActions';
 import * as candmoreinfoActions from '../actions/candmoreinfoActions';
 import * as docmoreinfoActions from '../actions/docmoreinfoActions';
-import  '../components/clients/clientspage.css'
+
+import AddClientModal from '../components/clients/CreateClientModal'
+import ClientsWrapper from '../components/clients/ClientsWrapper';
+
 class ClientsPage extends React.Component {
 
   constructor(props) {
@@ -94,7 +96,7 @@ handleMoreInfo(link ,client, e ){
     const candmoreinfo = this.props.candmoreinfo;
     return (
       <div >  
-          <ClientsContainer
+          <ClientsWrapper
           clients={clients}
           moreinfo={moreinfo}
           reqmoreinfo={reqmoreinfo}
@@ -104,6 +106,7 @@ handleMoreInfo(link ,client, e ){
           onDocuments={this.handleDocuments}
           onDelete={this.handleDeleteClient}
           onMoreInfo={this.handleMoreInfo}
+          handleModalOpen={this.handleModalOpen}
           />
           <AddClientModal
             client={this.state.client}
@@ -129,6 +132,7 @@ ClientsPage.propTypes = {
   candmoreinfo: PropTypes.object.isRequired,
   candmoreinfoactions: PropTypes.object.isRequired,
   docmoreinfoactions:PropTypes.object.isRequired
+  
 
 };
 

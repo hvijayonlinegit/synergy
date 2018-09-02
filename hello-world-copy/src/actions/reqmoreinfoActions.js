@@ -11,7 +11,7 @@ export function loadReqMoreinfo(link, client) {
     return candidatesApi.getCandidates(link).then(candidates => {
     //  console.log('inside requirement action.js'+requirements._embedded.requirementses[0].title);
     candidates._embedded.candidates.map((n,index) =>{
-      const link= 'http://localhost:8090/list'
+      const link= 'https://peaceful-mesa-72076.herokuapp.com/list'
       if(index ===0){
         dispatch(candmoreinfoActions.loadCandMoreinfo(link, n));
        }

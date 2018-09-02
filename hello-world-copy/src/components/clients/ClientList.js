@@ -50,7 +50,9 @@ updateSearch(event){
     this.setState({indexOfClickedItem: index});
     this.props.onMoreInfo(link, n);
   }
-  
+  handleModalOpen(){
+    this.props.handleModalOpen();
+  }
   render() {
     const { classes, to } = this.props;
     
@@ -105,7 +107,7 @@ updateSearch(event){
             hintStyle={styles.hintStyle}
             onChange={this.updateSearch.bind(this)}
             />
-            <Button variant="fab" mini color="primary" aria-label="Add" className={classes.button}>
+            <Button variant="fab" mini color="primary" aria-label="Add" className={classes.button} onClick={ this.props.handleModalOpen } >
               <AddIcon />
             </Button>
         {/* <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)}/> */}
@@ -142,6 +144,7 @@ updateSearch(event){
 }
 NestedList.propTypes = {
   clients: PropTypes.object.isRequired,
-  onMoreInfo: PropTypes.func.isRequired
+  onMoreInfo: PropTypes.func.isRequired,
+  handleModalOpen: PropTypes.func.isRequired
 };
 export default withStyles(styles)(NestedList);

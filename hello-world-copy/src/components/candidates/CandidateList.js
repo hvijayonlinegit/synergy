@@ -52,7 +52,8 @@ class NestedList extends React.Component {
         <List component="div" disablePadding>
             {
                 this.props.candidates.candidates.map((n,index) => {
-                const link= 'http://localhost:8090/list'
+               // const link= 'http://localhost:8090/list'
+               const link ='https://peaceful-mesa-72076.herokuapp.com/list'
                 //let boundClick = this.props.onRequirements.bind(this, link);
                 const selflink= n._links.self.href
                 const id = selflink.split('/').pop(-1);
@@ -61,8 +62,7 @@ class NestedList extends React.Component {
                 //let boundDeleteClick = this.props.onDelete.bind(this, selflink, n);
                 let boundMoreInfo = this.handleMoreinfo.bind(this, link, n, index);
                 return(
-                  
-                  <ListItem button  to={to} style= {this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem}  key= {id} divider= {true} onClick={boundMoreInfo}>
+                  <ListItem button  to={to} style= {this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem}  key= {index} divider= {true} onClick={boundMoreInfo}>
                     <ListItemText primary={fullName} secondary={clientid} />
                   </ListItem>
                 );

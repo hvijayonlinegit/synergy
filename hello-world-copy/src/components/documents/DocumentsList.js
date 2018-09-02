@@ -6,7 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
 //Spinner Imports
-//import { Loader } from 'react-overlay-loader';
+import { Loader } from 'react-overlay-loader';
 import 'react-overlay-loader/styles.css';
 
 const styles = theme => ({
@@ -40,13 +40,14 @@ class NestedList extends React.Component {
       borderBottom: '1px solid red'
     },
     };
+    
     function isEmpty(obj) {
         return Object.keys(obj).length === 0;
       }
       if(isEmpty(this.props.candidate.documents)){
         return (
-          // <Loader fullPage loading={true} />
-          <div> </div>
+           <Loader fullPage loading={true} />
+          //<div> </div>
         );
       }
     else{
