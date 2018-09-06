@@ -73,8 +73,7 @@ class SigninForm extends React.Component {
           <Grid item xs={12} sm={4}>
             <Card className={classes.card}>
               <CardContent>
-
-                <Typography variant="subheading" >
+                <Typography variant="headline" >
                   Login
                 </Typography>
                 <Typography color="textSecondary">
@@ -99,13 +98,15 @@ class SigninForm extends React.Component {
                     fullWidth />
                   {this.renderError()}
                   <CardActions>
-                    {/* <button action="submit" className="btn btn-primary">Sign in</button>*/}
-                    <Button variant="contained" size="large" className={classes.button} color="primary" onClick={this.props.onSubmit}>
-                      SignIn
-                    </Button>
                   </CardActions>
+                  
+                  
                   <Loader fullPage loading={this.props.spinner} />
                 </form>
+                <Button  variant="raised"
+                  color="primary" className={classes.submit} fullWidth  onClick={this.props.onSubmit}>
+                    SignIn
+                </Button>
               </CardContent>
             </Card>
           </Grid>

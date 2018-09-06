@@ -22,8 +22,8 @@ class DocumentsApi {
     });
   }
   static download(link, client) {
-   // const BASE_URL = `http://localhost:8090`
-    const BASE_URL = `https://peaceful-mesa-72076.herokuapp.com`
+    const BASE_URL = `http://localhost:8090`
+    //const BASE_URL = `https://peaceful-mesa-72076.herokuapp.com`
     console.log('inside the get candidate'+link+client)
     // eslint-disable-next-line
     const request = new Request(BASE_URL+`/download`+'?id='+link+'&key='+client, {

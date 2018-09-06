@@ -8,10 +8,8 @@ import TextField from '@material-ui/core/TextField';
 const styles = theme => ({
     root: {
         width: '100%',
-       // height: '100vh',
-        backgroundColor: theme.palette.background.paper,
-        borderLeft: '1px solid rgba(0, 0, 0, 0.12)',
         overflowY:'auto',
+        maxHeight: '37vh',
        
       },
   container: {

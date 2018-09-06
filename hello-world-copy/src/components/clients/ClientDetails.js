@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-// import Button from '@material-ui/core/Button';
 // import Save from '@material-ui/icons/Save';
 // import classNames from 'classnames';
 const styles = theme => ({
@@ -10,8 +9,10 @@ const styles = theme => ({
         width: '100%',
        // height: '100vh',
         backgroundColor: theme.palette.background.paper,
-        borderLeft: '1px solid rgba(0, 0, 0, 0.12)',
+        //borderLeft: '1px solid rgba(0, 0, 0, 0.12)',
         overflowY:'auto',
+        maxHeight: '50vh',
+       
        
       },
   container: {
@@ -71,7 +72,7 @@ class TextFields extends React.Component {
       [name]: event.target.value,
     });
   };
-
+  
   render() {
     const { classes } = this.props;
     function isEmpty(obj) {
@@ -82,6 +83,9 @@ class TextFields extends React.Component {
         return (<div> something went wrong</div>);
       }
       else{
+        const selflink= this.props.moreinfo.client._links.self.href
+        const id = selflink.split('/').pop(-1);
+        console.log('details' +id);
         return (
             <div className={classes.root}>
               <form className={classes.container} noValidate autoComplete="off">
@@ -156,6 +160,9 @@ class TextFields extends React.Component {
                             Save
                         </Button> */}
               </form>
+                {/* <Button variant="contained" value= {id } className={classes.button} onClick={() => this.props.handleReqModalOpen(id)}>
+                  Add requirement
+                </Button> */}
              </div>
             );
       }
@@ -166,6 +173,7 @@ class TextFields extends React.Component {
 TextFields.propTypes = {
   classes: PropTypes.object.isRequired,
   moreinfo: PropTypes.object.isRequired,
+  handleReqModalOpen: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(TextFields);

@@ -4,7 +4,9 @@ import * as moreinfoActions from '../actions/moreinfoActions';
 export function loadCatsSuccess(clients, self) {
   return {type: types.LOAD_CATS_SUCCESS, clients , self};
 }
-
+export function loadCatsFailure(clients, self) {
+  return {type: types.LOAD_CATS_FAILURE, clients , self};
+}
 export function updateCatSuccess(cat) {
   return {type: types.UPDATE_CAT_SUCCESS, cat}
 }
@@ -27,7 +29,8 @@ export function loadClients() {
   // make async call to api, handle promise, dispatch action when promise is resolved
   return function(dispatch) {
     return clientsApi.getAllClients().then(clients => {
-    // Code changes for default loading
+      if(!clients.message){
+        // Code changes for default loading
         clients._embedded.accountses.map((n,index) => {
           const link= n._links.requirements.href
           if(index ===0){
@@ -38,6 +41,10 @@ export function loadClients() {
         }
       );
       dispatch(loadCatsSuccess(clients._embedded));
+      }else{
+        dispatch(loadCatsFailure(clients.message))
+      }
+    
     }).catch(error => {
       throw(error);
     });

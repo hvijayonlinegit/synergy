@@ -4,11 +4,12 @@ import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-
+import Tooltip from '@material-ui/core/Tooltip';
+import TextField from '@material-ui/core/TextField';
 //Spinner Imports
 import { Loader } from 'react-overlay-loader';
 import 'react-overlay-loader/styles.css';
-import TextField from '@material-ui/core/TextField';
+
 
 import {white, blue500} from '@material-ui/core/colors/';
 import Button from '@material-ui/core/Button';
@@ -17,20 +18,19 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 const styles = theme => ({
-  active: {
-    backgroundColor: 'red',
-  },
+ root: {
+  maxHeight: '37vh',
+    overflow: 'auto'
+ },
   button: {
     margin: theme.spacing.unit,
+    marginLeft: '24%'
   },
-  
-  menuItem: {
-    '&:focus': {
-      backgroundColor: theme.palette.primary.main,
-      '& $primary, & $icon': {
-        color: theme.palette.common.white,
-      },
-    },
+  lightTooltip: {
+    background: theme.palette.common.white,
+    color: theme.palette.text.primary,
+    boxShadow: theme.shadows[1],
+    fontSize: 11,
   },
 });
 
@@ -95,7 +95,7 @@ updateSearch(event){
   
       );
     return (
-        <div>
+        <div >
           <TextField
             hintText="Search..."
             placeholder="Search..."
@@ -107,11 +107,13 @@ updateSearch(event){
             hintStyle={styles.hintStyle}
             onChange={this.updateSearch.bind(this)}
             />
-            <Button variant="fab" mini color="primary" aria-label="Add" className={classes.button} onClick={ this.props.handleModalOpen } >
-              <AddIcon />
-            </Button>
+            <Tooltip title="Add a Client" classes={{ tooltip: classes.lightTooltip }}>
+              <Button variant="fab" mini color="primary" aria-label="Add" className={classes.button} onClick={ this.props.handleModalOpen } >
+                <AddIcon />
+              </Button>
+            </Tooltip>
         {/* <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)}/> */}
-          <List component="div" disablePadding>
+          <List component="div" disablePadding className={classes.root}>
               {
                   filteredClients.map((n,index) => {
                   const link= n._links.requirements.href

@@ -8,7 +8,6 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-
 //Spinner Imports
 
 import ClientList from './ClientList'
@@ -19,6 +18,7 @@ import RequirementDetails from '../requirements/RequirementDetails'
 import CandidateDetails from '../candidates/CandidatesDetails'
 import DocumentsList from '../documents/DocumentsList'
 const styles = theme => ({
+    
     card: {
         marginTop: '30%',
         marginRight: '10%'
@@ -41,13 +41,14 @@ const styles = theme => ({
         border: '1px'
     },
     root: {
-        //overflow:'auto'
+       // overflow:'auto'
     },
     paper: {
         padding: theme.spacing.unit * 2,
         textAlign: 'center',
         color: theme.palette.text.secondary,
     },
+    
 });
 
 class ExampleGrid extends React.Component {
@@ -70,10 +71,10 @@ class ExampleGrid extends React.Component {
         return (
             <div className={classes.root}>
                 <Grid container spacing={32}>
-                    <Grid item xs={12} sm={12}>
+                    <Grid item xs={12} sm={12} >
                         <ExpansionPanel expanded={true} onChange={this.handleChange('panel2')}>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography className={classes.heading}>Clients</Typography>
+                                <Typography variant="title"  className={classes.heading}>Clients</Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
                                 <Grid container spacing={24}>
@@ -87,7 +88,7 @@ class ExampleGrid extends React.Component {
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={9}>
-                                        <ClientDetails moreinfo={this.props.moreinfo}></ClientDetails>
+                                        <ClientDetails moreinfo={this.props.moreinfo} handleReqModalOpen={this.props.handleReqModalOpen}></ClientDetails>
                                     </Grid>
                                 </Grid>
                             </ExpansionPanelDetails>
@@ -96,7 +97,7 @@ class ExampleGrid extends React.Component {
                     <Grid item xs={12} sm={12}>
                         <ExpansionPanel expanded={true} onChange={this.handleChange('panel2')}>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography className={classes.heading}>Requirements</Typography>
+                                <Typography variant="title"  className={classes.heading}>Requirements</Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
                                 <Grid container spacing={24}>
@@ -120,7 +121,7 @@ class ExampleGrid extends React.Component {
                     <Grid item xs={12} sm={12}>
                         <ExpansionPanel expanded={true} onChange={this.handleChange('panel3')}>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography className={classes.heading}>Candidates</Typography>
+                                <Typography variant="title"  className={classes.heading}>Candidates</Typography>
 
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
@@ -145,7 +146,7 @@ class ExampleGrid extends React.Component {
                     <Grid item xs={12} sm={12}>
                         <ExpansionPanel expanded={true} onChange={this.handleChange('panel3')}>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography className={classes.heading}>Documents</Typography>
+                                <Typography variant="title"  className={classes.heading} >Documents</Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
                                 <Grid container spacing={24}>
@@ -179,7 +180,8 @@ ExampleGrid.propTypes = {
     candmoreinfo: PropTypes.object.isRequired,
     onCandidates: PropTypes.func.isRequired,
     onDocuments:PropTypes.func.isRequired,
-    handleModalOpen: PropTypes.func.isRequired
+    handleModalOpen: PropTypes.func.isRequired,
+    handleReqModalOpen: PropTypes.func.isRequired
 
 };
 

@@ -4,6 +4,9 @@ import * as reqmoreinfoActions from '../actions/reqmoreinfoActions';
 export function loadMoreInfoSuccess(client){
   return {type: types.LOAD_MOREINFO_SUCCESS, client};
 }
+export function createRequirementSuccess(requirement) {
+  return {type: types.CREATE_REQUIREMENT_SUCCESS, requirement}
+}
 export function loadMoreinfo(link, client) {
 
   return function(dispatch) {
@@ -24,4 +27,18 @@ export function loadMoreinfo(link, client) {
     });
   };
 
+}
+export function createRequirement(requirement) {
+  return function (dispatch) {
+    return requirementsApi.createRequirement(requirement).then(response => {
+      if(!response.message){
+        //dispatch(clientActions.loadClients());
+         dispatch(createRequirementSuccess(response));
+      }
+      
+      //return response;
+    }).catch(error => {
+      throw(error);
+    });
+  };
 }
