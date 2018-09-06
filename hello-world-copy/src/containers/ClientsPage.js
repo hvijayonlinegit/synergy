@@ -111,7 +111,8 @@ class ClientsPage extends React.Component {
   }
 
 	handleModalOpen() {
-		this.setState({ modal: true });
+    this.setState({ modal: true , client: {name: '', type: '', phone: '', team: '', address: ''}});
+		
 //  browserHistory.push(`/clients/new`);
 	}
 	handleModalClose() {

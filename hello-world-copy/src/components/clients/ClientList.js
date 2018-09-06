@@ -80,7 +80,10 @@ updateSearch(event){
         );
       }
     else{
-      let filteredClients= this.props.clients.accountses.filter(
+      let sortedClients = this.props.clients.accountses.sort(
+        (a,b)=> Number(b._links.self.href.split('/').pop(-1)) - Number(a._links.self.href.split('/').pop(-1))
+      );
+      let filteredClients= sortedClients.filter(
         (client) =>{
           const selflink= client._links.self.href
           const id = selflink.split('/').pop(-1);

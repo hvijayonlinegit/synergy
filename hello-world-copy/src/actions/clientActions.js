@@ -31,7 +31,10 @@ export function loadClients() {
     return clientsApi.getAllClients().then(clients => {
       if(!clients.message){
         // Code changes for default loading
-        clients._embedded.accountses.map((n,index) => {
+        let sortedClients = clients._embedded.accountses.sort(
+          (a,b)=> Number(b._links.self.href.split('/').pop(-1)) - Number(a._links.self.href.split('/').pop(-1))
+        );
+        sortedClients.map((n,index) => {
           const link= n._links.requirements.href
           if(index ===0){
             dispatch(moreinfoActions.loadMoreinfo(link, n));
@@ -88,8 +91,16 @@ export function updateCat(cat) {
 export function createCat(client) {
   return function (dispatch) {
     return clientsApi.createCat(client).then(responseCat => {
-      dispatch(createCatSuccess(responseCat));
-      return responseCat;
+      if(!responseCat.message){
+        const link= responseCat._links.requirements.href
+        dispatch(moreinfoActions.loadMoreinfo(link, responseCat));
+        dispatch(createCatSuccess(responseCat));
+      }
+      else{
+        dispatch(loadCatsFailure(responseCat.message))
+      }
+     
+      //return responseCat;
     }).catch(error => {
       throw(error);
     });
