@@ -8,6 +8,13 @@ export default function reqmoreinfoReducer(state = initialState.clients.reqmorei
       clientState.requirement =  action.client
       //browserHistory.push('/clients')
       return clientState
+      case types.LOAD_REQ_MOREINFO_FAILURE:
+      const clientState1 = Object.assign([], state)
+      clientState1.requirement =  {
+        candidates: [],
+      }
+      //browserHistory.push('/clients')
+      return clientState1
     default:
       return state;
   }

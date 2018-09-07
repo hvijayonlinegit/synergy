@@ -4,6 +4,9 @@ import * as candmoreinfoActions from '../actions/candmoreinfoActions';
 export function loadReqMoreInfoSuccess(client){
   return {type: types.LOAD_REQ_MOREINFO_SUCCESS, client};
 }
+export function loadReqMoreinfofailure(){
+  return {type: types.LOAD_REQ_MOREINFO_FAILURE};
+}
 export function loadReqMoreinfo(link, client) {
 
   return function(dispatch) {

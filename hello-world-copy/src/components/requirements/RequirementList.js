@@ -118,7 +118,7 @@ class NestedList extends React.Component {
                 return (
                   <ListItem button style={this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem} key={id} divider={true} onClick={boundMoreInfo}>
                    <ListItemText  primary= {clientid} />
-                    <ListItemText  primary= {n.type}/>
+                    <ListItemText  primary= {n.title}/>
                     
                     <IconButton className={classes.button} aria-label="Delete" disabled color="primary">
                       <DeleteIcon />
