@@ -17,6 +17,7 @@ import CandidateList from '../candidates/CandidateList'
 import RequirementDetails from '../requirements/RequirementDetails'
 import CandidateDetails from '../candidates/CandidatesDetails'
 import DocumentsList from '../documents/DocumentsList'
+import themes from '../theme'
 const styles = theme => ({
     
     card: {
@@ -48,6 +49,14 @@ const styles = theme => ({
         textAlign: 'center',
         color: theme.palette.text.secondary,
     },
+    chippper:{
+        boxShadow: '0 1px 6px rgba(32, 33, 36, 0.28)',
+        backgroundColor: theme.palette.background.default,
+        borderRadius: '40px',
+        boxSizing: 'border-box',
+        overFlow: 'hidden',
+        padding: '10px 20px'
+    }
     
 });
 
@@ -74,7 +83,7 @@ class ExampleGrid extends React.Component {
                     <Grid item xs={12} sm={12} >
                         <ExpansionPanel expanded={true} onChange={this.handleChange('panel2')}>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography variant="title"  className={classes.heading}>Clients</Typography>
+                                <Typography variant="SubHeading"  className={classes.chippper}>Clients</Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
                                 <Grid container spacing={24}>

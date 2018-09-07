@@ -60,8 +60,8 @@ updateSearch(event){
       listItem: {
     },
     listItemClicked: {
-      backgroundColor: '#f0f8ff',
-      borderBottom: '1px solid red'
+      backgroundColor: 'rgba(0, 0, 0, 0.08)',
+      borderBottom: '1px solid gray'
     },
     textField: {
       color: white,

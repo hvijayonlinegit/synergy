@@ -2,6 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+
+import MySnackbarContentWrapper from '../../common/MySnackContent';
+
 // import Button from '@material-ui/core/Button';
 // import Save from '@material-ui/icons/Save';
 // import classNames from 'classnames';
@@ -76,7 +80,14 @@ class TextFields extends React.Component {
       }
     
       if(isEmpty(this.props.requirements.candidates)){
-        return (<div> something went wrong</div>);
+        return (
+
+          <MySnackbarContentWrapper
+          variant="info"
+          className={classes.margin}
+          message="There are no Requirements to Show , Please click/add a requirement!"
+        />
+                );
       }
       else{
         return (
