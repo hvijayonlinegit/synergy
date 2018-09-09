@@ -37,9 +37,9 @@ class RequirementsApi {
   static createRequirement(requirement) {
     //const BASE_URL = 'https://peaceful-mesa-72076.herokuapp.com/synergy/api'
     //const BASE_URL = `http://localhost:8090/synergy/api`
-    console.log('create client'+requirement.account_id)
+   // console.log('create client'+requirement.account_id)
     let accountid= requirement.id
-    const request = new Request(apiurl.BASE_URL+`/synergy/api/accountses/`+accountid+'/requirements', {
+    const request = new Request(apiurl.BASE_URL+`/accounts/`+accountid+'/requirements', {
       method: 'POST',
       headers: new Headers({
         'Accept': 'application/json',

@@ -137,17 +137,6 @@ class TextFields extends React.Component {
                      value={ this.props.moreinfo.client.address }
                      onChange={ this.handleChange('name')} />
                     
-                    
-        
-                    <TextField
-                     margin="dense"
-                     placeholder="Enter Client phone"
-                     name="account_phone"
-                     label="Phone"
-                     fullWidth
-                     className={classes.textField}
-                     value={ this.props.moreinfo.client.phone }
-                     onChange={ this.handleChange('name')}  />
                     <TextField
                      margin="dense"
                      placeholder="Enter Client team"

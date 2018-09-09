@@ -114,8 +114,8 @@ class NestedList extends React.Component {
                 let boundMoreInfo = this.handleMoreinfo.bind(this, link, n, index);
                 return(
                   <ListItem button  to={to} style= {this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem}  key= {index} divider= {true} onClick={boundMoreInfo}>
-                    <ListItemText primary={fullName} />
                     <ListItemText primary={clientid} />
+                    <ListItemText primary={fullName} />
                     <IconButton className={classes.button} aria-label="Delete" disabled color="primary">
                           <DeleteIcon />
                         </IconButton>

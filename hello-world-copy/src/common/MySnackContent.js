@@ -29,7 +29,7 @@ const styles1 = theme => ({
     backgroundColor: theme.palette.error.dark,
   },
   info: {
-    backgroundColor: theme.palette.primary.dark,
+    backgroundColor: 'lightcyan',
   },
   warning: {
     backgroundColor: amber[700],
@@ -44,6 +44,7 @@ const styles1 = theme => ({
   message: {
     display: 'flex',
     alignItems: 'center',
+    color: '#002884'
   },
 });
 

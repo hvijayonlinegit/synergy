@@ -1,6 +1,7 @@
 import * as types from './actionTypes';
 import requirementsApi from '../api/RequirementsApi';
 import * as reqmoreinfoActions from '../actions/reqmoreinfoActions';
+import * as candmoreinfoActions from '../actions/candmoreinfoActions';
 export function loadMoreInfoSuccess(client){
   return {type: types.LOAD_MOREINFO_SUCCESS, client};
 }
@@ -15,6 +16,7 @@ export function loadMoreinfo(link, client) {
     //  console.log('inside requirement action.js'+requirements._embedded.requirementses[0].title);
     if(requirements._embedded.requirementses.length === 0){
       dispatch(reqmoreinfoActions.loadReqMoreinfofailure());
+      dispatch(candmoreinfoActions.loadCandMoreinfofailure());
     }else{
       requirements._embedded.requirementses.map((n, index) =>{
         const link= n._links.candidates.href
