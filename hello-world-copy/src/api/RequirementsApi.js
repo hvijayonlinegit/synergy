@@ -9,7 +9,8 @@ class RequirementsApi {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
-        'origins':'*'
+        'origins':'*',
+        'Authorization':' Bearer ' + localStorage.getItem('token')
       })
     });
 
@@ -24,7 +25,8 @@ class RequirementsApi {
     const request = new Request(link, {
       method: 'GET',
       headers: new Headers({
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'Authorization':' Bearer ' + localStorage.getItem('token')
       })
     });
 
@@ -39,7 +41,7 @@ class RequirementsApi {
     //const BASE_URL = `http://localhost:8090/synergy/api`
    // console.log('create client'+requirement.account_id)
     let accountid= requirement.id
-    const request = new Request(apiurl.BASE_URL+`/accounts/`+accountid+'/requirements', {
+    const request = new Request(apiurl.BASE_URL+`/accounts/`+accountid+'/requitements', {
       method: 'POST',
       headers: new Headers({
         'Accept': 'application/json',

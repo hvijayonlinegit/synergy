@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
 import MySnackbarContentWrapper from '../../common/MySnackContent';
 
 // import Button from '@material-ui/core/Button';
@@ -55,6 +56,9 @@ const styles = theme => ({
   padder: {
       paddingLeft: '10px',
   },
+  card:{
+    border: '1px dotted grey'
+  }
 });
 
 
@@ -92,8 +96,9 @@ class TextFields extends React.Component {
       else{
         return (
             <div className={classes.root}>
+           
               <form className={classes.container} noValidate autoComplete="off">
-              {/* <h4 className={classes.header}>requirement Details: </h4> */}
+             
               <div className={classes.padder}>
               <TextField
                      margin="dense"
@@ -209,6 +214,7 @@ class TextFields extends React.Component {
                             fffSave
                         </Button> */}
               </form>
+           
              </div>
             );
       }

@@ -11,6 +11,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Button from '@material-ui/core/Button';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import PowerSettingsNew from '@material-ui/icons/PowerSettingsNew';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
@@ -101,6 +103,9 @@ const styles = theme => ({
     },
     
   },
+  user: {
+    width: '100px',
+  }
   
 });
 
@@ -110,15 +115,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      copen: false,
       value: 'home',
-      currentUser: null,
       isAuthenticated: false,
-      isLoading: false,
       anchorEl: null,
-      modal: false,
-      loginDetails: {username: '', password: ''},
-      loading: true
     };
     
     this.handleSignup = this.handleSignup.bind(this);
@@ -233,12 +232,32 @@ class App extends React.Component {
           ):(
             <div>
                 <IconButton
+                    color="inherit"
+                  >
+                <AccountCircle />
+                </IconButton>
+                <IconButton
+                    color="inherit"
+                    label="true"
+                    className={classes.user}
+                  >
+                <Typography variant="caption" noWrap = "true" color="inherit" >
+                  Rajesh Nettem
+                 </Typography>
+                </IconButton>
+                <IconButton
                   aria-owns={open ? 'menu-appbar' : null}
                   aria-haspopup="true"
                   onClick={this.handleMenu}
                   color="inherit"
                 >
-                  <AccountCircle />
+                  <ExpandMore />
+                </IconButton>
+                <IconButton
+                  onClick={this.handleLogout}
+                  color="inherit"
+                >
+                  <PowerSettingsNew />
                 </IconButton>
                 <Menu
                   id="menu-appbar"
@@ -256,7 +275,7 @@ class App extends React.Component {
                 >
                   <MenuItem onClick={this.handleClose}>Profile</MenuItem>
                   <MenuItem onClick={this.handleClose}>My account</MenuItem>
-                  <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
+                  
                 </Menu>
               </div>
           )

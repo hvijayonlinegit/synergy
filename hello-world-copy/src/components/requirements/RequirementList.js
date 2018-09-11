@@ -57,8 +57,11 @@ class NestedList extends React.Component {
       listItem: {
       },
       listItemClicked: {
-        backgroundColor: '#f0f8ff',
-        borderBottom: '1px solid red'
+        border: '1px solid red',
+        //borderBottom: '2px solid gray',
+        paddingTop: '0',
+        paddingBottom: '0',
+        borderLeft: '12px solid red'
       },
     };
     function isEmpty(obj) {
@@ -100,7 +103,7 @@ class NestedList extends React.Component {
             onChange={this.updateSearch.bind(this)}
           />
           <Tooltip title="Add a Requirement" classes={{ tooltip: classes.lightTooltip }}>
-            <Button variant="fab" mini color="primary" aria-label="Add" className={classes.button}  >
+            <Button variant="fab" mini color="primary" aria-label="Add" className={classes.button} onClick={() => this.props.handleReqModalOpen(this.props.selectedclient._links.self.href.split('/').pop(-1))}  >
               <AddIcon />
             </Button>
           </Tooltip>
@@ -135,7 +138,8 @@ class NestedList extends React.Component {
 }
 NestedList.propTypes = {
   requirements: PropTypes.object.isRequired,
-  onRequirements: PropTypes.func.isRequired
-
+  selectedclient: PropTypes.object.isRequired,
+  onRequirements: PropTypes.func.isRequired,
+  handleReqModalOpen: PropTypes.func.isRequired
 };
 export default withStyles(styles)(NestedList);

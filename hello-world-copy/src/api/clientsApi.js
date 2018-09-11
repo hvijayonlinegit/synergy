@@ -13,7 +13,9 @@ class clientsApi {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
-        'origins':'*'
+        'origins':'*',
+        // eslint-disable-next-line
+        'Authorization':' Bearer ' + localStorage.getItem('token')
       })
     });
 
@@ -82,7 +84,8 @@ class clientsApi {
     const request = new Request(link, {
       method: 'GET',
       headers: new Headers({
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'Authorization':' Bearer ' + localStorage.getItem('token')
       })
     });
 

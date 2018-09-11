@@ -58,10 +58,15 @@ updateSearch(event){
     
     const styles = {
       listItem: {
+        paddingBottom: '0',
+        paddingTop: '0'
     },
     listItemClicked: {
-      backgroundColor: 'rgba(0, 0, 0, 0.08)',
-      borderBottom: '1px solid gray'
+      border: '1px solid lightgreen',
+      //borderBottom: '2px solid gray',
+      paddingTop: '0',
+      paddingBottom: '0',
+      borderLeft: '12px solid lightgreen'
     },
     textField: {
       color: white,
@@ -130,7 +135,7 @@ updateSearch(event){
                     <div>
                       <ListItem button={true} style= {this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem} to={to}  key= {id} divider= {true} onClick={boundMoreInfo} >
                         {/* <ListItemText primary={n.name} secondary={clientid} /> */}
-                        <ListItemText  primary= {id}/>
+                        <ListItemText color="inherit" primary= {id}/>
                         <ListItemText  primary= {n.name} />
                         <IconButton className={classes.button} aria-label="Delete" disabled color="primary">
                           <DeleteIcon />

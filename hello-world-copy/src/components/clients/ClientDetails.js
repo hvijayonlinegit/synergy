@@ -178,7 +178,7 @@ class TextFields extends React.Component {
 TextFields.propTypes = {
   classes: PropTypes.object.isRequired,
   moreinfo: PropTypes.object.isRequired,
-  handleReqModalOpen: PropTypes.func.isRequired
+ 
 };
 
 export default withStyles(styles)(TextFields);

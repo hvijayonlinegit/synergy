@@ -53,8 +53,11 @@ class NestedList extends React.Component {
       listItem: {
     },
     listItemClicked: {
-      backgroundColor: '#f0f8ff',
-      borderBottom: '1px solid red'
+      border: '1px solid orange',
+      //borderBottom: '2px solid gray',
+      paddingTop: '0',
+      paddingBottom: '0',
+      borderLeft: '12px solid orange'
     },
     };
     function isEmpty(obj) {

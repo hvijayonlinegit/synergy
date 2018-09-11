@@ -51,12 +51,29 @@ const styles = theme => ({
     },
     chippper:{
         boxShadow: '0 1px 6px rgba(32, 33, 36, 0.28)',
-        backgroundColor: theme.palette.background.default,
+       
         borderRadius: '40px',
         boxSizing: 'border-box',
         overFlow: 'hidden',
-        padding: '10px 20px'
-    }
+        padding: '10px 20px',
+        color: theme.palette.primary.contrastText,
+        backgroundColor: themes.palette.primary.main,
+    },
+    detailsborder: {
+        border: '1px solid lightgreen',
+        //borderLeft:'5px solid lightgreen'
+    },
+    detailsbordererror: {
+        border: '1px solid red',
+        //borderLeft:'5px solid lightgreen'
+    },
+    detailsborderwarn: {
+        border: '1px solid orange',
+        //borderLeft:'5px solid lightgreen'
+    },
+   detailspad :{
+    paddingTop: '10px',
+   } 
     
 });
 
@@ -81,12 +98,12 @@ class ExampleGrid extends React.Component {
             <div className={classes.root}>
                 <Grid container spacing={32}>
                     <Grid item xs={12} sm={12} >
-                        <ExpansionPanel expanded={true} onChange={this.handleChange('panel2')}>
+                        <ExpansionPanel expanded={true}  onChange={this.handleChange('panel2')}>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography variant="SubHeading"  className={classes.chippper}>Clients</Typography>
+                                <div  className={classes.chippper}>Clients</div>
                             </ExpansionPanelSummary>
-                            <ExpansionPanelDetails>
-                                <Grid container spacing={24}>
+                            <ExpansionPanelDetails   >
+                                <Grid container spacing={24} className ={classes.detailspad}>
                                     <Grid item xs={12} sm={3} className={classes.pos}>
                                         <ClientList
                                             clients={clients}
@@ -96,8 +113,8 @@ class ExampleGrid extends React.Component {
                                             handleModalOpen={this.props.handleModalOpen}
                                         />
                                     </Grid>
-                                    <Grid item xs={12} sm={9}>
-                                        <ClientDetails moreinfo={this.props.moreinfo} handleReqModalOpen={this.props.handleReqModalOpen}></ClientDetails>
+                                    <Grid item xs={12} sm={9} className={classes.detailsborder}>
+                                        <ClientDetails moreinfo={this.props.moreinfo} ></ClientDetails>
                                     </Grid>
                                 </Grid>
                             </ExpansionPanelDetails>
@@ -109,16 +126,18 @@ class ExampleGrid extends React.Component {
                                 <Typography variant="title"  className={classes.heading}>Requirements</Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
-                                <Grid container spacing={24}>
+                                <Grid container spacing={24} className ={classes.detailspad}>
                                     <Grid item xs={12} sm={3} className={classes.pos}>
                                     <RequirementList
                                             requirements={requirements}
+                                            selectedclient = {this.props.moreinfo.client}
                                             onRequirements={this.props.onRequirements}
                                             onDelete={this.handleDeleteClient}
                                             onMoreInfo={this.props.onMoreInfo}
+                                            handleReqModalOpen={this.props.handleReqModalOpen}
                                         />
                                     </Grid>
-                                    <Grid item xs={12} sm={9}>
+                                    <Grid item xs={12} sm={9} className={classes.detailsbordererror}>
                                         <RequirementDetails 
                                         requirements={this.props.reqmoreinfo.requirement}
                                         ></RequirementDetails>
@@ -134,7 +153,7 @@ class ExampleGrid extends React.Component {
 
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
-                                <Grid container spacing={24}>
+                                <Grid container spacing={24} className ={classes.detailspad}>
                                     <Grid item xs={12} sm={3} className={classes.pos}>
                                     <CandidateList
                                             candidates={candidates}
@@ -143,7 +162,7 @@ class ExampleGrid extends React.Component {
                                             onMoreInfo={this.props.onMoreInfo}
                                         />
                                     </Grid>
-                                    <Grid item xs={12} sm={9}>
+                                    <Grid item xs={12} sm={9} className={classes.detailsborderwarn}>
                                         <CandidateDetails 
                                             candidate={this.props.candmoreinfo.candidate}
                                             ></CandidateDetails>

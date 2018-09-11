@@ -2,6 +2,7 @@ import * as types from './actionTypes';
 import requirementsApi from '../api/RequirementsApi';
 import * as reqmoreinfoActions from '../actions/reqmoreinfoActions';
 import * as candmoreinfoActions from '../actions/candmoreinfoActions';
+import * as apiurl  from '../common/apiURL';
 export function loadMoreInfoSuccess(client){
   return {type: types.LOAD_MOREINFO_SUCCESS, client};
 }
@@ -40,7 +41,9 @@ export function createRequirement(requirement) {
     return requirementsApi.createRequirement(requirement).then(response => {
       if(!response.message){
         //dispatch(clientActions.loadClients());
-         dispatch(createRequirementSuccess(response));
+        //let link = apiurl.BASE_URL+'/synergy/api/accountses/'+requirement.id+'/requirements';
+        //dispatch(loadMoreinfo(link, response));
+        // dispatch(createRequirementSuccess(response));
       }
       
       //return response;

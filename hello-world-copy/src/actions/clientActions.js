@@ -7,6 +7,9 @@ export function loadCatsSuccess(clients, self) {
 export function loadCatsFailure(clients, self) {
   return {type: types.LOAD_CATS_FAILURE, clients , self};
 }
+export function loadSignInPage(){
+  return {type: types.UNAUTH_SIGNIN_PAGE};
+}
 export function updateCatSuccess(cat) {
   return {type: types.UPDATE_CAT_SUCCESS, cat}
 }
@@ -45,7 +48,15 @@ export function loadClients() {
       );
       dispatch(loadCatsSuccess(clients._embedded));
       }else{
+        if(clients.status === 401){
+          dispatch(loadSignInPage())
+        }
+        if(clients.status === 500)
+        {
+          dispatch(loadCatsFailure(clients.message))
+        }
         dispatch(loadCatsFailure(clients.message))
+        
       }
     
     }).catch(error => {

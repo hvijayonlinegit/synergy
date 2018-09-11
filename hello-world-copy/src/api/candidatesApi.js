@@ -9,7 +9,8 @@ class CandidatesApi {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
-        'origins':'*'
+        'origins':'*',
+        'Authorization':' Bearer ' + localStorage.getItem('token')
         
       })
     });
@@ -26,7 +27,7 @@ class CandidatesApi {
       method: 'GET',
       headers: new Headers({
         'Accept': 'application/json',
-        'Authorization':' Bearer ' + token
+        'Authorization':' Bearer ' + localStorage.getItem('token')
       })
     });
 
