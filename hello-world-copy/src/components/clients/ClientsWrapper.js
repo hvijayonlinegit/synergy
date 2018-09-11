@@ -123,7 +123,7 @@ class ExampleGrid extends React.Component {
                     <Grid item xs={12} sm={12}>
                         <ExpansionPanel expanded={true} onChange={this.handleChange('panel2')}>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography variant="title"  className={classes.heading}>Requirements</Typography>
+                                <div  className={classes.chippper}>Requirements</div>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
                                 <Grid container spacing={24} className ={classes.detailspad}>
@@ -149,7 +149,7 @@ class ExampleGrid extends React.Component {
                     <Grid item xs={12} sm={12}>
                         <ExpansionPanel expanded={true} onChange={this.handleChange('panel3')}>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography variant="title"  className={classes.heading}>Candidates</Typography>
+                                <div className={classes.chippper}>Candidates</div>
 
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
@@ -174,7 +174,7 @@ class ExampleGrid extends React.Component {
                     <Grid item xs={12} sm={12}>
                         <ExpansionPanel expanded={true} onChange={this.handleChange('panel3')}>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography variant="title"  className={classes.heading} >Documents</Typography>
+                                <div className={classes.chippper} >Documents</div>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
                                 <Grid container spacing={24}>

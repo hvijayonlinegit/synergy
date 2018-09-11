@@ -14,7 +14,7 @@ const styles = theme => ({
   root: {
       width: '100%',
       overflowY:'auto',
-      maxHeight: '37vh',
+      maxHeight: '50vh',
     },
   container: {
     display: 'flex',

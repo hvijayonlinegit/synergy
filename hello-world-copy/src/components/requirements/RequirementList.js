@@ -18,7 +18,8 @@ import 'react-overlay-loader/styles.css';
 const styles = theme => ({
   root: {
     maxHeight: '37vh',
-      overflow: 'auto'
+      overflow: 'auto',
+      minHeight: '37vh'
    },
    button: {
     margin: theme.spacing.unit,
@@ -59,8 +60,8 @@ class NestedList extends React.Component {
       listItemClicked: {
         border: '1px solid red',
         //borderBottom: '2px solid gray',
-        paddingTop: '0',
-        paddingBottom: '0',
+        paddingTop: '5px',
+      paddingBottom: '5px',
         borderLeft: '12px solid red'
       },
     };
@@ -123,9 +124,9 @@ class NestedList extends React.Component {
                    <ListItemText  primary= {clientid} />
                     <ListItemText  primary= {n.title}/>
                     
-                    <IconButton className={classes.button} aria-label="Delete" disabled color="primary">
+                    {/* <IconButton className={classes.button} aria-label="Delete" disabled color="primary">
                       <DeleteIcon />
-                    </IconButton>
+                    </IconButton> */}
                   </ListItem>
                 );
               })

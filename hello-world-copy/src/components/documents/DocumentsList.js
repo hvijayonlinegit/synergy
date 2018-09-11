@@ -16,7 +16,8 @@ import 'react-overlay-loader/styles.css';
 const styles = theme => ({
   root: {
     maxHeight: '37vh',
-      overflow: 'auto'
+      overflow: 'auto',
+      minHeight: '37vh'
    },
    button: {
     margin: theme.spacing.unit,

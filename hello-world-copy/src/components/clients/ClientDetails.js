@@ -13,7 +13,7 @@ const styles = theme => ({
         //borderLeft: '1px solid rgba(0, 0, 0, 0.12)',
         overflowY:'auto',
         maxHeight: '50vh',
-       
+        minHeight: '50vh'
        
       },
   container: {

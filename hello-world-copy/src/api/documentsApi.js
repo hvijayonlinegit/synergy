@@ -1,11 +1,12 @@
 import * as apiurl  from '../common/apiURL';
+
 class DocumentsApi {
 
   static getAllDocuments(link) {
     //const PROD_URL = `https://peaceful-mesa-72076.herokuapp.com/accounts`
     //const BASE_URL = `http://localhost:8090`
     //const BASE_URL = `https://peaceful-mesa-72076.herokuapp.com`
-    const request = new Request(link, {
+    const request = new Request(apiurl.BASE_URL+`/list`, {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -14,7 +15,6 @@ class DocumentsApi {
         'Authorization':' Bearer ' + localStorage.getItem('token')
       })
     });
-
     return fetch(request).then(response => {
       return response.json();
     }).catch(error => {

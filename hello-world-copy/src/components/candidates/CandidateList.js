@@ -17,7 +17,8 @@ import 'react-overlay-loader/styles.css';
 const styles = theme => ({
   root: {
       maxHeight: '37vh',
-      overflow: 'auto'
+      overflow: 'auto',
+      minHeight: '37vh'
    },
    button: {
     margin: theme.spacing.unit,
@@ -55,8 +56,8 @@ class NestedList extends React.Component {
     listItemClicked: {
       border: '1px solid orange',
       //borderBottom: '2px solid gray',
-      paddingTop: '0',
-      paddingBottom: '0',
+      paddingTop: '5px',
+      paddingBottom: '5px',
       borderLeft: '12px solid orange'
     },
     };
@@ -107,7 +108,7 @@ class NestedList extends React.Component {
             {
                 filteredCandidates.map((n,index) => {
                // const link= 'http://localhost:8090/list'
-               const link ='https://peaceful-mesa-72076.herokuapp.com/list'
+               const link =''
                 //let boundClick = this.props.onRequirements.bind(this, link);
                 const selflink= n._links.self.href
                 const id = selflink.split('/').pop(-1);
@@ -119,9 +120,9 @@ class NestedList extends React.Component {
                   <ListItem button  to={to} style= {this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem}  key= {index} divider= {true} onClick={boundMoreInfo}>
                     <ListItemText primary={clientid} />
                     <ListItemText primary={fullName} />
-                    <IconButton className={classes.button} aria-label="Delete" disabled color="primary">
+                    {/* <IconButton className={classes.button} aria-label="Delete" disabled color="primary">
                           <DeleteIcon />
-                        </IconButton>
+                        </IconButton> */}
                   </ListItem>
                 );
               })
