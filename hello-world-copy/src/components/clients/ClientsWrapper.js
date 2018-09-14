@@ -97,6 +97,7 @@ class ExampleGrid extends React.Component {
         return (
             <div className={classes.root}>
                 <Grid container spacing={32}>
+                
                     <Grid item xs={12} sm={12} >
                         <ExpansionPanel expanded={true}  onChange={this.handleChange('panel2')}>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
