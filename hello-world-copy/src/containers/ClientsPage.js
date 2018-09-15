@@ -84,7 +84,7 @@ class ClientsPage extends React.Component {
     event.preventDefault();
 
     this.props.moreinfoactions.createRequirement(this.state.requirement).then((requirement) => {
-     this.setState({ modal: false });
+     this.setState({ reqmodal: false });
      this.redirect(requirement);
     });
 
