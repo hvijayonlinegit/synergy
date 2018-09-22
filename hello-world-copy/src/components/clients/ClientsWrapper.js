@@ -124,6 +124,7 @@ class ExampleGrid extends React.Component {
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={9} >
+                                        
                                         <ClientDetails moreinfo={this.props.moreinfo} ></ClientDetails>
                                     </Grid>
                                 </Grid>

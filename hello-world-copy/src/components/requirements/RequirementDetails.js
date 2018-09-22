@@ -136,43 +136,6 @@ class TextFields extends React.Component {
            
               <form className={classes.container} noValidate autoComplete="off">
               <Card className={classes.card}>
-               {/* <CardHeader  subheader="Client & Contact Information" 
-                  > 
-                
-                 </CardHeader> */}
-                <CardContent className={classes.content}>
-                <Typography className={classes.afterEle}variant="body1" gutterBottom>
-                Client & Contact Information
-                </Typography>
-                  <TextField
-                      margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
-                      label="Account Name"
-                      fullWidth
-                      className={classes.textField}
-                     // value = { this.props.moreinfo.client.name }
-                      onChange={ this.handleChange('name')}
-                      required />
-                      
-                      
-                      <TextField
-                      margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
-                      label="Contact Name"
-                      fullWidth
-                      className={classes.textField}
-                      //value = { this.props.moreinfo.client.name }
-                      onChange={ this.handleChange('name')}
-                       />
-                     
-                       
-                  <CardActions>
-                  </CardActions>
-                </CardContent>
-              </Card>
-              <Card className={classes.card}>
                {/* <CardHeader  subheader="Requirement Information" 
                   > 
                 
