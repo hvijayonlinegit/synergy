@@ -19,9 +19,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 const styles = theme => ({
  root: {
-  maxHeight: '37vh',
+  maxHeight: '50vh',
     overflow: 'auto',
-    minHeight: '37vh'
+    minHeight: '50vh'
  },
   button: {
     margin: theme.spacing.unit,
@@ -32,7 +32,8 @@ const styles = theme => ({
     color: theme.palette.text.primary,
     boxShadow: theme.shadows[1],
     fontSize: 11,
-  },
+  }
+  
 });
 
 class NestedList extends React.Component {
@@ -63,11 +64,13 @@ updateSearch(event){
         // paddingTop: '5px'
     },
     listItemClicked: {
-      border: '1px solid lightgreen',
+      
       //borderBottom: '2px solid gray',
-      paddingTop: '5px',
-      paddingBottom: '5px',
-      borderLeft: '12px solid lightgreen'
+     // paddingTop: '5px',
+     // paddingBottom: '5px',
+      border: '1px solid rgba(0, 0, 0, 0.12)',
+      borderLeft: '12px solid lightgreen',
+      boxShadow: '0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12)'
     },
     textField: {
       color: white,

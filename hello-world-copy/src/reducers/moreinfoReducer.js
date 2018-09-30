@@ -7,7 +7,7 @@ export default function moreinfoReducer(state = initialState.clients.moreinfo, a
       case types.CREATE_REQUIREMENT_SUCCESS:
       const newState = Object.assign([], state)
       newState.client.requirements.requirementses.push(action.requirement)
-      browserHistory.push(`/`)
+     // browserHistory.push(`/`)
       return newState
       case types.LOAD_MOREINFO_SUCCESS:
       const clientState = Object.assign([], state)

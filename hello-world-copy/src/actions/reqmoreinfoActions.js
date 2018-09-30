@@ -9,6 +9,10 @@ export function loadReqMoreinfofailure(){
   
   return {type: types.LOAD_REQ_MOREINFO_FAILURE};
 }
+export function createCandidateSuccess(candidate){
+
+  return {type: types.CREATE_CANDIDATE_SUCCESS, candidate}
+}
 
 export function setSelectedRequirement(client){
   return {type: types.SET_SELECTED_REQUIREMENT, client};
@@ -55,4 +59,22 @@ export function loadReqMoreinfo(link, client) {
     });
   };
 
+}
+export function createCandidate(candidate) {
+  return function (dispatch) {
+    return candidatesApi.createCandidate(candidate).then(response => {
+      if(!response.message){
+
+        //const link= response._links.candidates.href;
+       // dispatch(reqmoreinfoActions.loadReqMoreinfo(link, response));
+        dispatch(createCandidateSuccess(response));
+      }
+      else{
+       // dispatch(loadCatsFailure(response.message))
+      }
+      
+    }).catch(error => {
+      throw(error);
+    });
+  };
 }

@@ -16,9 +16,9 @@ import 'react-overlay-loader/styles.css';
 
 const styles = theme => ({
   root: {
-      maxHeight: '37vh',
+      maxHeight: '50vh',
       overflow: 'auto',
-      minHeight: '37vh'
+      minHeight: '50vh'
    },
    button: {
     margin: theme.spacing.unit,
@@ -39,6 +39,7 @@ class NestedList extends React.Component {
     this.state = { indexOfClickedItem: 0,search:''};
     
 }
+
   updateSearch(event){
     this.setState({search:event.target.value.substr(0,20)});
   }
@@ -54,11 +55,14 @@ class NestedList extends React.Component {
       listItem: {
     },
     listItemClicked: {
-      border: '1px solid orange',
-      //borderBottom: '2px solid gray',
-      paddingTop: '5px',
-      paddingBottom: '5px',
-      borderLeft: '12px solid orange'
+      // border: '1px solid orange',
+      // //borderBottom: '2px solid gray',
+      // paddingTop: '5px',
+      // paddingBottom: '5px',
+      // borderLeft: '12px solid orange'
+      border: '1px solid rgba(0, 0, 0, 0.12)',
+      borderLeft: '12px solid lightgreen',
+      boxShadow: '0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12)'
     },
     };
     function isEmpty(obj) {
@@ -100,7 +104,7 @@ class NestedList extends React.Component {
             onChange={this.updateSearch.bind(this)}
             />
             <Tooltip title="Add a Candidate" classes={{ tooltip: classes.lightTooltip }}>
-              <Button variant="fab" mini color="primary" aria-label="Add" className={classes.button} onClick={ this.props.handleModalOpen } >
+              <Button variant="fab" mini color="primary" aria-label="Add" className={classes.button} onClick={() => this.props.handleCadModalOpen(this.props.selectedRequirement._links.self.href)} >
                 <AddIcon />
               </Button>
             </Tooltip>
@@ -135,6 +139,8 @@ class NestedList extends React.Component {
 }
 NestedList.propTypes = {
   candidates: PropTypes.object.isRequired,
-  onCandidates: PropTypes.func.isRequired
+  selectedRequirement: PropTypes.object.isRequired,
+  onCandidates: PropTypes.func.isRequired,
+  handleCadModalOpen: PropTypes.func.isRequired
 };
 export default withStyles(styles)(NestedList);

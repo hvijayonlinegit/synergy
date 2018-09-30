@@ -37,6 +37,25 @@ class CandidatesApi {
       return error;
     });
   }
+
+  static createCandidate(candidate) {
+    //let accountid= candidate.id
+    const request = new Request(apiurl.BASE_URL+`/synergy/api/candidates/`, {
+      method: 'POST',
+      headers: new Headers({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization':' Bearer ' + localStorage.getItem('token')
+      }),
+      body: JSON.stringify(candidate)
+    });
+    console.log(request.body)
+    return fetch(request).then(response => {
+      return response.json();
+    }).catch(error => {
+      return error;
+    });
+  }
 }
 
 export default CandidatesApi;

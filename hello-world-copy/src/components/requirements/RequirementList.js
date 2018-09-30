@@ -17,9 +17,9 @@ import 'react-overlay-loader/styles.css';
 
 const styles = theme => ({
   root: {
-    maxHeight: '37vh',
+    maxHeight: '50vh',
       overflow: 'auto',
-      minHeight: '37vh'
+      minHeight: '50vh'
    },
    button: {
     margin: theme.spacing.unit,
@@ -58,11 +58,14 @@ class NestedList extends React.Component {
       listItem: {
       },
       listItemClicked: {
-        border: '1px solid red',
-        //borderBottom: '2px solid gray',
-        paddingTop: '5px',
-      paddingBottom: '5px',
-        borderLeft: '12px solid red'
+      //   border: '1px solid red',
+      //   //borderBottom: '2px solid gray',
+      //   paddingTop: '5px',
+      // paddingBottom: '5px',
+      //   borderLeft: '12px solid red'
+        border: '1px solid rgba(0, 0, 0, 0.12)',
+      borderLeft: '12px solid lightgreen',
+      boxShadow: '0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12)'
       },
     };
     function isEmpty(obj) {

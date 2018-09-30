@@ -18,7 +18,7 @@ export default function catReducer(state = initialState.clients.accountses, acti
     case types.CREATE_CAT_SUCCESS:
       const newState = Object.assign([], state)
       newState.accountses.push(action.cat)
-      browserHistory.push(`/`)
+      //browserHistory.push(`/`)
       return newState
     case types.UPDATE_CAT_SUCCESS:
       return [

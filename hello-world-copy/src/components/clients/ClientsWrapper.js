@@ -18,6 +18,7 @@ import RequirementDetails from '../requirements/RequirementDetails'
 import CandidateDetails from '../candidates/CandidatesDetails'
 import DocumentsList from '../documents/DocumentsList'
 import themes from '../theme'
+import { Paper } from '@material-ui/core';
 const styles = theme => ({
     
     card: {
@@ -52,12 +53,20 @@ const styles = theme => ({
     chippper:{
         boxShadow: '0 1px 6px rgba(32, 33, 36, 0.28)',
        
-        borderRadius: '40px',
+       // borderRadius: '40px',
         boxSizing: 'border-box',
         overFlow: 'hidden',
-        padding: '10px 20px',
+        padding: '10px 5px',
         color: theme.palette.primary.contrastText,
         backgroundColor: themes.palette.primary.main,
+        //for vertical align
+        writingMode: 'vertical-rl',
+        textOrientation: 'upright',
+        maxHeight: '70vh',
+        minHeight: '70vh',
+        display: 'flex',
+        marginLeft: '15px',
+        paddingTop: '150px'
     },
     detailsborder: {
         border: '1px solid grey',
@@ -83,6 +92,9 @@ const styles = theme => ({
       content: '"Clients"'
     },
 },
+paperlayout:{
+    padding: '40px 20px'
+}
     
 });
 
@@ -105,16 +117,21 @@ class ExampleGrid extends React.Component {
         const candidates= this.props.reqmoreinfo.requirement.candidates;
         return (
             <div className={classes.root}>
-                <Grid container spacing={32}>
-                
+                <Grid container spacing={32} className={classes.paperlayout}>
+                    
                     <Grid item xs={12} sm={12} >
-                        <ExpansionPanel expanded={true}  onChange={this.handleChange('panel2')}>
-                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <div  className={classes.chippper}>Clients</div>
-                            </ExpansionPanelSummary>
-                            <ExpansionPanelDetails   >
+                    <Paper >
+                        {/* <ExpansionPanel expanded={true}  onChange={this.handleChange('panel2')}>
+                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}> */}
+                                {/* <div  className={classes.chippper}>Clients</div> */}
+                            {/* </ExpansionPanelSummary>
+                            <ExpansionPanelDetails   > */}
                                 <Grid container spacing={24} className ={classes.detailspad}>
-                                    <Grid item xs={12} sm={3} className={classes.pos}>
+                                    <Grid item xs={8} sm={1} direction="column" >
+                                        <div  className={classes.chippper}>Clients</div>
+                                    </Grid>
+                                    <Grid item xs={8} sm={3} direction="column" className={classes.pos}>
+                                    
                                         <ClientList
                                             clients={clients}
                                             onRequirements={this.handleRequirements}
@@ -123,22 +140,29 @@ class ExampleGrid extends React.Component {
                                             handleModalOpen={this.props.handleModalOpen}
                                         />
                                     </Grid>
-                                    <Grid item xs={12} sm={9} >
+                                    <Grid item xs={8}direction="column"  sm={8} >
                                         
                                         <ClientDetails moreinfo={this.props.moreinfo} ></ClientDetails>
                                     </Grid>
                                 </Grid>
-                            </ExpansionPanelDetails>
-                        </ExpansionPanel>
+                            {/* </ExpansionPanelDetails>
+                        </ExpansionPanel> */}
+                        </Paper>
                     </Grid>
+                    
+                    
                     <Grid item xs={12} sm={12}>
-                        <ExpansionPanel expanded={true} onChange={this.handleChange('panel2')}>
-                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <div  className={classes.chippper}>Requirements</div>
-                            </ExpansionPanelSummary>
-                            <ExpansionPanelDetails>
+                        <Paper >
+                        {/* <ExpansionPanel expanded={true} onChange={this.handleChange('panel2')}>
+                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}> */}
+                                {/* <div  className={classes.chippper}></div> */}
+                            {/* </ExpansionPanelSummary>
+                            <ExpansionPanelDetails> */}
                                 <Grid container spacing={24} className ={classes.detailspad}>
-                                    <Grid item xs={12} sm={3} className={classes.pos}>
+                                    <Grid item xs={8} sm={1} direction="column" >
+                                        <div  className={classes.chippper}>Requirements</div>
+                                    </Grid>
+                                    <Grid item xs={12} sm={3} direction="column" className={classes.pos}>
                                     <RequirementList
                                             requirements={requirements}
                                             selectedclient = {this.props.moreinfo.client}
@@ -148,48 +172,61 @@ class ExampleGrid extends React.Component {
                                             handleReqModalOpen={this.props.handleReqModalOpen}
                                         />
                                     </Grid>
-                                    <Grid item xs={12} sm={9} >
+                                    <Grid item xs={12} sm={8} direction="column"  >
                                         <RequirementDetails 
                                         requirements={this.props.reqmoreinfo.requirement}
                                         ></RequirementDetails>
                                     </Grid>
                                 </Grid>
-                            </ExpansionPanelDetails>
-                        </ExpansionPanel>
+                            {/* </ExpansionPanelDetails>
+                        </ExpansionPanel> */}
+                        </Paper >
                     </Grid>
+                    
                     <Grid item xs={12} sm={12}>
-                        <ExpansionPanel expanded={true} onChange={this.handleChange('panel3')}>
-                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <div className={classes.chippper}>Candidates</div>
+                        <Paper >
+                        {/* <ExpansionPanel expanded={true} onChange={this.handleChange('panel3')}>
+                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}> */}
+                                {/* <div className={classes.chippper}>Candidates</div> */}
 
-                            </ExpansionPanelSummary>
-                            <ExpansionPanelDetails>
+                            {/* </ExpansionPanelSummary>
+                            <ExpansionPanelDetails> */}
                                 <Grid container spacing={24} className ={classes.detailspad}>
+                                    <Grid item xs={8} sm={1} direction="column" >
+                                        <div  className={classes.chippper}>Candidates</div>
+                                    </Grid>
                                     <Grid item xs={12} sm={3} className={classes.pos}>
                                     <CandidateList
                                             candidates={candidates}
+                                            selectedRequirement = {this.props.reqmoreinfo.requirement}
                                             onCandidates={this.props.onCandidates}
                                             onDelete={this.handleDeleteClient}
                                             onMoreInfo={this.props.onMoreInfo}
+                                            handleCadModalOpen={this.props.handleCadModalOpen}
                                         />
                                     </Grid>
-                                    <Grid item xs={12} sm={9} className={classes.detailsborderwarn}>
+                                    <Grid item xs={12} sm={8}>
                                         <CandidateDetails 
                                             candidate={this.props.candmoreinfo.candidate}
                                             ></CandidateDetails>
                                     </Grid>
                                 </Grid>
-                            </ExpansionPanelDetails>
-                        </ExpansionPanel>
+                            {/* </ExpansionPanelDetails>
+                        </ExpansionPanel> */}
+                        </Paper>
                     </Grid>
                     <Grid item xs={12} sm={12}>
-                        <ExpansionPanel expanded={true} onChange={this.handleChange('panel3')}>
+                        {/* <ExpansionPanel expanded={true} onChange={this.handleChange('panel3')}>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                                 <div className={classes.chippper} >Documents</div>
                             </ExpansionPanelSummary>
-                            <ExpansionPanelDetails>
+                            <ExpansionPanelDetails> */}
+                            <Paper >
                                 <Grid container spacing={24}>
-                                    <Grid item xs={12} sm={12} className={classes.pos}>
+                                     <Grid item xs={8} sm={1} direction="column" >
+                                        <div  className={classes.chippper}>Documents</div>
+                                    </Grid>
+                                    <Grid item xs={12} sm={9} className={classes.pos}>
                                     {this.props.candmoreinfo.candidate && this.props.candmoreinfo.candidate.documents.length > 0 ?
                                     <DocumentsList
                                             candidate={this.props.candmoreinfo.candidate}
@@ -200,8 +237,9 @@ class ExampleGrid extends React.Component {
                                     }
                                     </Grid>
                                 </Grid>
-                            </ExpansionPanelDetails>
-                        </ExpansionPanel>
+                            {/* </ExpansionPanelDetails>
+                        </ExpansionPanel> */}
+                        </Paper>
                     </Grid>
                 </Grid>
             </div>
@@ -220,7 +258,8 @@ ExampleGrid.propTypes = {
     onCandidates: PropTypes.func.isRequired,
     onDocuments:PropTypes.func.isRequired,
     handleModalOpen: PropTypes.func.isRequired,
-    handleReqModalOpen: PropTypes.func.isRequired
+    handleReqModalOpen: PropTypes.func.isRequired,
+    handleCadModalOpen: PropTypes.func.isRequired
 
 };
 

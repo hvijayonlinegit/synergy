@@ -13,13 +13,19 @@ import * as docmoreinfoActions from '../actions/docmoreinfoActions';
 import AddRequirementModal from '../components/requirements/CreateRequirementModal'
 import AddClientModal from '../components/clients/CreateClientModal'
 import ClientsWrapper from '../components/clients/ClientsWrapper';
-
+import AddCandidateModal from '../components/candidates/CreateCandidateModal'
 class ClientsPage extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      client: {name: '', type: '', phone: '', team: '', address: ''},
+      client: {
+        name: '', 
+        type: '', 
+        phone: '', 
+        team: '', 
+        address: ''
+      },
       requirement:{
 				account_manager: 'string',
 				candidate_availability: 'string',
@@ -36,9 +42,36 @@ class ClientsPage extends React.Component {
         type: 'string',
         accounts: '',
         account_id:''
-			  },
+        },
+        candidate:{
+          firstname: 'string',
+          lastname: 'string',
+          phonenumber: 'string',
+          emailaddress: 'string',
+          overallexperience: 'string',
+          relevantexperience: 'string',
+          workingstatus: 'string',
+          strengths: 'string',
+          avaiabilityforinterview: 'string',
+          availabilitytojoin: 'string',
+          status: 'string',
+          reason: 'string',
+          linkedinurl: 'string',
+          referrences: 'string',
+          vendorname: 'string',
+          vendorcontact: 'string',
+          vendorphone: 'string',
+          vendoremail: 'string',
+          referredby: 'string',
+          primaryskills: 'string',
+          secondaryskills: 'string',
+          docsuploaded: 'string',
+          requirements: [],
+          requirement_id: ''
+        },
       modal: false,
-      reqmodal: false
+      reqmodal: false,
+      cadmodal: false
     };
     this.handleModalOpen = this.handleModalOpen.bind(this);
     this.handleModalClose = this.handleModalClose.bind(this);
@@ -48,7 +81,11 @@ class ClientsPage extends React.Component {
     this.updateReqState = this.updateReqState.bind(this);
     this.saveRequirement = this.saveRequirement.bind(this);
 
-
+    this.handleCadModalOpen = this.handleCadModalOpen.bind(this);
+    this.handleCadModalClose = this.handleCadModalClose.bind(this);
+    this.updateCadState = this.updateCadState.bind(this);
+    this.saveCandidate = this.saveCandidate.bind(this);
+    
     this.redirect = this.redirect.bind(this);
     this.saveCat = this.saveCat.bind(this);
     this.updateCatState = this.updateCatState.bind(this);
@@ -63,7 +100,13 @@ class ClientsPage extends React.Component {
   componentWillMount(){
     this.props.actions.loadClients();
   }
-
+  updateCadState(event) {
+    const field = event.target.name;
+    const candidate = this.state.candidate;
+    console.log(field+event.target.value);
+    candidate[field] = event.target.value;
+    return this.setState({candidate: candidate});
+  }
   updateReqState(event) {
     const field = event.target.name;
     const requirement = this.state.requirement;
@@ -81,6 +124,15 @@ class ClientsPage extends React.Component {
 
   redirect(client) {
     browserHistory.push(`/clients`);
+  }
+  saveCandidate(event) {
+    event.preventDefault();
+
+    this.props.reqmoreinfoactions.createCandidate(this.state.candidate).then((candidate) => {
+     this.setState({ cadmodal: false });
+     this.redirect(candidate);
+    });
+
   }
   saveRequirement(event) {
     event.preventDefault();
@@ -100,6 +152,19 @@ class ClientsPage extends React.Component {
      this.redirect(cat);
     });
 
+  }
+  handleCadModalOpen(link) {
+    console.log(id+'viay');
+    let id = link.split('/').pop(-1);
+    //let req= Object.assign([], this.state.requirement)
+    //req.id= id
+    let linkarr=[];
+    linkarr.push(link);
+    this.setState({ candidate:{id:id, requirements:linkarr, requirement_id:id }, cadmodal: true });
+  
+  }
+  handleCadModalClose() {
+		this.setState({ cadmodal: false });
   }
   handleReqModalOpen(link) {
     console.log(id+'viay');
@@ -161,6 +226,7 @@ handleMoreInfo(link ,client, e ){
           onMoreInfo={this.handleMoreInfo}
           handleModalOpen={this.handleModalOpen}
           handleReqModalOpen={this.handleReqModalOpen}
+          handleCadModalOpen={this.handleCadModalOpen}
           children ={this.props.children}
           />
           <AddClientModal
@@ -176,6 +242,13 @@ handleMoreInfo(link ,client, e ){
             onChange={this.updateReqState}
             open={ this.state.reqmodal }
             close={ this.handleReqModalClose }
+          /> 
+          <AddCandidateModal
+            candidate={this.state.candidate}
+            onSave={this.saveCandidate}
+            onChange={this.updateCadState}
+            open={ this.state.cadmodal }
+            close={ this.handleCadModalClose }
           /> 
       </div>
     );

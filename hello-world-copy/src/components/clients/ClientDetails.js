@@ -19,6 +19,11 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 
 import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
+
+//Spinner Imports
+import { Loader } from 'react-overlay-loader';
+import 'react-overlay-loader/styles.css';
+
 const styles = theme => ({
     root: {
         width: '100%',
@@ -26,8 +31,8 @@ const styles = theme => ({
         backgroundColor: theme.palette.background.paper,
         //borderLeft: '1px solid rgba(0, 0, 0, 0.12)',
         overflowY:'auto',
-        maxHeight: '50vh',
-        minHeight: '50vh',
+        maxHeight: '70vh',
+        minHeight: '70vh',
         display: 'flex',
     flexWrap: 'wrap',
        
@@ -126,7 +131,7 @@ class TextFields extends React.Component {
       }
     
       if(isEmpty(this.props.moreinfo.client.requirements)){
-        return (<div> something went wrong</div>);
+        return (<div> <Loader fullPage loading={true} /></div>);
       }
       else{
         const selflink= this.props.moreinfo.client._links.self.href
