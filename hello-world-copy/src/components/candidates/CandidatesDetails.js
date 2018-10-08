@@ -108,7 +108,7 @@ class TextFields extends React.Component {
         return Object.keys(obj).length === 0;
       }
     
-      if(isEmpty(this.props.candidate.documents)){
+      if(isEmpty(this.props.candidate)){
         return (
           <MySnackbarContentWrapper
           variant="info"

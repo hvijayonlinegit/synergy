@@ -6,7 +6,7 @@ class DocumentsApi {
     //const PROD_URL = `https://peaceful-mesa-72076.herokuapp.com/accounts`
     //const BASE_URL = `http://localhost:8090`
     //const BASE_URL = `https://peaceful-mesa-72076.herokuapp.com`
-    const request = new Request(apiurl.BASE_URL+`/list`, {
+    const request = new Request(link, {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -36,6 +36,25 @@ class DocumentsApi {
 
     return fetch(request).then(response => {
 
+      return response;
+    }).catch(error => {
+      return error;
+    });
+  }
+  static upload(file, id) {
+    // eslint-disable-next-line
+    const formData = new FormData();
+      formData.append('file',file);
+      formData.append('id',id);
+    const request = new Request(apiurl.BASE_URL+`/upload`, {
+      method: 'POST',
+      headers: new Headers({
+        'origins':'*',
+        'Authorization':' Bearer ' + localStorage.getItem('token')
+      }),
+      body: formData
+    });
+    return fetch(request).then(response => {
       return response;
     }).catch(error => {
       return error;

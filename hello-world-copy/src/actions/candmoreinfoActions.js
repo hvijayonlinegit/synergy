@@ -1,24 +1,67 @@
 import * as types from './actionTypes';
 import documentsApi from '../api/documentsApi';
+import * as docmoreinfoActions from '../actions/docmoreinfoActions';
 
-export function loadCandMoreInfoSuccess(client){
-  return {type: types.LOAD_CAND_MOREINFO_SUCCESS, client};
+import * as clientActions from '../actions/clientActions';
+
+
+export function loadCandMoreInfoSuccess(selectedCandidate){
+  return {type: types.LOAD_CAND_MOREINFO_SUCCESS, selectedCandidate};
 }
 export function loadCandMoreinfofailure(){
   return {type: types.LOAD_CAND_MOREINFO_FAILURE};
 }
-export function loadCandMoreinfo(link, client) {
+
+export function loadCandMoreinfo(doclink, selectedCandidate) {
   return function(dispatch) {
-    console.log('calling link'+ link);
+    console.log('Selected candiate '+ doclink);
     
-    //return dispatch(loadCandMoreInfoSuccess(client));
-    return documentsApi.getAllDocuments(link).then(documents => {
-    //  console.log('inside requirement action.js'+requirements._embedded.requirementses[0].title);
-    client.documents = documents
-      dispatch(loadCandMoreInfoSuccess(client));
+    return documentsApi.getAllDocuments(doclink).then(documents => {
+      if(!documents.message){
+        if(documents._embedded.documents.length === 0){
+         dispatch(docmoreinfoActions.loadDocMoreinfofailure());
+        }else{
+          dispatch(docmoreinfoActions.loadDocMoreInfoSuccess(documents._embedded.documents));
+          
+        }
+        selectedCandidate.documents =documents._embedded
+        dispatch(loadCandMoreInfoSuccess(selectedCandidate));
+        
+      }
+      else{
+        if(documents.status === 401){
+          dispatch(clientActions.loadSignInPage())
+        }
+        if(documents.status === 500)
+        {
+          dispatch(clientActions.loadCatsFailure(documents.message))
+        }
+        if(documents.status === 403)
+        {
+          dispatch(clientActions.loadNeedAdminAccess(documents.message))
+        }
+      }
     }).catch(error => {
       throw(error);
     });
   };
 
+}
+export function fileUpload(file, id) {
+  return function (dispatch) {
+    return documentsApi.upload(file, id).then(response => {
+      if(!response.message){
+
+        //const link= response._links.candidates.href;
+       // dispatch(reqmoreinfoActions.loadReqMoreinfo(link, response));
+        //dispatch(createCandidateSuccess(response));
+      }
+      else{
+       // dispatch(loadCatsFailure(response.message))
+      }
+      
+    }).catch(error => {
+      throw(error);
+    });
+  };
 }

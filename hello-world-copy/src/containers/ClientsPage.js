@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {browserHistory} from 'react-router'
 import PropTypes from 'prop-types';
 import {bindActionCreators} from 'redux';
-
+import axios, { post } from 'axios';
 import * as courseActions from '../actions/clientActions';
 import * as moreinfoActions from '../actions/moreinfoActions';
 import * as reqmoreinfoActions from '../actions/reqmoreinfoActions';
@@ -71,7 +71,8 @@ class ClientsPage extends React.Component {
         },
       modal: false,
       reqmodal: false,
-      cadmodal: false
+      cadmodal: false,
+      file:null
     };
     this.handleModalOpen = this.handleModalOpen.bind(this);
     this.handleModalClose = this.handleModalClose.bind(this);
@@ -95,6 +96,8 @@ class ClientsPage extends React.Component {
     this.handleDocuments = this.handleDocuments.bind(this);
     this.handleDeleteClient = this.handleDeleteClient.bind(this);
     this.handleMoreInfo = this.handleMoreInfo.bind(this);
+    this.uploadDocument = this.uploadDocument.bind(this);
+    this.onFilechange =this.onFilechange.bind(this);
    
   }
   componentWillMount(){
@@ -186,6 +189,16 @@ class ClientsPage extends React.Component {
 	handleModalClose() {
 		this.setState({ modal: false });
   }
+  onFilechange(event){
+    this.setState({file:event.target.files[0]})
+  }
+  uploadDocument(link){
+   let id = link.split('/').pop(-1);
+    console.log('selected candiateid' +id);
+    //console.log('id of the candidate'+id)
+    this.props.candmoreinfoactions.fileUpload(this.state.file, id);
+  }
+  
   handleDocuments(id , client,token, e){
     this.props.docmoreinfoactions.downloadDoc(id,client,token);
   }
@@ -219,9 +232,12 @@ handleMoreInfo(link ,client, e ){
           moreinfo={moreinfo}
           reqmoreinfo={reqmoreinfo}
           candmoreinfo={candmoreinfo}
+          docmoreinfo={this.props.docmoreinfo}
           onRequirements={this.handleRequirements}
           onCandidates={this.handleCandidates}
           onDocuments={this.handleDocuments}
+          onUpload ={this.uploadDocument}
+          onFilechange={this.onFilechange}
           onDelete={this.handleDeleteClient}
           onMoreInfo={this.handleMoreInfo}
           handleModalOpen={this.handleModalOpen}
@@ -276,6 +292,7 @@ function mapStateToProps(state, ownProps) {
     moreinfo : state.moreinfo,
     reqmoreinfo : state.reqmoreinfo,
     candmoreinfo : state.candmoreinfo,
+    docmoreinfo : state.docmoreinfo,
 
   };
 }

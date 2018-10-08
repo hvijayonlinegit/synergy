@@ -1,5 +1,7 @@
 import * as types from './actionTypes';
 import candidatesApi from '../api/candidatesApi';
+
+import * as docmoreinfoActions from '../actions/docmoreinfoActions';
 import * as candmoreinfoActions from '../actions/candmoreinfoActions';
 import * as clientActions from '../actions/clientActions';
 export function loadReqMoreInfoSuccess(client){
@@ -20,20 +22,25 @@ export function setSelectedRequirement(client){
 export function loadReqMoreinfo(link, client) {
   //function (dispatch){dispatch(setSelectedRequirement(client));}
   return function(dispatch) {
-    console.log('calling link'+ link);
+    console.log('getting candidates using  link'+ link);
     return candidatesApi.getCandidates(link).then(candidates => {
     //  console.log('inside requirement action.js'+requirements._embedded.requirementses[0].title);
     if(!candidates.message){
       if(candidates._embedded.candidates.length === 0){
         dispatch(candmoreinfoActions.loadCandMoreinfofailure());
+        dispatch(docmoreinfoActions.loadDocMoreinfofailure());
       }else{
-        candidates._embedded.candidates.map((n,index) =>{
-          const link= 'https://peaceful-mesa-72076.herokuapp.com/list'
+        // Code changes for default loading
+        let sortedCandidates =  candidates._embedded.candidates.sort(
+          (a,b)=> Number(b._links.self.href.split('/').pop(-1)) - Number(a._links.self.href.split('/').pop(-1))
+        );
+        sortedCandidates.map((n, index) =>{
+          const link= n._links.document.href
+          console.log('calling candiates more info using link '+link);
           if(index ===0){
             dispatch(candmoreinfoActions.loadCandMoreinfo(link, n));
-           }
+          }
           return '';
-         
         });
       }
         

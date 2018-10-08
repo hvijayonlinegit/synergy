@@ -114,7 +114,7 @@ class ExampleGrid extends React.Component {
         const { classes } = this.props;
         const clients = this.props.clients;
         const requirements= this.props.moreinfo.client.requirements;
-        const candidates= this.props.reqmoreinfo.requirement.candidates;
+        //const documents = this.props.docmoreinfo.candidate.documents;
         return (
             <div className={classes.root}>
                 <Grid container spacing={32} className={classes.paperlayout}>
@@ -197,7 +197,7 @@ class ExampleGrid extends React.Component {
                                     </Grid>
                                     <Grid item xs={12} sm={3} className={classes.pos}>
                                     <CandidateList
-                                            candidates={candidates}
+                                            candidates={this.props.reqmoreinfo.requirement.candidates}
                                             selectedRequirement = {this.props.reqmoreinfo.requirement}
                                             onCandidates={this.props.onCandidates}
                                             onDelete={this.handleDeleteClient}
@@ -227,14 +227,17 @@ class ExampleGrid extends React.Component {
                                         <div  className={classes.chippper}>Documents</div>
                                     </Grid>
                                     <Grid item xs={12} sm={9} className={classes.pos}>
-                                    {this.props.candmoreinfo.candidate && this.props.candmoreinfo.candidate.documents.length > 0 ?
-                                    <DocumentsList
-                                            candidate={this.props.candmoreinfo.candidate}
+                                    
+                                     <DocumentsList
+                                            selectedCandidate={this.props.candmoreinfo.candidate}
+                                            documents={this.props.docmoreinfo.documents}
                                             onDocuments={this.props.onDocuments}
+                                            onFilechange={this.props.onFilechange}
+                                            onUpload={this.props.onUpload}
                                             onDelete={this.handleDeleteClient}
                                             onMoreInfo={this.props.onMoreInfo}
-                                    /> : <span></span>
-                                    }
+                                    />  
+                                    
                                     </Grid>
                                 </Grid>
                             {/* </ExpansionPanelDetails>
@@ -255,8 +258,11 @@ ExampleGrid.propTypes = {
     moreinfo: PropTypes.object.isRequired,
     reqmoreinfo: PropTypes.object.isRequired,
     candmoreinfo: PropTypes.object.isRequired,
+    docmoreinfo:PropTypes.object.isRequired,
     onCandidates: PropTypes.func.isRequired,
     onDocuments:PropTypes.func.isRequired,
+    onUpload:PropTypes.func.isRequired,
+    onFilechange:PropTypes.func.isRequired,
     handleModalOpen: PropTypes.func.isRequired,
     handleReqModalOpen: PropTypes.func.isRequired,
     handleCadModalOpen: PropTypes.func.isRequired

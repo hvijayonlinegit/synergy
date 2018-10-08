@@ -1,8 +1,11 @@
 import * as types from './actionTypes';
 import documentsApi from '../api/documentsApi';
 
-export function loadDocMoreInfoSuccess(client){
-  return {type: types.LOAD_DOC_MOREINFO_SUCCESS, client};
+export function loadDocMoreInfoSuccess(documents){
+  return {type: types.LOAD_DOC_MOREINFO_SUCCESS, documents};
+}
+export function loadDocMoreinfofailure(){
+  return {type: types.LOAD_DOC_MOREINFO_FAILURE};
 }
 export function downloadDoc(link, client) {
 

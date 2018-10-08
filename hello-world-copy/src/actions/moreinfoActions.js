@@ -2,6 +2,7 @@ import * as types from './actionTypes';
 import requirementsApi from '../api/RequirementsApi';
 import * as reqmoreinfoActions from '../actions/reqmoreinfoActions';
 import * as candmoreinfoActions from '../actions/candmoreinfoActions';
+import * as docmoreinfoActions from '../actions/docmoreinfoActions'
 import * as clientActions from '../actions/clientActions';
 
 import * as apiurl  from '../common/apiURL';
@@ -21,6 +22,7 @@ export function loadMoreinfo(link, client) {
         if(requirements._embedded.requirementses.length === 0){
           dispatch(reqmoreinfoActions.loadReqMoreinfofailure());
           dispatch(candmoreinfoActions.loadCandMoreinfofailure());
+          dispatch(docmoreinfoActions.loadDocMoreinfofailure());
         }else{
           // Code changes for default loading
           let sortedRequirements = requirements._embedded.requirementses.sort(

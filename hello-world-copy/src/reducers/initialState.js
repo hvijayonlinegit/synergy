@@ -15,7 +15,10 @@ export default {
       candidate: {
         documents: [],
       }
-    }
+    },
+    docmoreinfo :{
+        documents: [],
+    },
   },
   requirements: {},
   candidates : {},

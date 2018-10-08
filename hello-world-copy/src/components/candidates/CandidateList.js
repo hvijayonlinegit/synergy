@@ -8,8 +8,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
 //Spinner Imports
 //import { Loader } from 'react-overlay-loader';
 import 'react-overlay-loader/styles.css';
@@ -37,29 +35,20 @@ class NestedList extends React.Component {
     super(props);
     // Initialize a state which contain the index of clicked element (initially -1)
     this.state = { indexOfClickedItem: 0,search:''};
-    
 }
-
   updateSearch(event){
     this.setState({search:event.target.value.substr(0,20)});
   }
-  handleMoreinfo(link , n, index ){
-    console.log('child method'+ n.name);
+  handleMoreinfo(documentslink , n, index ){
     this.setState({indexOfClickedItem: index});
-    this.props.onCandidates(link, n);
+    this.props.onCandidates(documentslink, n);
   }
-  
   render() {
     const { classes, to } = this.props;
     const styles = {
       listItem: {
     },
     listItemClicked: {
-      // border: '1px solid orange',
-      // //borderBottom: '2px solid gray',
-      // paddingTop: '5px',
-      // paddingBottom: '5px',
-      // borderLeft: '12px solid orange'
       border: '1px solid rgba(0, 0, 0, 0.12)',
       borderLeft: '12px solid lightgreen',
       boxShadow: '0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12)'
@@ -75,10 +64,14 @@ class NestedList extends React.Component {
         );
       }
     else{
-      let filteredCandidates= this.props.candidates.candidates.filter(
+      // sort the list to show recently added candidate at the top
+      let sortedCandidates = this.props.candidates.candidates.sort(
+        (a,b)=> Number(b._links.self.href.split('/').pop(-1)) - Number(a._links.self.href.split('/').pop(-1))
+      );
+      //Apply search filters to search by name or id for the candidate list
+      let filteredCandidates= sortedCandidates.filter(
         (candidate) =>{
-          const selflink= candidate._links.self.href
-          const id = selflink.split('/').pop(-1);
+          const id = candidate._links.self.href.split('/').pop(-1);
           let fullName = candidate.firstname+ ' ' +candidate.lastname;
           if(fullName.toLowerCase().indexOf(this.state.search.toLowerCase())!== -1){
             return true;
@@ -88,7 +81,6 @@ class NestedList extends React.Component {
           }
           return false;
         }
-  
       );
     return (
       <div>
@@ -110,25 +102,18 @@ class NestedList extends React.Component {
             </Tooltip>
         <List component="div" disablePadding>
             {
-                filteredCandidates.map((n,index) => {
-               // const link= 'http://localhost:8090/list'
-               const link =''
-                //let boundClick = this.props.onRequirements.bind(this, link);
-                const selflink= n._links.self.href
-                const id = selflink.split('/').pop(-1);
-                let clientid=  id;
-                let fullName = n.firstname+ ' ' +n.lastname;
-                //let boundDeleteClick = this.props.onDelete.bind(this, selflink, n);
-                let boundMoreInfo = this.handleMoreinfo.bind(this, link, n, index);
+              filteredCandidates.map((n,index) => {
+                let documentsLink = '';
+                if (n._links) { documentsLink = n._links.document.href }
+
+                let boundMoreInfo = this.handleMoreinfo.bind(this, documentsLink, n, index);
+                
                 return(
-                  <ListItem button  to={to} style= {this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem}  key= {index} divider= {true} onClick={boundMoreInfo}>
-                    <ListItemText primary={clientid} />
-                    <ListItemText primary={fullName} />
-                    {/* <IconButton className={classes.button} aria-label="Delete" disabled color="primary">
-                          <DeleteIcon />
-                        </IconButton> */}
-                  </ListItem>
-                );
+                    <ListItem button  to={to} style= {this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem}  key= {index} divider= {true} onClick={boundMoreInfo} >
+                      <ListItemText primary={n._links.self.href.split('/').pop(-1)} />
+                      <ListItemText primary={n.firstname+ ' ' +n.lastname} />
+                    </ListItem>
+                  );
               })
             }
           </List>
