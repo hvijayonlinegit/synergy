@@ -191,12 +191,15 @@ class ClientsPage extends React.Component {
   }
   onFilechange(event){
     this.setState({file:event.target.files[0]})
+    
   }
-  uploadDocument(link){
+  uploadDocument(event, link){
+    event.preventDefault();
    let id = link.split('/').pop(-1);
     console.log('selected candiateid' +id);
     //console.log('id of the candidate'+id)
     this.props.candmoreinfoactions.fileUpload(this.state.file, id);
+    //event.target[0].files = [];
   }
   
   handleDocuments(id , client,token, e){

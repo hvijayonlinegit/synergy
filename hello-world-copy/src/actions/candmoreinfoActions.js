@@ -51,9 +51,15 @@ export function fileUpload(file, id) {
   return function (dispatch) {
     return documentsApi.upload(file, id).then(response => {
       if(!response.message){
-
+        //console.log(response.json)
         //const link= response._links.candidates.href;
-       // dispatch(reqmoreinfoActions.loadReqMoreinfo(link, response));
+        if (response.ok) {
+          response.json().then(json => {
+            console.log(json);
+            dispatch(docmoreinfoActions.loadDocUploadSuccess(json));
+          });
+        }
+       
         //dispatch(createCandidateSuccess(response));
       }
       else{

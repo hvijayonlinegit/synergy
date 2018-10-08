@@ -7,6 +7,9 @@ export function loadDocMoreInfoSuccess(documents){
 export function loadDocMoreinfofailure(){
   return {type: types.LOAD_DOC_MOREINFO_FAILURE};
 }
+export function loadDocUploadSuccess(documents){
+  return {type: types.LOAD_DOC_UPLOAD_SUCCESS, documents};
+}
 export function downloadDoc(link, client) {
 
   return function(dispatch) {

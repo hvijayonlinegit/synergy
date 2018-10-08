@@ -25,7 +25,9 @@ class DocumentUpload extends React.Component {
   render() {
     const {classes} = this.props;
     return (
-      <form  onSubmit={() => this.props.onUpload(this.props.selectedCandlink)}>
+      <form  onSubmit={(event) => 
+        this.props.onUpload(event, this.props.selectedCandlink
+        )}>
         <TextField type="file" multiple required mini onChange={this.props.onFilechange}></TextField>
         <Tooltip  title="Upload Document" classes={{ tooltip: classes.lightTooltip }}>
           <Button type="submit" variant="fab" mini color="primary" aria-label="Upload" className={classes.button} >

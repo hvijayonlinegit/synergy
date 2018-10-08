@@ -72,13 +72,22 @@ class NestedList extends React.Component {
       
       //Sort the documents to show recently added document at the begining.
       let sortedDocuments = this.props.documents.sort(
-        (a,b)=> Number(b._links.self.href.split('/').pop(-1)) - Number(a._links.self.href.split('/').pop(-1))
+        
+        // (a,b)=> Number(
+        //   b._links.self.href.split('/').pop(-1)) - Number(a._links.self.href.split('/').pop(-1)
+        //   )
       );
       //Apply search filters to search by name or id for the document list
       let filteredDocuments= sortedDocuments.filter(
         (document) =>{
-          const selflink= document._links.self.href
-          const id = selflink.split('/').pop(-1);
+          let id=''
+          if(document._links){
+            const selflink= document._links.self.href
+             id = selflink.split('/').pop(-1);
+          }
+          else{
+            id = document.id;
+          }
           if(document.documentName.toLowerCase().indexOf(this.state.search.toLowerCase())!== -1){
             return true;
           }
@@ -116,8 +125,14 @@ class NestedList extends React.Component {
         <List component="div" disablePadding className={classes.root} >
             {   
               filteredDocuments.map((n,index) => {
-              const selflink= n._links.self.href
-              const id = selflink.split('/').pop(-1);
+                let id=''
+                if(n._links){
+                  const selflink= n._links.self.href
+                   id = selflink.split('/').pop(-1);
+                }
+                else{
+                  id = n.id;
+                }
                return(
                   <ListItem button style= {this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem}  to={to}  divider= {true}  >
                      <ListItemText primary={n.documentName} secondary={id} /> 

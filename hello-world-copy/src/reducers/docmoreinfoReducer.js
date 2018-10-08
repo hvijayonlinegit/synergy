@@ -12,7 +12,10 @@ export default function docmoreinfoReducer(state = initialState.clients.docmorei
        const clientState2 = Object.assign([], state)
        clientState2.documents = []
        return  clientState2
-     
+     case types.LOAD_DOC_UPLOAD_SUCCESS:
+     const clientState3 = Object.assign([], state)
+     clientState3.documents.push( action.documents[0])
+     return  clientState3
     default:
       return state;
   }
