@@ -13,16 +13,31 @@ import DocumentUpload from './DocumentUpload';
 
 const styles = theme => ({
   root: {
-    maxHeight: '37vh',
-      overflow: 'auto',
-      minHeight: '37vh'
+    maxHeight: '25vh',
+    overflow: 'auto',
+    minHeight: '25vh',
    },
    button: {
     margin: theme.spacing.unit,
+    marginLeft: '20%'
   },
   topSection: {
     flexGrow: 1,
-  }
+    float:'right'
+  },
+  beforeEle: {
+    '&::before':  {
+        display: 'block',
+        float:'left',
+        content: '"Documents"',
+        writingMode: 'vertical-rl',
+        textOrientation: 'upright',
+        boxSizing: 'border-box',
+        padding: '1px 1px',
+        color: 'blue',
+        marginRight: '10px'
+    },
+}
 });
 
 class NestedList extends React.Component {
@@ -43,8 +58,12 @@ class NestedList extends React.Component {
     const {classes, to } = this.props;
     const styles = {
       listItem: {
+        paddingBottom: '5px',
+        paddingTop: '5px'
     },
     listItemClicked: {
+      paddingBottom: '5px',
+      paddingTop: '5px',
       backgroundColor: '#f0f8ff',
       borderBottom: '1px solid red'
     },
@@ -99,7 +118,7 @@ class NestedList extends React.Component {
   
       );
     return (
-      <div>
+      <div className={classes.beforeEle}>
          <div className={classes.topSection}>
             <Grid container spacing={24}>
               

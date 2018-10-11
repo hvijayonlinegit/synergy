@@ -14,13 +14,13 @@ import 'react-overlay-loader/styles.css';
 
 const styles = theme => ({
   root: {
-      maxHeight: '50vh',
-      overflow: 'auto',
-      minHeight: '50vh'
+    maxHeight: '25vh',
+    overflow: 'auto',
+    minHeight: '25vh',
    },
    button: {
     margin: theme.spacing.unit,
-    marginLeft: '24%'
+    marginLeft: '20%'
   },
   lightTooltip: {
     background: theme.palette.common.white,
@@ -28,6 +28,19 @@ const styles = theme => ({
     boxShadow: theme.shadows[1],
     fontSize: 11,
   },
+  beforeEle: {
+    '&::before':  {
+        display: 'block',
+        float:'left',
+        content: '"Candidates"',
+        writingMode: 'vertical-rl',
+        textOrientation: 'upright',
+        boxSizing: 'border-box',
+        padding: '1px 1px',
+        color: 'blue',
+        marginRight: '10px'
+    },
+}
 });
 
 class NestedList extends React.Component {
@@ -47,8 +60,12 @@ class NestedList extends React.Component {
     const { classes, to } = this.props;
     const styles = {
       listItem: {
+        paddingTop: '5px',
+        paddingBottom: '5px',
     },
     listItemClicked: {
+      paddingTop: '5px',
+      paddingBottom: '5px',
       border: '1px solid rgba(0, 0, 0, 0.12)',
       borderLeft: '12px solid lightgreen',
       boxShadow: '0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12)'
@@ -83,7 +100,7 @@ class NestedList extends React.Component {
         }
       );
     return (
-      <div>
+      <div className={classes.beforeEle}>
         <TextField
             hintText="Search..."
             placeholder="Search..."
@@ -100,7 +117,7 @@ class NestedList extends React.Component {
                 <AddIcon />
               </Button>
             </Tooltip>
-        <List component="div" disablePadding>
+        <List component="div" disablePadding className={classes.root}>
             {
               filteredCandidates.map((n,index) => {
                 let documentsLink = '';

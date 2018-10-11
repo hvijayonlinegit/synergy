@@ -27,12 +27,10 @@ import 'react-overlay-loader/styles.css';
 const styles = theme => ({
     root: {
         width: '100%',
-       // height: '100vh',
         backgroundColor: theme.palette.background.paper,
-        //borderLeft: '1px solid rgba(0, 0, 0, 0.12)',
         overflowY:'auto',
-        maxHeight: '70vh',
-        minHeight: '70vh',
+        maxHeight: '34vh',
+        minHeight: '34vh',
         display: 'flex',
     flexWrap: 'wrap',
        

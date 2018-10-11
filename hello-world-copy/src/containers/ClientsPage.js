@@ -199,7 +199,7 @@ class ClientsPage extends React.Component {
     console.log('selected candiateid' +id);
     //console.log('id of the candidate'+id)
     this.props.candmoreinfoactions.fileUpload(this.state.file, id);
-    //event.target[0].files = [];
+    //this.setState({file:[]});
   }
   
   handleDocuments(id , client,token, e){

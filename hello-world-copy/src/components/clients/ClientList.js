@@ -14,26 +14,37 @@ import 'react-overlay-loader/styles.css';
 import {white, blue500} from '@material-ui/core/colors/';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
-
 const styles = theme => ({
  root: {
-  maxHeight: '50vh',
+    maxHeight: '25vh',
     overflow: 'auto',
-    minHeight: '50vh'
+    minHeight: '25vh',
  },
   button: {
     margin: theme.spacing.unit,
-    marginLeft: '24%'
+    marginLeft: '20%'
   },
   lightTooltip: {
     background: theme.palette.common.white,
     color: theme.palette.text.primary,
     boxShadow: theme.shadows[1],
     fontSize: 11,
-  }
-  
+  },
+  beforeEle: {
+    '&::before':  {
+        display: 'block',
+        float:'left',
+        content: '"Clients"',
+        writingMode: 'vertical-rl',
+        textOrientation: 'upright',
+        boxSizing: 'border-box',
+        padding: '1px 1px',
+        color: 'blue',
+        marginRight: '10px',
+        //borderLeft: '1px solid green',
+        
+    },
+}
 });
 
 class NestedList extends React.Component {
@@ -60,14 +71,14 @@ updateSearch(event){
     
     const styles = {
       listItem: {
-        // paddingBottom: '5px',
-        // paddingTop: '5px'
+        paddingBottom: '5px',
+        paddingTop: '5px'
     },
     listItemClicked: {
       
       //borderBottom: '2px solid gray',
-     // paddingTop: '5px',
-     // paddingBottom: '5px',
+     paddingTop: '5px',
+        paddingBottom: '5px',
       border: '1px solid rgba(0, 0, 0, 0.12)',
       borderLeft: '12px solid lightgreen',
       boxShadow: '0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12)'
@@ -109,7 +120,7 @@ updateSearch(event){
   
       );
     return (
-        <div >
+        <div  className={classes.beforeEle}>
           <TextField
             hintText="Search..."
             placeholder="Search..."

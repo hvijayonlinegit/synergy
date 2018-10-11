@@ -26,9 +26,11 @@ const styles = theme => ({
     root: {
         width: '100%',
         overflowY:'auto',
-        maxHeight: '70vh',
-        minHeight: '70vh'
-      },
+        maxHeight: '34vh',
+        minHeight: '34vh',
+        display: 'flex',
+        flexWrap: 'wrap',
+      },  
   container: {
     display: 'flex',
     flexWrap: 'wrap',
