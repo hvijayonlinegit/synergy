@@ -8,6 +8,8 @@ import Tooltip from '@material-ui/core/Tooltip';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+
+import {white, blue500} from '@material-ui/core/colors/';
 //Spinner Imports
 //import { Loader } from 'react-overlay-loader';
 import 'react-overlay-loader/styles.css';
@@ -37,7 +39,7 @@ const styles = theme => ({
         textOrientation: 'upright',
         boxSizing: 'border-box',
         padding: '1px 1px',
-        color: 'blue',
+        color: 'green',
         marginRight: '10px'
     },
 }
@@ -60,15 +62,24 @@ class NestedList extends React.Component {
     const { classes, to } = this.props;
     const styles = {
       listItem: {
-        paddingTop: '5px',
-        paddingBottom: '5px',
+        paddingTop: '2px',
+        paddingBottom: '2px',
     },
     listItemClicked: {
-      paddingTop: '5px',
-      paddingBottom: '5px',
+      paddingTop: '2px',
+      paddingBottom: '2px',
       border: '1px solid rgba(0, 0, 0, 0.12)',
-      borderLeft: '12px solid lightgreen',
+      //borderLeft: '12px solid #000000',
+      background: '#0000004a',
+      color: '#fff',
       boxShadow: '0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12)'
+    },
+    textField: {
+      color: white,
+      backgroundColor: blue500,
+      borderRadius: 2,
+      height: 35,
+      marginBottom: '5%'
     },
     };
     function isEmpty(obj) {
@@ -113,9 +124,9 @@ class NestedList extends React.Component {
             onChange={this.updateSearch.bind(this)}
             />
             <Tooltip title="Add a Candidate" classes={{ tooltip: classes.lightTooltip }}>
-              <Button variant="fab" mini color="primary" aria-label="Add" className={classes.button} onClick={() => this.props.handleCadModalOpen(this.props.selectedRequirement._links.self.href)} >
-                <AddIcon />
-              </Button>
+              {/* <Button variant="fab" mini color="primary" aria-label="Add" className={classes.button} onClick={() => this.props.handleCadModalOpen(this.props.selectedRequirement._links.self.href)} > */}
+                <AddIcon color="primary"  onClick={() => this.props.handleCadModalOpen(this.props.selectedRequirement._links.self.href)} />
+              {/* </Button> */}
             </Tooltip>
         <List component="div" disablePadding className={classes.root}>
             {

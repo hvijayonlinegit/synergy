@@ -34,7 +34,7 @@ const styles = theme => ({
         textOrientation: 'upright',
         boxSizing: 'border-box',
         padding: '1px 1px',
-        color: 'blue',
+        color: 'green',
         marginRight: '10px'
     },
 }
@@ -58,12 +58,12 @@ class NestedList extends React.Component {
     const {classes, to } = this.props;
     const styles = {
       listItem: {
-        paddingBottom: '5px',
-        paddingTop: '5px'
+        paddingBottom: '2px',
+        paddingTop: '2px'
     },
     listItemClicked: {
-      paddingBottom: '5px',
-      paddingTop: '5px',
+      paddingBottom: '2px',
+      paddingTop: '2px',
       backgroundColor: '#f0f8ff',
       borderBottom: '1px solid red'
     },

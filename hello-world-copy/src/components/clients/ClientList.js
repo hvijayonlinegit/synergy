@@ -39,7 +39,7 @@ const styles = theme => ({
         textOrientation: 'upright',
         boxSizing: 'border-box',
         padding: '1px 1px',
-        color: 'blue',
+        color: 'black',
         marginRight: '10px',
         //borderLeft: '1px solid green',
         
@@ -71,16 +71,18 @@ updateSearch(event){
     
     const styles = {
       listItem: {
-        paddingBottom: '5px',
-        paddingTop: '5px'
+        paddingBottom: '2px',
+        paddingTop: '2px'
     },
     listItemClicked: {
       
       //borderBottom: '2px solid gray',
-     paddingTop: '5px',
-        paddingBottom: '5px',
+     paddingTop: '2px',
+        paddingBottom: '2px',
       border: '1px solid rgba(0, 0, 0, 0.12)',
-      borderLeft: '12px solid lightgreen',
+    //   borderLeft: '12px solid lightgreen',
+    //borderLeft: '12px solid #000000',
+      background: '#0000004a',
       boxShadow: '0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12)'
     },
     textField: {
@@ -133,9 +135,9 @@ updateSearch(event){
             onChange={this.updateSearch.bind(this)}
             />
             <Tooltip title="Add a Client" classes={{ tooltip: classes.lightTooltip }}>
-              <Button variant="fab" mini color="primary" aria-label="Add" className={classes.button} onClick={ this.props.handleModalOpen } >
-                <AddIcon />
-              </Button>
+              {/* <Button  mini color="primary" aria-label="Add" className={classes.button} onClick={ this.props.handleModalOpen } > */}
+                <AddIcon color="primary"  onClick={ this.props.handleModalOpen }></AddIcon>
+              {/* </Button> */}
             </Tooltip>
         {/* <input type="text" value={this.state.search} onChange={this.updateSearch.bind(this)}/> */}
           <List component="div" disablePadding className={classes.root}>

@@ -29,8 +29,8 @@ const styles = theme => ({
         width: '100%',
         backgroundColor: theme.palette.background.paper,
         overflowY:'auto',
-        maxHeight: '34vh',
-        minHeight: '34vh',
+        maxHeight: '32vh',
+        minHeight: '32vh',
         display: 'flex',
     flexWrap: 'wrap',
        

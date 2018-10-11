@@ -11,6 +11,8 @@ import AddIcon from '@material-ui/icons/Add';
 
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+
+import {white, blue500} from '@material-ui/core/colors/';
 //Spinner Imports
 //import { Loader } from 'react-overlay-loader';
 import 'react-overlay-loader/styles.css';
@@ -40,10 +42,11 @@ const styles = theme => ({
         textOrientation: 'upright',
         boxSizing: 'border-box',
         padding: '1px 1px',
-        color: 'blue',
+        color: 'green',
         marginRight: '10px'
     },
-  }
+  },
+  
 
 });
 
@@ -69,18 +72,27 @@ class NestedList extends React.Component {
     const { classes } = this.props;
     const styles = {
       listItem: {
-        paddingBottom: '5px',
-        paddingTop: '5px'
+        paddingBottom: '2px',
+        paddingTop: '2px'
       },
       listItemClicked: {
       //   border: '1px solid red',
       //   //borderBottom: '2px solid gray',
-        paddingTop: '5px',
-      paddingBottom: '5px',
+        paddingTop: '2px',
+      paddingBottom: '2px',
       //   borderLeft: '12px solid red'
         border: '1px solid rgba(0, 0, 0, 0.12)',
-      borderLeft: '12px solid lightgreen',
+      // borderLeft: '12px solid lightgreen',
+      //borderLeft: '12px solid #000000',
+      background: '#0000004a',
       boxShadow: '0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12)'
+      },
+      textField: {
+        color: white,
+        backgroundColor: blue500,
+        borderRadius: 2,
+        height: 35,
+        marginBottom: '5%'
       },
     };
     function isEmpty(obj) {
@@ -125,9 +137,9 @@ class NestedList extends React.Component {
             onChange={this.updateSearch.bind(this)}
           />
           <Tooltip title="Add a Requirement" classes={{ tooltip: classes.lightTooltip }}>
-            <Button variant="fab" mini color="primary" aria-label="Add" className={classes.button} onClick={() => this.props.handleReqModalOpen(this.props.selectedclient._links.self.href)}  >
-              <AddIcon />
-            </Button>
+            {/* <Button variant="fab" mini color="primary" aria-label="Add" className={classes.button} onClick={() => this.props.handleReqModalOpen(this.props.selectedclient._links.self.href)}  > */}
+              <AddIcon  color="primary" onClick={() => this.props.handleReqModalOpen(this.props.selectedclient._links.self.href)} />
+            {/* </Button> */}
           </Tooltip>
           <List component="div" disablePadding className={classes.root}>
             {
