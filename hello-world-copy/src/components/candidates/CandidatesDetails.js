@@ -133,174 +133,219 @@ class TextFields extends React.Component {
                 <Typography className={classes.afterEle}variant="body1" gutterBottom>
                     Candidate Info
                 </Typography>
-                  <TextField
+                  <TextField InputLabelProps={{ shrink: true }} 
                       margin="dense"
                       placeholder="Enter Client name"
-                      name="account_name"
+                      name="firstName"
                       label="First Name"
                       fullWidth
                       className={classes.textField}
-                      value = { this.props.candidate.firstname }
-                      onChange={ this.handleChange('name')}
+                      value = { this.props.candidate.firstName }
+                      onChange={this.props.onChange}
                       required />
-                      <TextField
+                      <TextField InputLabelProps={{ shrink: true }} 
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter middleName"
+                      name="middleName"
                       label="Middle Name"
                       fullWidth
                       className={classes.textField}
-                      value = { this.props.candidate.firstname }
-                      onChange={ this.handleChange('name')}
+                      value = { this.props.candidate.middleName }
+                      onChange={this.props.onChange}
                        />
-                       <TextField
+                       <TextField InputLabelProps={{ shrink: true }} 
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter lastName"
+                      name="lastName"
                       label="Last Name"
                       fullWidth
                       className={classes.textField}
-                      value = { this.props.candidate.lastname }
-                      onChange={ this.handleChange('name')}
+                      value = { this.props.candidate.lastName }
+                      onChange={this.props.onChange}
                        />
-                      <TextField
+                      <TextField InputLabelProps={{ shrink: true }} 
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter emailAddress"
+                      name="emailAddress"
                       label="Email"
                       fullWidth
                       className={classes.textField}
-                      value = { this.props.candidate.emailaddress }
-                      onChange={ this.handleChange('name')}
+                      value = { this.props.candidate.emailAddress }
+                      onChange={this.props.onChange}
                       required
                        />
-                        <TextField
+                        <TextField InputLabelProps={{ shrink: true }} 
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
-                      label="Mobile"
+                      placeholder="Enter mobileNumber"
+                      name="mobileNumber"
+                      label="Mobile Number"
                       fullWidth
                       className={classes.textField}
-                      value = { this.props.candidate.emailaddress }
-                      onChange={ this.handleChange('name')}
+                      value = { this.props.candidate.mobileNumber }
+                      onChange={this.props.onChange}
                       
                        />
-                       <TextField
+                       <TextField InputLabelProps={{ shrink: true }} 
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
-                      label="Phone"
+                      placeholder="Enter phoneNumber"
+                      name="phoneNumber"
+                      label="Phone Number"
                       fullWidth
                       className={classes.textField}
-                      value = { this.props.candidate.emailaddress }
-                      onChange={ this.handleChange('name')}
+                      value = { this.props.candidate.phoneNumber }
+                      onChange={this.props.onChange}
                       
                        />
                        <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="age-native-helper">Country</InputLabel>
-                        <NativeSelect
-                          //value={ this.props.moreinfo.client.name }
-                          onChange={this.handleChange('age')}
-                          input={<Input name="account_name" id="age-native-helper" />}
-                        >
-                          <option value="--select--">-- select --</option>
-                          <option value={10}>My Team</option>
-                          <option value={20}>Private</option>
-                          <option value={30}>Public</option>
-                        </NativeSelect>
-                       
-                      </FormControl>
-                      <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="name-readonly">State</InputLabel>
-                        <Select
-                          value="asha richards"
-                          onChange={this.handleChange}
-                          input={<Input name="name" id="name-readonly" readOnly />}
-                        >
-                          <MenuItem value="">
-                            <em>None</em>
-                          </MenuItem>
-                          <MenuItem value="Asha Richards">Asha Richards</MenuItem>
-                          <MenuItem value="Raj">Raj</MenuItem>
-                          <MenuItem value="kevin">Srikaanth</MenuItem>
-                        </Select>
-                       
-                      </FormControl>
-                      <TextField
+					   <InputLabel htmlFor="country">Country</InputLabel>
+					   <NativeSelect
+						  value = { this.props.candidate.country }
+						 onChange={ this.props.onChange}
+						 input={<Input name="country" id="country" />}
+					   >
+					  	<option value="0">--Select Country--</option>
+						<option value="1">United States</option>
+					   </NativeSelect>
+					  
+					 </FormControl>
+					 <FormControl className={classes.formControl}>
+					   <InputLabel htmlFor="state">State</InputLabel>
+					   <NativeSelect
+						 value = { this.props.candidate.state }
+						 onChange={ this.props.onChange}
+						 input={<Input name="state" id="state" />}
+					   >
+						 <option value="0">--Select State--</option>
+							<option value="AL">Alabama</option>
+							<option value="AK">Alaska</option>
+							<option value="AZ">Arizona</option>
+							<option value="AR">Arkansas</option>
+							<option value="CA">California</option>
+							<option value="CO">Colorado</option>
+							<option value="CT">Connecticut</option>
+							<option value="DE">Delaware</option>
+							<option value="DC">District of Columbia</option>
+							<option value="FL">Florida</option>
+							<option value="GA">Georgia</option>
+							<option value="HI">Hawaii</option>
+							<option value="ID">Idaho</option>
+							<option value="IL">Illinois</option>
+							<option value="IN">Indiana</option>
+							<option value="IA">Iowa</option>
+							<option value="KS">Kansa</option>
+							<option value="KY">Kentucky</option>
+							<option value="LA">Louisiana</option>
+							<option value="MD">Maryland</option>
+							<option value="MA">Massachusetts</option>
+							<option value="MI">Michigan</option>
+							<option value="MN">Minnesota</option>
+							<option value="MS">Mississippi</option>
+							<option value="MO">Missouri</option>
+							<option value="MT">Montana</option>
+							<option value="NE">Nebraska</option>
+							<option value="NV">Nevada</option>
+							<option value="NH">New Hampshire</option>
+							<option value="NJ">New Jersey</option>
+							<option value="NM">New Mexico</option>
+							<option value="NY">New York</option>
+							<option value="NC">North Carolina</option>
+							<option value="ND">North Dakota</option>
+							<option value="OH">Ohio</option>
+							<option value="OK">Oklahoma</option>
+							<option value="OR">Oregon</option>
+							<option value="PA">Pennsylvania</option>
+							<option value="RI">Rhode Island</option>
+							<option value="SC">South Carolina</option>
+							<option value="SD">South Dakota</option>
+							<option value="TN">Tennessee</option>
+							<option value="TX">Texas</option>
+							<option value="UT">Utah</option>
+							<option value="VT">Vermont</option>
+							<option value="VA">Virginia</option>
+							<option value="WA">Washington</option>
+							<option value="WV">West Virginia</option>
+							<option value="WI">Wisconsin</option>
+							<option value="WY">Wyoming</option>
+
+	
+					   </NativeSelect>
+					  
+					 </FormControl>
+					
+					 <TextField InputLabelProps={{ shrink: true }} 
+					 margin="dense"
+					 placeholder="Enter city name"
+					 name="city"
+					 label="City"
+					 
+					 
+					 value = { this.props.candidate.city }
+					 onChange={ this.props.onChange}
+					  />
+                       <TextField InputLabelProps={{ shrink: true }} 
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
-                      label="City"
-                      fullWidth
-                      className={classes.textField}
-                      value = { this.props.candidate.emailaddress }
-                      onChange={ this.handleChange('name')}
-                      
-                       />
-                       <TextField
-                      margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter address"
+                      name="address"
                       label="Address"
                       fullWidth
                       className={classes.textField}
-                      value = { this.props.candidate.emailaddress }
-                      onChange={ this.handleChange('name')}
+                      value = { this.props.candidate.address }
+                      onChange={this.props.onChange}
                       
                        />
-                      <TextField
+                      <TextField InputLabelProps={{ shrink: true }} 
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter preferredLocation1"
+                      name="preferredLocation1"
                       label="Preferred Location1 "
                       fullWidth
                       className={classes.textField}
-                      value = { this.props.candidate.emailaddress }
-                      onChange={ this.handleChange('name')}
+                      value = { this.props.candidate.preferredLocation1 }
+                      onChange={this.props.onChange}
                       
                        />
-                       <TextField
+                       <TextField InputLabelProps={{ shrink: true }} 
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter preferredLocation2"
+                      name="preferredLocation2"
                       label="Preferred Location2 "
                       fullWidth
                       className={classes.textField}
-                      value = { this.props.candidate.emailaddress }
-                      onChange={ this.handleChange('name')}
+                      value = { this.props.candidate.preferredLocation2 }
+                      onChange={this.props.onChange}
                       
                        />
-                       <TextField
+                       <TextField InputLabelProps={{ shrink: true }} 
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter zipCode"
+                      name="zipCode"
                       label="Zip Code "
                       fullWidth
                       className={classes.textField}
-                      value = { this.props.candidate.emailaddress }
-                      onChange={ this.handleChange('name')}
+                      value = { this.props.candidate.zipCode }
+                      onChange={this.props.onChange}
                       
                        />
-                       <TextField
+                       <TextField InputLabelProps={{ shrink: true }} 
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter skypeId"
+                      name="skypeId"
                       label="Skype Id  "
                       fullWidth
                       className={classes.textField}
-                      value = { this.props.candidate.emailaddress }
-                      onChange={ this.handleChange('name')}
+                      value = { this.props.candidate.skypeId }
+                      onChange={this.props.onChange}
                       
                        />
-                      <TextField
+                      <TextField InputLabelProps={{ shrink: true }} 
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter linkedinUrl"
+                      name="linkedinUrl"
                       label="Linkedin Id  "
                       fullWidth
                       className={classes.textField}
-                      value = { this.props.candidate.emailaddress }
-                      onChange={ this.handleChange('name')}
+                      value = { this.props.candidate.linkedinUrl }
+                      onChange={this.props.onChange}
                       
                        />
                     <CardActions>
@@ -308,146 +353,173 @@ class TextFields extends React.Component {
                 </CardContent>
               </Card>
               <Card className={classes.card}>
-               {/* <CardHeader subheader="Address Information"
-                  > 
-                
-                 </CardHeader> */}
                 <CardContent className={classes.content}>
                 <Typography className={classes.afterEle}variant="body1" gutterBottom>
                 Additional Information
                 </Typography>
                 <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="age-native-helper">Sourced From</InputLabel>
+                        <InputLabel htmlFor="sourceFrom">Sourced From</InputLabel>
                         <NativeSelect
-                          //value={ this.props.moreinfo.client.name }
-                          onChange={this.handleChange('age')}
-                          input={<Input name="account_name" id="age-native-helper" />}
+                          value={ this.props.candidate.sourceFrom }
+                          onChange={this.props.onChange}
+                          input={<Input name="sourceFrom" id="sourceFrom" />}
                         >
-                          <option value="--select--">-- select --</option>
-                          <option value={10}>My Team</option>
-                          <option value={20}>Private</option>
-                          <option value={30}>Public</option>
+							<option value="0">--Select--</option>
+							<option value="ip">Imported By Parser</option>
+							<option value="ir">Internal Referral</option>
+							<option value="jc">Career Site</option>
+							<option value="jcb">CareerBuilder</option>
+							<option value="jd">Dice</option>
+							<option value="ji">Indeed</option>
+							<option value="jm">Monster</option>
+							<option value="jn">Naukri</option>
+							<option value="jt">Times Job</option>
+							<option value="jtf"> TechFetch</option>
+							<option value="mr">Mail response to Requirement List</option>
+							<option value="na">N/A</option>
+							<option value="or">Other</option>
+							<option value="rb">Referred By</option>
+							<option value="ss">Sub-contractors</option>
+							<option value="vd">Vendor</option>
+
                         </NativeSelect>
                        
                       </FormControl>
-                  <TextField
+                  <TextField InputLabelProps={{ shrink: true }} 
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter sourceInfo"
+                      name="sourceInfo"
                       label="Source Information "
                       fullWidth
                       className={classes.textField}
-                      value = { this.props.candidate.emailaddress }
-                      onChange={ this.handleChange('name')}
+                      value = { this.props.candidate.sourceInfo }
+                      onChange={this.props.onChange}
                        />
-                       <TextField
+                       <TextField InputLabelProps={{ shrink: true }} 
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter sourcing"
+                      name="sourcing"
                       label="Sourcing "
                       fullWidth
                       className={classes.textField}
-                      value = { this.props.candidate.emailaddress }
-                      onChange={ this.handleChange('name')}
+                      value = { this.props.candidate.sourcing }
+                      onChange={this.props.onChange}
                        />
                       <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="age-native-helper">Sourced By</InputLabel>
+                        <InputLabel htmlFor="sourceBy">Sourced By</InputLabel>
                         <NativeSelect
-                          //value={ this.props.moreinfo.client.name }
-                          onChange={this.handleChange('age')}
-                          input={<Input name="account_name" id="age-native-helper" />}
+                          value={ this.props.candidate.sourceBy }
+                          onChange={this.props.onChange}
+                          input={<Input name="sourceBy" id="sourceBy" />}
                         >
-                          <option value="--select--">-- select --</option>
-                          <option value={10}>My Team</option>
-                          <option value={20}>Private</option>
-                          <option value={30}>Public</option>
+							<option value="0">--Select--</option>
+							<option value="4985">Rahul Akkisetti</option>
+							<option value="4984">Umakanth</option>
+							<option value="4942"> Meghan Breen</option>
+							<option value="4941">Francis</option>
+							<option value="4940">Ravi Thonger</option>
+							<option value="4939">Srinivas</option>
+							<option value="4938"> Sri Bollampally</option>
+							<option value="4937">Raj Nettem</option>
+							<option value="4936">Asha Richards</option>
+							<option value="4935">Admin Admin</option>
+
                         </NativeSelect>
                        
                       </FormControl>
-                      <TextField
+                      <TextField InputLabelProps={{ shrink: true }} 
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter availableFrom"
+                      name="availableFrom"
                       label="Available From "
                       fullWidth
                       className={classes.textField}
-                      value = { this.props.candidate.emailaddress }
-                      onChange={ this.handleChange('name')}
+                      value = { this.props.candidate.availableFrom }
+                      onChange={this.props.onChange}
                        />
                        <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="age-native-helper">Notice Period</InputLabel>
+                        <InputLabel htmlFor="noticePeriod">Notice Period</InputLabel>
                         <NativeSelect
-                          //value={ this.props.moreinfo.client.name }
-                          onChange={this.handleChange('age')}
-                          input={<Input name="account_name" id="age-native-helper" />}
+                          value={ this.props.candidate.noticePeriod }
+                          onChange={this.props.onChange}
+                          input={<Input name="noticePeriod" id="noticePeriod" />}
                         >
-                          <option value="--select--">-- select --</option>
-                          <option value={10}>My Team</option>
-                          <option value={20}>Private</option>
-                          <option value={30}>Public</option>
+							<option value="-1">--Select--</option>
+							<option value="I">Immediate</option>
+							<option value="1W">1 Week</option>
+							<option value="2W">2 Weeks</option>
+							<option value="1M">1 Month</option>
+							<option value="C">Custom</option>
+
                         </NativeSelect>
                        
                       </FormControl>
-                      <TextField
+                      <TextField InputLabelProps={{ shrink: true }} 
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter fax"
+                      name="fax"
                       label="Fax"
                       fullWidth
                       className={classes.textField}
-                      value = { this.props.candidate.emailaddress }
-                      onChange={ this.handleChange('name')}
+                      value = { this.props.candidate.fax }
+                      onChange={this.props.onChange}
                        />
-                       <TextField
+                       <TextField InputLabelProps={{ shrink: true }} 
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter licenseNumber"
+                      name="licenseNumber"
                       label="License No"
                       fullWidth
                       className={classes.textField}
-                      value = { this.props.candidate.emailaddress }
-                      onChange={ this.handleChange('name')}
+                      value = { this.props.candidate.licenseNumber }
+                      onChange={this.props.onChange}
                        />
-                       <TextField
+                       <TextField InputLabelProps={{ shrink: true }} 
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter passportNumber"
+                      name="passportNumber"
                       label="Passport No"
                       fullWidth
                       className={classes.textField}
-                      value = { this.props.candidate.emailaddress }
-                      onChange={ this.handleChange('name')}
+                      value = { this.props.candidate.passportNumber }
+                      onChange={this.props.onChange}
                        />
                       <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="age-native-helper">Visa Status</InputLabel>
+                        <InputLabel htmlFor="visaStatus">Visa Status</InputLabel>
                         <NativeSelect
-                          //value={ this.props.moreinfo.client.name }
-                          onChange={this.handleChange('age')}
-                          input={<Input name="account_name" id="age-native-helper" />}
+                          value={ this.props.candidate.visaStatus }
+                          onChange={this.props.onChange}
+                          input={<Input name="visaStatus" id="visaStatus" />}
                         >
-                         <option value="--select--">-- select --</option>
-                          <option value={10}>My Team</option>
-                          <option value={20}>Private</option>
-                          <option value={30}>Public</option>
+                          <option value="0">--Select--</option>
+                          <option value="CP">CPT</option>
+                          <option value="EA">EAD</option>
+                          <option value="GE">GC-EAD</option>
+                          <option value="GC">Green Card Holder</option>
+                          <option value="H1">H1B</option>
+                          <option value="OP">OPT</option>
+                          <option value="US">US Citizen</option>
+                          <option value="-1">Other</option>
+
                         </NativeSelect>
                        
                       </FormControl>
-                      <TextField
+                      <TextField InputLabelProps={{ shrink: true }} 
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter dateOfBirth"
+                      name="dateOfBirth"
                       label="Date of Birth "
                       fullWidth
                       className={classes.textField}
-                      value = { this.props.candidate.emailaddress }
-                      onChange={ this.handleChange('name')}
+                      value = { this.props.candidate.dateOfBirth }
+                      onChange={this.props.onChange}
                        />
                       <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="age-native-helper">Candidate Status</InputLabel>
+                        <InputLabel htmlFor="candidateStatus">Candidate Status</InputLabel>
                         <NativeSelect
-                          //value={ this.props.moreinfo.client.name }
-                          onChange={this.handleChange('age')}
-                          input={<Input name="account_name" id="age-native-helper" />}
+                          value={ this.props.candidate.candidateStatus }
+                          onChange={this.props.onChange}
+                          input={<Input name="candidateStatus" id="candidateStatus" />}
                         >
                           <option value="--select--">-- select --</option>
                           <option value={10}>My Team</option>
@@ -463,79 +535,77 @@ class TextFields extends React.Component {
                 </CardContent>
               </Card>
               <Card className={classes.card}>
-               {/* <CardHeader subheader="Address Information"
-                  > 
-                
-                 </CardHeader> */}
                 <CardContent className={classes.content}>
                 <Typography className={classes.afterEle}variant="body1" gutterBottom>
-                Personal Information
+                	Personal Information
                 </Typography>
                 <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="age-native-helper">Gender</InputLabel>
+                        <InputLabel htmlFor="gender" shrink>Gender</InputLabel>
                         <NativeSelect
-                          //value={ this.props.moreinfo.client.name }
-                          onChange={this.handleChange('age')}
-                          input={<Input name="account_name" id="age-native-helper" />}
+                          value={ this.props.candidate.gender }
+                          onChange={this.props.onChange}
+                          input={<Input name="gender" id="gender" />}
                         >
-                          <option value="--select--">-- select --</option>
-                          <option value={10}>My Team</option>
-                          <option value={20}>Private</option>
-                          <option value={30}>Public</option>
+						<option value="">--Select--</option>
+						<option value="Female">Female</option>
+						<option value="Male">Male</option>
+
                         </NativeSelect>
                        
                       </FormControl>
-                  <TextField
+                  <TextField InputLabelProps={{ shrink: true }} 
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter fatherName"
+                      name="fatherName"
                       label="Father Name "
                       fullWidth
                       className={classes.textField}
-                      value = { this.props.candidate.emailaddress }
-                      onChange={ this.handleChange('name')}
+                      value = { this.props.candidate.fatherName }
+                      onChange={this.props.onChange}
                        />
-                       <TextField
+                       <TextField InputLabelProps={{ shrink: true }} 
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter motherName"
+                      name="motherName"
                       label="Mother Name "
                       fullWidth
                       className={classes.textField}
-                      value = { this.props.candidate.emailaddress }
-                      onChange={ this.handleChange('name')}
+                      value = { this.props.candidate.motherName }
+                      onChange={this.props.onChange}
                        />
-                       <TextField
+                       <TextField InputLabelProps={{ shrink: true }} 
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter nationality"
+                      name="nationality"
                       label="Nationality  "
                       fullWidth
                       className={classes.textField}
-                      value = { this.props.candidate.emailaddress }
-                      onChange={ this.handleChange('name')}
+                      value = { this.props.candidate.nationality }
+                      onChange={this.props.onChange}
                        />
-                       <TextField
+                       <TextField InputLabelProps={{ shrink: true }} 
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter hobbies"
+                      name="hobbies"
                       label="Hobbies  "
                       fullWidth
                       className={classes.textField}
-                      value = { this.props.candidate.emailaddress }
-                      onChange={ this.handleChange('name')}
+                      value = { this.props.candidate.hobbies }
+                      onChange={this.props.onChange}
                        />
                       <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="age-native-helper">Marital Status</InputLabel>
+                        <InputLabel htmlFor="maritalStatus" shrink>Marital Status</InputLabel>
                         <NativeSelect
-                          //value={ this.props.moreinfo.client.name }
-                          onChange={this.handleChange('age')}
-                          input={<Input name="account_name" id="age-native-helper" />}
+                          value={ this.props.candidate.maritalStatus }
+                          onChange={this.props.onChange}
+                          input={<Input name="maritalStatus" id="maritalStatus" />}
                         >
-                          <option value="--select--">-- select --</option>
-                          <option value={10}>My Team</option>
-                          <option value={20}>Private</option>
-                          <option value={30}>Public</option>
+                      <option value="">--Select--</option>
+                      <option value="Single">Single</option>
+                      <option value="Married">Married</option>
+                      <option value="Widowed">Widowed</option>
+                      <option value="Divorced">Divorced</option>
+
                         </NativeSelect>
                        
                       </FormControl>
@@ -544,73 +614,7 @@ class TextFields extends React.Component {
                   </CardActions>
                 </CardContent>
               </Card>
-              {/* <div className={classes.padder}>
-                <TextField
-                     margin="dense"
-                     placeholder="Enter requirement name"
-                     name="account_name"
-                     label="name2"
-                     fullWidth
-                     className={classes.textField}
-                     value = { this.props.candidate.firstname }
-                     />
-                <TextField
-                        id="name"
-                        label="phone"
-                        className={classes.textField}
-                        value={ this.props.candidate.lastname }
-                        onChange={ this.handleChange('name')} 
-                        margin="normal"
-                    />
-                
-                <TextField
-                     margin="dense"
-                     placeholder="Enter candidate type"
-                     name="account_type"
-                     label="address"
-                     fullWidth
-                     className={classes.textField}
-                     value={ this.props.candidate.emailaddress }
-                     onChange={ this.handleChange('name')} />
-                    
-                    
-        
-                    <TextField
-                     margin="dense"
-                     placeholder="Enter candidate phone"
-                     name="account_phone"
-                     label="Phone"
-                     fullWidth
-                     className={classes.textField}
-                     value={ this.props.candidate.overallexperience }
-                     onChange={ this.handleChange('name')}  />
-                    <TextField
-                     margin="dense"
-                     placeholder="Enter candidate team"
-                     name="account_team"
-                     label="Team"
-                     fullWidth
-                     className={classes.textField}
-                     value={ this.props.candidate.relevantexperience }
-                     onChange={ this.handleChange('name')}  />
-                    <TextField
-                     margin="dense"
-                     placeholder="Enter candidate Address"
-                     name="account_address"
-                     label="type"
-                     fullWidth
-                     className={classes.textField}
-                     value={ this.props.candidate.workingstatus }
-                     onChange={ this.handleChange('name')}  />
-                     
-               </div> */}
-               {/* <Button variant="contained"  className={classes.button}>
-                            Update
-                    </Button>
-                    <Button variant="contained" size="small" className={classes.button}>
-                            <Save className={classNames(classes.leftIcon, classes.iconSmall)} />
-                            fffSave
-                        </Button> */}
+             
               </form>
              </div>
             );

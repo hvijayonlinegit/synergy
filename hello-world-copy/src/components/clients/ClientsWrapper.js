@@ -73,7 +73,7 @@ class ExampleGrid extends React.Component {
                             </Grid>
                             <Grid  item xs={12} sm={9}>
                                 <RequirementDetails 
-                                    requirements={this.props.reqmoreinfo.requirement}
+                                    requirement={this.props.reqmoreinfo.requirement}
                                     ></RequirementDetails>
                             </Grid>
                         </Grid>

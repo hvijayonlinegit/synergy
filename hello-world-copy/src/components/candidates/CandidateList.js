@@ -14,11 +14,13 @@ import {white, blue500} from '@material-ui/core/colors/';
 //import { Loader } from 'react-overlay-loader';
 import 'react-overlay-loader/styles.css';
 
+import themes from '../theme';
+
 const styles = theme => ({
   root: {
-    maxHeight: '25vh',
+    maxHeight: '30vh',
     overflow: 'auto',
-    minHeight: '25vh',
+    minHeight: '30vh',
    },
    button: {
     margin: theme.spacing.unit,
@@ -38,9 +40,13 @@ const styles = theme => ({
         writingMode: 'vertical-rl',
         textOrientation: 'upright',
         boxSizing: 'border-box',
-        padding: '1px 1px',
-        color: 'green',
-        marginRight: '10px'
+        marginRight: '10px',
+        // height: '35%',
+        // borderRight: '2px solid green',
+         padding: '2% 1px',
+         borderRadius: '20px',
+         color: theme.palette.primary.contrastText,
+         backgroundColor: themes.palette.primary.main,
     },
 }
 });
@@ -69,8 +75,8 @@ class NestedList extends React.Component {
       paddingTop: '2px',
       paddingBottom: '2px',
       border: '1px solid rgba(0, 0, 0, 0.12)',
-      //borderLeft: '12px solid #000000',
-      background: '#0000004a',
+      borderLeft: '12px solid lightgreen',
+      //background: '#0000004a',
       color: '#fff',
       boxShadow: '0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12)'
     },
@@ -88,7 +94,9 @@ class NestedList extends React.Component {
       if(isEmpty(this.props.candidates)){
         return (
           // <Loader fullPage loading={true} />
-          <div> </div>
+          <div className={classes.beforeEle}>
+          </div>
+          
         );
       }
     else{
@@ -100,7 +108,7 @@ class NestedList extends React.Component {
       let filteredCandidates= sortedCandidates.filter(
         (candidate) =>{
           const id = candidate._links.self.href.split('/').pop(-1);
-          let fullName = candidate.firstname+ ' ' +candidate.lastname;
+          let fullName = candidate.firstName+ ' ' +candidate.lastName;
           if(fullName.toLowerCase().indexOf(this.state.search.toLowerCase())!== -1){
             return true;
           }
@@ -139,7 +147,7 @@ class NestedList extends React.Component {
                 return(
                     <ListItem button  to={to} style= {this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem}  key= {index} divider= {true} onClick={boundMoreInfo} >
                       <ListItemText primary={n._links.self.href.split('/').pop(-1)} />
-                      <ListItemText primary={n.firstname+ ' ' +n.lastname} />
+                      <ListItemText primary={n.firstName+ ' ' +n.lastName} />
                     </ListItem>
                   );
               })

@@ -31,6 +31,14 @@ const styles = theme => ({
         display: 'flex',
     flexWrap: 'wrap',
     },
+    emptyroot: {
+      width: '100%',
+      overflowY:'auto',
+        maxHeight: '27vh',
+        minHeight: '27vh',
+        display: 'flex',
+    flexWrap: 'wrap',
+    },
   container: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -101,18 +109,9 @@ const styles = theme => ({
 
 
 class TextFields extends React.Component {
-  state = {
-    name: 'Cat in the Hat',
-    age: '',
-    multiline: 'Controlled',
-    currency: 'EUR',
-  };
+  
 
-  handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value,
-    });
-  };
+  
 
   render() {
     const { classes } = this.props;
@@ -120,14 +119,19 @@ class TextFields extends React.Component {
         return Object.keys(obj).length === 0;
       }
     
-      if(isEmpty(this.props.requirements.candidates)){
+      if(isEmpty(this.props.requirement.candidates)){
         return (
-
-          <MySnackbarContentWrapper
+          <div>
+            <MySnackbarContentWrapper
           variant="info"
           className={classes.margin}
           message="There are no Requirements to Show , Please click/add a requirement!"
         />
+          <div className={classes.emptyroot}>
+          </div>
+          
+       
+        </div>
                 );
       }
       else{
@@ -144,80 +148,76 @@ class TextFields extends React.Component {
                 <Typography className={classes.afterEle}variant="body1" gutterBottom>
                 Requirement Information
                 </Typography>
+				
                   <TextField
                       margin="dense"
                       placeholder="Enter Client name"
-                      name="account_name"
+                      name="requirementTitle"
                       label="Requirement Title"
-                      fullWidth
-                      className={classes.textField}
-                      value = { this.props.requirements.title }
-                      onChange={ this.handleChange('name')}
+                      value = { this.props.requirement.requirementTitle }
+                      onChange={this.props.onChange}
                       required />
+					  
                       <TextField
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter requirementId"
+                      name="requirementId"
                       label="Requirement Id"
-                      fullWidth
-                      className={classes.textField}
-                      //value = { this.props.moreinfo.client.name }
-                      onChange={ this.handleChange('name')}
+                      
+                      value = { this.props.requirement.requirementId}
+                      onChange={this.props.onChange}
                       required />
                       
-                       <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="age-native-helper">Account owner</InputLabel>
+					  <FormControl required className={classes.formControl}>
+					   <InputLabel htmlFor="accountOwner">Account Owner</InputLabel>
+					   <NativeSelect
+						 value={this.props.requirement.accountOwner}
+						 onChange={this.props.onChange}
+						 input={<Input name="accountOwner" id="accountOwner" />}
+					   >
+					   <option  value="--select--">--Select--</option>
+						<option value="4942"> Meghan Breen</option>
+						<option value="4938"> Sri Bollampally</option>
+						<option value="4935">Admin Admin</option>
+						<option value="4936">Asha Richards</option>
+						<option value="4937">Raj Nettem</option>
+					   </NativeSelect>
+					  
+					 </FormControl>
+                      <FormControl className={classes.formControl}>
+                        <InputLabel htmlFor="primaryRecruiteer">Primary Recruiter</InputLabel>
                         <NativeSelect
-                          //value={ this.props.moreinfo.client.name }
-                          onChange={this.handleChange('age')}
-                          input={<Input name="account_name" id="age-native-helper" />}
+                          value={this.props.requirement.primaryRecruiteer}
+						  onChange={this.props.onChange}
+                          input={<Input name="primaryRecruiteer" id="primaryRecruiteer"  />}
                         >
-                          <option value="--select--">-- select --</option>
-                          <option value={10}>My Team</option>
-                          <option value={20}>Private</option>
-                          <option value={30}>Public</option>
+                         <option value="0">--Select--</option>
+						 <option value="4939">Srinivas</option>
+						 <option value="4940">Ravi Thonger</option>
+						 <option value="4941">Francis</option>
+						 <option value="4984">Umakanth</option>
                         </NativeSelect>
                        
                       </FormControl>
                       <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="name-readonly">Primary Recruiteer</InputLabel>
-                        <Select
-                          value="asha richards"
-                          onChange={this.handleChange}
-                          input={<Input name="name" id="name-readonly" readOnly />}
-                        >
-                          <MenuItem value="">
-                            <em>None</em>
-                          </MenuItem>
-                          <MenuItem value="Asha Richards">Asha Richards</MenuItem>
-                          <MenuItem value="Raj">Raj</MenuItem>
-                          <MenuItem value="kevin">Srikaanth</MenuItem>
-                        </Select>
-                       
-                      </FormControl>
-                      
-                      
-
-                       <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="age-native-helper">Access</InputLabel>
-                        <NativeSelect
-                          //value={ this.props.moreinfo.client.name }
-                          onChange={this.handleChange('age')}
-                          input={<Input name="account_name" id="age-native-helper" />}
-                        >
-                          <option value="--select--">-- select --</option>
-                          <option value={10}>My Team</option>
-                          <option value={20}>Private</option>
-                          <option value={30}>Public</option>
-                        </NativeSelect>
-                       
-                      </FormControl>
+						<InputLabel htmlFor="access">Access</InputLabel>
+						<NativeSelect
+							value={this.props.requirement.access}
+							onChange={this.props.onChange}
+							input={<Input name="access" id="access" />}
+						>
+							<option value="--select--">-- select --</option>
+							<option value="MyTeam">My Team</option>
+							<option value="Private">Private</option>
+							<option value="Public">Public</option>
+						</NativeSelect>
+					</FormControl>
                       <FormControl className={classes.formControl}>
                         <InputLabel htmlFor="age-native-helper">End Client</InputLabel>
                         <NativeSelect
-                          //value={ this.props.moreinfo.client.name }
-                          onChange={this.handleChange('age')}
-                          input={<Input name="account_name" id="age-native-helper" />}
+                          value={ this.props.requirement.endClient }
+                          onChange={this.props.onChange}
+                          input={<Input name="endClient" id="endClient" />}
                         >
                           <option value="--select--">-- select --</option>
                           <option value={10}>My Team</option>
@@ -228,129 +228,180 @@ class TextFields extends React.Component {
                       </FormControl>
                       <TextField
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="enter requiredSkills"
+                      name="requiredSkills"
                       label="Required Skills"
                       fullWidth
-                      //className={classes.textField}
-                      //value = { this.props.moreinfo.client.name }
-                      onChange={ this.handleChange('name')}
+                      value = { this.props.requirement.requiredSkills}
+                      onChange={this.props.onChange}
                        />
                       <TextField
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter requiredExperience"
+                      name="requiredExperience"
                       label="Required Experience"
                       fullWidth
-                      className={classes.textField}
-                      //value = { this.props.moreinfo.client.name }
-                      onChange={ this.handleChange('name')}
+                      
+                      value = { this.props.requirement.requiredExperience }
+                      onChange={this.props.onChange}
                        />
                       <TextField
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="Bill Rate($)"
+                      placeholder="Enter billRate"
+                      name="billRate"
                       label="Bill Rate($)"
                       fullWidth
-                      className={classes.textField}
-                      //value = { this.props.moreinfo.client.name }
-                      onChange={ this.handleChange('name')}
+                      
+                      value = { this.props.requirement.billRate }
+                      onChange={this.props.onChange}
                        />
                       <TextField
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="Pay Rate($)"
+                      placeholder="Enter payRate"
+                      name="payRate"
                       label="Pay Rate($)"
                       fullWidth
-                      className={classes.textField}
-                      //value = { this.props.moreinfo.client.name }
-                      onChange={ this.handleChange('name')}
+                      
+                      value = { this.props.requirement.payRate }
+                      onChange={this.props.onChange}
                       required />
-                       <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="age-native-helper">Country</InputLabel>
-                        <NativeSelect
-                          //value={ this.props.moreinfo.client.name }
-                          onChange={this.handleChange('age')}
-                          input={<Input name="account_name" id="age-native-helper" />}
-                        >
-                          <option value="--select--">-- select --</option>
-                          <option value={10}>My Team</option>
-                          <option value={20}>Private</option>
-                          <option value={30}>Public</option>
-                        </NativeSelect>
-                       
-                      </FormControl>
-                      <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="age-native-helper">State</InputLabel>
-                        <NativeSelect
-                          //value={ this.props.moreinfo.client.name }
-                          onChange={this.handleChange('age')}
-                          input={<Input name="account_name" id="age-native-helper" />}
-                        >
-                          <option value="--select--">-- select --</option>
-                          <option value={10}>My Team</option>
-                          <option value={20}>Private</option>
-                          <option value={30}>Public</option>
-                        </NativeSelect>
-                       
-                      </FormControl>
-                      <TextField
-                      margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
-                      label="City"
-                      fullWidth
-                      className={classes.textField}
-                      //value = { this.props.moreinfo.client.name }
-                      onChange={ this.handleChange('name')}
-                       />
+                        <FormControl className={classes.formControl}>
+					   <InputLabel htmlFor="country">Country</InputLabel>
+					   <NativeSelect
+						  value = { this.props.requirement.country }
+						 onChange={ this.props.onChange}
+						 input={<Input name="country" id="country" />}
+					   >
+					  	<option value="0">--Select Country--</option>
+						<option value="1">United States</option>
+					   </NativeSelect>
+					  
+					 </FormControl>
+					 <FormControl className={classes.formControl}>
+					   <InputLabel htmlFor="state">State</InputLabel>
+					   <NativeSelect
+						 value = { this.props.requirement.state }
+						 onChange={ this.props.onChange}
+						 input={<Input name="state" id="state" />}
+					   >
+						 <option value="0">--Select State--</option>
+							<option value="AL">Alabama</option>
+							<option value="AK">Alaska</option>
+							<option value="AZ">Arizona</option>
+							<option value="AR">Arkansas</option>
+							<option value="CA">California</option>
+							<option value="CO">Colorado</option>
+							<option value="CT">Connecticut</option>
+							<option value="DE">Delaware</option>
+							<option value="DC">District of Columbia</option>
+							<option value="FL">Florida</option>
+							<option value="GA">Georgia</option>
+							<option value="HI">Hawaii</option>
+							<option value="ID">Idaho</option>
+							<option value="IL">Illinois</option>
+							<option value="IN">Indiana</option>
+							<option value="IA">Iowa</option>
+							<option value="KS">Kansa</option>
+							<option value="KY">Kentucky</option>
+							<option value="LA">Louisiana</option>
+							<option value="MD">Maryland</option>
+							<option value="MA">Massachusetts</option>
+							<option value="MI">Michigan</option>
+							<option value="MN">Minnesota</option>
+							<option value="MS">Mississippi</option>
+							<option value="MO">Missouri</option>
+							<option value="MT">Montana</option>
+							<option value="NE">Nebraska</option>
+							<option value="NV">Nevada</option>
+							<option value="NH">New Hampshire</option>
+							<option value="NJ">New Jersey</option>
+							<option value="NM">New Mexico</option>
+							<option value="NY">New York</option>
+							<option value="NC">North Carolina</option>
+							<option value="ND">North Dakota</option>
+							<option value="OH">Ohio</option>
+							<option value="OK">Oklahoma</option>
+							<option value="OR">Oregon</option>
+							<option value="PA">Pennsylvania</option>
+							<option value="RI">Rhode Island</option>
+							<option value="SC">South Carolina</option>
+							<option value="SD">South Dakota</option>
+							<option value="TN">Tennessee</option>
+							<option value="TX">Texas</option>
+							<option value="UT">Utah</option>
+							<option value="VT">Vermont</option>
+							<option value="VA">Virginia</option>
+							<option value="WA">Washington</option>
+							<option value="WV">West Virginia</option>
+							<option value="WI">Wisconsin</option>
+							<option value="WY">Wyoming</option>
+
+	
+					   </NativeSelect>
+					  
+					 </FormControl>
+					
+					 <TextField
+					 margin="dense"
+					 placeholder="Enter city name"
+					 name="city"
+					 label="City"
+					 
+					 
+					 value = { this.props.requirement.city }
+					 onChange={ this.props.onChange}
+					  />
+					 
+					 <TextField
+					 margin="dense"
+					 placeholder="Enter zipCode "
+					 name="zipCode"
+					 label="Zipcode"
+					 
+					 value = { this.props.requirement.zipCode }
+					 onChange={ this.props.onChange}
+					  />
                        <TextField
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
-                      label="Zip Code"
-                      fullWidth
-                      className={classes.textField}
-                      //value = { this.props.moreinfo.client.name }
-                      onChange={ this.handleChange('name')}
-                       />
-                       <TextField
-                      margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter numberOfOpenings"
+                      name="numberOfOpenings"
                       label="Number of Openings"
                       fullWidth
-                      className={classes.textField}
-                      //value = { this.props.moreinfo.client.name }
-                      onChange={ this.handleChange('name')}
+                      
+                      value = { this.props.requirement.numberOfOpenings }
+                      onChange={this.props.onChange}
                        />
                        <TextField
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter maxResumesAllowed"
+                      name="maxResumesAllowed"
                       label="Maximum Resumes allowed"
                       fullWidth
                       className={classes.textFieldMax}
-                      //value = { this.props.moreinfo.client.name }
-                      onChange={ this.handleChange('name')}
+                      value = { this.props.requirement.maxResumesAllowed }
+                      onChange={this.props.onChange}
                        />
                        <TextField
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter localIndicator"
+                      name="localIndicator"
                       label="Local Indicator"
                       fullWidth
-                      className={classes.textField}
-                      //value = { this.props.moreinfo.client.name }
-                      onChange={ this.handleChange('name')}
+                      
+                      value = { this.props.requirement.localIndicator }
+                      onChange={this.props.onChange}
                        />
                        <TextField
                         id="multiline-static"
                         multiline
-                        rows="4"
+						rows="4"
+						
                         label=" Brief Description"
                         margin="normal"
-                        fullWidth
+						fullWidth
+						name="briefDescription"
+						value = { this.props.requirement.briefDescription }
+                      onChange={this.props.onChange}
                       />
                       <TextField
                         id="multiline-static"
@@ -358,7 +409,10 @@ class TextFields extends React.Component {
                         rows="4"
                         label="  Description"
                         margin="normal"
-                        fullWidth
+						fullWidth
+						name="description"
+						value = { this.props.requirement.description }
+                      onChange={this.props.onChange}
                       />
                        
                   <CardActions>
@@ -366,10 +420,7 @@ class TextFields extends React.Component {
                 </CardContent>
               </Card>
               <Card className={classes.card}>
-               {/* <CardHeader  subheader="Duration & Type" 
-                  > 
-                
-                 </CardHeader> */}
+              
                  
                 <CardContent className={classes.content}>
                 <Typography className={classes.afterEle}variant="body1" gutterBottom>
@@ -377,42 +428,72 @@ class TextFields extends React.Component {
                 </Typography>
                   <TextField
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter duration"
+                      name="duration"
                       label="Duration"
                       fullWidth
-                      className={classes.textField}
-                      //value = { this.props.moreinfo.client.name }
-                      onChange={ this.handleChange('name')}
+                      
+                      value = { this.props.requirement.duration }
+                      onChange={this.props.onChange}
                       required />
                       
                        <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="age-native-helper">Category</InputLabel>
+                        <InputLabel htmlFor="category">Category</InputLabel>
                         <NativeSelect
-                          //value={ this.props.moreinfo.client.name }
-                          onChange={this.handleChange('age')}
-                          input={<Input name="account_name" id="age-native-helper" />}
+                          value={ this.props.requirement.category }
+                          onChange={this.props.onChange}
+                          input={<Input name="category" id="category" />}
                         >
-                          <option value="--select--">-- select --</option>
-                          <option value={10}>My Team</option>
-                          <option value={20}>Private</option>
-                          <option value={30}>Public</option>
+                          <option value="0">--Select--</option>
+							<option value="AFI">Accounting/Finance/Insurance</option>
+							<option value="ACL">Administrative/Clerical</option>
+							<option value="BRM">Banking/Real Estate/Mortgage Professionals</option>
+							<option value="BST">Building Construction/Skilled Trades</option>
+							<option value="BSM">Business/Strategic Management</option>
+							<option value="CDN">Creative/Design</option>
+							<option value="CSC">Customer Support/Client Care</option>
+							<option value="EW">Editorial/Writing</option>
+							<option value="ET">Education/Training</option>
+							<option value="EN">Engineering</option>
+							<option value="FH">Food Services/Hospitality</option>
+							<option value="hr">Human Resources</option>
+							<option selected="selected" value="it">Information Technology</option>
+							<option value="IMP">Installation/Maintenance/Repair</option>
+							<option value="L">Legal</option>
+							<option value="LT">Logistics/Transportation</option>
+							<option value="MPO">Manufacturing/Production/Operations</option>
+							<option value="MP">Marketing/Product</option>
+							<option value="MH">Medical/Health</option>
+							<option value="O ">Others</option>
+							<option value="PPM">Project/Program Management</option>
+							<option value="QS">Quality Assurance/Safety</option>
+							<option value="R ">Research</option>
+							<option value="SRB">Sales/Retail/Business Development</option>
+							<option value="SP">Security/Protective Services</option>
                         </NativeSelect>
                        
                       </FormControl>
                       <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="name-readonly">Sub Category</InputLabel>
+                        <InputLabel htmlFor="subCategory">Sub Category</InputLabel>
                         <Select
-                          value="asha richards"
+                          value={this.props.requirement.subCategory}
                           onChange={this.handleChange}
-                          input={<Input name="name" id="name-readonly" readOnly />}
+                          input={<Input name="subCategory" id="subCategory"  />}
                         >
-                          <MenuItem value="">
-                            <em>None</em>
-                          </MenuItem>
-                          <MenuItem value="Asha Richards">Asha Richards</MenuItem>
-                          <MenuItem value="Raj">Raj</MenuItem>
-                          <MenuItem value="kevin">Srikaanth</MenuItem>
+                          <option value="0">--Select--</option>
+						  <option value="11754">Computer/Network Security</option>
+						  <option value="11772">Database Development/Administration</option>
+						  <option value="11774">Desktop Service and Support</option>
+						  <option value="11787">Enterprise Software Implementation &amp; Consulting</option>
+						  <option value="11848">IT Project Management</option>
+						  <option value="11882">Network and Server Administration</option>
+						  <option value="11904">General/Other: IT/Software Development</option>
+						  <option value="11969">Software/System Architecture</option>
+						  <option value="11970">Software/Web Development</option>
+						  <option value="11979">Systems Analysis - IT</option>
+						  <option value="11987">Telecommunications Administration/Management</option>
+						  <option value="11996">Usability/Information Architecture</option>
+						  <option value="12005">Web/UI/UX Design</option>
                         </Select>
                        
                       </FormControl>
@@ -420,24 +501,39 @@ class TextFields extends React.Component {
                       
 
                        <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="age-native-helper">Employement Type</InputLabel>
+                        <InputLabel htmlFor="employementType">Employement Type</InputLabel>
                         <NativeSelect
-                          //value={ this.props.moreinfo.client.name }
-                          onChange={this.handleChange('age')}
-                          input={<Input name="account_name" id="age-native-helper" />}
+                          value={ this.props.requirement.employementType }
+                          onChange={this.props.onChange}
+                          input={<Input name="employementType" id="employementType" />}
                         >
-                          <option value="--select--">-- select --</option>
-                          <option value={10}>My Team</option>
-                          <option value={20}>Private</option>
-                          <option value={30}>Public</option>
+                         
+						<option value="0">--Select--</option>
+						<option value="cw">Contract – W2</option>
+						<option value="ch">Contract-to-Hire</option>
+						<option value="99">Contract-to-Hire-1099</option>
+						<option value="hc">Contract-to-Hire-Corp</option>
+						<option value="hw">Contract-to-Hire-W2</option>
+						<option value="pp">Corp-to-Corp</option>
+						<option value="DH">Direct Hire</option>
+						<option value="EM">Employee</option>
+						<option value="fw">Full time – W2</option>
+						<option value="ic">Independent Contractor</option>
+						<option value="I ">Intern</option>
+						<option value="ot">Others</option>
+						<option value="S">Seasonal</option>
+						<option value="TC">Temporary / Contract</option>
+						<option value="V">Volunteer</option>
+
+
                         </NativeSelect>
                        
                       </FormControl>
                       <FormControl className={classes.formControl}>
                         <InputLabel htmlFor="age-native-helper">Status</InputLabel>
                         <NativeSelect
-                          //value={ this.props.moreinfo.client.name }
-                          onChange={this.handleChange('age')}
+                          value={ this.props.requirement.name }
+                          onChange={this.props.onChange}
                           input={<Input name="account_name" id="age-native-helper" />}
                         >
                           <option value="--select--">-- select --</option>
@@ -448,80 +544,88 @@ class TextFields extends React.Component {
                        
                       </FormControl>
                       <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="age-native-helper">Experience Level</InputLabel>
+                        <InputLabel htmlFor="experienceLevel">Experience Level</InputLabel>
                         <NativeSelect
-                          //value={ this.props.moreinfo.client.name }
-                          onChange={this.handleChange('age')}
-                          input={<Input name="account_name" id="age-native-helper" />}
+                          value={ this.props.requirement.experienceLevel }
+                          onChange={this.props.onChange}
+                          input={<Input name="experienceLevel" id="experienceLevel" />}
                         >
-                          <option value="--select--">-- select --</option>
-                          <option value={10}>My Team</option>
-                          <option value={20}>Private</option>
-                          <option value={30}>Public</option>
+						<option value="0">--Select--</option>
+						<option value="11">Entry Level</option>
+						<option value="14">Executive (SVP, VP, Department Head, etc)</option>
+						<option value="12">Experienced (Non-Manager)</option>
+						<option value="13">Manager (Manager/Supervisor of Staff)</option>
+						<option value="15">Senior Executive (President, CFO, etc)</option>
+						<option value="16">Student (High School)</option>
+						<option value="10">Student (Undergraduate/Graduate)</option>
+
+
                         </NativeSelect>
                        
                       </FormControl>
                       <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="age-native-helper">Position Type</InputLabel>
+                        <InputLabel htmlFor="posiitonType">Position Type</InputLabel>
                         <NativeSelect
-                          //value={ this.props.moreinfo.client.name }
-                          onChange={this.handleChange('age')}
-                          input={<Input name="account_name" id="age-native-helper" />}
+                          value={ this.props.requirement.posiitonType }
+                          onChange={this.props.onChange}
+                          input={<Input name="posiitonType" id="posiitonType" />}
                         >
-                          <option value="--select--">-- select --</option>
-                          <option value={10}>My Team</option>
-                          <option value={20}>Private</option>
-                          <option value={30}>Public</option>
+                          <option value="0">--Select--</option>
+						<option value="27">Contract</option>
+						<option value="28">Contract-to-Hire</option>
+						<option value="4">Full Time</option>
+						<option value="5">Part Time</option>
+						<option value="26">Per Diem</option>
                         </NativeSelect>
                        
                       </FormControl>
                       <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="age-native-helper">Interview Type</InputLabel>
+                        <InputLabel htmlFor="interviewType">Interview Type</InputLabel>
                         <NativeSelect
-                          //value={ this.props.moreinfo.client.name }
-                          onChange={this.handleChange('age')}
-                          input={<Input name="account_name" id="age-native-helper" />}
+                          value={ this.props.requirement.interviewType }
+                          onChange={this.props.onChange}
+                          input={<Input name="interviewType" id="interviewType" />}
                         >
-                          <option value="--select--">-- select --</option>
-                          <option value={10}>My Team</option>
-                          <option value={20}>Private</option>
-                          <option value={30}>Public</option>
+							<option value="0">--Select--</option>
+							<option value="fa">Face to Face</option>
+							<option value="pi">Phone Interview</option>
+							<option value="pa">Panel Interview</option>
+							<option value="sv">Skype/Video interview</option>
+
+
                         </NativeSelect>
                        
                       </FormControl>
                       <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="age-native-helper">Visa Type</InputLabel>
+                        <InputLabel htmlFor="visaType">Visa Type</InputLabel>
                         <NativeSelect
-                          //value={ this.props.moreinfo.client.name }
-                          onChange={this.handleChange('age')}
-                          input={<Input name="account_name" id="age-native-helper" />}
+                          value={ this.props.requirement.visaType }
+                          onChange={this.props.onChange}
+                          input={<Input name="visaType" id="visaType" />}
                         >
-                          <option value="--select--">-- select --</option>
-                          <option value={10}>My Team</option>
-                          <option value={20}>Private</option>
-                          <option value={30}>Public</option>
+                          {/* <div id="bk8bx9qti" class="zselect"><span class="zmshead">Please Select</span><ul style="width: 100%; overflow: auto; max-height: 300px; display: none;"><li class="zmsfilter"><input id="search" name="search" type="text" placeholder="Search"></li><li><input name="CP" value="CP" type="checkbox"><span style="width:100%;display:table-cell;">CPT</span></li><li><input name="EA" value="EA" type="checkbox"><span style="width:100%;display:table-cell;">EAD</span></li><li><input name="GE" value="GE" type="checkbox"><span style="width:100%;display:table-cell;">GC-EAD</span></li><li><input name="GC" value="GC" type="checkbox"><span style="width:100%;display:table-cell;">Green Card Holder</span></li><li><input name="H1" value="H1" type="checkbox"><span style="width:100%;display:table-cell;">H1B</span></li><li><input name="OP" value="OP" type="checkbox"><span style="width:100%;display:table-cell;">OPT</span></li><li><input name="US" value="US" type="checkbox"><span style="width:100%;display:table-cell;">US Citizen</span></li><li class="filterResult"></li></ul></div> */}
                         </NativeSelect>
                        
                       </FormControl>
                       <TextField
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter projectStartDate"
+                      name="projectStartDate"
                       label="Project Start Date"
                       fullWidth
-                      className={classes.textField}
-                      //value = { this.props.moreinfo.client.name }
-                      onChange={ this.handleChange('name')}
+                      
+                      value = { this.props.requirement.projectStartDate }
+                      onChange={this.props.onChange}
                        />
                      <TextField
                       margin="dense"
-                      placeholder="Enter Client name"
-                      name="account_name"
+                      placeholder="Enter projectEndDate"
+                      name="projectEndDate"
                       label="Project End Date"
                       fullWidth
-                      className={classes.textField}
-                      //value = { this.props.moreinfo.client.name }
-                      onChange={ this.handleChange('name')}
+                      
+                      value = { this.props.requirement.projectEndDate }
+                      onChange={this.props.onChange}
                        />
                         <TextField
                         id="multiline-static"
@@ -529,120 +633,17 @@ class TextFields extends React.Component {
                         rows="4"
                         label="  Notes"
                         margin="normal"
-                        fullWidth
+						fullWidth
+						name="notes"
+						value = { this.props.requirement.notes }
+                      onChange={this.props.onChange}
                       />
                        
                   <CardActions>
                   </CardActions>
                 </CardContent>
               </Card>
-              <div className={classes.padder}>
-              {/* <TextField
-                     margin="dense"
-                     placeholder="Enter requirement name"
-                     name="account_name"
-                     label="Title"
-                     fullWidth
-                     className={classes.textField}
-                     value = { this.props.requirements.title }
-                     onChange={ this.handleChange('name')} />
-                
-                
-                <TextField
-                        id="name"
-                        label="Type"
-                        className={classes.textField}
-                        value={ this.props.requirements.type }
-                        onChange={ this.handleChange('name')} 
-                        margin="normal"
-                    />
-                
-                <TextField
-                     margin="dense"
-                     placeholder="Enter requirements type"
-                     name="account_type"
-                     label="Description"
-                     fullWidth
-                     className={classes.textField}
-                     value={ this.props.requirements.description }
-                     onChange={ this.handleChange('name')} />
-                    
-                    
-        
-                    <TextField
-                     margin="dense"
-                     placeholder="Enter requirements phone"
-                     name="account_phone"
-                     label="Rate"
-                     fullWidth
-                     className={classes.textField}
-                     value={ this.props.requirements.rate }
-                     onChange={ this.handleChange('name')}  />
-                    <TextField
-                     margin="dense"
-                     placeholder="Enter requirements team"
-                     name="account_team"
-                     label="Primary Skills"
-                     fullWidth
-                     className={classes.textField}
-                     value={ this.props.requirements.primary_skills }
-                     onChange={ this.handleChange('name')}  />
-                    <TextField
-                     margin="dense"
-                     placeholder="Enter requirements Address"
-                     name="account_address"
-                     label="Secondary Skills"
-                     fullWidth
-                     className={classes.textField}
-                     value={ this.props.requirements.secondary_skills }
-                     onChange={ this.handleChange('name')}  />
-                    <TextField
-                     margin="dense"
-                     placeholder="Enter requirements Address"
-                     name="account_address"
-                     label="Account Manager "
-                     fullWidth
-                     className={classes.textField}
-                     value={ this.props.requirements.account_manager }
-                     onChange={ this.handleChange('name')}  />
-                     <TextField
-                     margin="dense"
-                     placeholder="Enter requirements Address"
-                     name="account_address"
-                     label="Seniority Level "
-                     fullWidth
-                     className={classes.textField}
-                     value={ this.props.requirements.seniority_level }
-                     onChange={ this.handleChange('name')}  />
-                      <TextField
-                     margin="dense"
-                     placeholder="Enter requirements Address"
-                     name="account_address"
-                     label="Experience Required "
-                     fullWidth
-                     className={classes.textField}
-                     value={ this.props.requirements.exp_required }
-                     onChange={ this.handleChange('name')}  />
-                     <TextField
-                     margin="dense"
-                     placeholder="Enter requirements Address"
-                     name="account_address"
-                     label="Candidate Availability"
-                     fullWidth
-                     className={classes.textField}
-                     value={ this.props.requirements.candidate_availability }
-                     onChange={ this.handleChange('name')}  />
-                     <TextField
-                     margin="dense"
-                     placeholder="Enter requirements Address"
-                     name="account_address"
-                     label="Pay Rate"
-                     fullWidth
-                     className={classes.textField}
-                     value={ this.props.requirements.pay_rate }
-                     onChange={ this.handleChange('name')}  /> */}
-                     
-               </div>
+              
                {/* <Button variant="contained"  className={classes.button}>
                             Update
                     </Button>

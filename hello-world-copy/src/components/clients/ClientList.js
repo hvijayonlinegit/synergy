@@ -9,7 +9,7 @@ import TextField from '@material-ui/core/TextField';
 //Spinner Imports
 import { Loader } from 'react-overlay-loader';
 import 'react-overlay-loader/styles.css';
-
+import themes from '../theme'
 
 import {white, blue500} from '@material-ui/core/colors/';
 import Button from '@material-ui/core/Button';
@@ -32,16 +32,18 @@ const styles = theme => ({
   },
   beforeEle: {
     '&::before':  {
-        display: 'block',
         float:'left',
         content: '"Clients"',
         writingMode: 'vertical-rl',
         textOrientation: 'upright',
         boxSizing: 'border-box',
-        padding: '1px 1px',
-        color: 'black',
         marginRight: '10px',
-        //borderLeft: '1px solid green',
+       // height: '35%',
+       // borderRight: '2px solid green',
+        padding: '15% 1px',
+        borderRadius: '20px',
+        color: theme.palette.primary.contrastText,
+        backgroundColor: themes.palette.primary.main,
         
     },
 }
@@ -80,9 +82,9 @@ updateSearch(event){
      paddingTop: '2px',
         paddingBottom: '2px',
       border: '1px solid rgba(0, 0, 0, 0.12)',
-    //   borderLeft: '12px solid lightgreen',
+       borderLeft: '12px solid lightgreen',
     //borderLeft: '12px solid #000000',
-      background: '#0000004a',
+      //background: '#0000004a',
       boxShadow: '0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12)'
     },
     textField: {
@@ -98,7 +100,8 @@ updateSearch(event){
       }
       if(isEmpty(this.props.clients)){
         return (
-          <Loader fullPage loading={true} />
+        //   <Loader fullPage loading={true} />
+        <div></div>
         );
       }
     else{

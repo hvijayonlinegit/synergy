@@ -11,6 +11,8 @@ import { Loader } from 'react-overlay-loader';
 import 'react-overlay-loader/styles.css';
 import DocumentUpload from './DocumentUpload';
 
+import themes from '../theme'
+
 const styles = theme => ({
   root: {
     maxHeight: '25vh',
@@ -33,9 +35,13 @@ const styles = theme => ({
         writingMode: 'vertical-rl',
         textOrientation: 'upright',
         boxSizing: 'border-box',
-        padding: '1px 1px',
-        color: 'green',
-        marginRight: '10px'
+        marginRight: '10px',
+        // height: '35%',
+        // borderRight: '2px solid green',
+         padding: '2% 1px',
+         borderRadius: '20px',
+         color: theme.palette.primary.contrastText,
+         backgroundColor: themes.palette.primary.main,
     },
 }
 });
@@ -78,7 +84,7 @@ class NestedList extends React.Component {
       if(this.props.documents.length === 0 && isEmpty(this.props.selectedCandidate)){
         return (
           //  <Loader fullPage loading={true} />
-          <div>
+          <div className={classes.beforeEle}>
             
         </div>
         )
@@ -153,8 +159,11 @@ class NestedList extends React.Component {
                   id = n.id;
                 }
                return(
-                  <ListItem button style= {this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem}  to={to}  divider= {true}  >
-                     <ListItemText primary={n.documentName} secondary={id} /> 
+                  <ListItem  autofocus button style= {this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem}  to={to}  divider= {true}  >
+                     <ListItemText primary="Document ID :" secondary={id} /> 
+                     <ListItemText primary="File Name :" secondary={n.documentName} /> 
+                     <ListItemText primary="File Type" secondary={n.documentType.split('/').pop(-1)} />
+                     <ListItemText primary="Attached By" secondary="Asha Richards" />  
                   </ListItem>
                 );
               })

@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import {browserHistory} from 'react-router'
 import PropTypes from 'prop-types';
 import {bindActionCreators} from 'redux';
-import axios, { post } from 'axios';
 import * as courseActions from '../actions/clientActions';
 import * as moreinfoActions from '../actions/moreinfoActions';
 import * as reqmoreinfoActions from '../actions/reqmoreinfoActions';
@@ -14,60 +13,102 @@ import AddRequirementModal from '../components/requirements/CreateRequirementMod
 import AddClientModal from '../components/clients/CreateClientModal'
 import ClientsWrapper from '../components/clients/ClientsWrapper';
 import AddCandidateModal from '../components/candidates/CreateCandidateModal'
+//Spinner Imports
+import { Loader } from 'react-overlay-loader';
+import 'react-overlay-loader/styles.css';
 class ClientsPage extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       client: {
-        name: '', 
-        type: '', 
-        phone: '', 
-        team: '', 
-        address: ''
+        name: '',
+        access: '',
+        accountOwner: '',
+        category: '',
+        websiteAddress: '',
+        status: '',
+        accountCode: '',
+        phoneNumber1: '',
+        phoneNumber2: '',
+        country: '',
+        state: '',
+        city: '',
+        street: '',
+        zipCode: 0,
+        fax: 0,
+        email1: '',
+        email2: '',
+        description: ''
       },
       requirement:{
-				account_manager: 'string',
-				candidate_availability: 'string',
-				description: 'string',
-				exp_required: 'string',
-				id: 0,
-				pay_rate: 'string',
-				primary_skills: 'string',
-				rate: 'string',
-				recruiter_name: 'string',
-				secondary_skills: 'string',
-				seniority_level: 'string',
-				title: 'string',
-        type: 'string',
-        accounts: '',
-        account_id:''
-        },
+        access: '',
+        accountOwner: '',
+        billRate: 0,
+        briefDescription: '',
+        category: '',
+        city: '',
+        country: '',
+        description: '',
+        duration: '',
+        employementType: '',
+        endClient: '',
+        experienceLevel: '',
+        interviewType: '',
+        localIndicator: '',
+        maxResumesAllowed: 0,
+        notes: '',
+        numberOfOpenings: 0,
+        payRate: '',
+        posiitonType: '',
+        primaryRecruiteer: '',
+        projectEndDate: '',
+        projectStartDate: '',
+        requiredExperience: '',
+        requiredSkills: '',
+        requirementId: 0,
+        requirementTitle: '',
+        state: '',
+        status: '',
+        subCategory: '',
+        visaType: '',
+        zipCode: ''
+      },
         candidate:{
-          firstname: 'string',
-          lastname: 'string',
-          phonenumber: 'string',
-          emailaddress: 'string',
-          overallexperience: 'string',
-          relevantexperience: 'string',
-          workingstatus: 'string',
-          strengths: 'string',
-          avaiabilityforinterview: 'string',
-          availabilitytojoin: 'string',
-          status: 'string',
-          reason: 'string',
-          linkedinurl: 'string',
-          referrences: 'string',
-          vendorname: 'string',
-          vendorcontact: 'string',
-          vendorphone: 'string',
-          vendoremail: 'string',
-          referredby: 'string',
-          primaryskills: 'string',
-          secondaryskills: 'string',
-          docsuploaded: 'string',
-          requirements: [],
-          requirement_id: ''
+          address: '',
+          availableFrom: '',
+          candidateId: '',
+          candidateStatus: '',
+          city: '',
+          country: '',
+          dateOfBirth: '',
+          emailAddress: '',
+          fatherName: '',
+          fax: '',
+          firstName: '',
+          gender: '',
+          hobbies: '',
+          lastName: '',
+          licenseNumber: '',
+          linkedinUrl: '',
+          maritalStatus: '',
+          middleName: '',
+          mobileNumber: '',
+          motherName: '',
+          nationality: '',
+          noticePeriod: '',
+          passportNumber: '',
+          phoneNumber: '',
+          preferredLocation1: '',
+          preferredLocation2: '',
+          skypeId: '',
+          sourceBy: '',
+          sourceFrom: '',
+          sourceInfo: '',
+          sourcing: '',
+          state: '',
+          visaStatus: '',
+          zipCode: ''
         },
       modal: false,
       reqmodal: false,
@@ -182,7 +223,28 @@ class ClientsPage extends React.Component {
   }
 
 	handleModalOpen() {
-    this.setState({ modal: true , client: {name: '', type: '', phone: '', team: '', address: ''}});
+    this.setState({ modal: true , 
+      client: {
+        name: '',
+        access: '',
+        accountOwner: '',
+        category: '',
+        websiteAddress: '',
+        status: '',
+        accountCode: '',
+        phoneNumber1: '',
+        phoneNumber2: '',
+        country: '',
+        state: '',
+        city: '',
+        street: '',
+        zipCode: 0,
+        fax: 0,
+        email1: '',
+        email2: '',
+        description: ''
+      },
+    });
 		
 //  browserHistory.push(`/clients/new`);
 	}
@@ -230,6 +292,7 @@ handleMoreInfo(link ,client, e ){
     const candmoreinfo = this.props.candmoreinfo;
     return (
       <div >  
+         {/* <Loader fullPage loading={this.state.loading} /> */}
           <ClientsWrapper
           clients={clients}
           moreinfo={moreinfo}

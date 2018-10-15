@@ -17,6 +17,8 @@ import {white, blue500} from '@material-ui/core/colors/';
 //import { Loader } from 'react-overlay-loader';
 import 'react-overlay-loader/styles.css';
 
+import themes from '../theme'
+
 const styles = theme => ({
   root: {
     maxHeight: '25vh',
@@ -41,9 +43,13 @@ const styles = theme => ({
         writingMode: 'vertical-rl',
         textOrientation: 'upright',
         boxSizing: 'border-box',
-        padding: '1px 1px',
-        color: 'green',
-        marginRight: '10px'
+        marginRight: '10px',
+       // height: '35%',
+       // borderRight: '2px solid green',
+        padding: '2% 1px',
+        borderRadius: '20px',
+        color: theme.palette.primary.contrastText,
+        backgroundColor: themes.palette.primary.main,
     },
   },
   
@@ -82,9 +88,9 @@ class NestedList extends React.Component {
       paddingBottom: '2px',
       //   borderLeft: '12px solid red'
         border: '1px solid rgba(0, 0, 0, 0.12)',
-      // borderLeft: '12px solid lightgreen',
+      borderLeft: '12px solid lightgreen',
       //borderLeft: '12px solid #000000',
-      background: '#0000004a',
+      //background: '#0000004a',
       boxShadow: '0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12)'
       },
       textField: {
@@ -101,7 +107,9 @@ class NestedList extends React.Component {
     if (isEmpty(this.props.requirements)) {
       return (
         // <Loader fullPage loading={true} />
-        <div> No requirements to Show  </div>
+        <div className={classes.beforeEle}>
+            <div> No requirements to Show  </div>
+        </div>
       );
     }
     else {
@@ -112,7 +120,7 @@ class NestedList extends React.Component {
         (requirement) => {
           const selflink = requirement._links.self.href
           const id = selflink.split('/').pop(-1);
-          if (requirement.type.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1) {
+          if (requirement.requirementTitle.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1) {
             return true;
           }
           if (id.indexOf(this.state.search) !== -1) {
@@ -155,7 +163,7 @@ class NestedList extends React.Component {
                 return (
                   <ListItem button style={this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem} key={id} divider={true} onClick={boundMoreInfo}>
                    <ListItemText  primary= {clientid} />
-                    <ListItemText  primary= {n.title}/>
+                    <ListItemText  primary= {n.requirementTitle}/>
                     
                     {/* <IconButton className={classes.button} aria-label="Delete" disabled color="primary">
                       <DeleteIcon />
