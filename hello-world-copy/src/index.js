@@ -6,9 +6,6 @@ import routes from './routes'
 import configureStore from './store/configureStore';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
-import {loadClients} from './actions/clientActions';
-import {loadRequirements} from './actions/requirementActions';
-import {loadCandidates} from './actions/candidateActions'
 import {fetchUser} from './actions/authenticationActions'
 import { AUTH_USER } from './actions/actionTypes';
 const store = configureStore();

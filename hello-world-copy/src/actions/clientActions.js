@@ -13,10 +13,9 @@ export function loadSignInPage(){
 export function loadNeedAdminAccess(){
   return {type: types.REQUIRE_ADMIN_ACCESS}
 }
-export function updateCatSuccess(cat) {
-  return {type: types.UPDATE_CAT_SUCCESS, cat}
+export function updateClientSuccess(client){
+  return {type: types.UPDATE_CLIENT_SUCCESS, client}
 }
-
 export function createCatSuccess(cat) {
   return {type: types.CREATE_CAT_SUCCESS, cat}
 }
@@ -92,15 +91,22 @@ export function loadCandidates(link) {
   };
 }
 
-export function updateCat(cat) {
+export function updateClient(client,id) {
   return function (dispatch) {
-    return clientsApi.updateCat(cat).then(responseCat => {
-      dispatch(updateCatSuccess(responseCat));
+    return clientsApi.updateClient(client,id).then(response => {
+      if(!response.message){
+        dispatch(updateClientSuccess(response));
+        dispatch(moreinfoActions.loadMoreInfoUpdateSuccess(response));
+      }
+      else{
+        dispatch(loadCatsFailure(response.message))
+      }
     }).catch(error => {
       throw(error);
     });
   };
 }
+
 
 export function createCat(client) {
   return function (dispatch) {

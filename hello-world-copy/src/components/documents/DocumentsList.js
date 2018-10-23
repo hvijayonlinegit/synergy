@@ -6,8 +6,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-//Spinner Imports
-import { Loader } from 'react-overlay-loader';
 import 'react-overlay-loader/styles.css';
 import DocumentUpload from './DocumentUpload';
 

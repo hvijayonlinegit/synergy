@@ -38,7 +38,25 @@ class CandidatesApi {
       return error;
     });
   }
-
+  
+  static updateCandidate(candidate,id) {
+    const request = new Request(apiurl.BASE_URL+`/synergy/api/candidates/${id}`, {
+      method: 'PUT',
+      headers: new Headers({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization':' Bearer ' + localStorage.getItem('token')
+      }),
+      body: JSON.stringify(candidate)
+    });
+  
+  
+    return fetch(request).then(response => {
+      return response.json();
+    }).catch(error => {
+      return error;
+    });
+  }
   static createCandidate(candidate) {
     //let accountid= candidate.id
     const request = new Request(apiurl.BASE_URL+`/synergy/api/candidates/`, {

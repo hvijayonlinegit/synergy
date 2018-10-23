@@ -7,6 +7,9 @@ export default function candmoreinfoReducer(state = initialState.clients.candmor
       const clientState = Object.assign([], state)
       clientState.candidate =  action.selectedCandidate
       return clientState
+      case types.LOAD_CAND_UPDATE_SUCCESS:
+      state.candidate =  action.candidate
+      return state
       case types.LOAD_CAND_MOREINFO_FAILURE:
       const clientState1 = Object.assign([], state)
       clientState1.candidate =  {}

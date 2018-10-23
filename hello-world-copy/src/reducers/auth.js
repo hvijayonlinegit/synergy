@@ -20,11 +20,10 @@ export const reducer = (state = initialState.auth, action) => {
         case AUTH_ERROR:
             return { ...state, error: action.payload }
         case FETCH_USER:
-         return {... state,  userdetails: action.payload.name}
+            return { ...state, userdetails: action.payload.name }
         case REQUIRE_ADMIN_ACCESS:
-       
-         browserHistory.push(`/adminaccess`)
-         return state
+            browserHistory.push(`/adminaccess`)
+            return state
         default:
             return state;
     }

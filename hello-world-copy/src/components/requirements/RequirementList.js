@@ -6,11 +6,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Tooltip from '@material-ui/core/Tooltip';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
 
 import {white, blue500} from '@material-ui/core/colors/';
 //Spinner Imports
@@ -101,10 +98,8 @@ class NestedList extends React.Component {
         marginBottom: '5%'
       },
     };
-    function isEmpty(obj) {
-      return Object.keys(obj).length === 0;
-    }
-    if (isEmpty(this.props.requirements)) {
+    
+    if (this.props.requirements.length === 0) {
       return (
         // <Loader fullPage loading={true} />
         <div className={classes.beforeEle}>

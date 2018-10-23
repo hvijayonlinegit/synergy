@@ -27,13 +27,15 @@ class clientsApi {
     });
   }
 
-  static updateCat(cat) {
-    const request = new Request(`http://localhost:5000/api/v1/cats/${cat.id}`, {
+  static updateClient(client,id) {
+    const request = new Request(apiurl.BASE_URL+`/synergy/api/accountses/${id}`, {
       method: 'PUT',
       headers: new Headers({
-        'Content-Type': 'application/json'
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization':' Bearer ' + localStorage.getItem('token')
       }),
-      body: JSON.stringify({cat: cat})
+      body: JSON.stringify(client)
     });
 
 
@@ -45,9 +47,7 @@ class clientsApi {
   }
 
   static createCat(client) {
-    //const BASE_URL = 'https://peaceful-mesa-72076.herokuapp.com/synergy/api'
-    //const BASE_URL = `http://localhost:8090/synergy/api`
-    console.log(client.account_team)
+    
     const request = new Request(apiurl.BASE_URL+`/synergy/api/accountses`, {
       method: 'POST',
       headers: new Headers({

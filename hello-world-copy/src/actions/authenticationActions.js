@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { browserHistory} from 'react-router';
 import * as apiurl  from '../common/apiURL';
 import {
@@ -43,7 +42,7 @@ export const signinUser = ({ usernameOrEmail, password }) => {
                 // if request is bad...
                 // - show an error to the user
                 localStorage.removeItem('token');
-                dispatch(authError('Bad Login Info'));
+                dispatch(authError('Sorry unable to reach Backend server for now Please try again later'));
             });
     };
 };
@@ -58,14 +57,14 @@ export const signupUser = ({ email,name, password, username }) => {
         // submit email/password to the server
         return fetch(`${apiurl.BASE_URL}/api/auth/signup`, requestOptions)
             .then(handleResponse)
-            .then(response => {
-                //dispatch({ type: AUTH_USER });
-                //localStorage.setItem('token', response.data.token);
-                browserHistory.push('/signin');
-            })
-            .catch(err => {
-                dispatch(authError('Bad Sign up Info'));
-            });
+            .then(() => {
+                    //dispatch({ type: AUTH_USER });
+                    //localStorage.setItem('token', response.data.token);
+                    browserHistory.push('/signin');
+                })
+            .catch(() => {
+                    dispatch(authError('Bad Sign up Info'));
+                });
     };
 };
 

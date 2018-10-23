@@ -3,17 +3,18 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItemText from '@material-ui/core/ListItemText';
 import Tooltip from '@material-ui/core/Tooltip';
 import TextField from '@material-ui/core/TextField';
-//Spinner Imports
-import { Loader } from 'react-overlay-loader';
+import IconButton from '@material-ui/core/IconButton';
 import 'react-overlay-loader/styles.css';
 import themes from '../theme'
-
+import Edit from '@material-ui/icons/Edit';
 import {white, blue500} from '@material-ui/core/colors/';
-import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+
+
 const styles = theme => ({
  root: {
     maxHeight: '25vh',
@@ -63,11 +64,16 @@ updateSearch(event){
   handleMoreinfo(link , n, index ){
     console.log('child method'+ n.name);
     this.setState({indexOfClickedItem: index});
-    this.props.onMoreInfo(link, n);
+    this.props.onMoreInfo(link, n, false);
   }
   handleModalOpen(){
     this.props.handleModalOpen();
   }
+  handleClientEdit(link, n, e){
+    console.log('asadadadadadad');
+    this.props.onMoreInfo(link, n, true);
+  }
+  
   render() {
     const { classes, to } = this.props;
     
@@ -75,6 +81,12 @@ updateSearch(event){
       listItem: {
         paddingBottom: '2px',
         paddingTop: '2px'
+    },
+    editDisplay:{
+      display: 'block'
+    },
+    editHide:{
+      display: 'none'
     },
     listItemClicked: {
       
@@ -101,7 +113,9 @@ updateSearch(event){
       if(isEmpty(this.props.clients)){
         return (
         //   <Loader fullPage loading={true} />
-        <div></div>
+        <div className={classes.beforeEle}>
+            
+        </div>
         );
       }
     else{
@@ -127,6 +141,7 @@ updateSearch(event){
     return (
         <div  className={classes.beforeEle}>
           <TextField
+            autoFocus
             hintText="Search..."
             placeholder="Search..."
             underlineShow={false}
@@ -153,15 +168,24 @@ updateSearch(event){
                  // let clientid= "client id: " +id;
                   //let boundDeleteClick = this.props.onDelete.bind(this, selflink, n);
                   let boundMoreInfo = this.handleMoreinfo.bind(this, link, n, index);
+                  let boundClientEdit = this.handleClientEdit.bind(this, link, n, index);
                   return(
                     <div>
-                      <ListItem button={true} style= {this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem} to={to}  key= {id} divider= {true} onClick={boundMoreInfo} >
+                      <ListItem autoFocus button={true} style= {this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem} to={to}  key= {id} divider= {true} onClick={boundMoreInfo} >
                         {/* <ListItemText primary={n.name} secondary={clientid} /> */}
                         <ListItemText color="inherit" primary= {id}/>
                         <ListItemText  primary= {n.name} />
-                        {/* <IconButton className={classes.button} aria-label="Delete" disabled color="primary">
-                          <DeleteIcon />
-                        </IconButton> */}
+                       
+                          <ListItemSecondaryAction style= {this.state.indexOfClickedItem === index ? styles.editDisplay : styles.editHide}>
+                          <Tooltip title="Edit This Client info" classes={{ tooltip: classes.lightTooltip }}>
+                            <IconButton onClick={boundClientEdit} >
+                              <Edit  />
+                            </IconButton>
+                          </Tooltip>
+                            {/* <IconButton >
+                              <Delete />
+                            </IconButton> */}
+                        </ListItemSecondaryAction>
                       </ListItem>
                       
                     </div>
@@ -177,6 +201,7 @@ updateSearch(event){
 NestedList.propTypes = {
   clients: PropTypes.object.isRequired,
   onMoreInfo: PropTypes.func.isRequired,
-  handleModalOpen: PropTypes.func.isRequired
+  handleClientEdit:PropTypes.func.isRequired,
+  handleModalOpen: PropTypes.func.isRequired,
 };
 export default withStyles(styles)(NestedList);

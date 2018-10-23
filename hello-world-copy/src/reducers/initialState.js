@@ -2,14 +2,14 @@ export default {
   clients: {
       accountses: {},
       moreinfo :{
-      client: {
-        requirements: {}
-      }
+      edit: false,
+      client: {},
+      requirements: [],
+      
     },
     reqmoreinfo :{
-      requirement: {
-        candidates: [],
-      }
+      requirement: {},
+      candidates: [],
     },
     candmoreinfo :{
       candidate: {

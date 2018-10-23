@@ -40,7 +40,7 @@ class ExampleGrid extends React.Component {
 
         const { classes } = this.props;
         const clients = this.props.clients;
-        const requirements= this.props.moreinfo.client.requirements;
+        const requirements= this.props.moreinfo.requirements;
         return (
                 <div className={classes.root}>
                     <Paper className={classes.paper}>
@@ -52,10 +52,11 @@ class ExampleGrid extends React.Component {
                                     onDelete={this.handleDeleteClient}
                                     onMoreInfo={this.props.onMoreInfo}
                                     handleModalOpen={this.props.handleModalOpen}
+                                    handleClientEdit={this.props.onEdit}
                                 />
                             </Grid>
                             <Grid  item xs={12} sm={9}>
-                                <ClientDetails moreinfo={this.props.moreinfo} ></ClientDetails>
+                                <ClientDetails updateClient = {this.props.updateClient} moreinfo={this.props.moreinfo} editMode={this.props.editMode}></ClientDetails>
                             </Grid>
                         </Grid>
                     </Paper>
@@ -73,6 +74,7 @@ class ExampleGrid extends React.Component {
                             </Grid>
                             <Grid  item xs={12} sm={9}>
                                 <RequirementDetails 
+                                    updateRequirement = {this.props.updateRequirement}
                                     requirement={this.props.reqmoreinfo.requirement}
                                     ></RequirementDetails>
                             </Grid>
@@ -82,7 +84,7 @@ class ExampleGrid extends React.Component {
                         <Grid container spacing={0}>
                             <Grid item xs={12} sm={3}>
                             <CandidateList
-                                candidates={this.props.reqmoreinfo.requirement.candidates}
+                                candidates={this.props.reqmoreinfo.candidates}
                                 selectedRequirement = {this.props.reqmoreinfo.requirement}
                                 onCandidates={this.props.onCandidates}
                                 onDelete={this.handleDeleteClient}
@@ -92,6 +94,7 @@ class ExampleGrid extends React.Component {
                             </Grid>
                             <Grid  item xs={12} sm={9}>
                             <CandidateDetails 
+                                updateCandidate= {this.props.updateCandidate} 
                                 candidate={this.props.candmoreinfo.candidate}
                                 ></CandidateDetails>
                             </Grid>
@@ -123,6 +126,7 @@ ExampleGrid.propTypes = {
     onDelete: PropTypes.func.isRequired,
     onMoreInfo: PropTypes.func.isRequired,
     moreinfo: PropTypes.object.isRequired,
+    editMode: PropTypes.object.isRequired,
     reqmoreinfo: PropTypes.object.isRequired,
     candmoreinfo: PropTypes.object.isRequired,
     docmoreinfo:PropTypes.object.isRequired,
@@ -131,9 +135,12 @@ ExampleGrid.propTypes = {
     onUpload:PropTypes.func.isRequired,
     onFilechange:PropTypes.func.isRequired,
     handleModalOpen: PropTypes.func.isRequired,
+    onEdit: PropTypes.func.isRequired,
     handleReqModalOpen: PropTypes.func.isRequired,
-    handleCadModalOpen: PropTypes.func.isRequired
-
+    handleCadModalOpen: PropTypes.func.isRequired,
+    updateClient: PropTypes.func.isRequired,
+    updateRequirement: PropTypes.func.isRequired,
+    updateCandidate: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(ExampleGrid);

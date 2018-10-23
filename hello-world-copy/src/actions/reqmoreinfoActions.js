@@ -4,8 +4,15 @@ import candidatesApi from '../api/candidatesApi';
 import * as docmoreinfoActions from '../actions/docmoreinfoActions';
 import * as candmoreinfoActions from '../actions/candmoreinfoActions';
 import * as clientActions from '../actions/clientActions';
-export function loadReqMoreInfoSuccess(client){
-  return {type: types.LOAD_REQ_MOREINFO_SUCCESS, client};
+
+export function updateCandidateSuccess(candidate){
+  return {type: types.UPDATE_CANDIDATE_SUCCESS, candidate};
+}
+export function loadReqMoreInfoSuccess(client,candidates){
+  return {type: types.LOAD_REQ_MOREINFO_SUCCESS, client,candidates};
+}
+export function loadReqUpdateSuccess(requirement){
+  return {type: types.LOAD_REQ_UPDATE_SUCCESS, requirement};
 }
 export function loadReqMoreinfofailure(){
   
@@ -44,8 +51,8 @@ export function loadReqMoreinfo(link, client) {
         });
       }
         
-      client.candidates = candidates._embedded
-      dispatch(loadReqMoreInfoSuccess(client));
+      candidates = candidates._embedded
+      dispatch(loadReqMoreInfoSuccess(client,candidates));
     }
     else{
       if(candidates.status === 401){
@@ -80,6 +87,21 @@ export function createCandidate(candidate) {
        // dispatch(loadCatsFailure(response.message))
       }
       
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+export function updateCandidate(candidate,id) {
+  return function (dispatch) {
+    return candidatesApi.updateCandidate(candidate,id).then(response => {
+      if(!response.message){
+         dispatch(updateCandidateSuccess(response));
+        dispatch(candmoreinfoActions.loadCandUpdateSuccess(response));
+      }
+      else{
+        //dispatch(loadCatsFailure(response.message))
+      }
     }).catch(error => {
       throw(error);
     });

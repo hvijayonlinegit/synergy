@@ -6,7 +6,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Tooltip from '@material-ui/core/Tooltip';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 
 import {white, blue500} from '@material-ui/core/colors/';

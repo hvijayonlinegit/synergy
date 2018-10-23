@@ -4,7 +4,9 @@ import * as docmoreinfoActions from '../actions/docmoreinfoActions';
 
 import * as clientActions from '../actions/clientActions';
 
-
+export function loadCandUpdateSuccess(candidate){
+  return {type: types.LOAD_CAND_UPDATE_SUCCESS, candidate};
+}
 export function loadCandMoreInfoSuccess(selectedCandidate){
   return {type: types.LOAD_CAND_MOREINFO_SUCCESS, selectedCandidate};
 }

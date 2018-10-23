@@ -13,7 +13,7 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Lock from '@material-ui/icons/Lock'
 //Spinner Imports
-import { Loader } from 'react-overlay-loader';
+//import { Loader } from 'react-overlay-loader';
 import 'react-overlay-loader/styles.css';
 
 const styles = theme => ({

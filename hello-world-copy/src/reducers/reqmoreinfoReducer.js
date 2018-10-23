@@ -1,6 +1,5 @@
 import * as types from '../actions/actionTypes';
 import initialState from './initialState';
-import {browserHistory} from 'react-router';
 export default function reqmoreinfoReducer(state = initialState.clients.reqmoreinfo, action) {
   switch(action.type) {
       case types.SET_SELECTED_REQUIREMENT:
@@ -10,18 +9,34 @@ export default function reqmoreinfoReducer(state = initialState.clients.reqmorei
       case types.LOAD_REQ_MOREINFO_SUCCESS:
       const clientState = Object.assign([], state)
       clientState.requirement =  action.client
+      clientState.candidates = action.candidates
       //browserHistory.push('/clients')
       return clientState
+      //update the requirement Details with recently updated requirement
+      case types.LOAD_REQ_UPDATE_SUCCESS:
+      const updatedReq = Object.assign([], state)
+      updatedReq.requirement =  action.requirement
+      return updatedReq
+      
+      //Update the candidate list updated candidate
+      case types.UPDATE_CANDIDATE_SUCCESS:
+      const updateCand = Object.assign([], state)
+      
+      updateCand.candidates.candidates.forEach((element, index) => {
+          if(element._links.self.href === action.candidate._links.self.href) {
+            updateCand.candidates.candidates[index] = action.candidate;
+          }
+      });
+      return updateCand
       case types.LOAD_REQ_MOREINFO_FAILURE:
       const clientState1 = Object.assign([], state)
-      clientState1.requirement =  {
-        candidates: [],
-      }
+      clientState1.requirement =  {}
+      clientState1.candidates= []
       //browserHistory.push('/clients')
       return clientState1
       case types.CREATE_CANDIDATE_SUCCESS:
       const newState = Object.assign([], state)
-      newState.requirement.candidates.candidates.push(action.candidate)
+      newState.candidates.candidates.push(action.candidate)
      // browserHistory.push(`/`)
       return newState
     default:

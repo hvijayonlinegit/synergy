@@ -10,8 +10,10 @@ export default function catReducer(state = initialState.clients.accountses, acti
     return Object.assign({}, state, action.clients)
     case types.REQUIRE_ADMIN_ACCESS:
     browserHistory.push(`/adminaccess`)
+    return state
     case types.LOAD_CATS_FAILURE:
     browserHistory.push(`/500`)
+    return state
     case types.UNAUTH_SIGNIN_PAGE:
     browserHistory.push('/signin')
     return state
@@ -20,11 +22,16 @@ export default function catReducer(state = initialState.clients.accountses, acti
       newState.accountses.push(action.cat)
       //browserHistory.push(`/`)
       return newState
-    case types.UPDATE_CAT_SUCCESS:
-      return [
-        ...state.filter(cat => cat.id !== action.cat.id),
-        Object.assign({}, action.cat)
-      ]
+
+    case types.UPDATE_CLIENT_SUCCESS:
+    const newState2 = Object.assign([], state)
+    
+    newState2.accountses.forEach((element, index) => {
+        if(element._links.self.href === action.client._links.self.href) {
+          newState2.accountses[index] = action.client;
+        }
+    });
+    return newState2
     case types.DELETE_CAT_SUCCESS: {
       const delNewState = Object.assign([], state)
       const indexOfCatToDelete = delNewState.accountses.findIndex(

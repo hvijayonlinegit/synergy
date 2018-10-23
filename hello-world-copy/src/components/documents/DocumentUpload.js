@@ -2,7 +2,7 @@ import React from 'react'
 import Tooltip from '@material-ui/core/Tooltip';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import FileUpload from '@material-ui/icons/FileUpload';
+import FileUploadIcon from '@material-ui/icons/CloudUploadSharp';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -19,9 +19,7 @@ const styles = theme => ({
   });
   
 class DocumentUpload extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  
   render() {
     const {classes} = this.props;
     return (
@@ -31,7 +29,7 @@ class DocumentUpload extends React.Component {
         <TextField type="file" multiple required mini onChange={this.props.onFilechange}></TextField>
         <Tooltip  title="Upload Document" classes={{ tooltip: classes.lightTooltip }}>
           <Button type="submit" variant="fab" mini color="primary" aria-label="Upload" className={classes.button} >
-            <FileUpload />
+            <FileUploadIcon />
           </Button>
         </Tooltip>
       </form>

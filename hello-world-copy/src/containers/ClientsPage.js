@@ -14,7 +14,7 @@ import AddClientModal from '../components/clients/CreateClientModal'
 import ClientsWrapper from '../components/clients/ClientsWrapper';
 import AddCandidateModal from '../components/candidates/CreateCandidateModal'
 //Spinner Imports
-import { Loader } from 'react-overlay-loader';
+//import { Loader } from 'react-overlay-loader';
 import 'react-overlay-loader/styles.css';
 class ClientsPage extends React.Component {
 
@@ -113,23 +113,28 @@ class ClientsPage extends React.Component {
       modal: false,
       reqmodal: false,
       cadmodal: false,
+      editMode: false,
       file:null
     };
     this.handleModalOpen = this.handleModalOpen.bind(this);
+    this.handleClientEdit = this.handleClientEdit(this);
     this.handleModalClose = this.handleModalClose.bind(this);
 
     this.handleReqModalOpen = this.handleReqModalOpen.bind(this);
     this.handleReqModalClose = this.handleReqModalClose.bind(this);
     this.updateReqState = this.updateReqState.bind(this);
+    this.updateRequirement = this.updateRequirement.bind(this);
     this.saveRequirement = this.saveRequirement.bind(this);
 
     this.handleCadModalOpen = this.handleCadModalOpen.bind(this);
     this.handleCadModalClose = this.handleCadModalClose.bind(this);
     this.updateCadState = this.updateCadState.bind(this);
     this.saveCandidate = this.saveCandidate.bind(this);
+    this.updateCandidate = this.updateCandidate.bind(this);
     
     this.redirect = this.redirect.bind(this);
     this.saveCat = this.saveCat.bind(this);
+    this.updateClient= this.updateClient.bind(this);
     this.updateCatState = this.updateCatState.bind(this);
     
     this.handleRequirements = this.handleRequirements.bind(this);
@@ -158,6 +163,12 @@ class ClientsPage extends React.Component {
     requirement[field] = event.target.value;
     return this.setState({requirement: requirement});
   }
+  
+  updateRequirement(requirement, id){
+    this.props.moreinfoactions.updateRequirement(requirement,id).then((response) => {
+      this.redirect(response);
+     });
+  }
   updateCatState(event) {
     const field = event.target.name;
     const client = this.state.client;
@@ -178,6 +189,11 @@ class ClientsPage extends React.Component {
     });
 
   }
+  updateCandidate(candidate, id){
+    this.props.reqmoreinfoactions.updateCandidate(candidate,id).then((response) => {
+      this.redirect(response);
+     });
+  }
   saveRequirement(event) {
     event.preventDefault();
 
@@ -190,18 +206,21 @@ class ClientsPage extends React.Component {
 
   saveCat(event) {
     event.preventDefault();
-
     this.props.actions.createCat(this.state.client).then((cat) => {
      this.setState({ modal: false });
      this.redirect(cat);
     });
 
   }
+  updateClient(client,id){
+    this.props.actions.updateClient(client,id).then((response) => {
+      this.redirect(response);
+     });
+  }
+  
   handleCadModalOpen(link) {
-    console.log(id+'viay');
+    
     let id = link.split('/').pop(-1);
-    //let req= Object.assign([], this.state.requirement)
-    //req.id= id
     let linkarr=[];
     linkarr.push(link);
     this.setState({ candidate:{id:id, requirements:linkarr, requirement_id:id }, cadmodal: true });
@@ -211,7 +230,7 @@ class ClientsPage extends React.Component {
 		this.setState({ cadmodal: false });
   }
   handleReqModalOpen(link) {
-    console.log(id+'viay');
+    
     let id = link.split('/').pop(-1);
     //let req= Object.assign([], this.state.requirement)
     //req.id= id
@@ -221,30 +240,38 @@ class ClientsPage extends React.Component {
   handleReqModalClose() {
 		this.setState({ reqmodal: false });
   }
-
-	handleModalOpen() {
-    this.setState({ modal: true , 
-      client: {
-        name: '',
-        access: '',
-        accountOwner: '',
-        category: '',
-        websiteAddress: '',
-        status: '',
-        accountCode: '',
-        phoneNumber1: '',
-        phoneNumber2: '',
-        country: '',
-        state: '',
-        city: '',
-        street: '',
-        zipCode: 0,
-        fax: 0,
-        email1: '',
-        email2: '',
-        description: ''
-      },
-    });
+  handleClientEdit(){
+    console.log('cll came here');
+    // this.setState({editMode: true});
+  }
+	handleModalOpen(n) {
+    if(n === 'edit'){
+      this.setState({editMode: true});
+    }else{
+      this.setState({ modal: true , 
+        client: {
+          name: '',
+          access: '',
+          accountOwner: '',
+          category: '',
+          websiteAddress: '',
+          status: '',
+          accountCode: '',
+          phoneNumber1: '',
+          phoneNumber2: '',
+          country: '',
+          state: '',
+          city: '',
+          street: '',
+          zipCode: 0,
+          fax: 0,
+          email1: '',
+          email2: '',
+          description: ''
+        },
+      });
+    }
+    
 		
 //  browserHistory.push(`/clients/new`);
 	}
@@ -277,14 +304,16 @@ handleRequirements(link ,client, e){
   this.props.reqmoreinfoactions.loadReqMoreinfo(link,client);
   //store.dispatch(loadRequirements(text));
 }
+
 handleDeleteClient(link ,client, e ){
   //alert('Are you sure you want to delete the Client'+ client.name);
   this.props.actions.deleteCat(client, link);
 }
-handleMoreInfo(link ,client, e ){
+handleMoreInfo(link ,client, edit, e ){
   console.log("super parent called");
-  this.props.moreinfoactions.loadMoreinfo(link,client);
+  this.props.moreinfoactions.loadMoreinfo(link,client, edit);
 }
+
   render() {
     const clients = this.props.clients;
     const moreinfo =this.props.moreinfo;
@@ -298,6 +327,7 @@ handleMoreInfo(link ,client, e ){
           moreinfo={moreinfo}
           reqmoreinfo={reqmoreinfo}
           candmoreinfo={candmoreinfo}
+          editMode={this.state.editMode}
           docmoreinfo={this.props.docmoreinfo}
           onRequirements={this.handleRequirements}
           onCandidates={this.handleCandidates}
@@ -307,8 +337,12 @@ handleMoreInfo(link ,client, e ){
           onDelete={this.handleDeleteClient}
           onMoreInfo={this.handleMoreInfo}
           handleModalOpen={this.handleModalOpen}
+          handleClientEdit= {this.handleClientEdit}
           handleReqModalOpen={this.handleReqModalOpen}
           handleCadModalOpen={this.handleCadModalOpen}
+          updateClient= {this.updateClient}
+          updateRequirement={this.updateRequirement}
+          updateCandidate={this.updateCandidate}
           children ={this.props.children}
           />
           <AddClientModal
@@ -348,9 +382,7 @@ ClientsPage.propTypes = {
   candmoreinfo: PropTypes.object.isRequired,
   candmoreinfoactions: PropTypes.object.isRequired,
   docmoreinfoactions:PropTypes.object.isRequired
-  
-
-};
+ };
 
 function mapStateToProps(state, ownProps) {
   return {

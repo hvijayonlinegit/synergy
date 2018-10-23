@@ -92,16 +92,22 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 'home',
+      
       isAuthenticated: false,
       anchorEl: null,
+      value: ''
     };
     
     this.handleSignup = this.handleSignup.bind(this);
     this.handleSignin = this.handleSignin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
   }
-  
+  //this change is to keep the selected tab active based on the location of the browser
+  componentWillReceiveProps(_nextProps) {
+    const path= _nextProps.location.pathname.split('/').pop(-1)?_nextProps.location.pathname.split('/').pop(-1):'home';
+		this.setState({ value: path
+		})
+	}
   componentWillMount(){
     //this.props.actions.fetchUser();
     this.renderUserName()
@@ -175,10 +181,8 @@ class App extends React.Component {
   };
   render() {
     const { classes } = this.props;
-      const { value } = this.state;
-      const {  anchorEl  } = this.state;
-     let username = this.props.userdetails;
-      console.log(username+'>>>>>')
+    const { value } = this.state;
+    const {  anchorEl  } = this.state;
     const open = Boolean(anchorEl);
     return (
       <MuiThemeProvider theme={theme}>
@@ -203,7 +207,7 @@ class App extends React.Component {
           <div className={classes.flex} >
               <Tabs  value={value} onChange={this.handleChange}>
                 <Tab value="home" label="Home" />
-                  <Tab value="clients" label="Clients" />
+                <Tab value="clients" label="Clients" />
                 <Tab value="requirements" label="Requirements" />
                 <Tab value="candidates" label="Candidates" />
             </Tabs>
