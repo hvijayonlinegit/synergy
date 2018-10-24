@@ -3,22 +3,21 @@ import Dialog from '@material-ui/core/Dialog';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-
-import DialogTitle from '@material-ui/core/DialogTitle';
-
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
-
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import Slide from '@material-ui/core/Slide';
 
 const styles = theme => ({
     root: {
@@ -28,9 +27,14 @@ const styles = theme => ({
         maxHeight: '32vh',
         minHeight: '32vh',
         display: 'flex',
-    flexWrap: 'wrap',
-       
-      },
+    	flexWrap: 'wrap',
+	  },
+	  appBar: {
+		position: 'relative',
+	  },
+	  flex: {
+		flex: 1,
+	  },
   container: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -44,7 +48,6 @@ const styles = theme => ({
   menu: {
     width: 200,
   },
-  
   button: {
     margin: theme.spacing.unit,
     color: '#fff',
@@ -54,25 +57,10 @@ const styles = theme => ({
   backgroundColor: '#1976d2',
     },
   },
-  leftIcon: {
-    marginRight: theme.spacing.unit,
-  },
-  rightIcon: {
-    marginLeft: theme.spacing.unit,
-  },
-  iconSmall: {
-    fontSize: 20,
-  },
   header: {
     width: '100%',
     backgroundColor: 'aliceblue',
     padding: '20px',
-  },
-  padder: {
-      paddingLeft: '10px',
-  },
-  float: {
-     float: 'right'
   },
   card: {
     border: '1px solid lightgrey',
@@ -80,13 +68,9 @@ const styles = theme => ({
     boxShadow: 'none',
     marginBottom: '10px'
   },
-  
   formControl: {
     margin: theme.spacing.unit,
     minWidth: 150,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing.unit * 2,
   },
   content: {
     padding: '16px'
@@ -102,8 +86,10 @@ const styles = theme => ({
 },
 
 });
+function Transition(props) {
+	return <Slide direction="right" {...props} />;
+  }
 class ClientModal extends React.Component {
-
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -141,20 +127,27 @@ class ClientModal extends React.Component {
 		return (
 			<Dialog 
 				open={this.props.open}
-				onClose={this.handleClose}
 				aria-labelledby="alert-dialog-title"
 				aria-describedby="alert-dialog-description"
 				fullScreen
+				TransitionComponent={Transition}
 			>
-				<DialogTitle id="alert-dialog-title">{"Add a Client"}</DialogTitle>
+				<AppBar className={classes.appBar}>
+					<Toolbar>
+					<IconButton color="inherit" onClick={this.props.close} aria-label="Close">
+						<CloseIcon />
+					</IconButton>
+					<Typography variant="h6" color="inherit" className={classes.flex}>
+						Add a Client
+					</Typography>
+					<Button color="inherit" onClick={this.props.onSave}>
+						save
+					</Button>
+					</Toolbar>
+				</AppBar>
 				<DialogContent>
-				<form className={classes.container} noValidate autoComplete="off">
-             
+			<form className={classes.container} noValidate autoComplete="off">
 			 <Card className={classes.card}>
-			  {/* <CardHeader className={classes.hoverEle}  subheader="Client Information" 
-				 > 
-			   
-				</CardHeader> */}
 			   <CardContent className={classes.content}>
 			   <Typography className={classes.afterEle}variant="body1" gutterBottom>
 				   Client Information
@@ -171,7 +164,6 @@ class ClientModal extends React.Component {
 				<FormControl className={classes.formControl}>
 					<InputLabel htmlFor="age-native-helper">Access</InputLabel>
 					<NativeSelect
-						//value={ this.props.client.name }
 						defaultValue={this.props.client.access}
 						onChange={this.props.onChange}
 						input={<Input name="access" id="age-native-helper" />}
@@ -196,11 +188,7 @@ class ClientModal extends React.Component {
 						<option value="4936">Asha Richards</option>
 						<option value="4937">Raj Nettem</option>
 					   </NativeSelect>
-					  
 					 </FormControl>
-					 
-					 
-
 					  <FormControl className={classes.formControl}>
 					   <InputLabel htmlFor="category">Category</InputLabel>
 					   <NativeSelect
@@ -216,19 +204,15 @@ class ClientModal extends React.Component {
 						<option value="CV">Supplier</option>
 						<option value="ve">Vendor</option>
 					   </NativeSelect>
-					  
 					 </FormControl>
 					 <TextField
 					 margin="dense"
 					 placeholder="http://www."
 					 name="websiteAddress"
 					 label="Website Address"
-					 
-					 
 					 defaultValue={ this.props.client.websiteAddress }
 					 onChange={ this.props.onChange}
 					  />
-					
 					  <FormControl className={classes.formControl}>
 					   <InputLabel htmlFor="status">Status</InputLabel>
 					   <NativeSelect
@@ -241,18 +225,13 @@ class ClientModal extends React.Component {
 						<option value="cp">Contract Pending</option>
 						<option value="ia">In-Active</option>
 						<option value="ld">Lead</option>
-
-						 
 					   </NativeSelect>
-					  
 					 </FormControl>
 					 <TextField
 					 margin="dense"
 					 placeholder="Enter Account Code"
 					 name="accountCode"
 					 label="Account Code"
-					 
-					 
 					 defaultValue = { this.props.client.accountCode }
 					 onChange={ this.props.onChange}
 					 required />
@@ -270,8 +249,6 @@ class ClientModal extends React.Component {
 					 placeholder="Enter Phone Number "
 					 name="phoneNumber1"
 					 label="Phone Number1 "
-					 
-					 
 					 defaultValue = { this.props.client.phoneNumber1 }
 					 onChange={ this.props.onChange}
 					  />
@@ -280,8 +257,6 @@ class ClientModal extends React.Component {
 					 placeholder="Enter phone number  2"
 					 name="phoneNumber2"
 					 label="Phone Number2"
-					 
-					 
 					 defaultValue = { this.props.client.phoneNumber2 }
 					 onChange={ this.props.onChange}
 					  />
@@ -355,19 +330,13 @@ class ClientModal extends React.Component {
 							<option value="WV">West Virginia</option>
 							<option value="WI">Wisconsin</option>
 							<option value="WY">Wyoming</option>
-
-	
 					   </NativeSelect>
-					  
 					 </FormControl>
-					
 					 <TextField
 					 margin="dense"
 					 placeholder="Enter city name"
 					 name="city"
 					 label="City"
-					 
-					 
 					 defaultValue = { this.props.client.city }
 					 onChange={ this.props.onChange}
 					  />
@@ -376,7 +345,6 @@ class ClientModal extends React.Component {
 					 placeholder="Enter street name"
 					 name="street"
 					 label="Street"
-					 
 					 defaultValue = { this.props.client.street }
 					 onChange={ this.props.onChange}
 					  />
@@ -385,7 +353,6 @@ class ClientModal extends React.Component {
 					 placeholder="Enter zipCode "
 					 name="zipCode"
 					 label="Zipcode"
-					 
 					 defaultValue = { this.props.client.zipCode }
 					 onChange={ this.props.onChange}
 					  />
@@ -394,8 +361,6 @@ class ClientModal extends React.Component {
 					 placeholder="Enter fax "
 					 name="fax"
 					 label="Fax"
-					 
-					 
 					 defaultValue = { this.props.client.fax }
 					 onChange={ this.props.onChange}
 					  />
@@ -404,8 +369,6 @@ class ClientModal extends React.Component {
 					 placeholder="Enter email1 "
 					 name="email1"
 					 label="Email1"
-					 
-					 
 					 defaultValue = { this.props.client.email1 }
 					 onChange={ this.props.onChange}
 					  />
@@ -414,8 +377,6 @@ class ClientModal extends React.Component {
 					 placeholder="Enter email2 "
 					 name="email2"
 					 label="Email2"
-					 
-					 
 					 defaultValue = { this.props.client.email2 }
 					 onChange={ this.props.onChange}
 					  />
@@ -424,10 +385,6 @@ class ClientModal extends React.Component {
 			   </CardContent>
 			 </Card>
 			 <Card className={classes.card}>
-			  {/* <CardHeader subheader="Description"
-				 > 
-			   
-				</CardHeader> */}
 			   <CardContent className={classes.content}>
 			   <Typography className={classes.afterEle}variant="body1" gutterBottom>
 			   Description
@@ -446,116 +403,11 @@ class ClientModal extends React.Component {
 				 </CardActions>
 			   </CardContent>
 			 </Card>
-			 
 			 </form>
-					{/* <TextField
-						autoFocus
-						margin="dense"
-						placeholder="Enter Client name"
-						name="name"
-						label="Name"
-						
-						defaultValue={this.props.client.name}
-						onChange={this.props.onChange}
-					/>
-					<TextField
-						margin="dense"
-						placeholder="access"
-						name="access"
-						label="Access"
-						
-						defaultValue={this.props.client.access}
-						onChange={this.props.onChange}
-					/>
-					<TextField
-						margin="dense"
-						placeholder="Enter Client Address"
-						name="accountOwner"
-						label="Account Owner"
-						
-						defaultValue={this.props.client.accountOwner}
-						onChange={this.props.onChange}
-						errorText={this.state.invalid_url && 'Please enter a valid URL.'}
-					/>
-					<TextField
-						margin="dense"
-						label="Category"
-						placeholder=""
-						name="category"
-						
-						onChange={this.props.onChange}
-						errorText={this.state.invalid_url && 'Please enter a valid URL.'}
-						defaultValue={this.props.client.category} />
-					<TextField
-						margin="dense"
-						label="websiteAddress"
-						placeholder="www."
-						name="websiteAddress"
-						
-						onChange={this.props.onChange}
-						errorText={this.state.invalid_url && 'Please enter a valid URL.'}
-						defaultValue={this.props.client.websiteAddress} />
-					<TextField
-						margin="dense"
-						label="Status"
-						placeholder=""
-						name="status"
-						
-						onChange={this.props.onChange}
-						errorText={this.state.invalid_url && 'Please enter a valid URL.'}
-						defaultValue={this.props.client.status} />
-					<TextField
-						margin="dense"
-						label="Status"
-						placeholder=""
-						name="status"
-						
-						onChange={this.props.onChange}
-						errorText={this.state.invalid_url && 'Please enter a valid URL.'}
-						defaultValue={this.props.client.status} />
-					<TextField
-						margin="dense"
-						label="Status"
-						placeholder=""
-						name="status"
-						
-						onChange={this.props.onChange}
-						errorText={this.state.invalid_url && 'Please enter a valid URL.'}
-						defaultValue={this.props.client.status} />
-					<TextField
-						margin="dense"
-						label="Status"
-						placeholder=""
-						name="status"
-						
-						onChange={this.props.onChange}
-						errorText={this.state.invalid_url && 'Please enter a valid URL.'}
-						defaultValue={this.props.client.status} />
-					<TextField
-						margin="dense"
-						label="Status"
-						placeholder=""
-						name="status"
-						
-						onChange={this.props.onChange}
-						errorText={this.state.invalid_url && 'Please enter a valid URL.'}
-						defaultValue={this.props.client.status} /> */}
-
-				</DialogContent>
-				<DialogActions>
-					<Button
-						color="primary"
-						onClick={this.props.close}
-					>Cancel </Button>
-					<Button
-						color="primary"
-
-						onClick={this.props.onSave}> Submit </Button>
-				</DialogActions>
-			</Dialog>
+			</DialogContent>
+		</Dialog>
 		)
 	}
-
 }
 ClientModal.propTypes = {
 	fullScreen: PropTypes.bool.isRequired,

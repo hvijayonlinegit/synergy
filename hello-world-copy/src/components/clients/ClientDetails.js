@@ -2,23 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import Save from '@material-ui/icons/SaveRounded';
-import Cancel from '@material-ui/icons/CancelOutlined';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
-
-import Typography from '@material-ui/core/Typography';
-
 import MySnackbarContentWrapper from '../../common/MySnackContent';
-import Grid from '@material-ui/core/Grid';
 import 'react-overlay-loader/styles.css';
-import IconButton from '@material-ui/core/IconButton'
+import Audit from '../../common/Audit'
+import CardHeader from '../../common/CardDetailsHeader'
 const styles = theme => ({
 	root: {
 		width: '100%',
@@ -47,15 +41,6 @@ const styles = theme => ({
 	},
 	content: {
 		padding: '16px'
-	},
-	afterEle: {
-		'&::after': {
-			marginTop: '2px',
-			borderTop: '2px solid #698591',
-			display: 'block',
-			width: '30px',
-			content: '""'
-		},
 	},
 });
 
@@ -138,23 +123,7 @@ class ClientDetails extends React.Component {
 
 						<Card className={classes.card}>
 							<CardContent className={classes.content}>
-								<Grid container spacing={24}>
-									<Grid item xs={10}>
-										<Typography className={classes.afterEle} variant="body1" gutterBottom>
-											Client Information
-										</Typography>
-									</Grid>
-									<Grid item xs={2}>
-										<div>
-											<IconButton  onClick={this.updateClient}>
-												<Save />
-											</IconButton>
-											<IconButton  >
-												<Cancel />
-											</IconButton>
-										</div>
-									</Grid>
-								</Grid>
+								<CardHeader title='Client Information' parentMehod={this.updateClient}></CardHeader>
 								<TextField
 									type="input"
 									margin="dense"
@@ -245,9 +214,7 @@ class ClientDetails extends React.Component {
 						</Card>
 						<Card className={classes.card}>
 							<CardContent className={classes.content}>
-								<Typography className={classes.afterEle} variant="body1" gutterBottom>
-									Address Information
-			   					</Typography>
+								<CardHeader title='Address Information' parentMehod={this.updateClient}></CardHeader>
 								<TextField
 									margin="dense"
 									placeholder="Enter Phone Number "
@@ -390,9 +357,7 @@ class ClientDetails extends React.Component {
 						</Card>
 						<Card className={classes.card}>
 							<CardContent className={classes.content}>
-								<Typography className={classes.afterEle} variant="body1" gutterBottom>
-									Description
-			   					</Typography>
+								<CardHeader title='Description' parentMehod={this.updateClient}></CardHeader>
 								<TextField
 									id="multiline-static"
 									multiline
@@ -407,6 +372,7 @@ class ClientDetails extends React.Component {
 								</CardActions>
 							</CardContent>
 						</Card>
+						<Audit/>
 					</form>
 				</div>
 			);

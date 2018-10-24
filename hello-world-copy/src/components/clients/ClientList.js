@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
+// import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItemText from '@material-ui/core/ListItemText';
 import Tooltip from '@material-ui/core/Tooltip';
 import TextField from '@material-ui/core/TextField';
-import IconButton from '@material-ui/core/IconButton';
+// import IconButton from '@material-ui/core/IconButton';
 import 'react-overlay-loader/styles.css';
 import themes from '../theme'
-import Edit from '@material-ui/icons/Edit';
+// import Delete from '@material-ui/icons/Delete';
 import {white, blue500} from '@material-ui/core/colors/';
 import AddIcon from '@material-ui/icons/Add';
 
@@ -168,24 +168,23 @@ updateSearch(event){
                  // let clientid= "client id: " +id;
                   //let boundDeleteClick = this.props.onDelete.bind(this, selflink, n);
                   let boundMoreInfo = this.handleMoreinfo.bind(this, link, n, index);
-                  let boundClientEdit = this.handleClientEdit.bind(this, link, n, index);
+                 // let boundClientEdit = this.handleClientEdit.bind(this, link, n, index);
                   return(
                     <div>
                       <ListItem autoFocus button={true} style= {this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem} to={to}  key= {id} divider= {true} onClick={boundMoreInfo} >
                         {/* <ListItemText primary={n.name} secondary={clientid} /> */}
                         <ListItemText color="inherit" primary= {id}/>
                         <ListItemText  primary= {n.name} />
-                       
-                          <ListItemSecondaryAction style= {this.state.indexOfClickedItem === index ? styles.editDisplay : styles.editHide}>
-                          <Tooltip title="Edit This Client info" classes={{ tooltip: classes.lightTooltip }}>
-                            <IconButton onClick={boundClientEdit} >
+                          {/* <ListItemSecondaryAction style= {this.state.indexOfClickedItem === index ? styles.editDisplay : styles.editHide}>
+                          <Tooltip title="delete" classes={{ tooltip: classes.lightTooltip }}> */}
+                            {/* <IconButton onClick={boundClientEdit} >
                               <Edit  />
-                            </IconButton>
-                          </Tooltip>
+                            </IconButton> */}
                             {/* <IconButton >
                               <Delete />
-                            </IconButton> */}
-                        </ListItemSecondaryAction>
+                            </IconButton>
+                          </Tooltip>
+                        </ListItemSecondaryAction> */}
                       </ListItem>
                       
                     </div>

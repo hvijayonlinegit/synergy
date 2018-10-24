@@ -2,27 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import MySnackbarContentWrapper from '../../common/MySnackContent';
-
-// import Button from '@material-ui/core/Button';
-// import Save from '@material-ui/icons/Save';
-// import classNames from 'classnames';
-
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
 
-import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
-import Save from '@material-ui/icons/SaveRounded';
-import Cancel from '@material-ui/icons/CancelOutlined';
+import Audit from '../../common/Audit'
+import CardHeader from '../../common/CardDetailsHeader'
 const styles = theme => ({
   root: {
     width: '100%',
@@ -50,32 +41,12 @@ const styles = theme => ({
     marginRight: theme.spacing.unit,
     width: 300,
   },
-  
-  afterEle: {
-    '&::after': {
-      marginTop: '2px',
-      borderTop: '2px solid #698591',
-      display: 'block',
-      width: '30px',
-      content: '""'
-    },
-  },
-  button: {
-    margin: theme.spacing.unit,
-    color: '#fff',
-    marginLeft: '1px',
-    backgroundColor: '#2196f3',
-    '&:hover': {
-      backgroundColor: '#1976d2',
-    },
-  },
   card: {
     border: '1px solid lightgrey',
     width: '100%',
     boxShadow: 'none',
     marginBottom: '10px'
   },
-
   formControl: {
     margin: theme.spacing.unit,
     minWidth: 150,
@@ -167,23 +138,7 @@ class RequirementDetails extends React.Component {
           <form className={classes.container} noValidate autoComplete="off">
             <Card className={classes.card}>
               <CardContent className={classes.content}>
-                <Grid container spacing={24}>
-									<Grid item xs={10}>
-                    <Typography className={classes.afterEle} variant="body1" gutterBottom>
-                      Requirement Information
-                    </Typography>
-									</Grid>
-									<Grid item xs={2}>
-										<div>
-											<IconButton  onClick={this.updateRequirement}>
-												<Save />
-											</IconButton>
-											<IconButton  >
-												<Cancel />
-											</IconButton>
-										</div>
-									</Grid>
-								</Grid>
+                <CardHeader title='Requirement Information' parentMehod={this.updateRequirement}></CardHeader>
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
                   placeholder="Enter Client name"
@@ -437,9 +392,7 @@ class RequirementDetails extends React.Component {
             </Card>
             <Card className={classes.card}>
               <CardContent className={classes.content}>
-                <Typography className={classes.afterEle} variant="body1" gutterBottom>
-                  Duration & Type
-                </Typography>
+                <CardHeader title='Duration & Type' ></CardHeader>
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
                   placeholder="Enter duration"
@@ -633,13 +586,14 @@ class RequirementDetails extends React.Component {
                 </CardActions>
               </CardContent>
             </Card>
+            {/* Audit for last created and last modified */}
+            <Audit/>
           </form>
         </div>
       );
     }
   }
 }
-
 RequirementDetails.propTypes = {
   classes: PropTypes.object.isRequired,
   requirement: PropTypes.object.isRequired,
