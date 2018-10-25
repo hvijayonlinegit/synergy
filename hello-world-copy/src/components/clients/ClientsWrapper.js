@@ -106,6 +106,7 @@ class ExampleGrid extends React.Component {
                             <DocumentsList
                                 selectedCandidate={this.props.candmoreinfo.candidate}
                                 documents={this.props.docmoreinfo.documents}
+                                filelink={this.props.docmoreinfo.filelink}
                                 onDocuments={this.props.onDocuments}
                                 onFilechange={this.props.onFilechange}
                                 onUpload={this.props.onUpload}

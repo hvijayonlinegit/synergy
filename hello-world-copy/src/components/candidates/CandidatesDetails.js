@@ -200,7 +200,7 @@ class CandidateDetails extends React.Component {
 
                 />
                 <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="country">Country</InputLabel>
+                  <InputLabel htmlFor="country" shrink>Country</InputLabel>
                   <NativeSelect
                     value={this.state.country}
                     onChange={this.handleChange('country')}
@@ -212,7 +212,7 @@ class CandidateDetails extends React.Component {
 
                 </FormControl>
                 <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="state">State</InputLabel>
+                  <InputLabel htmlFor="state" shrink>State</InputLabel>
                   <NativeSelect
                     value={this.state.state}
                     onChange={this.handleChange('state')}
@@ -353,7 +353,7 @@ class CandidateDetails extends React.Component {
               <CardContent className={classes.content}>
                 <CardHeader title='Additional Information' parentMehod={this.updateCandidate}></CardHeader>
                 <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="sourceFrom">Sourced From</InputLabel>
+                  <InputLabel htmlFor="sourceFrom" shrink>Sourced From</InputLabel>
                   <NativeSelect
                     value={this.state.sourceFrom}
                     onChange={this.handleChange('sourceFrom')}
@@ -399,7 +399,7 @@ class CandidateDetails extends React.Component {
                   onChange={this.handleChange('sourcing')}
                 />
                 <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="sourceBy">Sourced By</InputLabel>
+                  <InputLabel htmlFor="sourceBy" shrink>Sourced By</InputLabel>
                   <NativeSelect
                     value={this.state.sourceBy}
                     onChange={this.handleChange('sourceBy')}
@@ -429,7 +429,7 @@ class CandidateDetails extends React.Component {
                   onChange={this.handleChange('availableFrom')}
                 />
                 <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="noticePeriod">Notice Period</InputLabel>
+                  <InputLabel htmlFor="noticePeriod" shrink>Notice Period</InputLabel>
                   <NativeSelect
                     value={this.state.noticePeriod}
                     onChange={this.handleChange('noticePeriod')}
@@ -474,7 +474,7 @@ class CandidateDetails extends React.Component {
                   onChange={this.handleChange('passportNumber')}
                 />
                 <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="visaStatus">Visa Status</InputLabel>
+                  <InputLabel htmlFor="visaStatus" shrink>Visa Status</InputLabel>
                   <NativeSelect
                     value={this.state.visaStatus}
                     onChange={this.handleChange('visaStatus')}
@@ -502,7 +502,7 @@ class CandidateDetails extends React.Component {
                   onChange={this.handleChange('dateOfBirth')}
                 />
                 <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="candidateStatus">Candidate Status</InputLabel>
+                  <InputLabel htmlFor="candidateStatus" shrink>Candidate Status</InputLabel>
                   <NativeSelect
                     value={this.state.candidateStatus}
                     onChange={this.handleChange('candidateStatus')}

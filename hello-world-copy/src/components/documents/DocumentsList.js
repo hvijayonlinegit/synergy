@@ -16,6 +16,7 @@ const styles = theme => ({
     maxHeight: '25vh',
     overflow: 'auto',
     minHeight: '25vh',
+    width: '55%'
    },
    button: {
     margin: theme.spacing.unit,
@@ -23,7 +24,7 @@ const styles = theme => ({
   },
   topSection: {
     flexGrow: 1,
-    float:'right'
+    float:'left'
   },
   beforeEle: {
     '&::before':  {
@@ -48,15 +49,20 @@ class NestedList extends React.Component {
   constructor(props) {
     super(props);
     // Initialize a state which contain the index of clicked element (initially -1)
-    this.state = { indexOfClickedItem: -1 , search:''};
+    this.state = { indexOfClickedItem: -1 , search:'', filelin:''};
   }
-
+  componentWillReceiveProps(_nextProps) {
+    const filelink= _nextProps.filelink?_nextProps.filelink:'';
+    console.log('doclink'+filelink);
+    this.setState({filelink: filelink});
+    //window.location.href(filelink);
+	}
   updateSearch(event){
     this.setState({search:event.target.value.substr(0,20)});
   }
-  handleMoreinfo(id , docname,token, index ){
+  handleMoreinfo(id , docname, index ){
     this.setState({indexOfClickedItem: index});
-    this.props.onDocuments(id, docname,token);
+    this.props.onDocuments(id, docname);
   }
   render() {
     const {classes, to } = this.props;
@@ -124,6 +130,7 @@ class NestedList extends React.Component {
     return (
       <div className={classes.beforeEle}>
          <div className={classes.topSection}>
+            <a href={this.state.filelink} download > {this.state.filelink}</a>
             <Grid container spacing={24}>
               
               <Grid item >
@@ -149,15 +156,19 @@ class NestedList extends React.Component {
             {   
               filteredDocuments.map((n,index) => {
                 let id=''
+                let boundMoreInfo
                 if(n._links){
                   const selflink= n._links.self.href
                    id = selflink.split('/').pop(-1);
+                   let selectedCandid= link.split('/').pop(-1);
+                   var  docname = n.documentName;
+                  boundMoreInfo = this.handleMoreinfo.bind(this, selectedCandid, docname);
                 }
                 else{
                   id = n.id;
                 }
                return(
-                  <ListItem  autofocus button style= {this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem}  to={to}  divider= {true}  >
+                  <ListItem  autofocus button style= {this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem}  to={to}  divider= {true} onClick={boundMoreInfo} >
                      <ListItemText primary="Document ID :" secondary={id} /> 
                      <ListItemText primary="File Name :" secondary={n.documentName} /> 
                      <ListItemText primary="File Type" secondary={n.documentType.split('/').pop(-1)} />
@@ -177,6 +188,7 @@ NestedList.propTypes = {
   documents:PropTypes.object.isRequired,
   onDocuments: PropTypes.func.isRequired,
   onUpload:PropTypes.func.isRequired,
-  onFilechange:PropTypes.func.isRequired
+  onFilechange:PropTypes.func.isRequired,
+  filelink:PropTypes.object.isRequired
 };
 export default withStyles(styles)(NestedList);

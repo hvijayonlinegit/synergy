@@ -18,6 +18,7 @@ export default {
     },
     docmoreinfo :{
         documents: [],
+        filelink:''
     },
   },
   requirements: {},

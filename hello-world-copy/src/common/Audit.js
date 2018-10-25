@@ -19,14 +19,14 @@ const styles = theme => ({
 
 function Audit(props) {
   const { classes } = props;
-
+const x = props.createdBy?props.createdBy:''
   return (
     <div className={classes.root}>
         <Card className={classes.card}>
             <CardContent className={classes.content}>
                 <Grid container spacing={24}>
                     <Grid item xs={6}>
-                        Last Created By: 
+                        Last Created By: {x}
                     </Grid>
                     <Grid item xs={6}>
                         Last Modified By:
@@ -40,6 +40,8 @@ function Audit(props) {
 
 Audit.propTypes = {
   classes: PropTypes.object.isRequired,
+  createdBy: PropTypes.object.isRequired,
+  ModifiedBy: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(Audit);

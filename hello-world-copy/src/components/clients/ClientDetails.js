@@ -372,7 +372,7 @@ class ClientDetails extends React.Component {
 								</CardActions>
 							</CardContent>
 						</Card>
-						<Audit/>
+						<Audit createdBy={this.state.createdBy} modifiedBy={this.state.modifiedBy}></Audit>
 					</form>
 				</div>
 			);

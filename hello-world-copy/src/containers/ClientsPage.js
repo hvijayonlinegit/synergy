@@ -291,8 +291,8 @@ class ClientsPage extends React.Component {
     //this.setState({file:[]});
   }
   
-  handleDocuments(id , client,token, e){
-    this.props.docmoreinfoactions.downloadDoc(id,client,token);
+  handleDocuments(id , docname, e){
+    this.props.docmoreinfoactions.downloadDoc(id,docname);
   }
   handleCandidates(link ,client, e){
     console.log('onclic'+link);

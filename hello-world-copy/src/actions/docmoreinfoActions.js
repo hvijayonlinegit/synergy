@@ -10,21 +10,24 @@ export function loadDocMoreinfofailure(){
 export function loadDocUploadSuccess(documents){
   return {type: types.LOAD_DOC_UPLOAD_SUCCESS, documents};
 }
-export function downloadDoc(link, client) {
+export function loadDocDownloadLink(link){
+  return {type: types.LOAD_DOC_DOWNLOAD_LINK, link};
+}
+export function downloadDoc(id, docname) {
 
   return function(dispatch) {
-    console.log('calling link'+ link);
+    console.log('calling link'+ id);
     
     //return dispatch(loadCandMoreInfoSuccess(client));
-    return documentsApi.download(link, client).then(documents => {
+    return documentsApi.download(id, docname).then(documents => {
     //  console.log('inside requirement action.js'+requirements._embedded.requirementses[0].title);
     //client.documents = documents
     const file = new Blob(
       [documents.data], 
-      {type: 'application/pdf'});
-      const fileURL = URL.createObjectURL(file);
-      
-      window.open(fileURL);
+      { type: "octet/stream"});
+      const fileURL = window.URL.createObjectURL(file);
+     
+      //window.open(fileURL);
     //var fileURL = URL.createObjectURL(documents.blob);
     //window.location.href(documents.body);
     //console.log(res);
@@ -32,7 +35,7 @@ export function downloadDoc(link, client) {
     //window.location.href ='http://releases.ubuntu.com/12.04.5/ubuntu-12.04.5-alternate-amd64.iso'
     //window.location.href("blob:http://localhost:8090/d697dc28-bcfb-4491-896a-ea3f28f1374d");
     
-     // dispatch(loadDocMoreInfoSuccess(client));
+     dispatch(loadDocDownloadLink(fileURL));
     }).catch(error => {
       throw(error);
     });
