@@ -94,7 +94,10 @@ class RequirementDetails extends React.Component {
         status: '',
         subCategory: '',
         visaType: '',
-        zipCode: ''
+        zipCode: '',
+        createdBy:'',
+			  updatedAt:'',
+			  updatedBy:''
 		}
 	}
 	componentWillReceiveProps(_nextProps) {
@@ -587,7 +590,7 @@ class RequirementDetails extends React.Component {
               </CardContent>
             </Card>
             {/* Audit for last created and last modified */}
-            <Audit/>
+            <Audit createdBy={this.state.createdBy} updatedBy={this.state.updatedBy} updatedAt= {this.state.updatedAt}></Audit>
           </form>
         </div>
       );

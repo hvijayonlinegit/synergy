@@ -71,7 +71,10 @@ class ClientDetails extends React.Component {
 			fax: '',
 			email1: '',
 			email2: '',
-			description: ''
+			description: '',
+			createdBy:'',
+			updatedAt:'',
+			updatedBy:''
 		}
 	}
 	componentWillReceiveProps(_nextProps) {
@@ -120,7 +123,7 @@ class ClientDetails extends React.Component {
 			return (
 				<div className={classes.root}>
 					<form className={classes.container} noValidate autoComplete="off">
-
+					
 						<Card className={classes.card}>
 							<CardContent className={classes.content}>
 								<CardHeader title='Client Information' parentMehod={this.updateClient}></CardHeader>
@@ -372,7 +375,7 @@ class ClientDetails extends React.Component {
 								</CardActions>
 							</CardContent>
 						</Card>
-						<Audit createdBy={this.state.createdBy} modifiedBy={this.state.modifiedBy}></Audit>
+						<Audit createdBy={this.state.createdBy} updatedBy={this.state.updatedBy} updatedAt= {this.state.updatedAt}></Audit>
 					</form>
 				</div>
 			);

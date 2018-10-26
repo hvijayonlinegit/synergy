@@ -29,7 +29,7 @@ class clientsApi {
 
   static updateClient(client,id) {
     const request = new Request(apiurl.BASE_URL+`/synergy/api/accountses/${id}`, {
-      method: 'PUT',
+      method: 'PATCH',
       headers: new Headers({
         'Accept': 'application/json',
         'Content-Type': 'application/json',
