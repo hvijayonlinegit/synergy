@@ -20,6 +20,10 @@ const styles = theme => ({
       content: '""'
     },
   },
+  iconButton: {
+    fontSize:'12px',
+    //backgroundColor: 'green'
+  }
 });
 
 function CardDetailsHeader(props) {
@@ -28,20 +32,22 @@ function CardDetailsHeader(props) {
   return (
     <div className={classes.root}>
         <Grid container spacing={24}>
-            <Grid item xs={10}>
+            <Grid item xs={9}>
                 <Typography className={classes.afterEle} variant="body1" gutterBottom>
                         {props.title}
                 </Typography>
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={3}>
                 {
                     props.parentMehod?
                 <div>    
-                <IconButton onClick={props.parentMehod}>
+                <IconButton  className={classes.iconButton}onClick={props.parentMehod}>
                     <Save />
+                    Save
                 </IconButton>
-                <IconButton>
+                <IconButton className={classes.iconButton}>
                     <Cancel />
+                    Cancel
                 </IconButton>
                 </div>:<div></div>
                 }

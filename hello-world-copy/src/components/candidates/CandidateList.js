@@ -31,6 +31,11 @@ const styles = theme => ({
     boxShadow: theme.shadows[1],
     fontSize: 11,
   },
+  infoColor:{
+    fill: 'green',
+    width: '0.75em',
+    height: '0.75em'
+  },
   beforeEle: {
     '&::before':  {
         display: 'block',

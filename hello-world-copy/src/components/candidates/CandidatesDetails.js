@@ -93,7 +93,8 @@ class CandidateDetails extends React.Component {
       zipCode: '',
       createdBy:'',
 			updatedAt:'',
-			updatedBy:''
+      updatedBy:'',
+      createdAt:''
     }
   }
   componentWillReceiveProps(_nextProps) {
@@ -594,7 +595,7 @@ class CandidateDetails extends React.Component {
                 </CardActions>
               </CardContent>
             </Card>
-            <Audit createdBy={this.state.createdBy} updatedBy={this.state.updatedBy} updatedAt= {this.state.updatedAt}></Audit>
+            <Audit createdBy={this.state.createdBy} createdAt={this.state.createdAt} updatedBy={this.state.updatedBy} updatedAt= {this.state.updatedAt}></Audit>
           </form>
         </div>
       );

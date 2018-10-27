@@ -97,7 +97,8 @@ class RequirementDetails extends React.Component {
         zipCode: '',
         createdBy:'',
 			  updatedAt:'',
-			  updatedBy:''
+        updatedBy:'',
+        createdAt:'',
 		}
 	}
 	componentWillReceiveProps(_nextProps) {
@@ -590,7 +591,7 @@ class RequirementDetails extends React.Component {
               </CardContent>
             </Card>
             {/* Audit for last created and last modified */}
-            <Audit createdBy={this.state.createdBy} updatedBy={this.state.updatedBy} updatedAt= {this.state.updatedAt}></Audit>
+            <Audit createdBy={this.state.createdBy} createdAt={this.state.createdAt} updatedBy={this.state.updatedBy} updatedAt= {this.state.updatedAt}></Audit>
           </form>
         </div>
       );

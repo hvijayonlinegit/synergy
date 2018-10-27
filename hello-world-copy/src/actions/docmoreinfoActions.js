@@ -24,15 +24,16 @@ export function downloadDoc(id, docname) {
     //client.documents = documents
     const file = new Blob(
       [documents.data], 
-      { type: "octet/stream"});
+      { type: "application/octet-stream"});
       const fileURL = window.URL.createObjectURL(file);
-     
+     console.log(fileURL);
       //window.open(fileURL);
     //var fileURL = URL.createObjectURL(documents.blob);
     //window.location.href(documents.body);
     //console.log(res);
     //console.log(documents.bytes);
-    //window.location.href ='http://releases.ubuntu.com/12.04.5/ubuntu-12.04.5-alternate-amd64.iso'
+    window.open(fileURL)
+    //window.location.href = 'blob:http://localhost:5000/1fd0516a-5298-406c-be77-9efc07dc5ced';
     //window.location.href("blob:http://localhost:8090/d697dc28-bcfb-4491-896a-ea3f28f1374d");
     
      dispatch(loadDocDownloadLink(fileURL));

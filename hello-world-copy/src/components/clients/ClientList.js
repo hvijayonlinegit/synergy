@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-// import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItemText from '@material-ui/core/ListItemText';
 import Tooltip from '@material-ui/core/Tooltip';
 import TextField from '@material-ui/core/TextField';
-// import IconButton from '@material-ui/core/IconButton';
+//import IconButton from '@material-ui/core/IconButton';
 import 'react-overlay-loader/styles.css';
 import themes from '../theme'
 // import Delete from '@material-ui/icons/Delete';
 import {white, blue500} from '@material-ui/core/colors/';
 import AddIcon from '@material-ui/icons/Add';
-
+import Info from '@material-ui/icons/Info';
 
 const styles = theme => ({
  root: {
@@ -48,7 +48,11 @@ const styles = theme => ({
         
     },
 },
-
+infoColor:{
+  fill: 'green',
+  width: '0.75em',
+  height: '0.75em'
+},
 arrowPopper: {
   '&[x-placement*="bottom"] $arrowArrow': {
     top: 0,
@@ -230,46 +234,44 @@ updateSearch(event){
                  // let boundClientEdit = this.handleClientEdit.bind(this, link, n, index);
                   return(
                     <div>
-                      <Tooltip placement="right-start" 
-                          title={
-                            <React.Fragment>
-                              <span className={classes.arrowArrow} ref={this.handleArrowRef} />
-                              <div>Contact information :
-                                      <p>Phone Number : {n.phoneNumber1}                     </p>
-                                      <p>email ID : {n.email1}
-                                      </p>
-                              </div>
-                              
-                            </React.Fragment>
-                          }
-                          classes={{ popper: classes.arrowPopper }}
-                          PopperProps={{
-                            popperOptions: {
-                              modifiers: {
-                                arrow: {
-                                  enabled: Boolean(this.state.arrowRef),
-                                  element: this.state.arrowRef,
-                                },
-                              },
-                            },
-                          }}
-                        >
+                      
                       <ListItem autoFocus button={true} style= {this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem} to={to}  key= {id} divider= {true} onClick={boundMoreInfo} >
                         {/* <ListItemText primary={n.name} secondary={clientid} /> */}
                         <ListItemText color="inherit" primary= {id}/>
                         <ListItemText  primary= {n.name} />
-                          {/* <ListItemSecondaryAction style= {this.state.indexOfClickedItem === index ? styles.editDisplay : styles.editHide}>
-                          <Tooltip title="delete" classes={{ tooltip: classes.lightTooltip }}> */}
-                            {/* <IconButton onClick={boundClientEdit} >
-                              <Edit  />
-                            </IconButton> */}
-                            {/* <IconButton >
+                          <ListItemSecondaryAction >
+                          <Tooltip placement="right-start" 
+                              title={
+                                <React.Fragment>
+                                  <span className={classes.arrowArrow} ref={this.handleArrowRef} />
+                                  <div>Contact information :
+                                          <p>Phone Number : {n.phoneNumber1}                     </p>
+                                          <p>email ID : {n.email1}
+                                          </p>
+                                  </div>
+                                  
+                                </React.Fragment>
+                              }
+                              classes={{ popper: classes.arrowPopper }}
+                              PopperProps={{
+                                popperOptions: {
+                                  modifiers: {
+                                    arrow: {
+                                      enabled: Boolean(this.state.arrowRef),
+                                      element: this.state.arrowRef,
+                                    },
+                                  },
+                                },
+                              }}
+                              > 
+                              <Info className={classes.infoColor}></Info>
+                             {/* <IconButton >
                               <Delete />
-                            </IconButton>
+                            </IconButton> */}
                           </Tooltip>
-                        </ListItemSecondaryAction> */}
+                        </ListItemSecondaryAction>
                       </ListItem>
-                      </Tooltip>
+                      
                     </div>
                   );
                 })

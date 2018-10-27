@@ -5,16 +5,14 @@ export default {
       edit: false,
       client: {},
       requirements: [],
-      
-    },
+      },
     reqmoreinfo :{
       requirement: {},
       candidates: [],
     },
     candmoreinfo :{
-      candidate: {
-        documents: [],
-      }
+      candidate: {},
+      documents: [],
     },
     docmoreinfo :{
         documents: [],

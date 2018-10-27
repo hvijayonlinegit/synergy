@@ -19,16 +19,18 @@ const styles = theme => ({
 
 function Audit(props) {
   const { classes } = props;
+  let updatedat= new Date(props.updatedAt?props.updatedAt:'').toLocaleString();
+  let createdAt= new Date(props.createdAt?props.createdAt:'').toLocaleString();
   return (
     <div className={classes.root}>
         <Card className={classes.card}>
             <CardContent className={classes.content}>
-                <Grid container spacing={24}>
+                <Grid container spacing={32}>
                     <Grid item xs={6}>
-                        Last Created By: {props.createdBy?props.createdBy:''}
+                        Created By: <b>{props.createdBy?props.createdBy:''} </b> on {createdAt}
                     </Grid>
                     <Grid item xs={6}>
-                        Last Modified By:{props.updatedBy?props.updatedBy:''} on {props.updatedAt?props.updatedAt:''}
+                      Modified By:<b>{props.updatedBy?props.updatedBy:''}</b> on {updatedat}
                     </Grid>
                 </Grid>
             </CardContent>

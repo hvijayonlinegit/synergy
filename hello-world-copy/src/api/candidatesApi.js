@@ -41,7 +41,7 @@ class CandidatesApi {
   
   static updateCandidate(candidate,id) {
     const request = new Request(apiurl.BASE_URL+`/synergy/api/candidates/${id}`, {
-      method: 'PUT',
+      method: 'PATCH',
       headers: new Headers({
         'Accept': 'application/json',
         'Content-Type': 'application/json',
