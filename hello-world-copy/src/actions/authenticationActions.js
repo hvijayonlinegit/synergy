@@ -1,5 +1,6 @@
 import { browserHistory} from 'react-router';
 import * as apiurl  from '../common/apiURL';
+import * as spinnerActions from './spinnerActions';
 import {
     AUTH_USER,
     UNAUTH_USER,
@@ -11,6 +12,7 @@ import {
 //const ROOT_URL = 'https://peaceful-mesa-72076.herokuapp.com';
 export const signinUser = ({ usernameOrEmail, password }) => {
     return (dispatch) => {
+        dispatch(spinnerActions.loadSpinner(true));
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -29,6 +31,7 @@ export const signinUser = ({ usernameOrEmail, password }) => {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     let token = user.accessToken.toString();
                     localStorage.setItem('token', token);
+                    dispatch(spinnerActions.loadSpinner(false));
                     //fetchUser();
                 }
                 
@@ -38,17 +41,24 @@ export const signinUser = ({ usernameOrEmail, password }) => {
                 // - redirect to the route '/feature'
                 browserHistory.push('/');
 
-            }).catch(() => {
+            }).catch((error) => {
                 // if request is bad...
                 // - show an error to the user
                 localStorage.removeItem('token');
-                dispatch(authError('Sorry unable to reach Backend server for now Please try again later'));
+                if(error === 'Unauthorized'){
+                    dispatch(authError('Invalid Username or Password , please check your details or signup as a new User'));
+                }else{
+                    dispatch(authError('Sorry unable to reach Backend server for now Please try again later'));
+                }
+                
+                dispatch(spinnerActions.loadSpinner(false));
             });
     };
 };
 
 export const signupUser = ({ email,name, password, username }) => {
     return (dispatch) => {
+        dispatch(spinnerActions.loadSpinner(true));
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -56,14 +66,16 @@ export const signupUser = ({ email,name, password, username }) => {
         };
         // submit email/password to the server
         return fetch(`${apiurl.BASE_URL}/api/auth/signup`, requestOptions)
-            .then(handleResponse)
+            .then(handleResponse(dispatch))
             .then(() => {
                     //dispatch({ type: AUTH_USER });
                     //localStorage.setItem('token', response.data.token);
+                    dispatch(spinnerActions.loadSpinner(false));
                     browserHistory.push('/signin');
                 })
             .catch(() => {
                     dispatch(authError('Bad Sign up Info'));
+                    dispatch(spinnerActions.loadSpinner(false));
                 });
     };
 };
@@ -77,12 +89,14 @@ export const authError = (error) => {
 };
 
 export const signoutUser = () => {
+    
     localStorage.removeItem('token');
     return { type: UNAUTH_USER };
 };
 
 export const fetchUser = () => {
     return (dispatch) => {
+        dispatch(spinnerActions.loadSpinner(true));
         return fetch(`${apiurl.BASE_URL}/user/me`, {
             method: 'GET',
             headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
@@ -95,7 +109,9 @@ export const fetchUser = () => {
                 
                 type: FETCH_USER,
                 payload: response
+
              });
+             dispatch(spinnerActions.loadSpinner(false));
         });
     };
 };
@@ -104,8 +120,9 @@ function handleResponse(response) {
         if (!response.ok) {
             if (response.status === 401) {
                 // auto logout if 401 response returned from api
-                //dispatch(authError('Bad Login Info'));
-                
+                // dispatch(authError('Bad Login Info'));
+                // dispatch(spinnerActions.loadSpinner(false));
+                //return Promise.reject(response)
             }
 
             const error = (data && data.error) || response.statusText;

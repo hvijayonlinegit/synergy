@@ -13,7 +13,9 @@ import Button from '@material-ui/core/Button';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import ExitToApp from '@material-ui/icons/ExitToApp'
-
+//Spinner Imports
+import { Loader } from 'react-overlay-loader';
+import 'react-overlay-loader/styles.css';
 
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
@@ -95,7 +97,8 @@ class App extends React.Component {
       
       isAuthenticated: false,
       anchorEl: null,
-      value: ''
+      value: '',
+      spinner: false
     };
     
     this.handleSignup = this.handleSignup.bind(this);
@@ -105,7 +108,7 @@ class App extends React.Component {
   //this change is to keep the selected tab active based on the location of the browser
   componentWillReceiveProps(_nextProps) {
     const path= _nextProps.location.pathname.split('/').pop(-1)?_nextProps.location.pathname.split('/').pop(-1):'home';
-		this.setState({ value: path
+		this.setState({ value: path, spinner: _nextProps.spinner
 		})
 	}
   componentWillMount(){
@@ -187,31 +190,32 @@ class App extends React.Component {
     return (
       <MuiThemeProvider theme={theme}>
       <div className={classes.root}>
-      
+      <Loader fullPage loading={this.state.spinner} />
         <AppBar
           position="absolute"
           className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
         >
           <Toolbar disableGutters={!this.state.open}>
 
-            <IconButton
+            {
+          this.props.authenticated ? <IconButton
               color="inherit"
               aria-label="open drawer"
               onClick={this.handleDrawerOpen}
               className={classNames(classes.menuButton, this.state.open && classes.hide)}
             >
               <MenuIcon />
-            </IconButton>
+            </IconButton>:<div></div>}
             {
           this.props.authenticated ? (
-          <div className={classes.flex} >
-              <Tabs  value={value} onChange={this.handleChange}>
-                <Tab value="home" label="Home" />
-                <Tab value="clients" label="Clients" />
-                <Tab value="requirements" label="Requirements" />
-                <Tab value="candidates" label="Candidates" />
-            </Tabs>
-          </div>
+              <div className={classes.flex} >
+                  <Tabs  value={value} onChange={this.handleChange}>
+                    <Tab value="home" label="Home" />
+                    <Tab value="clients" label="Clients" />
+                    <Tab value="requirements" label="Requirements" />
+                    <Tab value="candidates" label="Candidates" />
+                </Tabs>
+              </div>
         ):(
           <Typography variant="title" color="inherit" className={classes.flex}>
               Recupro
@@ -284,6 +288,7 @@ class App extends React.Component {
         </AppBar>
         <main className={classes.content}>
           <div className={classes.toolbar} />
+          
           {this.props.children}
         </main>
       </div>
@@ -302,7 +307,8 @@ function mapStateToProps(state, ownProps) {
     clients: state.clients,
     moreinfo : state.moreinfo,
     authenticated: state.auth.authenticated,
-    userdetails: state.auth.userdetails
+    userdetails: state.auth.userdetails,
+    spinner: state.spinner
   };
 }
 function mapDispatchToProps(dispatch) {

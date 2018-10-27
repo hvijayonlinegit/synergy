@@ -23,7 +23,7 @@ export function loadRequirements() {
   return function(dispatch) {
     return requirementsApi.getAllRequirements().then(requirements => {
       //console.log('inside cat action.js'+clients._embedded.accountses[0].name);
-      dispatch(loadRequirementsSuccess(requirements._embedded));
+      dispatch(loadRequirementsSuccess(requirements._embedded.requirementses));
     }).catch(error => {
       throw(error);
     });

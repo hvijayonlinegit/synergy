@@ -17,10 +17,10 @@ if (token) {
     
     // we need to update application state to avoid sign out upon refresh of the page
     store.dispatch({ type: AUTH_USER });
-    
+    store.dispatch(fetchUser());
 }
-console.log('before fetch user call');
-store.dispatch(fetchUser());
+//console.log('before fetch user call');
+//store.dispatch(fetchUser());
 //store.dispatch(loadClients());
 //store.dispatch(loadRequirements());
 //store.dispatch(loadCandidates());

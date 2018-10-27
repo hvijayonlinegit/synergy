@@ -4,7 +4,11 @@ import * as reqmoreinfoActions from '../actions/reqmoreinfoActions';
 import * as candmoreinfoActions from '../actions/candmoreinfoActions';
 import * as docmoreinfoActions from '../actions/docmoreinfoActions'
 import * as clientActions from '../actions/clientActions';
+import * as spinnerActions from'./spinnerActions';
 
+export function loadRequirementsSuccess(requirements) {
+  return {type: types.LOAD_REQUIREMENTS_SUCCESS, requirements};
+}
 export function updateRequirementSuccess(requirement){
   return {type: types.UPDATE_REQUIREMENT_SUCCESS, requirement};
 }
@@ -25,7 +29,7 @@ export function loadMoreinfo(link, client,edit) {
 
   return function(dispatch) {
     console.log('calling link'+ link);
-    
+    dispatch(spinnerActions.loadSpinner(true));
       return requirementsApi.getRequirements(link).then(requirements => {
         //  console.log('inside requirement action.js'+requirements._embedded.requirementses[0].title);
         if(!requirements.message){
@@ -49,7 +53,9 @@ export function loadMoreinfo(link, client,edit) {
             
             requirements = requirements._embedded
             dispatch(loadMoreInfoSuccess(client,edit,requirements));
+            dispatch(spinnerActions.loadSpinner(false));
            } else{
+              dispatch(spinnerActions.loadSpinner(false));
               if(requirements.status === 401){
                 dispatch(clientActions.loadSignInPage())
               }
@@ -65,7 +71,9 @@ export function loadMoreinfo(link, client,edit) {
               
             }
             }).catch(error => {
+              dispatch(spinnerActions.loadSpinner(false));
               throw(error);
+              
             });
       };
       
@@ -73,6 +81,7 @@ export function loadMoreinfo(link, client,edit) {
 }
 export function createRequirement(requirement) {
   return function (dispatch) {
+    dispatch(spinnerActions.loadSpinner(true));
     return requirementsApi.createRequirement(requirement).then(response => {
       if(!response.message){
 
@@ -83,8 +92,9 @@ export function createRequirement(requirement) {
       else{
        // dispatch(loadCatsFailure(response.message))
       }
-      
+      dispatch(spinnerActions.loadSpinner(false));
     }).catch(error => {
+      dispatch(spinnerActions.loadSpinner(false));
       throw(error);
     });
   };
@@ -92,6 +102,7 @@ export function createRequirement(requirement) {
 
 export function updateRequirement(requirement,id) {
   return function (dispatch) {
+    dispatch(spinnerActions.loadSpinner(true));
     return requirementsApi.updateRequirement(requirement,id).then(response => {
       if(!response.message){
         dispatch(updateRequirementSuccess(response));
@@ -100,6 +111,19 @@ export function updateRequirement(requirement,id) {
       else{
         //dispatch(loadCatsFailure(response.message))
       }
+      dispatch(spinnerActions.loadSpinner(false));
+    }).catch(error => {
+      dispatch(spinnerActions.loadSpinner(false));
+      throw(error);
+    });
+  };
+}
+export function loadRequirements() {
+  // make async call to api, handle promise, dispatch action when promise is resolved
+  return function(dispatch) {
+    return requirementsApi.getAllRequirements().then(requirements => {
+      //console.log('inside cat action.js'+clients._embedded.accountses[0].name);
+      dispatch(loadRequirementsSuccess(requirements._embedded));
     }).catch(error => {
       throw(error);
     });

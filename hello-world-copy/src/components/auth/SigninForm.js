@@ -81,8 +81,8 @@ class SigninForm extends React.Component {
                 <Typography variant="headline" >
                 <Lock></Lock>  Login
                 </Typography>
-                <Typography color="textSecondary">
-                  Don't have account? <Button variant="text" color="textPrimary" gutterBottom={true} size="small" mini="true" href="/Signup"> Click Here </Button>
+                <Typography color="primary">
+                  Don't have account? <Button variant="text" color="primary"  size="small" mini= {true} href="/Signup"> Click Here </Button>
                 </Typography>
                 <form className={classes.form} autoComplete="off">
                   <FormControl margin="normal" required fullWidth>
@@ -103,7 +103,7 @@ class SigninForm extends React.Component {
                   <Button
                     type="submit"
                     fullWidth
-                    variant="raised"
+                    variant="contained"
                     color="primary"
                     className={classes.submit}
                     onClick={this.props.onSubmit}
@@ -124,8 +124,8 @@ SigninForm.propTypes = {
 
   onSubmit: PropTypes.func.isRequired,
   onUpdate: PropTypes.func.isRequired,
-  spinner: PropTypes.object.isRequired,
-  errorMessage: PropTypes.object.isRequired
+  spinner: PropTypes.bool.isRequired,
+ // errorMessage: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(SigninForm);

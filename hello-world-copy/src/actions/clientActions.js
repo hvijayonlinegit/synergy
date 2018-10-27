@@ -1,6 +1,9 @@
 import * as types from './actionTypes';
 import clientsApi from '../api/clientsApi';
 import * as moreinfoActions from '../actions/moreinfoActions';
+import * as spinnerActions from './spinnerActions'
+
+
 export function loadCatsSuccess(clients, self) {
   return {type: types.LOAD_CATS_SUCCESS, clients , self};
 }
@@ -33,6 +36,7 @@ export function loadCandidatesSuccess(candidates) {
 export function loadClients() {
   // make async call to api, handle promise, dispatch action when promise is resolved
   return function(dispatch) {
+    dispatch(spinnerActions.loadSpinner(true));
     return clientsApi.getAllClients().then(clients => {
       if(!clients.message){
         // Code changes for default loading
@@ -49,7 +53,9 @@ export function loadClients() {
         }
       );
       dispatch(loadCatsSuccess(clients._embedded));
+      dispatch(spinnerActions.loadSpinner(false));
       }else{
+        dispatch(spinnerActions.loadSpinner(false));
         if(clients.status === 401){
           dispatch(loadSignInPage())
         }
@@ -62,6 +68,7 @@ export function loadClients() {
       }
     
     }).catch(error => {
+      dispatch(spinnerActions.loadSpinner(false));
       throw(error);
     });
   };
@@ -78,6 +85,7 @@ export function loadClients() {
 //     });
 //   };
 // }
+
 export function loadCandidates(link) {
   // make async call to api, handle promise, dispatch action when promise is resolved
   return function(dispatch) {
@@ -86,6 +94,7 @@ export function loadCandidates(link) {
       console.log('inside requirement action.js'+candidates._embedded.candidates[0].firstname);
       dispatch(loadCandidatesSuccess(candidates._embedded));
     }).catch(error => {
+      dispatch(spinnerActions.loadSpinner(false));
       throw(error);
     });
   };
@@ -93,6 +102,7 @@ export function loadCandidates(link) {
 
 export function updateClient(client,id) {
   return function (dispatch) {
+    dispatch(spinnerActions.loadSpinner(true));
     return clientsApi.updateClient(client,id).then(response => {
       if(!response.message){
         dispatch(updateClientSuccess(response));
@@ -101,7 +111,9 @@ export function updateClient(client,id) {
       else{
         dispatch(loadCatsFailure(response.message))
       }
+      dispatch(spinnerActions.loadSpinner(false));
     }).catch(error => {
+      dispatch(spinnerActions.loadSpinner(false));
       throw(error);
     });
   };

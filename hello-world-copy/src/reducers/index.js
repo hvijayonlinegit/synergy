@@ -5,7 +5,8 @@ import candidates from './candidateReducer';
 import moreinfo from './moreinfoReducer';
 import reqmoreinfo from './reqmoreinfoReducer';
 import candmoreinfo from './candmoreinfoReducer';
-import docmoreinfo from './docmoreinfoReducer'
+import docmoreinfo from './docmoreinfoReducer';
+import spinner from './spinnerReducer';
 import { reducer as authReducer } from './auth';
 
 const rootReducer = combineReducers({
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
   reqmoreinfo,
   candmoreinfo,
   docmoreinfo,
-  auth: authReducer
+  auth: authReducer,
+  spinner
 })
 
 export default rootReducer;

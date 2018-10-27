@@ -29,6 +29,7 @@ class ExampleGrid extends React.Component {
 
     state = {
         expanded: null,
+        path:''
     };
 
     handleChange = panel => (event, expanded) => {
@@ -36,6 +37,12 @@ class ExampleGrid extends React.Component {
             expanded: expanded ? panel : false,
         });
     };
+    //this change is to keep the selected tab active based on the location of the browser
+//   componentWillReceiveProps(_nextProps) {
+//     const path= _nextProps.location.pathname.split('/').pop(-1)?_nextProps.location.pathname.split('/').pop(-1):'';
+// 		this.setState({ value: path
+// 		})
+// 	}
     render() {
 
         const { classes } = this.props;
@@ -43,23 +50,25 @@ class ExampleGrid extends React.Component {
         const requirements= this.props.moreinfo.requirements;
         return (
                 <div className={classes.root}>
-                    <Paper className={classes.paper}>
-                        <Grid container spacing={0}>
-                            <Grid item xs={12} sm={3}>
-                                <ClientList 
-                                    clients={clients}
-                                    onRequirements={this.handleRequirements}
-                                    onDelete={this.handleDeleteClient}
-                                    onMoreInfo={this.props.onMoreInfo}
-                                    handleModalOpen={this.props.handleModalOpen}
-                                    handleClientEdit={this.props.onEdit}
-                                />
-                            </Grid>
-                            <Grid  item xs={12} sm={9}>
-                                <ClientDetails updateClient = {this.props.updateClient} moreinfo={this.props.moreinfo} editMode={this.props.editMode}></ClientDetails>
-                            </Grid>
-                        </Grid>
-                    </Paper>
+                   {
+                       this.props.path !== 'requirements'?<Paper className={classes.paper}>
+                       <Grid container spacing={0}>
+                           <Grid item xs={12} sm={3}>
+                               <ClientList 
+                                   clients={clients}
+                                   onRequirements={this.handleRequirements}
+                                   onDelete={this.handleDeleteClient}
+                                   onMoreInfo={this.props.onMoreInfo}
+                                   handleModalOpen={this.props.handleModalOpen}
+                                   handleClientEdit={this.props.onEdit}
+                               />
+                           </Grid>
+                           <Grid  item xs={12} sm={9}>
+                               <ClientDetails updateClient = {this.props.updateClient} moreinfo={this.props.moreinfo} editMode={this.props.editMode}></ClientDetails>
+                           </Grid>
+                       </Grid>
+                   </Paper>:<div></div>
+                   } 
                     <Paper className={classes.paper}>
                         <Grid container spacing={0}>
                             <Grid item xs={12} sm={3}>
@@ -127,7 +136,7 @@ ExampleGrid.propTypes = {
     onDelete: PropTypes.func.isRequired,
     onMoreInfo: PropTypes.func.isRequired,
     moreinfo: PropTypes.object.isRequired,
-    editMode: PropTypes.object.isRequired,
+    editMode: PropTypes.bool.isRequired,
     reqmoreinfo: PropTypes.object.isRequired,
     candmoreinfo: PropTypes.object.isRequired,
     docmoreinfo:PropTypes.object.isRequired,
@@ -136,12 +145,12 @@ ExampleGrid.propTypes = {
     onUpload:PropTypes.func.isRequired,
     onFilechange:PropTypes.func.isRequired,
     handleModalOpen: PropTypes.func.isRequired,
-    onEdit: PropTypes.func.isRequired,
     handleReqModalOpen: PropTypes.func.isRequired,
     handleCadModalOpen: PropTypes.func.isRequired,
     updateClient: PropTypes.func.isRequired,
     updateRequirement: PropTypes.func.isRequired,
     updateCandidate: PropTypes.func.isRequired,
+    path:PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(ExampleGrid);

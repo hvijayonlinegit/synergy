@@ -22,5 +22,6 @@ export default {
   requirements: {},
   candidates : {},
   selectedRequirement:{},
-  auth:{}
+  auth:{},
+  spinner:false
 }

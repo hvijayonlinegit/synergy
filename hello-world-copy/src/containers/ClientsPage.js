@@ -114,7 +114,8 @@ class ClientsPage extends React.Component {
       reqmodal: false,
       cadmodal: false,
       editMode: false,
-      file:null
+      file:null,
+      path:''
     };
     this.handleModalOpen = this.handleModalOpen.bind(this);
     this.handleClientEdit = this.handleClientEdit(this);
@@ -149,6 +150,10 @@ class ClientsPage extends React.Component {
   componentWillMount(){
     this.props.actions.loadClients();
   }
+  componentWillReceiveProps(_nextProps) {
+    const path= _nextProps.location.pathname.split('/').pop(-1)?_nextProps.location.pathname.split('/').pop(-1):'';
+		this.setState({path:path});
+	}
   updateCadState(event) {
     const field = event.target.name;
     const candidate = this.state.candidate;
@@ -344,6 +349,7 @@ handleMoreInfo(link ,client, edit, e ){
           updateRequirement={this.updateRequirement}
           updateCandidate={this.updateCandidate}
           children ={this.props.children}
+          path={this.state.path}
           />
           <AddClientModal
             client={this.state.client}

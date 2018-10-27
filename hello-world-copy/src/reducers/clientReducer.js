@@ -43,6 +43,7 @@ export default function catReducer(state = initialState.clients.accountses, acti
       browserHistory.push('/clients')
       return delNewState
     }
+    
     default:
       return state;
   }

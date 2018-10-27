@@ -132,10 +132,7 @@ updateSearch(event){
   handleModalOpen(){
     this.props.handleModalOpen();
   }
-  handleClientEdit(link, n, e){
-    console.log('asadadadadadad');
-    this.props.onMoreInfo(link, n, true);
-  }
+  
   
   render() {
     const { classes, to } = this.props;
@@ -231,7 +228,6 @@ updateSearch(event){
                  // let clientid= "client id: " +id;
                   //let boundDeleteClick = this.props.onDelete.bind(this, selflink, n);
                   let boundMoreInfo = this.handleMoreinfo.bind(this, link, n, index);
-                 // let boundClientEdit = this.handleClientEdit.bind(this, link, n, index);
                   return(
                     <div>
                       
@@ -285,7 +281,7 @@ updateSearch(event){
 NestedList.propTypes = {
   clients: PropTypes.object.isRequired,
   onMoreInfo: PropTypes.func.isRequired,
-  handleClientEdit:PropTypes.func.isRequired,
+  
   handleModalOpen: PropTypes.func.isRequired,
 };
 export default withStyles(styles)(NestedList);
