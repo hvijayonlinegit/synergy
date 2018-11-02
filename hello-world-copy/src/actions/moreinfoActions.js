@@ -29,47 +29,12 @@ export function loadMoreinfo(link, client,edit) {
 
   return function(dispatch) {
     console.log('calling link'+ link);
-    dispatch(spinnerActions.loadSpinner(true));
+    
       return requirementsApi.getRequirements(link).then(requirements => {
         //  console.log('inside requirement action.js'+requirements._embedded.requirementses[0].title);
-        if(!requirements.message){
-            if(requirements._embedded.requirementses.length === 0){
-              dispatch(reqmoreinfoActions.loadReqMoreinfofailure());
-              dispatch(candmoreinfoActions.loadCandMoreinfofailure());
-              dispatch(docmoreinfoActions.loadDocMoreinfofailure());
-            }else{
-              // Code changes for default loading
-              let sortedRequirements = requirements._embedded.requirementses.sort(
-                (a,b)=> Number(b._links.self.href.split('/').pop(-1)) - Number(a._links.self.href.split('/').pop(-1))
-              );
-              sortedRequirements.map((n, index) =>{
-                const link= n._links.candidates.href
-                if(index ===0){
-                  dispatch(reqmoreinfoActions.loadReqMoreinfo(link, n));
-                }
-                return '';
-              });
-            }
-            
-            requirements = requirements._embedded
-            dispatch(loadMoreInfoSuccess(client,edit,requirements));
-            dispatch(spinnerActions.loadSpinner(false));
-           } else{
-              dispatch(spinnerActions.loadSpinner(false));
-              if(requirements.status === 401){
-                dispatch(clientActions.loadSignInPage())
-              }
-              if(requirements.status === 500)
-              {
-                dispatch(clientActions.loadCatsFailure(requirements.message))
-              }
-              if(requirements.status === 403)
-              {
-                dispatch(clientActions.loadNeedAdminAccess(requirements.message))
-              }
-              //dispatch(clientActions.loadCatsFailure(requirements.message))
-              
-            }
+        requirements = defaultReqLoadng(requirements, dispatch);
+        dispatch(loadMoreInfoSuccess(client, edit, requirements));
+        dispatch(spinnerActions.loadSpinner(false));
             }).catch(error => {
               dispatch(spinnerActions.loadSpinner(false));
               throw(error);
@@ -79,6 +44,43 @@ export function loadMoreinfo(link, client,edit) {
       
 
 }
+function defaultReqLoadng(requirements, dispatch) {
+  if (!requirements.message) {
+    if (requirements._embedded.requirementses.length === 0) {
+      dispatch(reqmoreinfoActions.loadReqMoreinfofailure());
+      dispatch(candmoreinfoActions.loadCandMoreinfofailure());
+      dispatch(docmoreinfoActions.loadDocMoreinfofailure());
+    }
+    else {
+      // Code changes for default loading
+      let sortedRequirements = requirements._embedded.requirementses.sort((a, b) => Number(b._links.self.href.split('/').pop(-1)) - Number(a._links.self.href.split('/').pop(-1)));
+      sortedRequirements.map((n, index) => {
+        const link = n._links.candidates.href;
+        if (index === 0) {
+          dispatch(reqmoreinfoActions.loadReqMoreinfo(link, n));
+        }
+        return '';
+      });
+    }
+    requirements = requirements._embedded;
+    
+  }
+  else {
+    dispatch(spinnerActions.loadSpinner(false));
+    if (requirements.status === 401) {
+      dispatch(clientActions.loadSignInPage());
+    }
+    if (requirements.status === 500) {
+      dispatch(clientActions.loadCatsFailure(requirements.message));
+    }
+    if (requirements.status === 403) {
+      dispatch(clientActions.loadNeedAdminAccess(requirements.message));
+    }
+    //dispatch(clientActions.loadCatsFailure(requirements.message))
+  }
+  return requirements;
+}
+
 export function createRequirement(requirement) {
   return function (dispatch) {
     dispatch(spinnerActions.loadSpinner(true));
@@ -121,9 +123,12 @@ export function updateRequirement(requirement,id) {
 export function loadRequirements() {
   // make async call to api, handle promise, dispatch action when promise is resolved
   return function(dispatch) {
+    dispatch(spinnerActions.loadSpinner(true));
     return requirementsApi.getAllRequirements().then(requirements => {
-      //console.log('inside cat action.js'+clients._embedded.accountses[0].name);
-      dispatch(loadRequirementsSuccess(requirements._embedded));
+      //these if else code will make sure default loading of the details for each element in list
+      requirements = defaultReqLoadng(requirements, dispatch);
+      dispatch(loadRequirementsSuccess(requirements));
+      dispatch(spinnerActions.loadSpinner(false));
     }).catch(error => {
       throw(error);
     });

@@ -81,6 +81,7 @@ const styles = theme => ({
   },
   flex: {
     flex: 1,
+    overflow: 'auto'
   },
   user: {
     width: 'auto',
@@ -142,6 +143,9 @@ class App extends React.Component {
     case 'candidates':
         browserHistory.push(`/candidates`);
         break;
+    case 'Documents':
+      browserHistory.push(`/Documents`);
+      break;
     default:
         browserHistory.push(`/`);
       }
@@ -156,25 +160,6 @@ class App extends React.Component {
   handleSignup = () =>{
     browserHistory.push(`/signup`);
   }
-  
-  handleClients = () => {
-    browserHistory.push(`/clients`);
-    this.setState({ anchorEl: null });
-  };
-  handleRequirements = () =>{
-    browserHistory.push(`/requirements`);
-    this.setState({ anchorEl: null });
-  }
-  handleCandidates = () =>{
-    browserHistory.push(`/candidates`);
-    this.setState({ anchorEl: null });
-  }
-  handleHome=() =>{
-    browserHistory.push(`/`);
-    this.setState({ anchorEl: null });
-  }
-  
-
   handleMenu = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
@@ -214,6 +199,7 @@ class App extends React.Component {
                     <Tab value="clients" label="Clients" />
                     <Tab value="requirements" label="Requirements" />
                     <Tab value="candidates" label="Candidates" />
+                    <Tab value="Documents" label="Documents" />
                 </Tabs>
               </div>
         ):(

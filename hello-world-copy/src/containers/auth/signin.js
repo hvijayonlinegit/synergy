@@ -9,7 +9,6 @@ class Signin extends React.Component {
         super(props);
         this.state = {
           signin: {usernameOrEmail: '', password: ''},
-           loading: false 
         };
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.updateSigninState = this.updateSigninState.bind(this);
@@ -22,7 +21,6 @@ class Signin extends React.Component {
         }
         else{
             event.preventDefault();
-            this.setState({ loading: true });
             this.props.signinUser(this.state.signin)
         }
         
@@ -38,7 +36,6 @@ class Signin extends React.Component {
     render() {
         return (
             <SigninForm
-                spinner={this.state.loading}
                 onSubmit={this.handleFormSubmit}
                 onUpdate={this.updateSigninState}
                 errorMessage= {this.props.errorMessage}

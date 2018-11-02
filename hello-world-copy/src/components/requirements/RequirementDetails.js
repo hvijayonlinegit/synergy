@@ -202,7 +202,7 @@ class RequirementDetails extends React.Component {
                   </NativeSelect>
                 </FormControl>
                 <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="age-native-helper">End Client</InputLabel>
+                  <InputLabel htmlFor="age-native-helper" shrink >End Client</InputLabel>
                   <NativeSelect
                     value={this.state.endClient}
                     onChange={this.handleChange('endClient')}

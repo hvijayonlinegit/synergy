@@ -7,6 +7,10 @@ export default function docmoreinfoReducer(state = initialState.clients.docmorei
       const clientState1 = Object.assign([], state)
       clientState1.documents = action.documents
       return  clientState1
+      case types.LOAD_DOCUMENTS_SUCCESS:
+      const alldocuments= Object.assign([], state)
+      alldocuments.documents = action.documents
+      return alldocuments
       case types.LOAD_DOC_DOWNLOAD_LINK:
       const doclink = Object.assign([], state)
       doclink.filelink= action.link

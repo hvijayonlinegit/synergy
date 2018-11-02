@@ -355,7 +355,7 @@ class CandidateDetails extends React.Component {
             </Card>
             <Card className={classes.card}>
               <CardContent className={classes.content}>
-                <CardHeader title='Additional Information' parentMehod={this.updateCandidate}></CardHeader>
+                <CardHeader title='Additional Information' ></CardHeader>
                 <FormControl className={classes.formControl}>
                   <InputLabel htmlFor="sourceFrom" shrink>Sourced From</InputLabel>
                   <NativeSelect
@@ -524,7 +524,7 @@ class CandidateDetails extends React.Component {
             </Card>
             <Card className={classes.card}>
               <CardContent className={classes.content}>
-                <CardHeader title='Personal Information' parentMehod={this.updateCandidate}></CardHeader>
+                <CardHeader title='Personal Information' ></CardHeader>
                 <FormControl className={classes.formControl}>
                   <InputLabel htmlFor="gender" shrink>Gender</InputLabel>
                   <NativeSelect

@@ -12,9 +12,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Lock from '@material-ui/icons/Lock'
-//Spinner Imports
-//import { Loader } from 'react-overlay-loader';
-import 'react-overlay-loader/styles.css';
+
 
 const styles = theme => ({
   card: {
@@ -124,7 +122,6 @@ SigninForm.propTypes = {
 
   onSubmit: PropTypes.func.isRequired,
   onUpdate: PropTypes.func.isRequired,
-  spinner: PropTypes.bool.isRequired,
  // errorMessage: PropTypes.object.isRequired
 };
 

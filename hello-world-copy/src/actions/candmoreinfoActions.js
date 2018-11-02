@@ -4,6 +4,7 @@ import * as docmoreinfoActions from '../actions/docmoreinfoActions';
 
 import * as clientActions from '../actions/clientActions';
 
+
 export function loadCandUpdateSuccess(candidate){
   return {type: types.LOAD_CAND_UPDATE_SUCCESS, candidate};
 }
@@ -68,6 +69,17 @@ export function fileUpload(file, id) {
        // dispatch(loadCatsFailure(response.message))
       }
       
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+export function loadDocuments() {
+  // make async call to api, handle promise, dispatch action when promise is resolved
+  return function(dispatch) {
+    return documentsApi.getDocumentsList().then(documents => {
+      //console.log('inside cat action.js'+clients._embedded.accountses[0].name);
+      dispatch(docmoreinfoActions.loadDocumentsSuccess(documents._embedded.documents));
     }).catch(error => {
       throw(error);
     });

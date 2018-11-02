@@ -6,7 +6,7 @@ class CandidatesApi {
     //const BASE_URL = `http://localhost:8090/synerdy/api`
     //const BASE_URL = `https://peaceful-mesa-72076.herokuapp.com/synergy/api`
     // modified base url as backedn table name changed 
-    const request = new Request(apiurl.BASE_URL+`/synergy/api/candidateses`, {
+    const request = new Request(apiurl.BASE_URL+`/synergy/api/candidates`, {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',

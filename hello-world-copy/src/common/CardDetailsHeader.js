@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import Save from '@material-ui/icons/SaveRounded';
-import Cancel from '@material-ui/icons/CancelOutlined';
 import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
@@ -22,7 +21,6 @@ const styles = theme => ({
   },
   iconButton: {
     fontSize:'12px',
-    //backgroundColor: 'green'
   }
 });
 
@@ -32,12 +30,12 @@ function CardDetailsHeader(props) {
   return (
     <div className={classes.root}>
         <Grid container spacing={24}>
-            <Grid item xs={9}>
+            <Grid item xs={10}>
                 <Typography className={classes.afterEle} variant="body1" gutterBottom>
                         {props.title}
                 </Typography>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={2}>
                 {
                     props.parentMehod?
                 <div>    
@@ -45,10 +43,7 @@ function CardDetailsHeader(props) {
                     <Save />
                     Save
                 </IconButton>
-                <IconButton className={classes.iconButton}>
-                    <Cancel />
-                    Cancel
-                </IconButton>
+                
                 </div>:<div></div>
                 }
                 

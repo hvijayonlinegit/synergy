@@ -18,14 +18,4 @@ export function loadCandidate(link) {
     });
   };
 }
-export function loadCandidates() {
-  // make async call to api, handle promise, dispatch action when promise is resolved
-  return function(dispatch) {
-    return candidatesApi.getAllCandidates().then(candidates => {
-      //console.log('inside cat action.js'+clients._embedded.accountses[0].name);
-      dispatch(loadCandidatesSuccess(candidates._embedded));
-    }).catch(error => {
-      throw(error);
-    });
-  };
-}
+

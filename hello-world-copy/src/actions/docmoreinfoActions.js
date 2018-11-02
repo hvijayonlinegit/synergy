@@ -1,6 +1,9 @@
 import * as types from './actionTypes';
 import documentsApi from '../api/documentsApi';
 
+export function loadDocumentsSuccess(documents){
+  return {type: types.LOAD_DOCUMENTS_SUCCESS, documents}
+}
 export function loadDocMoreInfoSuccess(documents){
   return {type: types.LOAD_DOC_MOREINFO_SUCCESS, documents};
 }

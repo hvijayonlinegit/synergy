@@ -11,7 +11,7 @@ import Signup from './containers/auth/signup';
 import ServerErrorPage from './common/ServerErrorPage'
 import RequireAdminAccess from './common/RequireAdminAccess'
 import DocumentUpload from './components/documents/DocumentUpload';
-
+import DocumentsPage from './containers/DocumentsPage'
 export default (
   <div>
     <Switch>
@@ -23,7 +23,7 @@ export default (
         </Route>
         <Route path="/requirements" component = {RequirementsPage}></Route>
         <Route path="/candidates" component = {CandidatesPage}></Route>
-        
+        <Route path="/documents" component = {DocumentsPage}></Route>
       </Route> 
       <Route path="/upload" component = {DocumentUpload}></Route>
       <Route path="/500" component={ServerErrorPage}/>

@@ -2,9 +2,9 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types';
 import {bindActionCreators} from 'redux';
-import * as reqmoreinfoActions from '../actions/reqmoreinfoActions';
+import * as candmoreinfoActions from '../actions/candmoreinfoActions';
 import CommonPage from './CommonPage'
-class CandidatesPage extends React.Component {
+class DocumentsPage extends React.Component {
 
   constructor(props) {
     super(props);
@@ -13,7 +13,7 @@ class CandidatesPage extends React.Component {
     };
   }
   componentWillMount(){
-    this.props.reqmoreinfoactions.loadCandidates();
+    this.props.candmoreinfoactions.loadDocuments();
   }
   componentWillReceiveProps(_nextProps) {
     const path= _nextProps.location.pathname.split('/').pop(-1)?_nextProps.location.pathname.split('/').pop(-1):'';
@@ -26,7 +26,7 @@ class CandidatesPage extends React.Component {
   }
 }
 
-CandidatesPage.propTypes = {
+DocumentsPage.propTypes = {
   children: PropTypes.object,
   reqmoreinfoactions: PropTypes.object.isRequired,
  };
@@ -43,7 +43,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    reqmoreinfoactions: bindActionCreators(reqmoreinfoActions, dispatch),
+    candmoreinfoactions: bindActionCreators(candmoreinfoActions, dispatch),
   };
 }
-export default connect(mapStateToProps, mapDispatchToProps) (CandidatesPage);
+export default connect(mapStateToProps, mapDispatchToProps) (DocumentsPage);

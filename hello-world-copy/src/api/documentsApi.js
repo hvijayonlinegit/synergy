@@ -6,7 +6,24 @@ class DocumentsApi {
     //const PROD_URL = `https://peaceful-mesa-72076.herokuapp.com/accounts`
     //const BASE_URL = `http://localhost:8090`
     //const BASE_URL = `https://peaceful-mesa-72076.herokuapp.com`
+    console.log('documentslink'+ link);
     const request = new Request(link, {
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        'origins':'*',
+        // eslint-disable-next-line
+        'Authorization':' Bearer ' + localStorage.getItem('token')
+      })
+    });
+    return fetch(request).then(response => {
+      return response.json();
+    }).catch(error => {
+      return error;
+    });
+  }
+  static getDocumentsList() {
+    const request = new Request(apiurl.BASE_URL+`/synergy/api/documents`, {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',

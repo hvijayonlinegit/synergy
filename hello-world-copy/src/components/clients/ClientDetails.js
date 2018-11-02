@@ -106,8 +106,6 @@ class ClientDetails extends React.Component {
 
 		if (isEmpty(this.props.moreinfo.client)) {
 			return (<div>
-				{/* <Loader fullPage loading={true} /> */}
-
 				<MySnackbarContentWrapper
 					variant="info"
 					className={classes.margin}
@@ -218,7 +216,7 @@ class ClientDetails extends React.Component {
 						</Card>
 						<Card className={classes.card}>
 							<CardContent className={classes.content}>
-								<CardHeader title='Address Information' parentMehod={this.updateClient}></CardHeader>
+								<CardHeader title='Address Information'></CardHeader>
 								<TextField
 									margin="dense"
 									placeholder="Enter Phone Number "
@@ -361,7 +359,7 @@ class ClientDetails extends React.Component {
 						</Card>
 						<Card className={classes.card}>
 							<CardContent className={classes.content}>
-								<CardHeader title='Description' parentMehod={this.updateClient}></CardHeader>
+								<CardHeader title='Description' ></CardHeader>
 								<TextField
 									id="multiline-static"
 									multiline

@@ -37,12 +37,6 @@ class ExampleGrid extends React.Component {
             expanded: expanded ? panel : false,
         });
     };
-    //this change is to keep the selected tab active based on the location of the browser
-//   componentWillReceiveProps(_nextProps) {
-//     const path= _nextProps.location.pathname.split('/').pop(-1)?_nextProps.location.pathname.split('/').pop(-1):'';
-// 		this.setState({ value: path
-// 		})
-// 	}
     render() {
 
         const { classes } = this.props;
@@ -51,25 +45,27 @@ class ExampleGrid extends React.Component {
         return (
                 <div className={classes.root}>
                    {
-                       this.props.path !== 'requirements'?<Paper className={classes.paper}>
-                       <Grid container spacing={0}>
-                           <Grid item xs={12} sm={3}>
-                               <ClientList 
-                                   clients={clients}
-                                   onRequirements={this.handleRequirements}
-                                   onDelete={this.handleDeleteClient}
-                                   onMoreInfo={this.props.onMoreInfo}
-                                   handleModalOpen={this.props.handleModalOpen}
-                                   handleClientEdit={this.props.onEdit}
-                               />
-                           </Grid>
-                           <Grid  item xs={12} sm={9}>
-                               <ClientDetails updateClient = {this.props.updateClient} moreinfo={this.props.moreinfo} editMode={this.props.editMode}></ClientDetails>
-                           </Grid>
-                       </Grid>
-                   </Paper>:<div></div>
+                       (this.props.path !== 'requirements' && this.props.path !== 'candidates' && this.props.path !== 'Documents' )?
+                       <Paper className={classes.paper}>
+                            <Grid container spacing={0}>
+                                <Grid item xs={12} sm={3}>
+                                    <ClientList 
+                                        clients={clients}
+                                        onRequirements={this.handleRequirements}
+                                        onDelete={this.handleDeleteClient}
+                                        onMoreInfo={this.props.onMoreInfo}
+                                        handleModalOpen={this.props.handleModalOpen}
+                                        handleClientEdit={this.props.onEdit}
+                                    />
+                                </Grid>
+                                <Grid  item xs={12} sm={9}>
+                                    <ClientDetails updateClient = {this.props.updateClient} moreinfo={this.props.moreinfo} editMode={this.props.editMode}></ClientDetails>
+                                </Grid>
+                            </Grid>
+                        </Paper>:
+                        <div></div>
                    } 
-                    <Paper className={classes.paper}>
+                    {(this.props.path !== 'candidates'&& this.props.path !== 'Documents')?<Paper className={classes.paper}>
                         <Grid container spacing={0}>
                             <Grid item xs={12} sm={3}>
                             <RequirementList
@@ -88,8 +84,9 @@ class ExampleGrid extends React.Component {
                                     ></RequirementDetails>
                             </Grid>
                         </Grid>
-                    </Paper>
-                    <Paper className={classes.paper}>
+                    </Paper>:<div></div>
+                    }
+                    {this.props.path !== 'Documents'?<Paper className={classes.paper}>
                         <Grid container spacing={0}>
                             <Grid item xs={12} sm={3}>
                             <CandidateList
@@ -108,7 +105,7 @@ class ExampleGrid extends React.Component {
                                 ></CandidateDetails>
                             </Grid>
                         </Grid>
-                    </Paper>
+                    </Paper>:<div></div>}
                     <Paper className={classes.paper}>
                         <Grid container spacing={0}>
                             <Grid item xs={12} sm={12}>
