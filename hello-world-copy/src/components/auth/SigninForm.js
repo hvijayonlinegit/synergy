@@ -36,7 +36,8 @@ const styles = theme => ({
     marginBottom: 12,
   },
   root: {
-
+    //backgroundColor: 'green'
+    zIndex: '100'
   },
   paper: {
     padding: theme.spacing.unit * 2,
@@ -68,6 +69,7 @@ class SigninForm extends React.Component {
 
     return (
       <div className={classes.root}>
+      
         <Grid container spacing={24}>
           <Grid item xs={12} sm={8}>
           </Grid>

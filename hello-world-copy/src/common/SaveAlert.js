@@ -7,13 +7,31 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import PropTypes from 'prop-types';
+import YesIcon from '@material-ui/icons/Check';
+import NoIcon from '@material-ui/icons/Cancel';
+import { withStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
 function Transition(props) {
-  return <Slide direction="up" {...props} />;
+  return <Slide direction="down" {...props} />;
 }
-
+const styles = theme => ({
+    button: {
+      margin: theme.spacing.unit,
+    },
+    leftIcon: {
+      marginRight: theme.spacing.unit,
+    },
+    rightIcon: {
+      marginLeft: theme.spacing.unit,
+    },
+    iconSmall: {
+      fontSize: 20,
+    },
+  });
 class SaveAlert extends React.Component {
 
   render() {
+    const { classes } = this.props;
     return (
       <div>
         <Dialog
@@ -33,11 +51,13 @@ class SaveAlert extends React.Component {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.props.updateConfirm} color="primary">
-              Yes
+            <Button variant="contained" size="small" className={classes.button} onClick={this.props.updateConfirm}>
+                <YesIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
+                Yes
             </Button>
-            <Button onClick={this.props.onClose} color="primary">
-              No
+            <Button variant="contained" color="secondary" size="small" className={classes.button} onClick={this.props.onClose}>
+                <NoIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
+                No
             </Button>
           </DialogActions>
         </Dialog>
@@ -52,4 +72,4 @@ SaveAlert.propTypes = {
     open: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired
   };
-export default SaveAlert;
+export default  withStyles(styles) (SaveAlert);

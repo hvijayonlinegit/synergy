@@ -3,6 +3,7 @@ import * as actions from '../../actions/authenticationActions';
 import { connect } from 'react-redux';
 import SigninForm from '../../components/auth/SigninForm'
 
+// import ParticlesBackground from '../../common/ParticlesBackground'
 class Signin extends React.Component {
 
     constructor(props) {
@@ -35,11 +36,15 @@ class Signin extends React.Component {
     }
     render() {
         return (
+            <div>
+                {/* <ParticlesBackground key="background" /> */}
             <SigninForm
                 onSubmit={this.handleFormSubmit}
                 onUpdate={this.updateSigninState}
                 errorMessage= {this.props.errorMessage}
             />
+            
+            </div>
         );
     }
 }

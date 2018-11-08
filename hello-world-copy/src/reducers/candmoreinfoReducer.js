@@ -14,10 +14,7 @@ export default function candmoreinfoReducer(state = initialState.clients.candmor
       const clientState1 = Object.assign([], state)
       clientState1.candidate =  {}
       return clientState1
-      case types.LOAD_DOCUMENTS_SUCCESS:
-      const alldocuments= Object.assign([], state)
-      alldocuments.documents = action.documents
-      return alldocuments
+      
     default:
       return state;
   }

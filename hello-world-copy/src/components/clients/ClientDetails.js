@@ -114,15 +114,9 @@ class ClientDetails extends React.Component {
 			</div>);
 		}
 		else {
-			const selflink = this.props.moreinfo.client._links.self.href
-			
-			const id = selflink.split('/').pop(-1);
-			
-			console.log('details' + id);
 			return (
 				<div className={classes.root}>
 					<form className={classes.container} noValidate autoComplete="off">
-					
 						<Card className={classes.card}>
 							<CardContent className={classes.content}>
 								<CardHeader title='Client Information' parentMehod={this.updateClient}></CardHeader>

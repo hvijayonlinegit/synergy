@@ -12,7 +12,9 @@ import Tab from '@material-ui/core/Tab';
 import Button from '@material-ui/core/Button';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import ExitToApp from '@material-ui/icons/ExitToApp'
+import ExitToApp from '@material-ui/icons/ExitToApp';
+import AddIcon from '@material-ui/icons/Add';
+import Paper from '@material-ui/core/Paper';
 //Spinner Imports
 import { Loader } from 'react-overlay-loader';
 import 'react-overlay-loader/styles.css';
@@ -22,14 +24,12 @@ import Menu from '@material-ui/core/Menu';
 
 import { browserHistory} from 'react-router';
 import {connect} from 'react-redux'
-
-
 import { compose } from '../../node_modules/redux';
 import 'font-awesome/css/font-awesome.min.css';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import theme from '../components/theme';
 import * as authenticationActions from '../actions/authenticationActions';
-
+import ParticlesBackground from '../common/ParticlesBackground'
 import {bindActionCreators} from 'redux';
 const drawerWidth = 240;
 
@@ -183,14 +183,15 @@ class App extends React.Component {
           <Toolbar disableGutters={!this.state.open}>
 
             {
-          this.props.authenticated ? <IconButton
+          this.props.authenticated ? <div><IconButton
               color="inherit"
               aria-label="open drawer"
               onClick={this.handleDrawerOpen}
               className={classNames(classes.menuButton, this.state.open && classes.hide)}
             >
               <MenuIcon />
-            </IconButton>:<div></div>}
+            </IconButton>
+            <IconButton color="inherit"><AddIcon color="inherit" ></AddIcon></IconButton></div>:<div></div>}
             {
           this.props.authenticated ? (
               <div className={classes.flex} >

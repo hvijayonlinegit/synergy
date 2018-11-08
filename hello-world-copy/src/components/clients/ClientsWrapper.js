@@ -48,7 +48,7 @@ class ExampleGrid extends React.Component {
                        (this.props.path !== 'requirements' && this.props.path !== 'candidates' && this.props.path !== 'Documents' )?
                        <Paper className={classes.paper}>
                             <Grid container spacing={0}>
-                                <Grid item xs={12} sm={3}>
+                                <Grid item xs={12}  md ={3}sm={4}>
                                     <ClientList 
                                         clients={clients}
                                         onRequirements={this.handleRequirements}
@@ -58,7 +58,7 @@ class ExampleGrid extends React.Component {
                                         handleClientEdit={this.props.onEdit}
                                     />
                                 </Grid>
-                                <Grid  item xs={12} sm={9}>
+                                <Grid  item xs={12} md={9} sm={8}>
                                     <ClientDetails updateClient = {this.props.updateClient} moreinfo={this.props.moreinfo} editMode={this.props.editMode}></ClientDetails>
                                 </Grid>
                             </Grid>

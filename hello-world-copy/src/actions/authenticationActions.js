@@ -31,6 +31,7 @@ export const signinUser = ({ usernameOrEmail, password }) => {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     let token = user.accessToken.toString();
                     localStorage.setItem('token', token);
+                    localStorage.setItem('currentUser', usernameOrEmail);
                     dispatch(spinnerActions.loadSpinner(false));
                     //fetchUser();
                 }

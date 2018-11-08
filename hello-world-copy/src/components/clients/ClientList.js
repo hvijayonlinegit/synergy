@@ -45,9 +45,13 @@ const styles = theme => ({
         borderRadius: '20px',
         color: theme.palette.primary.contrastText,
         backgroundColor: themes.palette.primary.main,
+        // [theme.breakpoints.up('md')]: {
+        //   marginRight: '10px',
+        // },
         
     },
 },
+
 infoColor:{
   fill: 'green',
   width: '0.75em',
