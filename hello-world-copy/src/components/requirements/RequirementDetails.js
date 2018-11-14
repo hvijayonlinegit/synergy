@@ -11,15 +11,15 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
-
+import Model from '../../common/model'
 import Audit from '../../common/Audit'
 import CardHeader from '../../common/CardDetailsHeader'
 const styles = theme => ({
   root: {
     width: '100%',
     overflowY: 'auto',
-    maxHeight: '34vh',
-    minHeight: '34vh',
+    maxHeight: '37.5vh',
+    minHeight: '37.5vh',
     display: 'flex',
     flexWrap: 'wrap',
   },
@@ -39,7 +39,12 @@ const styles = theme => ({
   textFieldMax: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 300,
+    width: 150,
+  },
+  textFieldMin: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 50,
   },
   card: {
     border: '1px solid lightgrey',
@@ -49,8 +54,13 @@ const styles = theme => ({
   },
   formControl: {
     margin: theme.spacing.unit,
-    minWidth: 150,
+    minWidth: 100,
   },
+  textField: {
+		marginLeft: theme.spacing.unit,
+		marginRight: theme.spacing.unit,
+		width: 100,
+	  },
 
 });
 class RequirementDetails extends React.Component {
@@ -63,43 +73,7 @@ class RequirementDetails extends React.Component {
 	getInitState() {
 		const { requirement } = this.props.requirement
 		
-		return requirement ? requirement : {
-			  access: '',
-        accountOwner: '',
-        billRate: 0,
-        briefDescription: '',
-        category: '',
-        city: '',
-        country: '',
-        description: '',
-        duration: '',
-        employementType: '',
-        endClient: '',
-        experienceLevel: '',
-        interviewType: '',
-        localIndicator: '',
-        maxResumesAllowed: 0,
-        notes: '',
-        numberOfOpenings: 0,
-        payRate: '',
-        posiitonType: '',
-        primaryRecruiteer: '',
-        projectEndDate: '',
-        projectStartDate: '',
-        requiredExperience: '',
-        requiredSkills: '',
-        requirementId: 0,
-        requirementTitle: '',
-        state: '',
-        status: '',
-        subCategory: '',
-        visaType: '',
-        zipCode: '',
-        createdBy:'',
-			  updatedAt:'',
-        updatedBy:'',
-        createdAt:'',
-		}
+		return requirement ? requirement : Model.requirement
 	}
 	componentWillReceiveProps(_nextProps) {
 		console.log(_nextProps);
@@ -141,7 +115,7 @@ class RequirementDetails extends React.Component {
         <div className={classes.root}>
           <form className={classes.container} noValidate autoComplete="off">
             <Card className={classes.card}>
-              <CardContent className={classes.content}>
+              <CardContent>
                 <CardHeader title='Requirement Information' parentMehod={this.updateRequirement}></CardHeader>
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
@@ -150,15 +124,10 @@ class RequirementDetails extends React.Component {
                   label="Requirement Title"
                   value={this.state.requirementTitle}
 									onChange={this.handleChange('requirementTitle')}
-                  required />
-                <TextField InputLabelProps={{ shrink: true }}
-                  margin="dense"
-                  placeholder="Enter requirementId"
-                  name="requirementId"
-                  label="Requirement Id"
-                  value={this.state.requirementId}
-									onChange={this.handleChange('requirementId')}
-                  required />
+                  required 
+                  className={classes.textFieldMax}
+                  />
+                
                 <FormControl required className={classes.formControl}>
                   <InputLabel htmlFor="accountOwner">Account Owner</InputLabel>
                   <NativeSelect
@@ -223,15 +192,17 @@ class RequirementDetails extends React.Component {
                   fullWidth
                   value={this.state.requiredSkills}
                   onChange={this.handleChange('requiredSkills')}
+                  className={classes.textField}
                 />
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
                   placeholder="Enter requiredExperience"
                   name="requiredExperience"
-                  label="Required Experience"
+                  label="Experience Req"
                   fullWidth
                   value={this.state.requiredExperience}
                   onChange={this.handleChange('requiredExperience')}
+                  className={classes.textFieldMin}
                 />
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
@@ -241,6 +212,7 @@ class RequirementDetails extends React.Component {
                   fullWidth
                   value={this.state.billRate}
                   onChange={this.handleChange('billRate')}
+                  className={classes.textFieldMin}
                 />
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
@@ -250,9 +222,156 @@ class RequirementDetails extends React.Component {
                   fullWidth
                   value={this.state.payRate}
                   onChange={this.handleChange('payRate')}
-                  required />
+                  required 
+                  className={classes.textFieldMin}
+                  />
+                   <TextField InputLabelProps={{ shrink: true }}
+                  margin="dense"
+                  placeholder="Enter numberOfOpenings"
+                  name="Num OfOpenings"
+                  label="No.of Openings"
+                  fullWidth
+                  value={this.state.numberOfOpenings}
+                  onChange={this.handleChange('numberOfOpenings')}
+                  className={classes.textField}
+                />
+                <TextField InputLabelProps={{ shrink: true }}
+                  type="input"
+                  margin="dense"
+                  placeholder="Enter maxResumesAllowed"
+                  name="maxResumesAllowed"
+                  label="No.of CV's Allowed"
+                  value={this.state.maxResumesAllowed}
+                  onChange={this.handleChange('maxResumesAllowed')}
+                  className={classes.textField}
+                />
                 <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="country">Country</InputLabel>
+                  <InputLabel htmlFor="posiitonType" shrink>Position Type</InputLabel>
+                  <NativeSelect
+                    value={this.state.posiitonType}
+                    onChange={this.handleChange('posiitonType')}
+                    input={<Input name="posiitonType" id="posiitonType" />}
+                  >
+                    <option value="0">--Select--</option>
+                    <option value="27">Contract</option>
+                    <option value="28">Contract-to-Hire</option>
+                    <option value="4">Full Time</option>
+                    <option value="5">Part Time</option>
+                    <option value="26">Per Diem</option>
+                  </NativeSelect>
+                </FormControl>
+                <TextField InputLabelProps={{ shrink: true }}
+                  margin="dense"
+                  placeholder="Enter duration"
+                  name="duration"
+                  label="Duration"
+                  fullWidth
+                  value={this.state.duration}
+                  onChange={this.handleChange('duration')}
+                  className={classes.textFieldMin}
+                  required />
+                  <TextField InputLabelProps={{ shrink: true }}
+                  margin="dense"
+                  placeholder="Enter localIndicator"
+                  name="localIndicator"
+                  label="Local Indicator"
+                  fullWidth
+                  value={this.state.localIndicator}
+                  onChange={this.handleChange('localIndicator')}
+                  className={classes.textField}
+                />
+                <FormControl className={classes.formControl}>
+                  <InputLabel htmlFor="visaType">Visa Type</InputLabel>
+                  <NativeSelect
+                    value={this.state.visaType}
+                    onChange={this.handleChange('visaType')}
+                    input={<Input name="visaType" id="visaType" />}
+                  >
+                  </NativeSelect>
+                </FormControl>
+                <FormControl className={classes.formControl}>
+                  <InputLabel htmlFor="interviewType" shrink>Interview Type</InputLabel>
+                  <NativeSelect
+                    value={this.state.interviewType}
+                    onChange={this.handleChange('interviewType')}
+                    input={<Input name="interviewType" id="interviewType" />}
+                  >
+                    <option value="0">--Select--</option>
+                    <option value="fa">Face to Face</option>
+                    <option value="pi">Phone Interview</option>
+                    <option value="pa">Panel Interview</option>
+                    <option value="sv">Skype/Video interview</option>
+                  </NativeSelect>
+                </FormControl>
+                <FormControl className={classes.formControl}>
+                  <InputLabel htmlFor="experienceLevel" shrink>Experience Level</InputLabel>
+                  <NativeSelect
+                    value={this.state.experienceLevel}
+                    onChange={this.handleChange('experienceLevel')}
+                    input={<Input name="experienceLevel" id="experienceLevel" />}
+                  >
+                    <option value="0">--Select--</option>
+                    <option value="11">Entry Level</option>
+                    <option value="14">Executive (SVP, VP, Department Head, etc)</option>
+                    <option value="12">Experienced (Non-Manager)</option>
+                    <option value="13">Manager (Manager/Supervisor of Staff)</option>
+                    <option value="15">Senior Executive (President, CFO, etc)</option>
+                    <option value="16">Student (High School)</option>
+                    <option value="10">Student (Undergraduate/Graduate)</option>
+                  </NativeSelect>
+                </FormControl>
+                
+                
+                <FormControl className={classes.formControl}>
+                  <InputLabel htmlFor="employementType" shrink>Employement Type</InputLabel>
+                  <NativeSelect
+                    value={this.state.employementType}
+                    onChange={this.handleChange('employementType')}
+                    input={<Input name="employementType" id="employementType" />}
+                  >
+                    <option value="0">--Select--</option>
+                    <option value="cw">Contract – W2</option>
+                    <option value="ch">Contract-to-Hire</option>
+                    <option value="99">Contract-to-Hire-1099</option>
+                    <option value="hc">Contract-to-Hire-Corp</option>
+                    <option value="hw">Contract-to-Hire-W2</option>
+                    <option value="pp">Corp-to-Corp</option>
+                    <option value="DH">Direct Hire</option>
+                    <option value="EM">Employee</option>
+                    <option value="fw">Full time – W2</option>
+                    <option value="ic">Independent Contractor</option>
+                    <option value="I ">Intern</option>
+                    <option value="ot">Others</option>
+                    <option value="S">Seasonal</option>
+                    <option value="TC">Temporary / Contract</option>
+                    <option value="V">Volunteer</option>
+                  </NativeSelect>
+                </FormControl>
+                
+                <TextField InputLabelProps={{ shrink: true }}
+                  margin="dense"
+                  placeholder="Enter projectStartDate"
+                  name="projectStartDate"
+                  label="Project Start Date"
+                  fullWidth
+                  type="date"
+                  value={this.state.projectStartDate}
+                  onChange={this.handleChange('projectStartDate')}
+                  className={classes.textFieldMax}
+                />
+                <TextField InputLabelProps={{ shrink: true }}
+                  margin="dense"
+                  placeholder="Enter projectEndDate"
+                  name="projectEndDate"
+                  label="Project End Date"
+                  fullWidth
+                  type="date"
+                  value={this.state.projectEndDate}
+                  onChange={this.handleChange('projectEndDate')}
+                  className={classes.textFieldMax}
+                />
+                <FormControl className={classes.formControl}>
+                  <InputLabel htmlFor="country" shrink>Country</InputLabel>
                   <NativeSelect
                   value={this.state.country}
                   onChange={this.handleChange('country')}
@@ -264,7 +383,7 @@ class RequirementDetails extends React.Component {
 
                 </FormControl>
                 <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="state">State</InputLabel>
+                  <InputLabel htmlFor="state" shrink>State</InputLabel>
                   <NativeSelect
                     value={this.state.state}
                     onChange={this.handleChange('state')}
@@ -330,6 +449,7 @@ class RequirementDetails extends React.Component {
                   label="City"
                   value={this.state.city}
                   onChange={this.handleChange('city')}
+                  className={classes.textField}
                   />
 
                 <TextField InputLabelProps={{ shrink: true }}
@@ -340,34 +460,8 @@ class RequirementDetails extends React.Component {
                   value={this.state.zipCode}
                   onChange={this.handleChange('zipCode')}
                 />
-                <TextField InputLabelProps={{ shrink: true }}
-                  margin="dense"
-                  placeholder="Enter numberOfOpenings"
-                  name="numberOfOpenings"
-                  label="Number of Openings"
-                  fullWidth
-                  value={this.state.numberOfOpenings}
-                  onChange={this.handleChange('numberOfOpenings')}
-                />
-                <TextField InputLabelProps={{ shrink: true }}
-                  margin="dense"
-                  placeholder="Enter maxResumesAllowed"
-                  name="maxResumesAllowed"
-                  label="Maximum Resumes allowed"
-                  fullWidth
-                  className={classes.textFieldMax}
-                  value={this.state.maxResumesAllowed}
-                  onChange={this.handleChange('maxResumesAllowed')}
-                />
-                <TextField InputLabelProps={{ shrink: true }}
-                  margin="dense"
-                  placeholder="Enter localIndicator"
-                  name="localIndicator"
-                  label="Local Indicator"
-                  fullWidth
-                  value={this.state.localIndicator}
-                  onChange={this.handleChange('localIndicator')}
-                />
+               
+                
                 <TextField InputLabelProps={{ shrink: true }}
                   id="multiline-static"
                   multiline
@@ -397,15 +491,7 @@ class RequirementDetails extends React.Component {
             <Card className={classes.card}>
               <CardContent className={classes.content}>
                 <CardHeader title='Duration & Type' ></CardHeader>
-                <TextField InputLabelProps={{ shrink: true }}
-                  margin="dense"
-                  placeholder="Enter duration"
-                  name="duration"
-                  label="Duration"
-                  fullWidth
-                  value={this.state.duration}
-                  onChange={this.handleChange('duration')}
-                  required />
+                
                 <FormControl className={classes.formControl}>
                   <InputLabel htmlFor="category">Category</InputLabel>
                   <NativeSelect
@@ -464,31 +550,7 @@ class RequirementDetails extends React.Component {
                     <option value="12005">Web/UI/UX Design</option>
                   </Select>
                 </FormControl>
-                <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="employementType">Employement Type</InputLabel>
-                  <NativeSelect
-                    value={this.state.employementType}
-                    onChange={this.handleChange('employementType')}
-                    input={<Input name="employementType" id="employementType" />}
-                  >
-                    <option value="0">--Select--</option>
-                    <option value="cw">Contract – W2</option>
-                    <option value="ch">Contract-to-Hire</option>
-                    <option value="99">Contract-to-Hire-1099</option>
-                    <option value="hc">Contract-to-Hire-Corp</option>
-                    <option value="hw">Contract-to-Hire-W2</option>
-                    <option value="pp">Corp-to-Corp</option>
-                    <option value="DH">Direct Hire</option>
-                    <option value="EM">Employee</option>
-                    <option value="fw">Full time – W2</option>
-                    <option value="ic">Independent Contractor</option>
-                    <option value="I ">Intern</option>
-                    <option value="ot">Others</option>
-                    <option value="S">Seasonal</option>
-                    <option value="TC">Temporary / Contract</option>
-                    <option value="V">Volunteer</option>
-                  </NativeSelect>
-                </FormControl>
+                
                 <FormControl className={classes.formControl}>
                   <InputLabel htmlFor="age-native-helper">Status</InputLabel>
                   <NativeSelect
@@ -502,79 +564,8 @@ class RequirementDetails extends React.Component {
                     <option value={30}>Public</option>
                   </NativeSelect>
                 </FormControl>
-                <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="experienceLevel">Experience Level</InputLabel>
-                  <NativeSelect
-                    value={this.state.experienceLevel}
-                    onChange={this.handleChange('experienceLevel')}
-                    input={<Input name="experienceLevel" id="experienceLevel" />}
-                  >
-                    <option value="0">--Select--</option>
-                    <option value="11">Entry Level</option>
-                    <option value="14">Executive (SVP, VP, Department Head, etc)</option>
-                    <option value="12">Experienced (Non-Manager)</option>
-                    <option value="13">Manager (Manager/Supervisor of Staff)</option>
-                    <option value="15">Senior Executive (President, CFO, etc)</option>
-                    <option value="16">Student (High School)</option>
-                    <option value="10">Student (Undergraduate/Graduate)</option>
-                  </NativeSelect>
-                </FormControl>
-                <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="posiitonType">Position Type</InputLabel>
-                  <NativeSelect
-                    value={this.state.posiitonType}
-                    onChange={this.handleChange('posiitonType')}
-                    input={<Input name="posiitonType" id="posiitonType" />}
-                  >
-                    <option value="0">--Select--</option>
-                    <option value="27">Contract</option>
-                    <option value="28">Contract-to-Hire</option>
-                    <option value="4">Full Time</option>
-                    <option value="5">Part Time</option>
-                    <option value="26">Per Diem</option>
-                  </NativeSelect>
-                </FormControl>
-                <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="interviewType">Interview Type</InputLabel>
-                  <NativeSelect
-                    value={this.state.interviewType}
-                    onChange={this.handleChange('interviewType')}
-                    input={<Input name="interviewType" id="interviewType" />}
-                  >
-                    <option value="0">--Select--</option>
-                    <option value="fa">Face to Face</option>
-                    <option value="pi">Phone Interview</option>
-                    <option value="pa">Panel Interview</option>
-                    <option value="sv">Skype/Video interview</option>
-                  </NativeSelect>
-                </FormControl>
-                <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="visaType">Visa Type</InputLabel>
-                  <NativeSelect
-                    value={this.state.visaType}
-                    onChange={this.handleChange('visaType')}
-                    input={<Input name="visaType" id="visaType" />}
-                  >
-                  </NativeSelect>
-                </FormControl>
-                <TextField InputLabelProps={{ shrink: true }}
-                  margin="dense"
-                  placeholder="Enter projectStartDate"
-                  name="projectStartDate"
-                  label="Project Start Date"
-                  fullWidth
-                  value={this.state.projectStartDate}
-                  onChange={this.handleChange('projectStartDate')}
-                />
-                <TextField InputLabelProps={{ shrink: true }}
-                  margin="dense"
-                  placeholder="Enter projectEndDate"
-                  name="projectEndDate"
-                  label="Project End Date"
-                  fullWidth
-                  value={this.state.projectEndDate}
-                  onChange={this.handleChange('projectEndDate')}
-                />
+                
+                
                 <TextField InputLabelProps={{ shrink: true }}
                   id="multiline-static"
                   multiline

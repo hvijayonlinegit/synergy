@@ -24,6 +24,8 @@ const styles = theme => ({
   },
   iconButton: {
     fontSize:'12px',
+    padding:0,
+    float:'right',
   },
   button: {
     margin: theme.spacing.unit,
@@ -36,6 +38,7 @@ const styles = theme => ({
   },
   iconSmall: {
     fontSize: 20,
+    
   },
 });
 
@@ -44,28 +47,21 @@ function CardDetailsHeader(props) {
 
   return (
     <div className={classes.root}>
-        <Grid container spacing={24}>
+        <Grid container spacing={0}>
             <Grid item xs={10} md={10} sm={8}>
-                <Typography className={classes.afterEle} variant="body1" gutterBottom>
+                <Typography className={classes.afterEle} variant="subtitle2" gutterBottom>
                         {props.title}
                 </Typography>
             </Grid>
             <Grid item xs={2} md={2} sm={4}>
                 {
                     props.parentMehod?
-                <div>    
                 <IconButton  className={classes.iconButton}onClick={props.parentMehod}>
-                <SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
+                    <SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
                     SAVE
                 </IconButton>
-                {/* <Button variant="contained" size="small" className={classes.button} onClick={props.parentMehod}>
-                  <SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
-                  Save
-                </Button> */}
-                
-                </div>:<div></div>
+                :<div></div>
                 }
-                
             </Grid>
         </Grid>
     </div>

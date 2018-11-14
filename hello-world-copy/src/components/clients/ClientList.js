@@ -17,9 +17,9 @@ import Info from '@material-ui/icons/Info';
 
 const styles = theme => ({
  root: {
-    maxHeight: '25vh',
+    maxHeight: '19.5vh',
     overflow: 'auto',
-    minHeight: '25vh',
+    minHeight: '19.5vh',
  },
   button: {
     margin: theme.spacing.unit,
@@ -39,6 +39,7 @@ const styles = theme => ({
         textOrientation: 'upright',
         boxSizing: 'border-box',
         marginRight: '10px',
+        marginTop: '15px',
        // height: '35%',
        // borderRight: '2px solid green',
         padding: '15% 1px',
@@ -144,7 +145,8 @@ updateSearch(event){
     const styles = {
       listItem: {
         paddingBottom: '2px',
-        paddingTop: '2px'
+        paddingTop: '2px',
+        //borderLeft: '1px solid black',
     },
     editDisplay:{
       display: 'block'
@@ -232,13 +234,13 @@ updateSearch(event){
                  // let clientid= "client id: " +id;
                   //let boundDeleteClick = this.props.onDelete.bind(this, selflink, n);
                   let boundMoreInfo = this.handleMoreinfo.bind(this, link, n, index);
+                  let displayname =  id+"   "+n.name;
                   return(
                     <div>
                       
                       <ListItem autoFocus button={true} style= {this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem} to={to}  key= {id} divider= {true} onClick={boundMoreInfo} >
                         {/* <ListItemText primary={n.name} secondary={clientid} /> */}
-                        <ListItemText color="inherit" primary= {id}/>
-                        <ListItemText  primary= {n.name} />
+                        <ListItemText  primary= {displayname}/>
                           <ListItemSecondaryAction >
                           <Tooltip placement="right-start" 
                               title={

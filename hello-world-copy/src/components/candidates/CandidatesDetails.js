@@ -18,8 +18,8 @@ const styles = theme => ({
   root: {
     width: '100%',
     overflowY: 'auto',
-    maxHeight: '34vh',
-    minHeight: '34vh',
+    maxHeight: '37vh',
+    minHeight: '37vh',
     display: 'flex',
     flexWrap: 'wrap',
   },
@@ -31,8 +31,22 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 200,
+    width: 100,
   },
+  textFieldMax: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 150,
+  },
+  textFieldMin: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 50,
+  },
+  formControl: {
+		margin: theme.spacing.unit,
+		minWidth: 40,
+	},
   header: {
     width: '100%',
     backgroundColor: 'aliceblue',
@@ -156,7 +170,7 @@ class CandidateDetails extends React.Component {
                   name="middleName"
                   label="Middle Name"
                   fullWidth
-                  className={classes.textField}
+                  className={classes.textFieldMin}
                   value={this.state.middleName}
                   onChange={this.handleChange('middleName')}
                 />
@@ -177,11 +191,13 @@ class CandidateDetails extends React.Component {
                   label="Email"
                   fullWidth
                   className={classes.textField}
+                  multiline= "true"
+                  rowsMax="1"
                   value={this.state.emailAddress}
                   onChange={this.handleChange('emailAddress')}
                   required
                 />
-                <TextField InputLabelProps={{ shrink: true }}
+                {/* <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
                   placeholder="Enter mobileNumber"
                   name="mobileNumber"
@@ -191,18 +207,205 @@ class CandidateDetails extends React.Component {
                   value={this.state.mobileNumber}
                   onChange={this.handleChange('mobileNumber')}
 
-                />
+                /> */}
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
                   placeholder="Enter phoneNumber"
                   name="phoneNumber"
-                  label="Phone Number"
+                  label="Phone #"
                   fullWidth
                   className={classes.textField}
                   value={this.state.phoneNumber}
                   onChange={this.handleChange('phoneNumber')}
 
                 />
+                <TextField InputLabelProps={{ shrink: true }}
+                  margin="dense"
+                  placeholder="Enter skypeId"
+                  name="skypeId"
+                  label="Skype Id  "
+                  fullWidth
+                  className={classes.textField}
+                  value={this.state.skypeId}
+                  onChange={this.handleChange('skypeId')}
+
+                />
+                <TextField InputLabelProps={{ shrink: true }}
+                  margin="dense"
+                  placeholder="Enter linkedinUrl"
+                  name="linkedinUrl"
+                  label="Linkedin Id  "
+                  fullWidth
+                  className={classes.textField}
+                  value={this.state.linkedinUrl}
+                  onChange={this.handleChange('linkedinUrl')}
+
+                />
+                 <TextField InputLabelProps={{ shrink: true }}
+                  margin="dense"
+                  placeholder="Enter availableFrom"
+                  name="availableFrom"
+                  label="Available From "
+                  fullWidth
+                  className={classes.textField}
+                  value={this.state.availableFrom}
+                  onChange={this.handleChange('availableFrom')}
+                />
+                <FormControl className={classes.formControl}>
+                  <InputLabel htmlFor="noticePeriod" shrink>Notice Period</InputLabel>
+                  <NativeSelect
+                    value={this.state.noticePeriod}
+                    onChange={this.handleChange('noticePeriod')}
+                    input={<Input name="noticePeriod" id="noticePeriod" />}
+                  >
+                    <option value="-1">--Select--</option>
+                    <option value="I">Immediate</option>
+                    <option value="1W">1 Week</option>
+                    <option value="2W">2 Weeks</option>
+                    <option value="1M">1 Month</option>
+                    <option value="C">Custom</option>
+                  </NativeSelect>
+                </FormControl>
+                <FormControl className={classes.formControl}>
+                  <InputLabel htmlFor="sourceFrom" shrink>Sourced From</InputLabel>
+                  <NativeSelect
+                    value={this.state.sourceFrom}
+                    onChange={this.handleChange('sourceFrom')}
+                    input={<Input name="sourceFrom" id="sourceFrom" />}
+                  >
+                    <option value="0">--Select--</option>
+                    <option value="ip">Imported By Parser</option>
+                    <option value="ir">Internal Referral</option>
+                    <option value="jc">Career Site</option>
+                    <option value="jcb">CareerBuilder</option>
+                    <option value="jd">Dice</option>
+                    <option value="ji">Indeed</option>
+                    <option value="jm">Monster</option>
+                    <option value="jn">Naukri</option>
+                    <option value="jt">Times Job</option>
+                    <option value="jtf"> TechFetch</option>
+                    <option value="mr">Mail response to Requirement List</option>
+                    <option value="na">N/A</option>
+                    <option value="or">Other</option>
+                    <option value="rb">Referred By</option>
+                    <option value="ss">Sub-contractors</option>
+                    <option value="vd">Vendor</option>
+                  </NativeSelect>
+                </FormControl>
+                <FormControl className={classes.formControl}>
+                  <InputLabel htmlFor="sourceBy" shrink>Sourced By</InputLabel>
+                  <NativeSelect
+                    value={this.state.sourceBy}
+                    onChange={this.handleChange('sourceBy')}
+                    input={<Input name="sourceBy" id="sourceBy" />}
+                  >
+                    <option value="0">--Select--</option>
+                    <option value="4985">Rahul Akkisetti</option>
+                    <option value="4984">Umakanth</option>
+                    <option value="4942"> Meghan Breen</option>
+                    <option value="4941">Francis</option>
+                    <option value="4940">Ravi Thonger</option>
+                    <option value="4939">Srinivas</option>
+                    <option value="4938"> Sri Bollampally</option>
+                    <option value="4937">Raj Nettem</option>
+                    <option value="4936">Asha Richards</option>
+                    <option value="4935">Admin Admin</option>
+                  </NativeSelect>
+                </FormControl>
+                <TextField InputLabelProps={{ shrink: true }}
+                  margin="dense"
+                  placeholder="Enter sourceInfo"
+                  name="sourceInfo"
+                  label="SSN "
+                  fullWidth
+                  className={classes.textField}
+                  value={this.state.sourceInfo}
+                  onChange={this.handleChange('sourceInfo')}
+                />
+                <TextField InputLabelProps={{ shrink: true }}
+                  margin="dense"
+                  placeholder="Enter licenseNumber"
+                  name="licenseNumber"
+                  label="License No"
+                  fullWidth
+                  className={classes.textField}
+                  value={this.state.licenseNumber}
+                  onChange={this.handleChange('licenseNumber')}
+                />
+                <TextField InputLabelProps={{ shrink: true }}
+                  margin="dense"
+                  placeholder="Enter passportNumber"
+                  name="passportNumber"
+                  label="Passport No"
+                  fullWidth
+                  className={classes.textField}
+                  value={this.state.passportNumber}
+                  onChange={this.handleChange('passportNumber')}
+                />
+                <FormControl className={classes.formControl}>
+                  <InputLabel htmlFor="visaStatus" shrink>Visa Status</InputLabel>
+                  <NativeSelect
+                    value={this.state.visaStatus}
+                    onChange={this.handleChange('visaStatus')}
+                    input={<Input name="visaStatus" id="visaStatus" />}
+                  >
+                    <option value="0">--Select--</option>
+                    <option value="CP">CPT</option>
+                    <option value="EA">EAD</option>
+                    <option value="GE">GC-EAD</option>
+                    <option value="GC">Green Card Holder</option>
+                    <option value="H1">H1B</option>
+                    <option value="OP">OPT</option>
+                    <option value="US">US Citizen</option>
+                    <option value="-1">Other</option>
+                  </NativeSelect>
+                </FormControl>
+                <TextField InputLabelProps={{ shrink: true }}
+                  margin="dense"
+                  placeholder="Enter dateOfBirth"
+                  name="dateOfBirth"
+                  label="Date of Birth "
+                  fullWidth
+                  className={classes.textFieldMax}
+                  value={this.state.dateOfBirth}
+                  type="Date"
+                  onChange={this.handleChange('dateOfBirth')}
+                />
+                <TextField InputLabelProps={{ shrink: true }}
+                  margin="dense"
+                  placeholder="Enter preferredLocation1"
+                  name="preferredLocation1"
+                  label="Preferred Location1 "
+                  fullWidth
+                  className={classes.textField}
+                  value={this.state.preferredLocation1}
+                  onChange={this.handleChange('preferredLocation1')}
+
+                />
+                <TextField InputLabelProps={{ shrink: true }}
+                  margin="dense"
+                  placeholder="Enter preferredLocation2"
+                  name="preferredLocation2"
+                  label="Preferred Location2 "
+                  fullWidth
+                  className={classes.textField}
+                  value={this.state.preferredLocation2}
+                  onChange={this.handleChange('preferredLocation2')}
+
+                />
+                <FormControl className={classes.formControl}>
+                  <InputLabel htmlFor="candidateStatus" shrink>Candidate Status</InputLabel>
+                  <NativeSelect
+                    value={this.state.candidateStatus}
+                    onChange={this.handleChange('candidateStatus')}
+                    input={<Input name="candidateStatus" id="candidateStatus" />}
+                  >
+                    <option value="--select--">-- select --</option>
+                    <option value={10}>My Team</option>
+                    <option value={20}>Private</option>
+                    <option value={30}>Public</option>
+                  </NativeSelect>
+                </FormControl>
                 <FormControl className={classes.formControl}>
                   <InputLabel htmlFor="country" shrink>Country</InputLabel>
                   <NativeSelect
@@ -294,28 +497,7 @@ class CandidateDetails extends React.Component {
                   onChange={this.handleChange('address')}
 
                 />
-                <TextField InputLabelProps={{ shrink: true }}
-                  margin="dense"
-                  placeholder="Enter preferredLocation1"
-                  name="preferredLocation1"
-                  label="Preferred Location1 "
-                  fullWidth
-                  className={classes.textField}
-                  value={this.state.preferredLocation1}
-                  onChange={this.handleChange('preferredLocation1')}
-
-                />
-                <TextField InputLabelProps={{ shrink: true }}
-                  margin="dense"
-                  placeholder="Enter preferredLocation2"
-                  name="preferredLocation2"
-                  label="Preferred Location2 "
-                  fullWidth
-                  className={classes.textField}
-                  value={this.state.preferredLocation2}
-                  onChange={this.handleChange('preferredLocation2')}
-
-                />
+                
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
                   placeholder="Enter zipCode"
@@ -327,28 +509,8 @@ class CandidateDetails extends React.Component {
                   onChange={this.handleChange('zipCode')}
 
                 />
-                <TextField InputLabelProps={{ shrink: true }}
-                  margin="dense"
-                  placeholder="Enter skypeId"
-                  name="skypeId"
-                  label="Skype Id  "
-                  fullWidth
-                  className={classes.textField}
-                  value={this.state.skypeId}
-                  onChange={this.handleChange('skypeId')}
-
-                />
-                <TextField InputLabelProps={{ shrink: true }}
-                  margin="dense"
-                  placeholder="Enter linkedinUrl"
-                  name="linkedinUrl"
-                  label="Linkedin Id  "
-                  fullWidth
-                  className={classes.textField}
-                  value={this.state.linkedinUrl}
-                  onChange={this.handleChange('linkedinUrl')}
-
-                />
+                
+                
                 <CardActions>
                 </CardActions>
               </CardContent>
@@ -356,42 +518,8 @@ class CandidateDetails extends React.Component {
             <Card className={classes.card}>
               <CardContent className={classes.content}>
                 <CardHeader title='Additional Information' ></CardHeader>
-                <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="sourceFrom" shrink>Sourced From</InputLabel>
-                  <NativeSelect
-                    value={this.state.sourceFrom}
-                    onChange={this.handleChange('sourceFrom')}
-                    input={<Input name="sourceFrom" id="sourceFrom" />}
-                  >
-                    <option value="0">--Select--</option>
-                    <option value="ip">Imported By Parser</option>
-                    <option value="ir">Internal Referral</option>
-                    <option value="jc">Career Site</option>
-                    <option value="jcb">CareerBuilder</option>
-                    <option value="jd">Dice</option>
-                    <option value="ji">Indeed</option>
-                    <option value="jm">Monster</option>
-                    <option value="jn">Naukri</option>
-                    <option value="jt">Times Job</option>
-                    <option value="jtf"> TechFetch</option>
-                    <option value="mr">Mail response to Requirement List</option>
-                    <option value="na">N/A</option>
-                    <option value="or">Other</option>
-                    <option value="rb">Referred By</option>
-                    <option value="ss">Sub-contractors</option>
-                    <option value="vd">Vendor</option>
-                  </NativeSelect>
-                </FormControl>
-                <TextField InputLabelProps={{ shrink: true }}
-                  margin="dense"
-                  placeholder="Enter sourceInfo"
-                  name="sourceInfo"
-                  label="Source Information "
-                  fullWidth
-                  className={classes.textField}
-                  value={this.state.sourceInfo}
-                  onChange={this.handleChange('sourceInfo')}
-                />
+                
+                
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
                   placeholder="Enter sourcing"
@@ -402,51 +530,9 @@ class CandidateDetails extends React.Component {
                   value={this.state.sourcing}
                   onChange={this.handleChange('sourcing')}
                 />
-                <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="sourceBy" shrink>Sourced By</InputLabel>
-                  <NativeSelect
-                    value={this.state.sourceBy}
-                    onChange={this.handleChange('sourceBy')}
-                    input={<Input name="sourceBy" id="sourceBy" />}
-                  >
-                    <option value="0">--Select--</option>
-                    <option value="4985">Rahul Akkisetti</option>
-                    <option value="4984">Umakanth</option>
-                    <option value="4942"> Meghan Breen</option>
-                    <option value="4941">Francis</option>
-                    <option value="4940">Ravi Thonger</option>
-                    <option value="4939">Srinivas</option>
-                    <option value="4938"> Sri Bollampally</option>
-                    <option value="4937">Raj Nettem</option>
-                    <option value="4936">Asha Richards</option>
-                    <option value="4935">Admin Admin</option>
-                  </NativeSelect>
-                </FormControl>
-                <TextField InputLabelProps={{ shrink: true }}
-                  margin="dense"
-                  placeholder="Enter availableFrom"
-                  name="availableFrom"
-                  label="Available From "
-                  fullWidth
-                  className={classes.textField}
-                  value={this.state.availableFrom}
-                  onChange={this.handleChange('availableFrom')}
-                />
-                <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="noticePeriod" shrink>Notice Period</InputLabel>
-                  <NativeSelect
-                    value={this.state.noticePeriod}
-                    onChange={this.handleChange('noticePeriod')}
-                    input={<Input name="noticePeriod" id="noticePeriod" />}
-                  >
-                    <option value="-1">--Select--</option>
-                    <option value="I">Immediate</option>
-                    <option value="1W">1 Week</option>
-                    <option value="2W">2 Weeks</option>
-                    <option value="1M">1 Month</option>
-                    <option value="C">Custom</option>
-                  </NativeSelect>
-                </FormControl>
+                
+               
+                
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
                   placeholder="Enter fax"
@@ -457,67 +543,7 @@ class CandidateDetails extends React.Component {
                   value={this.state.fax}
                   onChange={this.handleChange('fax')}
                 />
-                <TextField InputLabelProps={{ shrink: true }}
-                  margin="dense"
-                  placeholder="Enter licenseNumber"
-                  name="licenseNumber"
-                  label="License No"
-                  fullWidth
-                  className={classes.textField}
-                  value={this.state.licenseNumber}
-                  onChange={this.handleChange('licenseNumber')}
-                />
-                <TextField InputLabelProps={{ shrink: true }}
-                  margin="dense"
-                  placeholder="Enter passportNumber"
-                  name="passportNumber"
-                  label="Passport No"
-                  fullWidth
-                  className={classes.textField}
-                  value={this.state.passportNumber}
-                  onChange={this.handleChange('passportNumber')}
-                />
-                <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="visaStatus" shrink>Visa Status</InputLabel>
-                  <NativeSelect
-                    value={this.state.visaStatus}
-                    onChange={this.handleChange('visaStatus')}
-                    input={<Input name="visaStatus" id="visaStatus" />}
-                  >
-                    <option value="0">--Select--</option>
-                    <option value="CP">CPT</option>
-                    <option value="EA">EAD</option>
-                    <option value="GE">GC-EAD</option>
-                    <option value="GC">Green Card Holder</option>
-                    <option value="H1">H1B</option>
-                    <option value="OP">OPT</option>
-                    <option value="US">US Citizen</option>
-                    <option value="-1">Other</option>
-                  </NativeSelect>
-                </FormControl>
-                <TextField InputLabelProps={{ shrink: true }}
-                  margin="dense"
-                  placeholder="Enter dateOfBirth"
-                  name="dateOfBirth"
-                  label="Date of Birth "
-                  fullWidth
-                  className={classes.textField}
-                  value={this.state.dateOfBirth}
-                  onChange={this.handleChange('dateOfBirth')}
-                />
-                <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="candidateStatus" shrink>Candidate Status</InputLabel>
-                  <NativeSelect
-                    value={this.state.candidateStatus}
-                    onChange={this.handleChange('candidateStatus')}
-                    input={<Input name="candidateStatus" id="candidateStatus" />}
-                  >
-                    <option value="--select--">-- select --</option>
-                    <option value={10}>My Team</option>
-                    <option value={20}>Private</option>
-                    <option value={30}>Public</option>
-                  </NativeSelect>
-                </FormControl>
+                
                 <CardActions>
                 </CardActions>
               </CardContent>

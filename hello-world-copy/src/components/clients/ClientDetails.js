@@ -13,13 +13,13 @@ import MySnackbarContentWrapper from '../../common/MySnackContent';
 import 'react-overlay-loader/styles.css';
 import Audit from '../../common/Audit'
 import CardHeader from '../../common/CardDetailsHeader'
+import Model from '../../common/model'
 const styles = theme => ({
 	root: {
 		width: '100%',
-		backgroundColor: theme.palette.background.paper,
 		overflowY: 'auto',
-		maxHeight: '35vh',
-		minHeight: '35vh',
+		maxHeight: '30vh',
+		minHeight: '30vh',
 		display: 'flex',
 		flexWrap: 'wrap',
 	},
@@ -37,11 +37,24 @@ const styles = theme => ({
 
 	formControl: {
 		margin: theme.spacing.unit,
-		minWidth: 150,
+		minWidth: 40,
 	},
-	content: {
-		padding: '16px'
-	},
+	textFieldMax: {
+		marginLeft: theme.spacing.unit,
+		marginRight: theme.spacing.unit,
+		width: 150,
+	  },
+	
+	textField: {
+		marginLeft: theme.spacing.unit,
+		marginRight: theme.spacing.unit,
+		width: 100,
+	  },
+	  textFieldMin: {
+		marginLeft: theme.spacing.unit,
+		marginRight: theme.spacing.unit,
+		width: 70,
+	  },
 });
 
 class ClientDetails extends React.Component {
@@ -52,31 +65,7 @@ class ClientDetails extends React.Component {
 	}
 	getInitState() {
 		const { client } = this.props.moreinfo.client
-		
-		return client ? client : {
-			name: '',
-			access: '',
-			accountOwner: '',
-			category: '',
-			websiteAddress: '',
-			status: '',
-			accountCode: '',
-			phoneNumber1: '',
-			phoneNumber2: '',
-			country: '',
-			state: '',
-			city: '',
-			street: '',
-			zipCode: '',
-			fax: '',
-			email1: '',
-			email2: '',
-			description: '',
-			createdBy:'',
-			updatedAt:'',
-			updatedBy:'',
-			createdAt:''
-		}
+		return client ? client : Model.client
 	}
 	componentWillReceiveProps(_nextProps) {
 		console.log(_nextProps);
@@ -118,23 +107,26 @@ class ClientDetails extends React.Component {
 				<div className={classes.root}>
 					<form className={classes.container} noValidate autoComplete="off">
 						<Card className={classes.card}>
-							<CardContent className={classes.content}>
+							<CardContent >
 								<CardHeader title='Client Information' parentMehod={this.updateClient}></CardHeader>
-								<TextField
-									type="input"
+								<TextField InputLabelProps={{ shrink: true }}
+									
 									margin="dense"
 									placeholder="Enter Client name"
 									name="name"
 									label="Name"
 									value={this.state.name}
 									onChange={this.handleChange('name')}
-									required />
-								<FormControl className={classes.formControl}>
+									required
+									className={classes.textFieldMax}
+									
+									 />
+								<FormControl className={classes.formControl} >
 									<InputLabel htmlFor="age-native-helper">Access</InputLabel>
 									<NativeSelect
 										value={this.state.access}
 										onChange={this.handleChange('access')}
-										input={<Input name="access" id="age-native-helper" />}
+										input={<Input name="access" id="age-native-helper"  />}
 									>
 										<option value="--select--">-- select --</option>
 										<option value="MyTeam">My Team</option>
@@ -200,10 +192,54 @@ class ClientDetails extends React.Component {
 									margin="dense"
 									placeholder="Enter Account Code"
 									name="accountCode"
-									label="Account Code"
+									label="Acct Cd"
 									value={this.state.accountCode}
 									onChange={this.handleChange('accountCode')}
-									required />
+									required
+									className={classes.textFieldMin}
+									 />
+								
+								<TextField
+									margin="dense"
+									placeholder="Enter city name"
+									name="city"
+									label="Location"
+									value={this.state.city}
+									onChange={this.handleChange('city')}
+									multiline= "true" 
+									rowsMax="1"
+									className={classes.textField}
+								/>
+								<TextField
+									type="input"
+									margin="dense"
+									placeholder="Enter email1 "
+									name="email1"
+									label="Email1"
+									value={this.state.email1}
+									onChange={this.handleChange('email1')}
+									multiline= "true" 
+									rowsMax="1"
+									className={classes.textField}
+								/>
+								<TextField
+									margin="dense"
+									placeholder="Enter zipCode "
+									name="zipCode"
+									label="Zipcode"
+									value={this.state.zipCode}
+									onChange={this.handleChange('zipCode')}
+									className={classes.textField}
+								/>
+								<TextField
+									margin="dense"
+									placeholder="Enter Phone Number "
+									name="phoneNumber1"
+									label="Phone# "
+									value={this.state.phoneNumber1}
+									onChange={this.handleChange('phoneNumber1')}
+									className={classes.textField}
+								/>
 								<CardActions>
 								</CardActions>
 							</CardContent>
@@ -211,14 +247,7 @@ class ClientDetails extends React.Component {
 						<Card className={classes.card}>
 							<CardContent className={classes.content}>
 								<CardHeader title='Address Information'></CardHeader>
-								<TextField
-									margin="dense"
-									placeholder="Enter Phone Number "
-									name="phoneNumber1"
-									label="Phone Number1 "
-									value={this.state.phoneNumber1}
-									onChange={this.handleChange('phoneNumber1')}
-								/>
+								
 								<TextField
 									margin="dense"
 									placeholder="Enter phone number  2"
@@ -315,14 +344,7 @@ class ClientDetails extends React.Component {
 									value={this.state.street}
 									onChange={this.handleChange('street')}
 								/>
-								<TextField
-									margin="dense"
-									placeholder="Enter zipCode "
-									name="zipCode"
-									label="Zipcode"
-									value={this.state.zipCode}
-									onChange={this.handleChange('zipCode')}
-								/>
+								
 								<TextField
 									margin="dense"
 									placeholder="Enter fax "
@@ -331,14 +353,7 @@ class ClientDetails extends React.Component {
 									value={this.state.fax}
 									onChange={this.handleChange('fax')}
 								/>
-								<TextField
-									margin="dense"
-									placeholder="Enter email1 "
-									name="email1"
-									label="Email1"
-									value={this.state.email1}
-									onChange={this.handleChange('email1')}
-								/>
+								
 								<TextField
 									margin="dense"
 									placeholder="Enter email2 "

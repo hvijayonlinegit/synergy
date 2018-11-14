@@ -14,7 +14,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import AddIcon from '@material-ui/icons/Add';
-import Paper from '@material-ui/core/Paper';
+// import Paper from '@material-ui/core/Paper';
 //Spinner Imports
 import { Loader } from 'react-overlay-loader';
 import 'react-overlay-loader/styles.css';
@@ -29,7 +29,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import theme from '../components/theme';
 import * as authenticationActions from '../actions/authenticationActions';
-import ParticlesBackground from '../common/ParticlesBackground'
+// import ParticlesBackground from '../common/ParticlesBackground'
 import {bindActionCreators} from 'redux';
 const drawerWidth = 240;
 

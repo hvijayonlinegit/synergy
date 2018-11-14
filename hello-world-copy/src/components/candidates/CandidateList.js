@@ -17,9 +17,9 @@ import themes from '../theme';
 
 const styles = theme => ({
   root: {
-    maxHeight: '30vh',
+    maxHeight: '25vh',
     overflow: 'auto',
-    minHeight: '30vh',
+    minHeight: '25vh',
    },
    button: {
     margin: theme.spacing.unit,
@@ -45,6 +45,7 @@ const styles = theme => ({
         textOrientation: 'upright',
         boxSizing: 'border-box',
         marginRight: '10px',
+        marginTop: '45px',
         // height: '35%',
         // borderRight: '2px solid green',
          padding: '2% 1px',
@@ -147,11 +148,10 @@ class NestedList extends React.Component {
                 if (n._links) { documentsLink = n._links.document.href }
 
                 let boundMoreInfo = this.handleMoreinfo.bind(this, documentsLink, n, index);
-                
+                let displayName= n._links.self.href.split('/').pop(-1)+ '   '+n.firstName+ ' ' +n.lastName;
                 return(
                     <ListItem button  to={to} style= {this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem}  key= {index} divider= {true} onClick={boundMoreInfo} >
-                      <ListItemText primary={n._links.self.href.split('/').pop(-1)} />
-                      <ListItemText primary={n.firstName+ ' ' +n.lastName} />
+                      <ListItemText primary={displayName} />
                     </ListItem>
                   );
               })

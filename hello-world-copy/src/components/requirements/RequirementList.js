@@ -14,9 +14,9 @@ import 'react-overlay-loader/styles.css';
 import themes from '../theme'
 const styles = theme => ({
   root: {
-    maxHeight: '25vh',
+    maxHeight: '28vh',
     overflow: 'auto',
-    minHeight: '25vh',
+    minHeight: '28vh',
   },
   button: {
     margin: theme.spacing.unit,
@@ -37,6 +37,7 @@ const styles = theme => ({
       textOrientation: 'upright',
       boxSizing: 'border-box',
       marginRight: '10px',
+      marginTop: '40px',
       // height: '35%',
       // borderRight: '2px solid green',
       padding: '2% 1px',
@@ -131,12 +132,11 @@ class NestedList extends React.Component {
                 if (n._links) { link = n._links.candidates.href }
                 const selflink = n._links.self.href
                 const id = selflink.split('/').pop(-1);
-                let clientid = id;
+                let clientid = id+"   "+n.requirementTitle;
                 let boundMoreInfo = this.handleMoreinfo.bind(this, link, n, index);
                 return (
                   <ListItem button style={this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem} key={id} divider={true} onClick={boundMoreInfo}>
                     <ListItemText primary={clientid} />
-                    <ListItemText primary={n.requirementTitle} />
                   </ListItem>
                 );
               })
