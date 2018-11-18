@@ -18,8 +18,8 @@ const styles = theme => ({
   root: {
     width: '100%',
     overflowY: 'auto',
-    maxHeight: '37.5vh',
-    minHeight: '37.5vh',
+    maxHeight: '39vh',
+    minHeight: '39vh',
     display: 'flex',
     flexWrap: 'wrap',
   },
@@ -116,7 +116,7 @@ class RequirementDetails extends React.Component {
           <form className={classes.container} noValidate autoComplete="off">
             <Card className={classes.card}>
               <CardContent>
-                <CardHeader title='Requirement Information' parentMehod={this.updateRequirement}></CardHeader>
+                <CardHeader title='Requirement Info' parentMehod={this.updateRequirement}></CardHeader>
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
                   placeholder="Enter Client name"

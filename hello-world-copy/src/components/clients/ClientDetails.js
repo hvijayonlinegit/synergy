@@ -18,8 +18,8 @@ const styles = theme => ({
 	root: {
 		width: '100%',
 		overflowY: 'auto',
-		maxHeight: '30vh',
-		minHeight: '30vh',
+		maxHeight: '35vh',
+		minHeight: '35vh',
 		display: 'flex',
 		flexWrap: 'wrap',
 	},
@@ -108,7 +108,7 @@ class ClientDetails extends React.Component {
 					<form className={classes.container} noValidate autoComplete="off">
 						<Card className={classes.card}>
 							<CardContent >
-								<CardHeader title='Client Information' parentMehod={this.updateClient}></CardHeader>
+								<CardHeader title='Client Info' parentMehod={this.updateClient}></CardHeader>
 								<TextField InputLabelProps={{ shrink: true }}
 									
 									margin="dense"
@@ -120,6 +120,16 @@ class ClientDetails extends React.Component {
 									required
 									className={classes.textFieldMax}
 									
+									 />
+								<TextField
+									margin="dense"
+									placeholder="Enter Account Code"
+									name="accountCode"
+									label="Acct Cd"
+									value={this.state.accountCode}
+									onChange={this.handleChange('accountCode')}
+									required
+									className={classes.textFieldMin}
 									 />
 								<FormControl className={classes.formControl} >
 									<InputLabel htmlFor="age-native-helper">Access</InputLabel>
@@ -168,12 +178,33 @@ class ClientDetails extends React.Component {
 								</FormControl>
 								<TextField
 									margin="dense"
+									placeholder="Enter city name"
+									name="city"
+									label="Location"
+									value={this.state.city}
+									onChange={this.handleChange('city')}
+									multiline= "true" 
+									rowsMax="1"
+									className={classes.textField}
+								/>
+								<TextField
+									margin="dense"
+									placeholder="Enter zipCode "
+									name="zipCode"
+									label="Zipcode"
+									value={this.state.zipCode}
+									onChange={this.handleChange('zipCode')}
+									className={classes.textFieldMin}
+								/>
+								<TextField
+									margin="dense"
 									placeholder="http://www."
 									name="websiteAddress"
 									label="Website Address"
 									value={this.state.websiteAddress}
 									onChange={this.handleChange('websiteAddress')}
 								/>
+								
 								<FormControl className={classes.formControl}>
 									<InputLabel htmlFor="status" shrink>Status</InputLabel>
 									<NativeSelect
@@ -188,28 +219,9 @@ class ClientDetails extends React.Component {
 									<option value="ld">Lead</option>
 									</NativeSelect>
 								</FormControl>
-								<TextField
-									margin="dense"
-									placeholder="Enter Account Code"
-									name="accountCode"
-									label="Acct Cd"
-									value={this.state.accountCode}
-									onChange={this.handleChange('accountCode')}
-									required
-									className={classes.textFieldMin}
-									 />
 								
-								<TextField
-									margin="dense"
-									placeholder="Enter city name"
-									name="city"
-									label="Location"
-									value={this.state.city}
-									onChange={this.handleChange('city')}
-									multiline= "true" 
-									rowsMax="1"
-									className={classes.textField}
-								/>
+								
+								
 								<TextField
 									type="input"
 									margin="dense"
@@ -224,39 +236,34 @@ class ClientDetails extends React.Component {
 								/>
 								<TextField
 									margin="dense"
-									placeholder="Enter zipCode "
-									name="zipCode"
-									label="Zipcode"
-									value={this.state.zipCode}
-									onChange={this.handleChange('zipCode')}
+									placeholder="Enter email2 "
+									name="email2"
+									label="Email2"
+									value={this.state.email2}
+									multiline= "true" 
+									rowsMax="1"
+									onChange={this.handleChange('email2')}
 									className={classes.textField}
 								/>
 								<TextField
 									margin="dense"
 									placeholder="Enter Phone Number "
 									name="phoneNumber1"
-									label="Phone# "
+									label="Pri. Phone# "
 									value={this.state.phoneNumber1}
 									onChange={this.handleChange('phoneNumber1')}
 									className={classes.textField}
 								/>
-								<CardActions>
-								</CardActions>
-							</CardContent>
-						</Card>
-						<Card className={classes.card}>
-							<CardContent className={classes.content}>
-								<CardHeader title='Address Information'></CardHeader>
-								
 								<TextField
 									margin="dense"
 									placeholder="Enter phone number  2"
 									name="phoneNumber2"
-									label="Phone Number2"
+									label="Sec. Phone#"
 									value={this.state.phoneNumber2}
 									onChange={this.handleChange('phoneNumber2')}
+									className={classes.textField}
 								/>
-								<FormControl className={classes.formControl}>
+								{/* <FormControl className={classes.formControl}>
 									<InputLabel htmlFor="country">Country</InputLabel>
 									<NativeSelect
 										value={this.state.country}
@@ -343,8 +350,7 @@ class ClientDetails extends React.Component {
 									label="Street"
 									value={this.state.street}
 									onChange={this.handleChange('street')}
-								/>
-								
+								/> */}
 								<TextField
 									margin="dense"
 									placeholder="Enter fax "
@@ -352,21 +358,24 @@ class ClientDetails extends React.Component {
 									label="Fax"
 									value={this.state.fax}
 									onChange={this.handleChange('fax')}
+									className={classes.textFieldMin}
 								/>
-								
 								<TextField
-									margin="dense"
-									placeholder="Enter email2 "
-									name="email2"
-									label="Email2"
-									value={this.state.email2}
-									onChange={this.handleChange('email2')}
+									id="multiline-static"
+									multiline
+									rows="4"
+									label="Description"
+									margin="normal"
+									fullWidth
+									name="description"
+									value={this.state.description}
+									onChange={this.handleChange('description')}
 								/>
 								<CardActions>
 								</CardActions>
 							</CardContent>
 						</Card>
-						<Card className={classes.card}>
+						{/* <Card className={classes.card}>
 							<CardContent className={classes.content}>
 								<CardHeader title='Description' ></CardHeader>
 								<TextField
@@ -382,7 +391,7 @@ class ClientDetails extends React.Component {
 								<CardActions>
 								</CardActions>
 							</CardContent>
-						</Card>
+						</Card> */}
 						<Audit createdBy={this.state.createdBy} createdAt={this.state.createdAt} updatedBy={this.state.updatedBy} updatedAt= {this.state.updatedAt}></Audit>
 					</form>
 				</div>

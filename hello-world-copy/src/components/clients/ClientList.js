@@ -17,9 +17,9 @@ import Info from '@material-ui/icons/Info';
 
 const styles = theme => ({
  root: {
-    maxHeight: '19.5vh',
+    maxHeight: '25vh',
     overflow: 'auto',
-    minHeight: '19.5vh',
+    minHeight: '25vh',
  },
   button: {
     margin: theme.spacing.unit,
