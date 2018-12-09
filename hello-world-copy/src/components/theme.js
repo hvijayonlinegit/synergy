@@ -25,5 +25,6 @@ export default createMuiTheme({
 
     // for 12 px font size == 21.8
     htmlFontSize: 18,
+    useNextVariants: true,
   },
 });

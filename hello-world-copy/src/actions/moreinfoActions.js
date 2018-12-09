@@ -28,7 +28,8 @@ export function createRequirementSuccess(requirement) {
 export function loadMoreinfo(link, client,edit) {
 
   return function(dispatch) {
-    console.log('calling link'+ link);
+    dispatch(spinnerActions.loadSpinner(true));
+    console.log('calling link more info actions'+ link);
     
       return requirementsApi.getRequirements(link).then(requirements => {
         //  console.log('inside requirement action.js'+requirements._embedded.requirementses[0].title);
@@ -55,9 +56,14 @@ function defaultReqLoadng(requirements, dispatch) {
       // Code changes for default loading
       let sortedRequirements = requirements._embedded.requirementses.sort((a, b) => Number(b._links.self.href.split('/').pop(-1)) - Number(a._links.self.href.split('/').pop(-1)));
       sortedRequirements.map((n, index) => {
-        const link = n._links.candidates.href;
+        // const link = n._links.candidates.href;
+        // const selectedClientLink=n._links.accounts.href;
+        let selectedClientLink= '';
+        let link='';
+        if (n._links) { link = n._links.candidates.href;
+          selectedClientLink=n._links.accounts.href; }
         if (index === 0) {
-          dispatch(reqmoreinfoActions.loadReqMoreinfo(link, n));
+          dispatch(reqmoreinfoActions.loadReqMoreinfo(link, n,selectedClientLink));
         }
         return '';
       });

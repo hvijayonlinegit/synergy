@@ -45,7 +45,7 @@ const styles = theme => ({
 }
 });
 
-class NestedList extends React.Component {
+class DocumentsList extends React.Component {
   constructor(props) {
     super(props);
     // Initialize a state which contain the index of clicked element (initially -1)
@@ -183,12 +183,12 @@ class NestedList extends React.Component {
     }
   }
 }
-NestedList.propTypes = {
+DocumentsList.propTypes = {
   selectedCandidate: PropTypes.object.isRequired,
-  documents:PropTypes.object.isRequired,
+  documents:PropTypes.array.isRequired,
   onDocuments: PropTypes.func.isRequired,
   onUpload:PropTypes.func.isRequired,
   onFilechange:PropTypes.func.isRequired,
-  filelink:PropTypes.object.isRequired
+  filelink:PropTypes.string.isRequired
 };
-export default withStyles(styles)(NestedList);
+export default withStyles(styles)(DocumentsList);

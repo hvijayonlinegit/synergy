@@ -67,9 +67,9 @@ class SaveAlert extends React.Component {
 }
 SaveAlert.propTypes = {
     updateConfirm:PropTypes.func.isRequired,
-    onOpen: PropTypes.func.isRequired,
+    onOpen: PropTypes.func,
     onClose: PropTypes.func.isRequired,
-    open: PropTypes.object.isRequired,
+    open: PropTypes.bool.isRequired,
     classes: PropTypes.object.isRequired
   };
 export default  withStyles(styles) (SaveAlert);

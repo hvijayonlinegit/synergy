@@ -132,8 +132,11 @@ class CommonPage extends React.Component {
     handleReqModalClose() {
         this.setState({ reqmodal: false });
     }
-    handleRequirements(link, client) {
-        this.props.reqmoreinfoactions.loadReqMoreinfo(link, client);
+    handleRequirements(link,selectedClientLink, client) {
+        this.props.reqmoreinfoactions.loadReqMoreinfo(link, client,selectedClientLink);
+       // this.props.reqmoreinfoactions.loadSelectedClient(selectedClientLink);
+        
+        
     }
     ////////////////////////////////
     // Candidate page functions
@@ -263,14 +266,14 @@ class CommonPage extends React.Component {
     }
 }
 CommonPage.propTypes = {
-    clients: PropTypes.object.isRequired,
+    clients: PropTypes.any.isRequired,
     children: PropTypes.object,
     actions: PropTypes.object.isRequired,
     moreinfoactions: PropTypes.object.isRequired,
-    moreinfo: PropTypes.object.isRequired,
-    reqmoreinfo: PropTypes.object.isRequired,
+    moreinfo: PropTypes.any.isRequired,
+    reqmoreinfo: PropTypes.any.isRequired,
     reqmoreinfoactions: PropTypes.object.isRequired,
-    candmoreinfo: PropTypes.object.isRequired,
+    candmoreinfo: PropTypes.any.isRequired,
     candmoreinfoactions: PropTypes.object.isRequired,
     docmoreinfoactions: PropTypes.object.isRequired,
     path: PropTypes.string.isRequired

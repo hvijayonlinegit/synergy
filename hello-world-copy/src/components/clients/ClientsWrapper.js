@@ -25,7 +25,7 @@ const styles = theme => ({
     }
 });
 
-class ExampleGrid extends React.Component {
+class ClientWrapper extends React.Component {
 
     state = {
         expanded: null,
@@ -42,10 +42,14 @@ class ExampleGrid extends React.Component {
         const { classes } = this.props;
         const clients = this.props.clients;
         const requirements= this.props.moreinfo.requirements;
+        let showClientDetails = null;
+        if((this.props.path === 'requirements')){
+             showClientDetails= this.props.reqmoreinfo.selectedClient;
+        }
         return (
                 <div className={classes.root}>
                    {
-                       (this.props.path !== 'requirements' && this.props.path !== 'candidates' && this.props.path !== 'Documents' )?
+                       (this.props.path !== 'requirements' && this.props.path !== 'candidates' && this.props.path !== 'Documents' && this.props.path !== 'employees' )?
                        <Paper className={classes.paper}>
                             <Grid container spacing={0} className={classes.gridHeight}>
                                 <Grid item   md ={3}sm={4}>
@@ -65,7 +69,8 @@ class ExampleGrid extends React.Component {
                         </Paper>:
                         <div></div>
                    } 
-                    {(this.props.path !== 'candidates'&& this.props.path !== 'Documents')?<Paper className={classes.paper}>
+                   {(this.props.path !== 'candidates'&& this.props.path !== 'Documents' && this.props.path !== 'employees')?
+                    <Paper className={classes.paper}>
                         <Grid container spacing={0}>
                             <Grid item xs={12} sm={3}>
                             <RequirementList
@@ -81,12 +86,14 @@ class ExampleGrid extends React.Component {
                                 <RequirementDetails 
                                     updateRequirement = {this.props.updateRequirement}
                                     requirement={this.props.reqmoreinfo.requirement}
+                                    showClientDetails= {showClientDetails}
                                     ></RequirementDetails>
                             </Grid>
                         </Grid>
                     </Paper>:<div></div>
                     }
-                    {this.props.path !== 'Documents'?<Paper className={classes.paper}>
+                    {this.props.path !== 'Documents' ?
+                    <Paper className={classes.paper}>
                         <Grid container spacing={0}>
                             <Grid item xs={12} sm={3}>
                             <CandidateList
@@ -96,6 +103,7 @@ class ExampleGrid extends React.Component {
                                 onDelete={this.handleDeleteClient}
                                 onMoreInfo={this.props.onMoreInfo}
                                 handleCadModalOpen={this.props.handleCadModalOpen}
+                                path= {this.props.path}
                             />
                             </Grid>
                             <Grid  item xs={12} sm={9}>
@@ -127,16 +135,16 @@ class ExampleGrid extends React.Component {
     }
 }
 
-ExampleGrid.propTypes = {
-    clients: PropTypes.object.isRequired,
+ClientWrapper.propTypes = {
+    clients: PropTypes.any.isRequired,
     onRequirements: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
     onMoreInfo: PropTypes.func.isRequired,
-    moreinfo: PropTypes.object.isRequired,
+    moreinfo: PropTypes.any.isRequired,
     editMode: PropTypes.bool.isRequired,
-    reqmoreinfo: PropTypes.object.isRequired,
-    candmoreinfo: PropTypes.object.isRequired,
-    docmoreinfo:PropTypes.object.isRequired,
+    reqmoreinfo: PropTypes.any.isRequired,
+    candmoreinfo: PropTypes.any.isRequired,
+    docmoreinfo:PropTypes.any.isRequired,
     onCandidates: PropTypes.func.isRequired,
     onDocuments:PropTypes.func.isRequired,
     onUpload:PropTypes.func.isRequired,
@@ -147,7 +155,7 @@ ExampleGrid.propTypes = {
     updateClient: PropTypes.func.isRequired,
     updateRequirement: PropTypes.func.isRequired,
     updateCandidate: PropTypes.func.isRequired,
-    path:PropTypes.object.isRequired,
+    path:PropTypes.string.isRequired,
 };
 
-export default withStyles(styles)(ExampleGrid);
+export default withStyles(styles)(ClientWrapper);

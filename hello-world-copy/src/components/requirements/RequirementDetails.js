@@ -9,11 +9,12 @@ import CardContent from '@material-ui/core/CardContent';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+// import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import Model from '../../common/model'
 import Audit from '../../common/Audit'
 import CardHeader from '../../common/CardDetailsHeader'
+import InputAdornment from '@material-ui/core/InputAdornment';
 const styles = theme => ({
   root: {
     width: '100%',
@@ -44,7 +45,7 @@ const styles = theme => ({
   textFieldMin: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 50,
+    width: 70,
   },
   card: {
     border: '1px solid lightgrey',
@@ -60,7 +61,38 @@ const styles = theme => ({
 		marginLeft: theme.spacing.unit,
 		marginRight: theme.spacing.unit,
 		width: 100,
-	  },
+    },
+    bootstrapInput: {
+      borderRadius: 4,
+      backgroundColor: theme.palette.common.white,
+      border: '1px solid #ced4da',
+      fontSize: 16,
+      padding: '10px 12px',
+      transition: theme.transitions.create(['border-color', 'box-shadow']),
+      // Use the system font instead of the default Roboto font.
+      fontFamily: [
+        '-apple-system',
+        'BlinkMacSystemFont',
+        '"Segoe UI"',
+        'Roboto',
+        '"Helvetica Neue"',
+        'Arial',
+        'sans-serif',
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+      ].join(','),
+      '&:focus': {
+        borderColor: '#80bdff',
+        boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+      },
+    },
+    bootstrapFormLabel: {
+      fontSize: 18,
+    },
+    adormentEnd:{
+      margin: '0'
+    }
 
 });
 class RequirementDetails extends React.Component {
@@ -97,7 +129,7 @@ class RequirementDetails extends React.Component {
 	}
   render() {
     const { classes } = this.props;
-    if (this.props.requirement.requirementTitle === undefined) {
+    if (this.props.requirement === undefined) {
       return (
         <div>
           <MySnackbarContentWrapper
@@ -116,13 +148,25 @@ class RequirementDetails extends React.Component {
           <form className={classes.container} noValidate autoComplete="off">
             <Card className={classes.card}>
               <CardContent>
-                <CardHeader title='Requirement Info' parentMehod={this.updateRequirement}></CardHeader>
+                <CardHeader chips = 'true' parentMehod={this.updateRequirement}></CardHeader>
+                {this.props.showClientDetails ?
+                  <TextField InputLabelProps={{ shrink: true }}
+									margin="dense"
+									placeholder="Enter Client name"
+									name="name"
+									label="Client"
+									value={this.props.showClientDetails.name || ''}
+									onChange={this.handleChange('name')}
+									required
+									className={classes.textFieldMax}
+                   />
+                   :<p></p> }
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
                   placeholder="Enter Client name"
                   name="requirementTitle"
-                  label="Requirement Title"
-                  value={this.state.requirementTitle}
+                  label="Requirement"
+                  value={this.state.requirementTitle || ''}
 									onChange={this.handleChange('requirementTitle')}
                   required 
                   className={classes.textFieldMax}
@@ -131,11 +175,11 @@ class RequirementDetails extends React.Component {
                 <FormControl required className={classes.formControl}>
                   <InputLabel htmlFor="accountOwner">Account Owner</InputLabel>
                   <NativeSelect
-                    value={this.state.accountOwner}
+                    value={this.state.accountOwner || ''}
                     onChange={this.handleChange('accountOwner')}
                     input={<Input name="accountOwner" id="accountOwner" />}
                   >
-                    <option value="--select--">--Select--</option>
+                    <option value="0">--Select--</option>
                     <option value="4942"> Meghan Breen</option>
                     <option value="4938"> Sri Bollampally</option>
                     <option value="4935">Admin Admin</option>
@@ -144,13 +188,13 @@ class RequirementDetails extends React.Component {
                   </NativeSelect>
                 </FormControl>
                 <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="primaryRecruiteer">Primary Recruiter</InputLabel>
+                  <InputLabel htmlFor="primaryRecruiteer" shrink>Primary Recruiter</InputLabel>
                   <NativeSelect
-                    value={this.state.primaryRecruiteer}
+                    value={this.state.primaryRecruiteer || ''}
                     onChange={this.handleChange('primaryRecruiteer')}
                     input={<Input name="primaryRecruiteer" id="primaryRecruiteer" />}
                   >
-                    <option value="0">--Select--</option>
+                    <option value="--select--">--Select--</option>
                     <option value="4939">Srinivas</option>
                     <option value="4940">Ravi Thonger</option>
                     <option value="4941">Francis</option>
@@ -158,9 +202,9 @@ class RequirementDetails extends React.Component {
                   </NativeSelect>
                 </FormControl>
                 <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="access">Access</InputLabel>
+                  <InputLabel htmlFor="access" shrink>Access</InputLabel>
                   <NativeSelect
-                    value={this.state.access}
+                    value={this.state.access || ''}
                     onChange={this.handleChange('access')}
                     input={<Input name="access" id="access" />}
                   >
@@ -170,10 +214,10 @@ class RequirementDetails extends React.Component {
                     <option value="Public">Public</option>
                   </NativeSelect>
                 </FormControl>
-                <FormControl className={classes.formControl}>
+                {/* <FormControl className={classes.formControl}>
                   <InputLabel htmlFor="age-native-helper" shrink >End Client</InputLabel>
                   <NativeSelect
-                    value={this.state.endClient}
+                    value={this.state.endClient || ''}
                     onChange={this.handleChange('endClient')}
                     input={<Input name="endClient" id="endClient" />}
                   >
@@ -183,14 +227,14 @@ class RequirementDetails extends React.Component {
                     <option value={30}>Public</option>
                   </NativeSelect>
 
-                </FormControl>
+                </FormControl> */}
                 <TextField  InputLabelProps={{ shrink: true }}
                   margin="dense"
                   placeholder="enter requiredSkills"
                   name="requiredSkills"
                   label="Required Skills"
                   fullWidth
-                  value={this.state.requiredSkills}
+                  value={this.state.requiredSkills || ''}
                   onChange={this.handleChange('requiredSkills')}
                   className={classes.textField}
                 />
@@ -200,7 +244,7 @@ class RequirementDetails extends React.Component {
                   name="requiredExperience"
                   label="Experience Req"
                   fullWidth
-                  value={this.state.requiredExperience}
+                  value={this.state.requiredExperience || ''}
                   onChange={this.handleChange('requiredExperience')}
                   className={classes.textFieldMin}
                 />
@@ -208,19 +252,27 @@ class RequirementDetails extends React.Component {
                   margin="dense"
                   placeholder="Enter billRate"
                   name="billRate"
-                  label="Bill Rate($)"
+                  label="Billing($)"
                   fullWidth
-                  value={this.state.billRate}
+                  value={this.state.billRate || ''}
                   onChange={this.handleChange('billRate')}
+                  InputProps={{
+										endAdornment: <InputAdornment  className={classes.adormentEnd} position="end">/hr</InputAdornment>,
+										// endAdornment: <InputAdornment position="end">.com</InputAdornment>,
+									  }}
                   className={classes.textFieldMin}
                 />
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
                   placeholder="Enter payRate"
                   name="payRate"
-                  label="Pay Rate($)"
+                  label="Pay($)"
                   fullWidth
-                  value={this.state.payRate}
+                  InputProps={{
+										endAdornment: <InputAdornment  className={classes.adormentEnd} position="end">/hr</InputAdornment>,
+										// endAdornment: <InputAdornment position="end">.com</InputAdornment>,
+									  }}
+                  value={this.state.payRate || ''}
                   onChange={this.handleChange('payRate')}
                   required 
                   className={classes.textFieldMin}
@@ -229,9 +281,9 @@ class RequirementDetails extends React.Component {
                   margin="dense"
                   placeholder="Enter numberOfOpenings"
                   name="Num OfOpenings"
-                  label="No.of Openings"
+                  label="# Openings"
                   fullWidth
-                  value={this.state.numberOfOpenings}
+                  value={this.state.numberOfOpenings || ''}
                   onChange={this.handleChange('numberOfOpenings')}
                   className={classes.textField}
                 />
@@ -240,15 +292,15 @@ class RequirementDetails extends React.Component {
                   margin="dense"
                   placeholder="Enter maxResumesAllowed"
                   name="maxResumesAllowed"
-                  label="No.of CV's Allowed"
-                  value={this.state.maxResumesAllowed}
+                  label="# CV's Allowed"
+                  value={this.state.maxResumesAllowed || ''}
                   onChange={this.handleChange('maxResumesAllowed')}
                   className={classes.textField}
                 />
                 <FormControl className={classes.formControl}>
                   <InputLabel htmlFor="posiitonType" shrink>Position Type</InputLabel>
                   <NativeSelect
-                    value={this.state.posiitonType}
+                    value={this.state.posiitonType || ''}
                     onChange={this.handleChange('posiitonType')}
                     input={<Input name="posiitonType" id="posiitonType" />}
                   >
@@ -266,7 +318,7 @@ class RequirementDetails extends React.Component {
                   name="duration"
                   label="Duration"
                   fullWidth
-                  value={this.state.duration}
+                  value={this.state.duration || ''}
                   onChange={this.handleChange('duration')}
                   className={classes.textFieldMin}
                   required />
@@ -276,23 +328,31 @@ class RequirementDetails extends React.Component {
                   name="localIndicator"
                   label="Local Indicator"
                   fullWidth
-                  value={this.state.localIndicator}
+                  value={this.state.localIndicator || ''}
                   onChange={this.handleChange('localIndicator')}
                   className={classes.textField}
                 />
                 <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="visaType">Visa Type</InputLabel>
+                  <InputLabel htmlFor="visaType" shrink>Visa Type</InputLabel>
                   <NativeSelect
-                    value={this.state.visaType}
+                    value={this.state.visaType || ''}
                     onChange={this.handleChange('visaType')}
                     input={<Input name="visaType" id="visaType" />}
                   >
+                  <option value="0">--Select--</option>
+                  <option value="CP">CPT</option>
+                  <option value="EA">EAD</option>
+                  <option value="GE">GC-EAD</option>
+                  <option value="GC">Green Card Holder</option>
+                  <option value="H1">H1B</option>
+                  <option value="OP">OPT</option>
+                  <option value="US">US Citizen</option>
                   </NativeSelect>
                 </FormControl>
                 <FormControl className={classes.formControl}>
                   <InputLabel htmlFor="interviewType" shrink>Interview Type</InputLabel>
                   <NativeSelect
-                    value={this.state.interviewType}
+                    value={this.state.interviewType || ''}
                     onChange={this.handleChange('interviewType')}
                     input={<Input name="interviewType" id="interviewType" />}
                   >
@@ -306,7 +366,7 @@ class RequirementDetails extends React.Component {
                 <FormControl className={classes.formControl}>
                   <InputLabel htmlFor="experienceLevel" shrink>Experience Level</InputLabel>
                   <NativeSelect
-                    value={this.state.experienceLevel}
+                    value={this.state.experienceLevel || ''}
                     onChange={this.handleChange('experienceLevel')}
                     input={<Input name="experienceLevel" id="experienceLevel" />}
                   >
@@ -325,7 +385,7 @@ class RequirementDetails extends React.Component {
                 <FormControl className={classes.formControl}>
                   <InputLabel htmlFor="employementType" shrink>Employement Type</InputLabel>
                   <NativeSelect
-                    value={this.state.employementType}
+                    value={this.state.employementType || ''}
                     onChange={this.handleChange('employementType')}
                     input={<Input name="employementType" id="employementType" />}
                   >
@@ -355,7 +415,7 @@ class RequirementDetails extends React.Component {
                   label="Project Start Date"
                   fullWidth
                   type="date"
-                  value={this.state.projectStartDate}
+                  value={this.state.projectStartDate || ''}
                   onChange={this.handleChange('projectStartDate')}
                   className={classes.textFieldMax}
                 />
@@ -366,14 +426,14 @@ class RequirementDetails extends React.Component {
                   label="Project End Date"
                   fullWidth
                   type="date"
-                  value={this.state.projectEndDate}
+                  value={this.state.projectEndDate || ''}
                   onChange={this.handleChange('projectEndDate')}
                   className={classes.textFieldMax}
                 />
-                <FormControl className={classes.formControl}>
+                {/* <FormControl className={classes.formControl}>
                   <InputLabel htmlFor="country" shrink>Country</InputLabel>
                   <NativeSelect
-                  value={this.state.country}
+                  value={this.state.country || ''}
                   onChange={this.handleChange('country')}
                     input={<Input name="country" id="country" />}
                   >
@@ -381,11 +441,19 @@ class RequirementDetails extends React.Component {
                     <option value="1">United States</option>
                   </NativeSelect>
 
-                </FormControl>
+                </FormControl> */}
+                <TextField InputLabelProps={{ shrink: true }}
+                  margin="dense"
+                  name="zipCode"
+                  label="Zipcode"
+                  value={this.state.zipCode || ''}
+                  onChange={this.handleChange('zipCode')}
+                  className={classes.textFieldMin}
+                />
                 <FormControl className={classes.formControl}>
                   <InputLabel htmlFor="state" shrink>State</InputLabel>
                   <NativeSelect
-                    value={this.state.state}
+                    value={this.state.state || ''}
                     onChange={this.handleChange('state')}
                     input={<Input name="state" id="state" />}
                   >
@@ -447,19 +515,12 @@ class RequirementDetails extends React.Component {
                   placeholder="Enter city name"
                   name="city"
                   label="City"
-                  value={this.state.city}
+                  value={this.state.city || ''}
                   onChange={this.handleChange('city')}
                   className={classes.textField}
                   />
 
-                <TextField InputLabelProps={{ shrink: true }}
-                  margin="dense"
-                  placeholder="Enter zipCode "
-                  name="zipCode"
-                  label="Zipcode"
-                  value={this.state.zipCode}
-                  onChange={this.handleChange('zipCode')}
-                />
+                
                
                 
                 <TextField InputLabelProps={{ shrink: true }}
@@ -470,7 +531,7 @@ class RequirementDetails extends React.Component {
                   margin="normal"
                   fullWidth
                   name="briefDescription"
-                  value={this.state.briefDescription}
+                  value={this.state.briefDescription || ''}
                   onChange={this.handleChange('briefDescription')}
                 />
                 <TextField InputLabelProps={{ shrink: true }}
@@ -481,21 +542,21 @@ class RequirementDetails extends React.Component {
                   margin="normal"
                   fullWidth
                   name="description"
-                  value={this.state.description}
+                  value={this.state.description || ''}
                   onChange={this.handleChange('description')}
                 />
                 <CardActions>
                 </CardActions>
               </CardContent>
             </Card>
-            <Card className={classes.card}>
+            {/* <Card className={classes.card}>
               <CardContent className={classes.content}>
                 <CardHeader title='Duration & Type' ></CardHeader>
                 
                 <FormControl className={classes.formControl}>
                   <InputLabel htmlFor="category">Category</InputLabel>
                   <NativeSelect
-                    value={this.state.category}
+                    value={this.state.category || ''}
                     onChange={this.handleChange('category')}
                     input={<Input name="category" id="category" />}
                   >
@@ -512,7 +573,7 @@ class RequirementDetails extends React.Component {
                     <option value="EN">Engineering</option>
                     <option value="FH">Food Services/Hospitality</option>
                     <option value="hr">Human Resources</option>
-                    <option selected="selected" value="it">Information Technology</option>
+                    <option defaultValue="it" value="it">Information Technology</option>
                     <option value="IMP">Installation/Maintenance/Repair</option>
                     <option value="L">Legal</option>
                     <option value="LT">Logistics/Transportation</option>
@@ -530,7 +591,7 @@ class RequirementDetails extends React.Component {
                 <FormControl className={classes.formControl}>
                   <InputLabel htmlFor="subCategory">Sub Category</InputLabel>
                   <Select
-                     value={this.state.subCategory}
+                     value={this.state.subCategory || ''}
                      onChange={this.handleChange('subCategory')}
                     input={<Input name="subCategory" id="subCategory" />}
                   >
@@ -554,7 +615,7 @@ class RequirementDetails extends React.Component {
                 <FormControl className={classes.formControl}>
                   <InputLabel htmlFor="age-native-helper">Status</InputLabel>
                   <NativeSelect
-                    value={this.state.status}
+                    value={this.state.status || ''}
                     onChange={this.handleChange('status')}
                     input={<Input name="account_name" id="age-native-helper" />}
                   >
@@ -574,13 +635,13 @@ class RequirementDetails extends React.Component {
                   margin="normal"
                   fullWidth
                   name="notes"
-                  value={this.state.notes}
+                  value={this.state.notes || ''}
                   onChange={this.handleChange('notes')}
                 />
                 <CardActions>
                 </CardActions>
               </CardContent>
-            </Card>
+            </Card> */}
             {/* Audit for last created and last modified */}
             <Audit createdBy={this.state.createdBy} createdAt={this.state.createdAt} updatedBy={this.state.updatedBy} updatedAt= {this.state.updatedAt}></Audit>
           </form>
@@ -592,6 +653,7 @@ class RequirementDetails extends React.Component {
 RequirementDetails.propTypes = {
   classes: PropTypes.object.isRequired,
   requirement: PropTypes.object.isRequired,
+  showClientDetails: PropTypes.object
 };
 
 export default withStyles(styles)(RequirementDetails);

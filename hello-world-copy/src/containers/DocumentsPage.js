@@ -28,7 +28,6 @@ class DocumentsPage extends React.Component {
 
 DocumentsPage.propTypes = {
   children: PropTypes.object,
-  reqmoreinfoactions: PropTypes.object.isRequired,
  };
 
 function mapStateToProps(state) {

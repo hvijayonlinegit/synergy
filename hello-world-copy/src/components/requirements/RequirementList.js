@@ -48,7 +48,7 @@ const styles = theme => ({
   },
 });
 
-class NestedList extends React.Component {
+class RequirementsList extends React.Component {
   constructor(props) {
     super(props);
     // Initialize a state which contain the index of clicked element (initially -1)
@@ -57,10 +57,10 @@ class NestedList extends React.Component {
   updateSearch(event) {
     this.setState({ search: event.target.value.substr(0, 20) });
   }
-  handleMoreinfo(link, n, index) {
-    console.log('child method' + n.name);
+  handleMoreinfo(link,selectedClientLink, n, index) {
+    console.log('child method' + selectedClientLink);
     this.setState({ indexOfClickedItem: index });
-    this.props.onRequirements(link, n);
+    this.props.onRequirements(link,selectedClientLink, n);
   }
   render() {
     const { classes } = this.props;
@@ -113,13 +113,13 @@ class NestedList extends React.Component {
       return (
         <div className={classes.beforeEle}>
           <TextField
-            hintText="Search..."
+            hinttext="Search..."
             placeholder="Search..."
-            underlineShow={false}
+            underlineshow="false"
             style={styles.textField}
             value={this.state.search}
-            inputStyle={styles.inputStyle}
-            hintStyle={styles.hintStyle}
+            inputstyle={styles.inputStyle}
+            hintstyle={styles.hintStyle}
             onChange={this.updateSearch.bind(this)}
           />
           <Tooltip title="Add a Requirement" classes={{ tooltip: classes.lightTooltip }}>
@@ -129,11 +129,13 @@ class NestedList extends React.Component {
             {
               filteredRequirements.map((n, index) => {
                 let link = '';
-                if (n._links) { link = n._links.candidates.href }
+                let selectedClientLink= '';
+                if (n._links) { link = n._links.candidates.href;
+                  selectedClientLink=n._links.accounts.href; }
                 const selflink = n._links.self.href
                 const id = selflink.split('/').pop(-1);
                 let clientid = id+"   "+n.requirementTitle;
-                let boundMoreInfo = this.handleMoreinfo.bind(this, link, n, index);
+                let boundMoreInfo = this.handleMoreinfo.bind(this, link,selectedClientLink, n, index);
                 return (
                   <ListItem button style={this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem} key={id} divider={true} onClick={boundMoreInfo}>
                     <ListItemText primary={clientid} />
@@ -147,10 +149,10 @@ class NestedList extends React.Component {
     }
   }
 }
-NestedList.propTypes = {
-  requirements: PropTypes.object.isRequired,
-  selectedclient: PropTypes.object.isRequired,
+RequirementsList.propTypes = {
+  requirements: PropTypes.any.isRequired,
+  selectedclient: PropTypes.any.isRequired,
   onRequirements: PropTypes.func.isRequired,
   handleReqModalOpen: PropTypes.func.isRequired
 };
-export default withStyles(styles)(NestedList);
+export default withStyles(styles)(RequirementsList);

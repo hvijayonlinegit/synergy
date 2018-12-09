@@ -32,11 +32,11 @@ class RequirementsPage extends React.Component {
 
 RequirementsPage.propTypes = {
   children: PropTypes.object,
-  actions: PropTypes.object.isRequired,
-  moreinfoactions: PropTypes.object.isRequired,
-  reqmoreinfoactions: PropTypes.object.isRequired,
-  candmoreinfoactions: PropTypes.object.isRequired,
-  docmoreinfoactions:PropTypes.object.isRequired
+  actions: PropTypes.object,
+  moreinfoactions: PropTypes.object,
+  reqmoreinfoactions: PropTypes.object,
+  candmoreinfoactions: PropTypes.object,
+  docmoreinfoactions:PropTypes.object
  };
 
 function mapStateToProps(state) {

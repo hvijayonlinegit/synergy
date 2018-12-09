@@ -1,6 +1,6 @@
 import * as types from './actionTypes';
 import candidatesApi from '../api/candidatesApi';
-
+import clientsApi from'../api/clientsApi';
 import * as docmoreinfoActions from '../actions/docmoreinfoActions';
 import * as candmoreinfoActions from '../actions/candmoreinfoActions';
 import * as clientActions from '../actions/clientActions';
@@ -12,8 +12,8 @@ export function loadCandidatesSuccess(candidates) {
 export function updateCandidateSuccess(candidate){
   return {type: types.UPDATE_CANDIDATE_SUCCESS, candidate};
 }
-export function loadReqMoreInfoSuccess(client,candidates){
-  return {type: types.LOAD_REQ_MOREINFO_SUCCESS, client,candidates};
+export function loadReqMoreInfoSuccess(associatedClient, client,candidates,selectedClient){
+  return {type: types.LOAD_REQ_MOREINFO_SUCCESS,associatedClient, client,candidates,selectedClient};
 }
 export function loadReqUpdateSuccess(requirement){
   return {type: types.LOAD_REQ_UPDATE_SUCCESS, requirement};
@@ -30,15 +30,29 @@ export function createCandidateSuccess(candidate){
 export function setSelectedRequirement(client){
   return {type: types.SET_SELECTED_REQUIREMENT, client};
 }
-export function loadReqMoreinfo(link, client) {
+
+export function loadSelectedClient(associatedClientLink,selectedRequirement, candidates ){
+  return function(dispatch) {
+    return clientsApi.getSelectedClient(associatedClientLink).then(associatedClient => {
+      dispatch(loadReqMoreInfoSuccess(associatedClient, selectedRequirement, candidates));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+export function loadReqMoreinfo(link, selectedRequirement,selectedClientLink) {
   //function (dispatch){dispatch(setSelectedRequirement(client));}
   return function(dispatch) {
+    dispatch(spinnerActions.loadSpinner(true));
     console.log('getting candidates using  link'+ link);
     return candidatesApi.getCandidates(link).then(candidates => {
-    //  console.log('inside requirement action.js'+requirements._embedded.requirementses[0].title);
+      console.log('req more ingo link'+ link);
+      // Default behavior to load the list of candidates in sort order and their detials.
     candidates = defaultLoad(candidates, dispatch);
-    dispatch(loadReqMoreInfoSuccess(client, candidates));
+    dispatch(loadSelectedClient(selectedClientLink,selectedRequirement, candidates));
+    dispatch(spinnerActions.loadSpinner(false));
     }).catch(error => {
+      dispatch(spinnerActions.loadSpinner(false));
       throw(error);
     });
   };

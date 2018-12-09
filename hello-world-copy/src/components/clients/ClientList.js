@@ -118,7 +118,7 @@ arrowArrow: {
 },
 });
 
-class NestedList extends React.Component {
+class ClientsList extends React.Component {
   constructor(props) {
     super(props);
     // Initialize a state which contain the index of clicked element (initially -1)
@@ -208,14 +208,14 @@ updateSearch(event){
         <div  className={classes.beforeEle}>
           <TextField
             autoFocus
-            hintText="Search..."
+            hinttext="Search..."
             placeholder="Search..."
-            underlineShow={false}
+            underlineshow="false"
             
             style={styles.textField}
             value={this.state.search} 
-            inputStyle={styles.inputStyle}
-            hintStyle={styles.hintStyle}
+            inputstyle={styles.inputStyle}
+            hintstyle={styles.hintStyle}
             onChange={this.updateSearch.bind(this)}
             />
             <Tooltip title="Add a Client" classes={{ tooltip: classes.lightTooltip }}>
@@ -236,9 +236,9 @@ updateSearch(event){
                   let boundMoreInfo = this.handleMoreinfo.bind(this, link, n, index);
                   let displayname =  id+"   "+n.name;
                   return(
-                    <div>
+                    <div key= {n.name}>
                       
-                      <ListItem autoFocus button={true} style= {this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem} to={to}  key= {id} divider= {true} onClick={boundMoreInfo} >
+                      <ListItem autoFocus button={true}  style= {this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem} to={to}   divider= {true} onClick={boundMoreInfo} >
                         {/* <ListItemText primary={n.name} secondary={clientid} /> */}
                         <ListItemText  primary= {displayname}/>
                           <ListItemSecondaryAction >
@@ -284,10 +284,10 @@ updateSearch(event){
     }
   }
 }
-NestedList.propTypes = {
+ClientsList.propTypes = {
   clients: PropTypes.object.isRequired,
   onMoreInfo: PropTypes.func.isRequired,
   
   handleModalOpen: PropTypes.func.isRequired,
 };
-export default withStyles(styles)(NestedList);
+export default withStyles(styles)(ClientsList);

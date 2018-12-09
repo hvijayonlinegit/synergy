@@ -41,9 +41,9 @@ function Audit(props) {
 
 Audit.propTypes = {
   classes: PropTypes.object.isRequired,
-  createdBy: PropTypes.object.isRequired,
-  updatedBy: PropTypes.object.isRequired,
-  updatedAt: PropTypes.object.isRequired
+  createdBy: PropTypes.any,
+  updatedBy: PropTypes.any,
+  updatedAt: PropTypes.any
 };
 
 export default withStyles(styles)(Audit);

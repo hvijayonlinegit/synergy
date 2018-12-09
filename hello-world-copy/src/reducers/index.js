@@ -8,7 +8,6 @@ import candmoreinfo from './candmoreinfoReducer';
 import docmoreinfo from './docmoreinfoReducer';
 import spinner from './spinnerReducer';
 import { reducer as authReducer } from './auth';
-
 const rootReducer = combineReducers({
   // short hand property names
   clients,

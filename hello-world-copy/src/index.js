@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import {fetchUser} from './actions/authenticationActions'
 import { AUTH_USER } from './actions/actionTypes';
+import 'babel-polyfill'
 const store = configureStore();
 
 const token = localStorage.getItem('token');

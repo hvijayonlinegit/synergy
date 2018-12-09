@@ -10,6 +10,7 @@ export default function reqmoreinfoReducer(state = initialState.clients.reqmorei
       const clientState = Object.assign([], state)
       clientState.requirement =  action.client
       clientState.candidates = action.candidates
+      clientState.selectedClient = action.associatedClient
       //browserHistory.push('/clients')
       return clientState
       case types.LOAD_CANDIDATES_SUCCESS:

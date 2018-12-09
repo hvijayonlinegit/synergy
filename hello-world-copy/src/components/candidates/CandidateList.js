@@ -56,7 +56,7 @@ const styles = theme => ({
 }
 });
 
-class NestedList extends React.Component {
+class CandidatesList extends React.Component {
   constructor(props) {
     super(props);
     // Initialize a state which contain the index of clicked element (initially -1)
@@ -105,10 +105,17 @@ class NestedList extends React.Component {
         );
       }
     else{
-      // sort the list to show recently added candidate at the top
-      let sortedCandidates = this.props.candidates.candidates.sort(
+      // Logi to show employees
+      let sortedCandidates =[];
+      if(this.props.path === 'employees'){
+
+      }else{
+        // sort the list to show recently added candidate at the top
+       sortedCandidates = this.props.candidates.candidates.sort(
         (a,b)=> Number(b._links.self.href.split('/').pop(-1)) - Number(a._links.self.href.split('/').pop(-1))
       );
+      }
+      
       //Apply search filters to search by name or id for the candidate list
       let filteredCandidates= sortedCandidates.filter(
         (candidate) =>{
@@ -126,14 +133,14 @@ class NestedList extends React.Component {
     return (
       <div className={classes.beforeEle}>
         <TextField
-            hintText="Search..."
+            hinttext="Search..."
             placeholder="Search..."
-            underlineShow={false}
+            underlineshow="false"
             
             style={styles.textField}
             value={this.state.search} 
-            inputStyle={styles.inputStyle}
-            hintStyle={styles.hintStyle}
+            inputttyle={styles.inputStyle}
+            hintstyle={styles.hintStyle}
             onChange={this.updateSearch.bind(this)}
             />
             <Tooltip title="Add a Candidate" classes={{ tooltip: classes.lightTooltip }}>
@@ -162,10 +169,11 @@ class NestedList extends React.Component {
     }
   }
 }
-NestedList.propTypes = {
-  candidates: PropTypes.object.isRequired,
-  selectedRequirement: PropTypes.object.isRequired,
+CandidatesList.propTypes = {
+  candidates: PropTypes.any.isRequired,
+  selectedRequirement: PropTypes.any.isRequired,
   onCandidates: PropTypes.func.isRequired,
-  handleCadModalOpen: PropTypes.func.isRequired
+  handleCadModalOpen: PropTypes.func.isRequired,
+  path:PropTypes.string.isRequired,
 };
-export default withStyles(styles)(NestedList);
+export default withStyles(styles)(CandidatesList);

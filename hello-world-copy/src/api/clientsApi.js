@@ -95,6 +95,21 @@ class clientsApi {
       return error;
     });
   }
+  static getSelectedClient(link) {
+    const request = new Request(link, {
+      method: 'GET',
+      headers: new Headers({
+        'Accept': 'application/json',
+        'Authorization':' Bearer ' + localStorage.getItem('token')
+      })
+    });
+
+    return fetch(request).then(response => {
+      return response.json();
+    }).catch(error => {
+      return error;
+    });
+  }
 
   static deleteCat(cat, link) {
     const request = new Request(link, {

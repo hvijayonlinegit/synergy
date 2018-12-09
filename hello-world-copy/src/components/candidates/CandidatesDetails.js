@@ -168,7 +168,7 @@ class CandidateDetails extends React.Component {
                   margin="dense"
                   placeholder="Enter middleName"
                   name="middleName"
-                  label="Middle Name"
+                  label="MI.Name"
                   fullWidth
                   className={classes.textFieldMin}
                   value={this.state.middleName}
@@ -631,7 +631,7 @@ class CandidateDetails extends React.Component {
 
 CandidateDetails.propTypes = {
   classes: PropTypes.object.isRequired,
-  candidate: PropTypes.object.isRequired,
+  candidate: PropTypes.any.isRequired,
 };
 
 export default withStyles(styles)(CandidateDetails);

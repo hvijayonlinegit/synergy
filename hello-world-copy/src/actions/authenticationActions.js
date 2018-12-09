@@ -40,7 +40,7 @@ export const signinUser = ({ usernameOrEmail, password }) => {
                //localStorage.setItem('token', user.token);
 
                 // - redirect to the route '/feature'
-                browserHistory.push('/');
+                browserHistory.push('/clientsdash');
 
             }).catch((error) => {
                 // if request is bad...

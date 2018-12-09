@@ -11,6 +11,7 @@ import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import MySnackbarContentWrapper from '../../common/MySnackContent';
 import 'react-overlay-loader/styles.css';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import Audit from '../../common/Audit'
 import CardHeader from '../../common/CardDetailsHeader'
 import Model from '../../common/model'
@@ -55,6 +56,9 @@ const styles = theme => ({
 		marginRight: theme.spacing.unit,
 		width: 70,
 	  },
+	  adorment: {
+		  marginRight: '0'
+	  }
 });
 
 class ClientDetails extends React.Component {
@@ -108,9 +112,8 @@ class ClientDetails extends React.Component {
 					<form className={classes.container} noValidate autoComplete="off">
 						<Card className={classes.card}>
 							<CardContent >
-								<CardHeader title='Client Info' parentMehod={this.updateClient}></CardHeader>
+								<CardHeader parentMehod={this.updateClient}></CardHeader>
 								<TextField InputLabelProps={{ shrink: true }}
-									
 									margin="dense"
 									placeholder="Enter Client name"
 									name="name"
@@ -148,6 +151,7 @@ class ClientDetails extends React.Component {
 									<InputLabel htmlFor="name-readonly">Account Owner</InputLabel>
 									<NativeSelect
 										value={this.state.accountOwner}
+										defaultValue="4942"
 										onChange={this.handleChange('accountOwner')}
 										input={<Input name="accountOwner" id="accountOwner" />}
 									>
@@ -183,7 +187,7 @@ class ClientDetails extends React.Component {
 									label="Location"
 									value={this.state.city}
 									onChange={this.handleChange('city')}
-									multiline= "true" 
+									multiline
 									rowsMax="1"
 									className={classes.textField}
 								/>
@@ -198,11 +202,15 @@ class ClientDetails extends React.Component {
 								/>
 								<TextField
 									margin="dense"
-									placeholder="http://www."
+									InputProps={{
+										startAdornment: <InputAdornment  className={classes.adorment} position="start">http://www.</InputAdornment>,
+										// endAdornment: <InputAdornment position="end">.com</InputAdornment>,
+									  }}
 									name="websiteAddress"
 									label="Website Address"
 									value={this.state.websiteAddress}
 									onChange={this.handleChange('websiteAddress')}
+									className={classes.textFieldMax}
 								/>
 								
 								<FormControl className={classes.formControl}>
@@ -230,7 +238,7 @@ class ClientDetails extends React.Component {
 									label="Email1"
 									value={this.state.email1}
 									onChange={this.handleChange('email1')}
-									multiline= "true" 
+									multiline 
 									rowsMax="1"
 									className={classes.textField}
 								/>
@@ -240,7 +248,7 @@ class ClientDetails extends React.Component {
 									name="email2"
 									label="Email2"
 									value={this.state.email2}
-									multiline= "true" 
+									multiline 
 									rowsMax="1"
 									onChange={this.handleChange('email2')}
 									className={classes.textField}
@@ -403,9 +411,8 @@ class ClientDetails extends React.Component {
 
 ClientDetails.propTypes = {
 	classes: PropTypes.object.isRequired,
-	moreinfo: PropTypes.object.isRequired,
-	onChange: PropTypes.func.isRequired,
-	editMode: PropTypes.object.isRequired,
+	moreinfo: PropTypes.any.isRequired,
+	editMode: PropTypes.bool.isRequired,
 	updateClient: PropTypes.func.isRequired,
 };
 

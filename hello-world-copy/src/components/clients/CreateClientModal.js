@@ -410,7 +410,7 @@ class ClientModal extends React.Component {
 	}
 }
 ClientModal.propTypes = {
-	fullScreen: PropTypes.bool.isRequired,
+	fullScreen: PropTypes.bool,
 	classes: PropTypes.object.isRequired,
 	client: PropTypes.object.isRequired,
 	onSave: PropTypes.func.isRequired,

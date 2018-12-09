@@ -162,7 +162,7 @@ class ClientModal extends React.Component {
 				<TextField
 						autoFocus
 						margin="dense"
-						disabled= "true"
+						disabled 
 						name="id"
 						label="Account Id "
 						fullWidth

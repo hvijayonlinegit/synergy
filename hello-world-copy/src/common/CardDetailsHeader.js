@@ -9,6 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import SaveIcon from '@material-ui/icons/Save';
 import classNames from 'classnames';
 // import Button from '@material-ui/core/Button';
+
+// import Chip from '@material-ui/core/Chip';
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -49,9 +51,11 @@ function CardDetailsHeader(props) {
     <div className={classes.root}>
         <Grid container spacing={0}>
             <Grid item xs={10} md={10} sm={8}>
-                <Typography className={classes.afterEle} variant="subtitle2" gutterBottom>
-                        {props.title}
-                </Typography>
+              {props.title?<Typography className={classes.afterEle} variant="subtitle2" gutterBottom>
+                  {props.title}      
+                </Typography>:<p></p> }
+                {/* {props.chips?<Chip label="No. of Cadidates Submitted:" className={classes.chip} variant="outlined" />:<span></span>} */}
+                
             </Grid>
             <Grid item xs={2} md={2} sm={4}>
                 {
@@ -70,8 +74,8 @@ function CardDetailsHeader(props) {
 
 CardDetailsHeader.propTypes = {
   classes: PropTypes.object.isRequired,
-  title: PropTypes.string.isRequired,
-  parentMehod:PropTypes.func.isRequired
+  title: PropTypes.string,
+  parentMehod:PropTypes.func,
 };
 
 export default withStyles(styles)(CardDetailsHeader);

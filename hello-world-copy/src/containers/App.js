@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import ExitToApp from '@material-ui/icons/ExitToApp';
-import AddIcon from '@material-ui/icons/Add';
+// import AddIcon from '@material-ui/icons/Add';
 // import Paper from '@material-ui/core/Paper';
 //Spinner Imports
 import { Loader } from 'react-overlay-loader';
@@ -122,7 +122,7 @@ class App extends React.Component {
 
       return (
         
-        <Typography variant="caption" noWrap = "true" color="inherit" >
+        <Typography variant="caption" noWrap  color="inherit" >
            Welcome {this.props.userdetails}
           </Typography>
       );
@@ -135,7 +135,7 @@ class App extends React.Component {
         browserHistory.push(`/clients`);
         break;
     case 'home':
-        browserHistory.push(`/`);
+        browserHistory.push(`/home`);
         break;
     case 'requirements':
         browserHistory.push(`/requirements`);
@@ -145,6 +145,9 @@ class App extends React.Component {
         break;
     case 'Documents':
       browserHistory.push(`/Documents`);
+      break;
+    case 'employees':
+      browserHistory.push(`/employees`);
       break;
     default:
         browserHistory.push(`/`);
@@ -191,15 +194,17 @@ class App extends React.Component {
             >
               <MenuIcon />
             </IconButton>
-            <IconButton color="inherit"><AddIcon color="inherit" ></AddIcon></IconButton></div>:<div></div>}
+            {/* <IconButton color="inherit"><AddIcon color="inherit" ></AddIcon></IconButton> */}
+            </div>:<div></div>}
             {
           this.props.authenticated ? (
               <div className={classes.flex} >
-                  <Tabs  value={value} onChange={this.handleChange}>
+                  <Tabs  value={value || 'home'} onChange={this.handleChange}>
                     <Tab value="home" label="Home" />
                     <Tab value="clients" label="Clients" />
                     <Tab value="requirements" label="Requirements" />
                     <Tab value="candidates" label="Candidates" />
+                    <Tab value="employees" label="Employees" />
                     <Tab value="Documents" label="Documents" />
                 </Tabs>
               </div>
