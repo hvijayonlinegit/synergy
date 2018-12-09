@@ -38,6 +38,9 @@ const styles = theme => ({
   reports:{
     backgroundColor: 'lightBlue',
     marginLeft: '15px'
+},
+marginCustom:{
+    marginBottom:'20px'
 }
 });
 
@@ -74,10 +77,10 @@ class TaskList extends React.Component {
       },
       
       listItemClicked: {
-       paddingTop: '2px',
+        paddingTop: '2px',
         paddingBottom: '2px',
         border: '1px solid rgba(0, 0, 0, 0.12)',
-        borderLeft: '12px solid lightgreen',
+        borderLeft: '3px solid lightgreen',
         boxShadow: '0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12)'
       },
      
@@ -90,7 +93,7 @@ class TaskList extends React.Component {
         className={classes.root}
       >
       
-        <ListItem button disableGutters   onClick={this.handleClick}>
+        <ListItem button disableGutters className={classes.marginCustom}  onClick={this.handleClick}>
          <Chip 
          icon={<ReportsIcon />}
          label={
@@ -122,7 +125,7 @@ class TaskList extends React.Component {
         {/* <li>
                 <Divider  />
             </li> */}
-        <ListItem button disableGutters   onClick={this.handleTaskClick}>
+        <ListItem button disableGutters  className={classes.marginCustom} onClick={this.handleTaskClick}>
         <Chip 
          icon={
               <TaskIcon />
