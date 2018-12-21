@@ -90,7 +90,6 @@ export const authError = (error) => {
 };
 
 export const signoutUser = () => {
-    
     localStorage.removeItem('token');
     return { type: UNAUTH_USER };
 };

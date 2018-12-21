@@ -240,7 +240,7 @@ class ClientDetails extends React.Component {
 									onChange={this.handleChange('email1')}
 									multiline 
 									rowsMax="1"
-									className={classes.textField}
+									className={classes.textFieldMax}
 								/>
 								<TextField
 									margin="dense"
@@ -251,7 +251,7 @@ class ClientDetails extends React.Component {
 									multiline 
 									rowsMax="1"
 									onChange={this.handleChange('email2')}
-									className={classes.textField}
+									className={classes.textFieldMax}
 								/>
 								<TextField
 									margin="dense"
@@ -366,7 +366,7 @@ class ClientDetails extends React.Component {
 									label="Fax"
 									value={this.state.fax}
 									onChange={this.handleChange('fax')}
-									className={classes.textFieldMin}
+									className={classes.textField}
 								/>
 								<TextField
 									id="multiline-static"
