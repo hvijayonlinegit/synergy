@@ -26,7 +26,8 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
     borderRight: '1px solid rgba(0, 0, 0, 0.12)',
     border: '1px solid rgba(0, 0, 0, 0.12)',
-    minHeight: '100vh'
+    minHeight: '100vh',
+    maxHeight: '100vh'
   },
   nested: {
     // paddingLeft: theme.spacing.unit * 4,

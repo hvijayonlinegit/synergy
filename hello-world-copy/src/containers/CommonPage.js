@@ -69,6 +69,7 @@ class CommonPage extends React.Component {
 
     //Clients page functions
     createClient(event) {
+        console.log('i am in create client')
         if (this.state.client.name === '') {
         }
         else {
@@ -85,6 +86,7 @@ class CommonPage extends React.Component {
     updateClientState(event) {
         const field = event.target.name;
         const client = this.state.client;
+        console.log(field+event.target.value)
         client[field] = event.target.value;
         return this.setState({ client: client });
     }
@@ -132,11 +134,11 @@ class CommonPage extends React.Component {
     handleReqModalClose() {
         this.setState({ reqmodal: false });
     }
-    handleRequirements(link,selectedClientLink, client) {
-        this.props.reqmoreinfoactions.loadReqMoreinfo(link, client,selectedClientLink);
-       // this.props.reqmoreinfoactions.loadSelectedClient(selectedClientLink);
-        
-        
+    handleRequirements(link, selectedClientLink, client) {
+        this.props.reqmoreinfoactions.loadReqMoreinfo(link, client, selectedClientLink);
+        // this.props.reqmoreinfoactions.loadSelectedClient(selectedClientLink);
+
+
     }
     ////////////////////////////////
     // Candidate page functions
@@ -211,57 +213,58 @@ class CommonPage extends React.Component {
         const reqmoreinfo = this.props.reqmoreinfo;
         const candmoreinfo = this.props.candmoreinfo;
         return (
-            <div >
-                <ClientsWrapper
-                    clients={clients}
-                    moreinfo={moreinfo}
-                    reqmoreinfo={reqmoreinfo}
-                    candmoreinfo={candmoreinfo}
-                    editMode={this.state.editMode}
-                    docmoreinfo={this.props.docmoreinfo}
-                    onRequirements={this.handleRequirements}
-                    onCandidates={this.handleCandidates}
-                    onDocuments={this.handleDocuments}
-                    onUpload={this.uploadDocument}
-                    onFilechange={this.onFilechange}
-                    onDelete={this.handleDeleteClient}
-                    onMoreInfo={this.handleMoreInfo}
-                    handleModalOpen={this.handleModalOpen}
-                    handleReqModalOpen={this.handleReqModalOpen}
-                    handleCadModalOpen={this.handleCadModalOpen}
-                    updateClient={this.updateClient}
-                    updateRequirement={this.updateRequirement}
-                    updateCandidate={this.updateCandidate}
-                    children={this.props.children}
-                    path={this.props.path}
-                />
-                <AddClientModal
-                    client={this.state.client}
-                    onSave={this.createClient}
-                    onChange={this.updateClientState}
-                    open={this.state.modal}
-                    close={this.handleModalClose}
-                />
-                <AddRequirementModal
-                    requirement={this.state.requirement}
-                    onSave={this.createRequirement}
-                    onChange={this.updateReqState}
-                    open={this.state.reqmodal}
-                    close={this.handleReqModalClose}
-                />
-                <AddCandidateModal
-                    candidate={this.state.candidate}
-                    onSave={this.saveCandidate}
-                    onChange={this.updateCadState}
-                    open={this.state.cadmodal}
-                    close={this.handleCadModalClose}
-                />
-                <SaveAlert 
-                updateConfirm={this.updateConfirm} 
-                open={this.state.openAlert} 
-                onClose={this.handleSaveAlertClose} 
-                />
-            </div>
+                    <div >
+                        <ClientsWrapper
+                            clients={clients}
+                            moreinfo={moreinfo}
+                            reqmoreinfo={reqmoreinfo}
+                            candmoreinfo={candmoreinfo}
+                            editMode={this.state.editMode}
+                            docmoreinfo={this.props.docmoreinfo}
+                            onRequirements={this.handleRequirements}
+                            onCandidates={this.handleCandidates}
+                            onDocuments={this.handleDocuments}
+                            onUpload={this.uploadDocument}
+                            onFilechange={this.onFilechange}
+                            onDelete={this.handleDeleteClient}
+                            onMoreInfo={this.handleMoreInfo}
+                            handleModalOpen={this.handleModalOpen}
+                            handleReqModalOpen={this.handleReqModalOpen}
+                            handleCadModalOpen={this.handleCadModalOpen}
+                            updateClient={this.updateClient}
+                            updateRequirement={this.updateRequirement}
+                            updateCandidate={this.updateCandidate}
+                            children={this.props.children}
+                            path={this.props.path}
+                        />
+                        <AddClientModal
+                            client={this.state.client}
+                            onSave={this.createClient}
+                            onChange={this.updateClientState}
+                            open={this.state.modal}
+                            close={this.handleModalClose}
+                        />
+                        <AddRequirementModal
+                            requirement={this.state.requirement}
+                            onSave={this.createRequirement}
+                            onChange={this.updateReqState}
+                            open={this.state.reqmodal}
+                            close={this.handleReqModalClose}
+                        />
+                        <AddCandidateModal
+                            candidate={this.state.candidate}
+                            onSave={this.saveCandidate}
+                            onChange={this.updateCadState}
+                            open={this.state.cadmodal}
+                            close={this.handleCadModalClose}
+                        />
+                        <SaveAlert
+                            updateConfirm={this.updateConfirm}
+                            open={this.state.openAlert}
+                            onClose={this.handleSaveAlertClose}
+                        />
+                    </div>
+            
         );
     }
 }

@@ -1,16 +1,25 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { Paper } from '@material-ui/core';
+import { Paper, withStyles } from '@material-ui/core';
 import Sample from './Sample'
 import SampleList from './SampleList'
-
+import ClientInputForm from '../components/clients/ClientInputForm'
+import RequirementList from '../components/requirements/RequirementList'
+import model from '../common/model'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import * as clientActions from '../actions/clientActions'
+import * as moreinfoActions from '../actions/moreinfoActions';
+import * as reqmoreinfoActions from '../actions/reqmoreinfoActions';
+import * as candmoreinfoActions from '../actions/candmoreinfoActions';
+import * as docmoreinfoActions from '../actions/docmoreinfoActions';
+import PropTypes from 'prop-types';
 import { browserHistory} from 'react-router';
+import { compose } from '../../node_modules/redux';
 const styles = theme => ({
   root: {
     width: '100%',
@@ -26,64 +35,91 @@ const styles = theme => ({
       float: 'right'
   },
   paper: {
-      
-      width: '100%',
+    width: '100%',
 		overflowY: 'auto',
 		maxHeight: '50vh',
 		minHeight: '50vh',
 		display: 'flex',
 		flexWrap: 'wrap',
   },
-  labelpro: {
-    // backgroundColor: '#9ccc65',
-    // '&::after':
-    // {
-    //   right: 'auto',
-    //   left: '100%',
-    //   borderLeftWidth: '0',
-    //   borderRightWidth: '8px',
-    //   borderColor: '#9ccc65',
-    //   borderRightColor: 'transparent'
-    // }
-  }
+  
 });
 
 function getSteps() {
   return ['Create a Client', 'Select a Requirement', 'Create Candiate', 'Upload Documents'];
 }
 
-function getStepContent(step, classes) {
+function getStepContent(step, state,updateClientState, requirements) {
   switch (step) {
     case 0:
-      return <Paper className={classes.paper}><Sample></Sample></Paper>;
+      return <ClientInputForm
+                            client={state}
+                            onChange={updateClientState}
+                            ></ClientInputForm>;
     case 1:
-      return <Paper className={classes.paper}><SampleList></SampleList></Paper>;
+      return <RequirementList
+      requirements={requirements}
+  />;
     case 2:
-      return <Paper className={classes.paper}><Sample></Sample></Paper>;
+      return <Sample></Sample>;
     default:
-      return <Paper className={classes.paper}><Typography variant="headline">Upload Documents and Click Finish to Navigate to Clients Section.</Typography> </Paper>;
+      return <Typography variant="headline">Upload Documents and Click Finish to Navigate to Clients Section.</Typography> ;
   }
 }
 
 class CustomStepper extends React.Component {
-  state = {
+  constructor(props) {
+    super(props);
+    this.state = {
     activeStep: 0,
     skipped: new Set(),
+    client: model.client,
   };
+  
+  this.createClient = this.createClient.bind(this);
+  this.updateClientState = this.updateClientState.bind(this);
+  }
+  componentWillMount() {
+    // this.props.moreinfoactions.loadRequirements();
+  }
 
+   //Clients page functions
+   createClient(event) {
+    console.log('i am in create client')
+    if (this.state.client.name === '') {
+    }
+    else {
+        event.preventDefault();
+        this.props.actions.createCat(this.state.client).then(() => {
+            this.setState({ modal: false });
+        });
+    }
+}
+updateClientState(event) {
+  const field = event.target.name;
+  const client = this.state.client;
+  console.log(field+event.target.value)
+  client[field] = event.target.value;
+  return this.setState({ client: client });
+}
   isStepOptional = step => {
     return step === 2;
   };
 
-  handleNext = () => {
+  handleNext = (event) => {
     const { activeStep } = this.state;
     let { skipped } = this.state;
     if (this.isStepSkipped(activeStep)) {
       skipped = new Set(skipped.values());
       skipped.delete(activeStep);
+      console.log('hi....')
     }
     if(activeStep === 3){
       browserHistory.push('/clients')
+    }
+    if(activeStep === 0){
+      this.createClient(event);
+      this.props.moreinfoactions.loadRequirements();
     }
     this.setState({
       activeStep: activeStep + 1,
@@ -165,7 +201,7 @@ class CustomStepper extends React.Component {
           ) : (
             <div>
               
-              <Typography className={classes.instructions}>{getStepContent(activeStep, classes)}</Typography>
+              <Typography className={classes.instructions}>{getStepContent(activeStep, this.state.client, this.updateClientState, this.props.moreinfo.requirements)}</Typography>
               <div className={classes.float}>
                 <Button
                   disabled={activeStep === 0}
@@ -205,4 +241,25 @@ CustomStepper.propTypes = {
   classes: PropTypes.object,
 };
 
-export default withStyles(styles)(CustomStepper);
+function mapStateToProps(state) {
+  return {
+      clients: state.clients,
+      moreinfo: state.moreinfo,
+      reqmoreinfo: state.reqmoreinfo,
+      candmoreinfo: state.candmoreinfo,
+      docmoreinfo: state.docmoreinfo,
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return {
+      actions: bindActionCreators(clientActions, dispatch),
+      moreinfoactions: bindActionCreators(moreinfoActions, dispatch),
+      reqmoreinfoactions: bindActionCreators(reqmoreinfoActions, dispatch),
+      candmoreinfoactions: bindActionCreators(candmoreinfoActions, dispatch),
+      docmoreinfoactions: bindActionCreators(docmoreinfoActions, dispatch)
+  };
+}
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, mapDispatchToProps)
+) (CustomStepper);
