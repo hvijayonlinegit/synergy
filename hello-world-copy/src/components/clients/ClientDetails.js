@@ -38,26 +38,37 @@ const styles = theme => ({
 
 	formControl: {
 		margin: theme.spacing.unit,
-		minWidth: 40,
+		minWidth: 70
+	},
+	formControlState:{
+		margin: theme.spacing.unit,
+		minWidth: 50,
 	},
 	textFieldMax: {
-		marginLeft: theme.spacing.unit,
-		marginRight: theme.spacing.unit,
+		margin: theme.spacing.unit,
+		// marginRight: theme.spacing.unit,
 		width: 150,
 	  },
-	
-	textField: {
+	  textFieldEmail: {
 		marginLeft: theme.spacing.unit,
 		marginRight: theme.spacing.unit,
+		width: 200,
+	  },
+	textField: {
+		margin: theme.spacing.unit,
+		// marginRight: theme.spacing.unit,
 		width: 100,
 	  },
 	  textFieldMin: {
-		marginLeft: theme.spacing.unit,
-		marginRight: theme.spacing.unit,
-		width: 70,
+		margin: theme.spacing.unit,
+		// marginRight: theme.spacing.unit,
+		width: 80,
 	  },
 	  adorment: {
 		  marginRight: '0'
+	  },
+	  customselect: {
+		  paddingTop: '1px'
 	  }
 });
 
@@ -140,6 +151,7 @@ class ClientDetails extends React.Component {
 										value={this.state.access}
 										onChange={this.handleChange('access')}
 										input={<Input name="access" id="age-native-helper"  />}
+										className={classes.customselect}
 									>
 										<option value="--select--">-- select --</option>
 										<option value="MyTeam">My Team</option>
@@ -180,7 +192,7 @@ class ClientDetails extends React.Component {
 									</NativeSelect>
 
 								</FormControl>
-								<TextField
+								{/* <TextField
 									margin="dense"
 									placeholder="Enter city name"
 									name="city"
@@ -190,28 +202,9 @@ class ClientDetails extends React.Component {
 									multiline
 									rowsMax="1"
 									className={classes.textField}
-								/>
-								<TextField
-									margin="dense"
-									placeholder="Enter zipCode "
-									name="zipCode"
-									label="Zipcode"
-									value={this.state.zipCode}
-									onChange={this.handleChange('zipCode')}
-									className={classes.textFieldMin}
-								/>
-								<TextField
-									margin="dense"
-									InputProps={{
-										startAdornment: <InputAdornment  className={classes.adorment} position="start">http://www.</InputAdornment>,
-										// endAdornment: <InputAdornment position="end">.com</InputAdornment>,
-									  }}
-									name="websiteAddress"
-									label="Website Address"
-									value={this.state.websiteAddress}
-									onChange={this.handleChange('websiteAddress')}
-									className={classes.textFieldMax}
-								/>
+								/> */}
+								
+								
 								
 								<FormControl className={classes.formControl}>
 									<InputLabel htmlFor="status" shrink>Status</InputLabel>
@@ -229,18 +222,26 @@ class ClientDetails extends React.Component {
 								</FormControl>
 								
 								
-								
 								<TextField
-									type="input"
+									margin="dense"
+									InputProps={{
+										startAdornment: <InputAdornment  className={classes.adorment} position="start">http://www.</InputAdornment>,
+										// endAdornment: <InputAdornment position="end">.com</InputAdornment>,
+									  }}
+									name="websiteAddress"
+									label="Website Address"
+									value={this.state.websiteAddress}
+									onChange={this.handleChange('websiteAddress')}
+									className={classes.textFieldMax}
+								/>
+								<TextField
 									margin="dense"
 									placeholder="Enter email1 "
 									name="email1"
 									label="Email1"
 									value={this.state.email1}
 									onChange={this.handleChange('email1')}
-									multiline 
-									rowsMax="1"
-									className={classes.textFieldMax}
+									className={classes.textFieldEmail}
 								/>
 								<TextField
 									margin="dense"
@@ -248,10 +249,8 @@ class ClientDetails extends React.Component {
 									name="email2"
 									label="Email2"
 									value={this.state.email2}
-									multiline 
-									rowsMax="1"
 									onChange={this.handleChange('email2')}
-									className={classes.textFieldMax}
+									className={classes.textFieldEmail}
 								/>
 								<TextField
 									margin="dense"
@@ -262,13 +261,22 @@ class ClientDetails extends React.Component {
 									onChange={this.handleChange('phoneNumber1')}
 									className={classes.textField}
 								/>
-								<TextField
+								{/* <TextField
 									margin="dense"
 									placeholder="Enter phone number  2"
 									name="phoneNumber2"
 									label="Sec. Phone#"
 									value={this.state.phoneNumber2}
 									onChange={this.handleChange('phoneNumber2')}
+									className={classes.textField}
+								/> */}
+								<TextField
+									margin="dense"
+									placeholder="Enter fax "
+									name="fax"
+									label="Fax"
+									value={this.state.fax}
+									onChange={this.handleChange('fax')}
 									className={classes.textField}
 								/>
 								{/* <FormControl className={classes.formControl}>
@@ -282,75 +290,8 @@ class ClientDetails extends React.Component {
 									<option value="1">United States</option>
 									</NativeSelect>
 
-								</FormControl>
-								<FormControl className={classes.formControl}>
-									<InputLabel htmlFor="state">State</InputLabel>
-									<NativeSelect
-										value={this.state.state}
-										onChange={this.handleChange('state')}
-										input={<Input name="state" id="state" />}
-									>
-										<option value="0">--Select State--</option>
-										<option value="AL">Alabama</option>
-										<option value="AK">Alaska</option>
-										<option value="AZ">Arizona</option>
-										<option value="AR">Arkansas</option>
-										<option value="CA">California</option>
-										<option value="CO">Colorado</option>
-										<option value="CT">Connecticut</option>
-										<option value="DE">Delaware</option>
-										<option value="DC">District of Columbia</option>
-										<option value="FL">Florida</option>
-										<option value="GA">Georgia</option>
-										<option value="HI">Hawaii</option>
-										<option value="ID">Idaho</option>
-										<option value="IL">Illinois</option>
-										<option value="IN">Indiana</option>
-										<option value="IA">Iowa</option>
-										<option value="KS">Kansa</option>
-										<option value="KY">Kentucky</option>
-										<option value="LA">Louisiana</option>
-										<option value="MD">Maryland</option>
-										<option value="MA">Massachusetts</option>
-										<option value="MI">Michigan</option>
-										<option value="MN">Minnesota</option>
-										<option value="MS">Mississippi</option>
-										<option value="MO">Missouri</option>
-										<option value="MT">Montana</option>
-										<option value="NE">Nebraska</option>
-										<option value="NV">Nevada</option>
-										<option value="NH">New Hampshire</option>
-										<option value="NJ">New Jersey</option>
-										<option value="NM">New Mexico</option>
-										<option value="NY">New York</option>
-										<option value="NC">North Carolina</option>
-										<option value="ND">North Dakota</option>
-										<option value="OH">Ohio</option>
-										<option value="OK">Oklahoma</option>
-										<option value="OR">Oregon</option>
-										<option value="PA">Pennsylvania</option>
-										<option value="RI">Rhode Island</option>
-										<option value="SC">South Carolina</option>
-										<option value="SD">South Dakota</option>
-										<option value="TN">Tennessee</option>
-										<option value="TX">Texas</option>
-										<option value="UT">Utah</option>
-										<option value="VT">Vermont</option>
-										<option value="VA">Virginia</option>
-										<option value="WA">Washington</option>
-										<option value="WV">West Virginia</option>
-										<option value="WI">Wisconsin</option>
-										<option value="WY">Wyoming</option>
-									</NativeSelect>
-								</FormControl>
-								<TextField
-									margin="dense"
-									placeholder="Enter city name"
-									name="city"
-									label="City"
-									value={this.state.city}
-									onChange={this.handleChange('city')}
-								/>
+								</FormControl> */}
+								
 								<TextField
 									margin="dense"
 									placeholder="Enter street name"
@@ -358,16 +299,89 @@ class ClientDetails extends React.Component {
 									label="Street"
 									value={this.state.street}
 									onChange={this.handleChange('street')}
-								/> */}
+									className={classes.textFieldMax}
+								/>
 								<TextField
 									margin="dense"
-									placeholder="Enter fax "
-									name="fax"
-									label="Fax"
-									value={this.state.fax}
-									onChange={this.handleChange('fax')}
+									placeholder="Enter city name"
+									name="city"
+									label="City"
+									value={this.state.city}
+									onChange={this.handleChange('city')}
 									className={classes.textField}
 								/>
+								<FormControl className={classes.formControlState}>
+									<InputLabel htmlFor="state">State</InputLabel>
+									<NativeSelect
+										value={this.state.state}
+										onChange={this.handleChange('state')}
+										input={<Input name="state" id="state" />}
+									>
+										<option value="0">-- select --</option>
+										<option value="AL">AL</option>
+										<option value="AK">AK</option>
+										<option value="AZ">AZ</option>
+										<option value="AR">AR</option>
+										<option value="CA">CA</option>
+										<option value="CO">CO</option>
+										<option value="CT">CT</option>
+										<option value="DE">DE</option>
+										<option value="DC">DC</option>
+										<option value="FL">FL</option>
+										<option value="GA">GA</option>
+										<option value="HI">HI</option>
+										<option value="ID">ID</option>
+										<option value="IL">IL</option>
+										<option value="IN">IN</option>
+										<option value="IA">IA</option>
+										<option value="KS">KS</option>
+										<option value="KY">KY</option>
+										<option value="LA">LA</option>
+										<option value="MD">MD</option>
+										<option value="MA">MA</option>
+										<option value="MI">MI</option>
+										<option value="MN">MN</option>
+										<option value="MS">MS</option>
+										<option value="MO">MO</option>
+										<option value="MT">MT</option>
+										<option value="NE">NE</option>
+										<option value="NV">NV</option>
+										<option value="NH">NH</option>
+										<option value="NJ">NJ</option>
+										<option value="NM">NM</option>
+										<option value="NY">NY</option>
+										<option value="NC">NC</option>
+										<option value="ND">ND</option>
+										<option value="OH">OH</option>
+										<option value="OK">OK</option>
+										<option value="OR">OR</option>
+										<option value="PA">PA</option>
+										<option value="RI">RI</option>
+										<option value="SC">SC</option>
+										<option value="SD">SD</option>
+										<option value="TN">TN</option>
+										<option value="TX">TX</option>
+										<option value="UT">UT</option>
+										<option value="VT">VT</option>
+										<option value="VA">VA</option>
+										<option value="WA">WA</option>
+										<option value="WV">WV</option>
+										<option value="WI">WI</option>
+										<option value="WY">WY</option>
+									</NativeSelect>
+								</FormControl>
+								
+								<TextField
+									margin="dense"
+									placeholder="Enter zipCode "
+									name="zipCode"
+									label="Zipcode"
+									value={this.state.zipCode}
+									onChange={this.handleChange('zipCode')}
+									className={classes.textFieldMin}
+								/>
+								
+								
 								<TextField
 									id="multiline-static"
 									multiline
@@ -379,6 +393,7 @@ class ClientDetails extends React.Component {
 									value={this.state.description}
 									onChange={this.handleChange('description')}
 								/>
+								
 								<CardActions>
 								</CardActions>
 							</CardContent>

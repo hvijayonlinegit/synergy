@@ -55,6 +55,10 @@ const styles = theme => ({
   },
   formControl: {
     margin: theme.spacing.unit,
+    minWidth: 150,
+  },
+  formControlMin: {
+    margin: theme.spacing.unit,
     minWidth: 100,
   },
   textField: {
@@ -129,7 +133,7 @@ class RequirementDetails extends React.Component {
 	}
   render() {
     const { classes } = this.props;
-    if (this.props.requirement === undefined) {
+    if (this.props.requirements.requirementses === undefined || this.props.requirements.requirementses.length === 0) {
       return (
         <div>
           <MySnackbarContentWrapper
@@ -172,7 +176,7 @@ class RequirementDetails extends React.Component {
                   className={classes.textFieldMax}
                   />
                 
-                <FormControl required className={classes.formControl}>
+                {/* <FormControl required className={classes.formControl}>
                   <InputLabel htmlFor="accountOwner">Account Owner</InputLabel>
                   <NativeSelect
                     value={this.state.accountOwner || ''}
@@ -186,8 +190,8 @@ class RequirementDetails extends React.Component {
                     <option value="4936">Asha Richards</option>
                     <option value="4937">Raj Nettem</option>
                   </NativeSelect>
-                </FormControl>
-                <FormControl className={classes.formControl}>
+                </FormControl> */}
+                <FormControl className={classes.formControlMin}>
                   <InputLabel htmlFor="primaryRecruiteer" shrink>Primary Recruiter</InputLabel>
                   <NativeSelect
                     value={this.state.primaryRecruiteer || ''}
@@ -201,7 +205,7 @@ class RequirementDetails extends React.Component {
                     <option value="4984">Umakanth</option>
                   </NativeSelect>
                 </FormControl>
-                <FormControl className={classes.formControl}>
+                <FormControl className={classes.formControlMin}>
                   <InputLabel htmlFor="access" shrink>Access</InputLabel>
                   <NativeSelect
                     value={this.state.access || ''}
@@ -228,16 +232,7 @@ class RequirementDetails extends React.Component {
                   </NativeSelect>
 
                 </FormControl> */}
-                <TextField  InputLabelProps={{ shrink: true }}
-                  margin="dense"
-                  placeholder="enter requiredSkills"
-                  name="requiredSkills"
-                  label="Required Skills"
-                  fullWidth
-                  value={this.state.requiredSkills || ''}
-                  onChange={this.handleChange('requiredSkills')}
-                  className={classes.textField}
-                />
+                
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
                   placeholder="Enter requiredExperience"
@@ -277,27 +272,35 @@ class RequirementDetails extends React.Component {
                   required 
                   className={classes.textFieldMin}
                   />
-                   <TextField InputLabelProps={{ shrink: true }}
+                  
+                  <TextField  InputLabelProps={{ shrink: true }}
                   margin="dense"
-                  placeholder="Enter numberOfOpenings"
-                  name="Num OfOpenings"
-                  label="# Openings"
+                  placeholder="enter requiredSkills"
+                  name="requiredSkills"
+                  label="Required Skills"
                   fullWidth
-                  value={this.state.numberOfOpenings || ''}
-                  onChange={this.handleChange('numberOfOpenings')}
-                  className={classes.textField}
-                />
-                <TextField InputLabelProps={{ shrink: true }}
-                  type="input"
-                  margin="dense"
-                  placeholder="Enter maxResumesAllowed"
-                  name="maxResumesAllowed"
-                  label="# CV's Allowed"
-                  value={this.state.maxResumesAllowed || ''}
-                  onChange={this.handleChange('maxResumesAllowed')}
-                  className={classes.textField}
+                  value={this.state.requiredSkills || ''}
+                  onChange={this.handleChange('requiredSkills')}
+                  className={classes.textFieldMax}
                 />
                 <FormControl className={classes.formControl}>
+                  <InputLabel htmlFor="experienceLevel" shrink>Experience Level</InputLabel>
+                  <NativeSelect
+                    value={this.state.experienceLevel || ''}
+                    onChange={this.handleChange('experienceLevel')}
+                    input={<Input name="experienceLevel" id="experienceLevel" />}
+                  >
+                    <option value="0">--Select--</option>
+                    <option value="11">Developer</option>
+                    <option value="14">Sr. Developer</option>
+                    <option value="12">Business Analyst</option>
+                    <option value="13">QA Engineer</option>
+                    <option value="15">QA Manager</option>
+                    <option value="16">Architech</option>
+                    <option value="10">Tech Lead</option>
+                  </NativeSelect>
+                </FormControl>
+                <FormControl className={classes.formControlMin}>
                   <InputLabel htmlFor="posiitonType" shrink>Position Type</InputLabel>
                   <NativeSelect
                     value={this.state.posiitonType || ''}
@@ -312,6 +315,28 @@ class RequirementDetails extends React.Component {
                     <option value="26">Per Diem</option>
                   </NativeSelect>
                 </FormControl>
+                <TextField InputLabelProps={{ shrink: true }}
+                  margin="dense"
+                  placeholder="Enter numberOfOpenings"
+                  name="Num OfOpenings"
+                  label="Openings"
+                  fullWidth
+                  value={this.state.numberOfOpenings || ''}
+                  onChange={this.handleChange('numberOfOpenings')}
+                  className={classes.textFieldMin}
+                />
+                <TextField InputLabelProps={{ shrink: true }}
+                  type="input"
+                  margin="dense"
+                  placeholder="Enter maxResumesAllowed"
+                  name="maxResumesAllowed"
+                  label="#CV's Max"
+                  value={this.state.maxResumesAllowed || ''}
+                  onChange={this.handleChange('maxResumesAllowed')}
+                  className={classes.textFieldMin}
+                />
+                
+                
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
                   placeholder="Enter duration"
@@ -332,6 +357,49 @@ class RequirementDetails extends React.Component {
                   onChange={this.handleChange('localIndicator')}
                   className={classes.textField}
                 />
+                <TextField InputLabelProps={{ shrink: true }}
+                  margin="dense"
+                  name="zipCode"
+                  label="Zipcode"
+                  value={this.state.zipCode || ''}
+                  onChange={this.handleChange('zipCode')}
+                  className={classes.textFieldMin}
+                />
+                <TextField
+									margin="dense"
+									placeholder="Enter city name"
+									name="city"
+									label="Location"
+                  value={this.state.city || ''}
+									onChange={this.handleChange('city')}
+									className={classes.textFieldMax}
+								/>
+                  <FormControl className={classes.formControl}>
+                  <InputLabel htmlFor="employmentType" shrink>Employment Type</InputLabel>
+                  <NativeSelect
+                    value={this.state.employementType || ''}
+                    onChange={this.handleChange('employementType')}
+                    input={<Input name="employementType" id="employementType" />}
+                  >
+                    <option value="0">--Select--</option>
+                    <option value="cw">Contract – W2</option>
+                    <option value="ch">Contract-to-Hire</option>
+                    {/* <option value="99">Contract-to-Hire-1099</option>
+                    <option value="hc">Contract-to-Hire-Corp</option>
+                    <option value="hw">Contract-to-Hire-W2</option> */}
+                    <option value="pp">Corp-to-Corp</option>
+                    <option value="DH">Direct Hire</option>
+                    <option value="EM">Employee</option>
+                    <option value="fw">Full time – W2</option>
+                    <option value="ic">Ind. Contractor</option>
+                    <option value="I ">Intern</option>
+                    <option value="ot">Others</option>
+                    <option value="S">Seasonal</option>
+                    {/* <option value="TC">Temporary / Contract</option> */}
+                    <option value="V">Volunteer</option>
+                  </NativeSelect>
+                </FormControl>
+                  
                 <FormControl className={classes.formControl}>
                   <InputLabel htmlFor="visaType" shrink>Visa Type</InputLabel>
                   <NativeSelect
@@ -349,7 +417,7 @@ class RequirementDetails extends React.Component {
                   <option value="US">US Citizen</option>
                   </NativeSelect>
                 </FormControl>
-                <FormControl className={classes.formControl}>
+                <FormControl className={classes.formControlMin}>
                   <InputLabel htmlFor="interviewType" shrink>Interview Type</InputLabel>
                   <NativeSelect
                     value={this.state.interviewType || ''}
@@ -360,53 +428,13 @@ class RequirementDetails extends React.Component {
                     <option value="fa">Face to Face</option>
                     <option value="pi">Phone Interview</option>
                     <option value="pa">Panel Interview</option>
-                    <option value="sv">Skype/Video interview</option>
-                  </NativeSelect>
-                </FormControl>
-                <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="experienceLevel" shrink>Experience Level</InputLabel>
-                  <NativeSelect
-                    value={this.state.experienceLevel || ''}
-                    onChange={this.handleChange('experienceLevel')}
-                    input={<Input name="experienceLevel" id="experienceLevel" />}
-                  >
-                    <option value="0">--Select--</option>
-                    <option value="11">Entry Level</option>
-                    <option value="14">Executive (SVP, VP, Department Head, etc)</option>
-                    <option value="12">Experienced (Non-Manager)</option>
-                    <option value="13">Manager (Manager/Supervisor of Staff)</option>
-                    <option value="15">Senior Executive (President, CFO, etc)</option>
-                    <option value="16">Student (High School)</option>
-                    <option value="10">Student (Undergraduate/Graduate)</option>
+                    <option value="sv">Skype Interview</option>
                   </NativeSelect>
                 </FormControl>
                 
                 
-                <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="employementType" shrink>Employement Type</InputLabel>
-                  <NativeSelect
-                    value={this.state.employementType || ''}
-                    onChange={this.handleChange('employementType')}
-                    input={<Input name="employementType" id="employementType" />}
-                  >
-                    <option value="0">--Select--</option>
-                    <option value="cw">Contract – W2</option>
-                    <option value="ch">Contract-to-Hire</option>
-                    <option value="99">Contract-to-Hire-1099</option>
-                    <option value="hc">Contract-to-Hire-Corp</option>
-                    <option value="hw">Contract-to-Hire-W2</option>
-                    <option value="pp">Corp-to-Corp</option>
-                    <option value="DH">Direct Hire</option>
-                    <option value="EM">Employee</option>
-                    <option value="fw">Full time – W2</option>
-                    <option value="ic">Independent Contractor</option>
-                    <option value="I ">Intern</option>
-                    <option value="ot">Others</option>
-                    <option value="S">Seasonal</option>
-                    <option value="TC">Temporary / Contract</option>
-                    <option value="V">Volunteer</option>
-                  </NativeSelect>
-                </FormControl>
+                
+                
                 
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
@@ -442,15 +470,9 @@ class RequirementDetails extends React.Component {
                   </NativeSelect>
 
                 </FormControl> */}
-                <TextField InputLabelProps={{ shrink: true }}
-                  margin="dense"
-                  name="zipCode"
-                  label="Zipcode"
-                  value={this.state.zipCode || ''}
-                  onChange={this.handleChange('zipCode')}
-                  className={classes.textFieldMin}
-                />
-                <FormControl className={classes.formControl}>
+                
+                
+                {/* <FormControl className={classes.formControl}>
                   <InputLabel htmlFor="state" shrink>State</InputLabel>
                   <NativeSelect
                     value={this.state.state || ''}
@@ -518,7 +540,7 @@ class RequirementDetails extends React.Component {
                   value={this.state.city || ''}
                   onChange={this.handleChange('city')}
                   className={classes.textField}
-                  />
+                  /> */}
 
                 
                
@@ -653,6 +675,7 @@ class RequirementDetails extends React.Component {
 RequirementDetails.propTypes = {
   classes: PropTypes.object.isRequired,
   requirement: PropTypes.object.isRequired,
+  requirements: PropTypes.array.isRequired,
   showClientDetails: PropTypes.object
 };
 

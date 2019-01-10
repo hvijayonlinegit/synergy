@@ -40,14 +40,19 @@ export function loadSelectedClient(associatedClientLink,selectedRequirement, can
     });
   };
 }
+//this function need 
+// link - for pulling the candidates for the selected requirement.
+// selected Requirement - for future additions for this req,ex for adding candidate for selected requirement
+// selected ClientLink - for showing the client details in requirement page.     
 export function loadReqMoreinfo(link, selectedRequirement,selectedClientLink) {
+  
   //function (dispatch){dispatch(setSelectedRequirement(client));}
   return function(dispatch) {
+    //1. Attach spinner for loading 
     dispatch(spinnerActions.loadSpinner(true));
-    console.log('getting candidates using  link'+ link);
+    // 2. get list of candidates associated to selected requirement
     return candidatesApi.getCandidates(link).then(candidates => {
-      console.log('req more ingo link'+ link);
-      // Default behavior to load the list of candidates in sort order and their detials.
+    // 3.  Default behavior to load the list of candidates in sort order and their detials.
     candidates = defaultLoad(candidates, dispatch);
     dispatch(loadSelectedClient(selectedClientLink,selectedRequirement, candidates));
     dispatch(spinnerActions.loadSpinner(false));
@@ -110,6 +115,7 @@ export function loadCandidates() {
 }
 // this function is to make the default loading of the list items 
 function defaultLoad(candidates, dispatch) {
+  // 1. check  for API call success 
   if (!candidates.message) {
     if (candidates._embedded.candidates.length === 0) {
       dispatch(candmoreinfoActions.loadCandMoreinfofailure());
@@ -130,6 +136,7 @@ function defaultLoad(candidates, dispatch) {
     candidates = candidates._embedded;
     
   }
+  // 2 API call  not success through appropriate meesage to the user
   else {
     if (candidates.status === 401) {
       dispatch(clientActions.loadSignInPage());

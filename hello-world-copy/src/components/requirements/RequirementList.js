@@ -57,10 +57,10 @@ class RequirementsList extends React.Component {
   updateSearch(event) {
     this.setState({ search: event.target.value.substr(0, 20) });
   }
-  handleMoreinfo(link,selectedClientLink, n, index) {
+  handleMoreinfo(link,selectedClientLink, selectedRequirement, index) {
     console.log('child method' + selectedClientLink);
     this.setState({ indexOfClickedItem: index });
-    this.props.onRequirements(link,selectedClientLink, n);
+    this.props.onRequirements(link,selectedClientLink, selectedRequirement);
   }
   render() {
     const { classes } = this.props;
@@ -127,17 +127,17 @@ class RequirementsList extends React.Component {
           </Tooltip>
           <List component="div" disablePadding className={classes.root}>
             {
-              filteredRequirements.map((n, index) => {
+              filteredRequirements.map((selectedRequirement, index) => {
                 let link = '';
                 let selectedClientLink= '';
-                if (n._links) { link = n._links.candidates.href;
-                  selectedClientLink=n._links.accounts.href; }
-                const selflink = n._links.self.href
+                if (selectedRequirement._links) { link = selectedRequirement._links.candidates.href;
+                  selectedClientLink=selectedRequirement._links.accounts.href; }
+                const selflink = selectedRequirement._links.self.href
                 const id = selflink.split('/').pop(-1);
-                let clientid = id+"   "+n.requirementTitle;
-                let boundMoreInfo = this.handleMoreinfo.bind(this, link,selectedClientLink, n, index);
+                let clientid = id+"   "+selectedRequirement.requirementTitle;
+                let boundMoreInfo = this.handleMoreinfo.bind(this, link,selectedClientLink, selectedRequirement, index);
                 return (
-                  <ListItem button style={this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem} key={id} divider={true} onClick={boundMoreInfo}>
+                  <ListItem key= {id} button style={this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem} key={id} divider={true} onClick={boundMoreInfo}>
                     <ListItemText primary={clientid} />
                   </ListItem>
                 );

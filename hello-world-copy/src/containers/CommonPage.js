@@ -12,6 +12,7 @@ import AddRequirementModal from '../components/requirements/CreateRequirementMod
 import AddClientModal from '../components/clients/CreateClientModal'
 import ClientsWrapper from '../components/clients/ClientsWrapper';
 import AddCandidateModal from '../components/candidates/CreateCandidateModal'
+import AddDocModal from '../components/documents/CreateDocumentModal'
 import SaveAlert from '../common/SaveAlert';
 import model from '../common/model'
 class CommonPage extends React.Component {
@@ -21,9 +22,11 @@ class CommonPage extends React.Component {
             client: model.client,
             requirement: model.requirement,
             candidate: model.candidate,
+            document: model.document,
             modal: false,
             reqmodal: false,
             cadmodal: false,
+            docmodal: false,
             editMode: false,
             file: null,
             path: '',
@@ -32,6 +35,7 @@ class CommonPage extends React.Component {
             saveFor: '',
             selectedReqId: '',
             selectedCandId: '',
+            selectedDocId: '',
         };
         //Clients page functions
         this.createClient = this.createClient.bind(this);
@@ -62,6 +66,11 @@ class CommonPage extends React.Component {
         this.handleCandidates = this.handleCandidates.bind(this);
 
         // Documents page functions    
+        this.handleDocModalOpen = this.handleDocModalOpen.bind(this);
+        this.handleDocModalClose = this.handleDocModalClose.bind(this);
+        this.updateDocState = this.updateDocState.bind(this);
+        this.saveDocument = this.saveDocument.bind(this);
+        this.updateDocument = this.updateDocument.bind(this);
         this.handleDocuments = this.handleDocuments.bind(this);
         this.uploadDocument = this.uploadDocument.bind(this);
         this.onFilechange = this.onFilechange.bind(this);
@@ -134,12 +143,14 @@ class CommonPage extends React.Component {
     handleReqModalClose() {
         this.setState({ reqmodal: false });
     }
-    handleRequirements(link, selectedClientLink, client) {
-        this.props.reqmoreinfoactions.loadReqMoreinfo(link, client, selectedClientLink);
+    handleRequirements(link, selectedClientLink, selectedRequirement) {
+        this.props.reqmoreinfoactions.loadReqMoreinfo(link, selectedRequirement, selectedClientLink);
         // this.props.reqmoreinfoactions.loadSelectedClient(selectedClientLink);
 
 
     }
+    
+    
     ////////////////////////////////
     // Candidate page functions
     updateCadState(event) {
@@ -172,14 +183,40 @@ class CommonPage extends React.Component {
     }
     //////////////////////
     ///Document page functions///////
+    handleDocModalOpen(link){
+        let id = link.split('/').pop(-1);
+        this.setState({selectedCandId:id, docmodal: true});
+    }
+    handleDocModalClose() {
+        this.setState({ docmodal: false });
+    }
+    updateDocState(event) {
+        // const field = event.target.name;
+        // const document = this.state.document;
+        // document[field] = event.target.value;
+        // return this.setState({ document: document });
+    }
+    saveDocument(event) {
+        // event.preventDefault();
+        // this.props.reqmoreinfoactions.createCandidate(this.state.document).then(() => {
+        //     this.setState({ docmodal: false });
+        // });
+    }
+    updateDocument(document, id) {
+        // this.setState({ document: document, selectedDocId: id, saveFor: 'documents' });
+        // this.handleSaveAlertOpen();
+    }
     onFilechange(event) {
         this.setState({ file: event.target.files[0] })
 
     }
-    uploadDocument(event, link) {
+    uploadDocument(event) {
         event.preventDefault();
-        let id = link.split('/').pop(-1);
-        this.props.candmoreinfoactions.fileUpload(this.state.file, id);
+        // let id = link.split('/').pop(-1);
+        this.props.candmoreinfoactions.fileUpload(this.state.file, this.state.selectedCandId).then(()=>{
+            this.setState({ docmodal: false });
+        });
+        
     }
     handleDocuments(id, docname) {
         this.props.docmoreinfoactions.downloadDoc(id, docname);
@@ -205,6 +242,10 @@ class CommonPage extends React.Component {
             this.props.reqmoreinfoactions.updateCandidate(this.state.candidate, this.state.selectedCandId).then(() => {
             });
         }
+        else if (this.state.saveFor === 'documents') {
+            // this.props.reqmoreinfoactions.updateDocument(this.state.document, this.state.selectedDocId).then(() => {
+            // });
+        }
         this.setState({ saveFor: '' });
     }
     render() {
@@ -212,6 +253,7 @@ class CommonPage extends React.Component {
         const moreinfo = this.props.moreinfo;
         const reqmoreinfo = this.props.reqmoreinfo;
         const candmoreinfo = this.props.candmoreinfo;
+        const docmoreinfo = this.props.docmoreinfo;
         return (
                     <div >
                         <ClientsWrapper
@@ -219,18 +261,17 @@ class CommonPage extends React.Component {
                             moreinfo={moreinfo}
                             reqmoreinfo={reqmoreinfo}
                             candmoreinfo={candmoreinfo}
+                            docmoreinfo={docmoreinfo}
                             editMode={this.state.editMode}
-                            docmoreinfo={this.props.docmoreinfo}
                             onRequirements={this.handleRequirements}
                             onCandidates={this.handleCandidates}
                             onDocuments={this.handleDocuments}
-                            onUpload={this.uploadDocument}
-                            onFilechange={this.onFilechange}
                             onDelete={this.handleDeleteClient}
                             onMoreInfo={this.handleMoreInfo}
                             handleModalOpen={this.handleModalOpen}
                             handleReqModalOpen={this.handleReqModalOpen}
                             handleCadModalOpen={this.handleCadModalOpen}
+                            handleDocModalOpen={this.handleDocModalOpen}
                             updateClient={this.updateClient}
                             updateRequirement={this.updateRequirement}
                             updateCandidate={this.updateCandidate}
@@ -258,6 +299,14 @@ class CommonPage extends React.Component {
                             open={this.state.cadmodal}
                             close={this.handleCadModalClose}
                         />
+                        <AddDocModal
+                            document={this.state.document}
+                            onUpload={this.uploadDocument}
+                            onChange={this.updateDocState}
+                            open={this.state.docmodal}
+                            close={this.handleDocModalClose}
+                            onFilechange={this.onFilechange}
+                        />
                         <SaveAlert
                             updateConfirm={this.updateConfirm}
                             open={this.state.openAlert}
@@ -277,6 +326,7 @@ CommonPage.propTypes = {
     reqmoreinfo: PropTypes.any.isRequired,
     reqmoreinfoactions: PropTypes.object.isRequired,
     candmoreinfo: PropTypes.any.isRequired,
+    docmoreinfo: PropTypes.any.isRequired,
     candmoreinfoactions: PropTypes.object.isRequired,
     docmoreinfoactions: PropTypes.object.isRequired,
     path: PropTypes.string.isRequired

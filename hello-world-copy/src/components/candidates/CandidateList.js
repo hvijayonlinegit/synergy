@@ -150,12 +150,12 @@ class CandidatesList extends React.Component {
             </Tooltip>
         <List component="div" disablePadding className={classes.root}>
             {
-              filteredCandidates.map((n,index) => {
+              filteredCandidates.map((selectedCandidate,index) => {
                 let documentsLink = '';
-                if (n._links) { documentsLink = n._links.document.href }
+                if (selectedCandidate._links) { documentsLink = selectedCandidate._links.document.href }
 
-                let boundMoreInfo = this.handleMoreinfo.bind(this, documentsLink, n, index);
-                let displayName= n._links.self.href.split('/').pop(-1)+ '   '+n.firstName+ ' ' +n.lastName;
+                let boundMoreInfo = this.handleMoreinfo.bind(this, documentsLink, selectedCandidate, index);
+                let displayName= selectedCandidate._links.self.href.split('/').pop(-1)+ '   '+selectedCandidate.firstName+ ' ' +selectedCandidate.lastName;
                 return(
                     <ListItem button  to={to} style= {this.state.indexOfClickedItem === index ? styles.listItemClicked : styles.listItem}  key= {index} divider= {true} onClick={boundMoreInfo} >
                       <ListItemText primary={displayName} />

@@ -11,6 +11,7 @@ import RequirementList from '../requirements/RequirementList'
 import CandidateList from '../candidates/CandidateList'
 import RequirementDetails from '../requirements/RequirementDetails'
 import CandidateDetails from '../candidates/CandidatesDetails'
+import DocumentDetails from '../documents/DocumentDetails'
 import DocumentsList from '../documents/DocumentsList'
 
 const styles = theme => ({
@@ -84,6 +85,7 @@ class ClientWrapper extends React.Component {
                             </Grid>
                             <Grid  item xs={12} sm={9}>
                                 <RequirementDetails 
+                                    requirements={requirements}
                                     updateRequirement = {this.props.updateRequirement}
                                     requirement={this.props.reqmoreinfo.requirement}
                                     showClientDetails= {showClientDetails}
@@ -116,17 +118,18 @@ class ClientWrapper extends React.Component {
                     </Paper>:<div></div>}
                     <Paper className={classes.paper}>
                         <Grid container spacing={0}>
-                            <Grid item xs={12} sm={12}>
+                            <Grid item xs={12} sm={3}>
                             <DocumentsList
                                 selectedCandidate={this.props.candmoreinfo.candidate}
-                                documents={this.props.docmoreinfo.documents}
-                                filelink={this.props.docmoreinfo.filelink}
-                                onDocuments={this.props.onDocuments}
-                                onFilechange={this.props.onFilechange}
-                                onUpload={this.props.onUpload}
-                                onDelete={this.handleDeleteClient}
-                                onMoreInfo={this.props.onMoreInfo}
+                                documents={this.props.candmoreinfo.documents}
+                                handleDocModalOpen={this.props.handleDocModalOpen}
                                 />  
+                            </Grid>
+                            <Grid  item xs={12} sm={9}>
+                            {/* <DocumentDetails 
+                                updateDocument= {this.props.updateDocument} 
+                                document={this.props.candmoreinfo.candidate}
+                                ></DocumentDetails> */}
                             </Grid>
                         </Grid>
                     </Paper>
@@ -147,11 +150,10 @@ ClientWrapper.propTypes = {
     docmoreinfo:PropTypes.any.isRequired,
     onCandidates: PropTypes.func.isRequired,
     onDocuments:PropTypes.func.isRequired,
-    onUpload:PropTypes.func.isRequired,
-    onFilechange:PropTypes.func.isRequired,
     handleModalOpen: PropTypes.func.isRequired,
     handleReqModalOpen: PropTypes.func.isRequired,
     handleCadModalOpen: PropTypes.func.isRequired,
+    handleDocModalOpen: PropTypes.func.isRequired,
     updateClient: PropTypes.func.isRequired,
     updateRequirement: PropTypes.func.isRequired,
     updateCandidate: PropTypes.func.isRequired,

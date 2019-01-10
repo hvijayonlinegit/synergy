@@ -40,18 +40,32 @@ class CheckboxList extends React.Component {
 
   render() {
     const { classes } = this.props;
-
-    return (
+    
+    if (this.props.requirements.length === 0) {
+      return (
+        // <Loader fullPage loading={true} />
+        <div className={classes.beforeEle}>
+          <div> No requirements to Show  </div>
+        </div>
+      );
+    }
+    else {
+      let sortedRequirements = this.props.requirements.sort(
+        (a, b) => Number(b._links.self.href.split('/').pop(-1)) - Number(a._links.self.href.split('/').pop(-1))
+      );
+      
+      return (
+    
       <div className={classes.root}>
         <List>
-          {[0, 1, 2, 3].map(value => (
+          {sortedRequirements.map(value => (
             <ListItem key={value} role={undefined} dense button onClick={this.handleToggle(value)}>
               <Checkbox
                 checked={this.state.checked.indexOf(value) !== -1}
                 tabIndex={-1}
                 disableRipple
               />
-              <ListItemText primary={`Line item ${value + 1}`} />
+              <ListItemText primary={`${value._links.self.href.split('/').pop(-1)} ${value.requirementTitle}`} />
               <ListItemSecondaryAction>
                 <IconButton aria-label="Comments">
                   <CommentIcon />
@@ -62,11 +76,13 @@ class CheckboxList extends React.Component {
         </List>
       </div>
     );
+          }
   }
 }
 
 CheckboxList.propTypes = {
   classes: PropTypes.object.isRequired,
+  requirements: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(CheckboxList);

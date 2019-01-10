@@ -8,7 +8,7 @@ import { Paper, withStyles } from '@material-ui/core';
 import Sample from './Sample'
 import SampleList from './SampleList'
 import ClientInputForm from '../components/clients/ClientInputForm'
-import RequirementList from '../components/requirements/RequirementList'
+// import RequirementList from '../components/requirements/RequirementList'
 import model from '../common/model'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
@@ -57,9 +57,7 @@ function getStepContent(step, state,updateClientState, requirements) {
                             onChange={updateClientState}
                             ></ClientInputForm>;
     case 1:
-      return <RequirementList
-      requirements={requirements}
-  />;
+      return <SampleList requirements= {requirements.requirementses}></SampleList>;
     case 2:
       return <Sample></Sample>;
     default:
@@ -80,7 +78,7 @@ class CustomStepper extends React.Component {
   this.updateClientState = this.updateClientState.bind(this);
   }
   componentWillMount() {
-    // this.props.moreinfoactions.loadRequirements();
+    this.props.moreinfoactions.loadRequirements();
   }
 
    //Clients page functions
@@ -119,7 +117,7 @@ updateClientState(event) {
     }
     if(activeStep === 0){
       this.createClient(event);
-      this.props.moreinfoactions.loadRequirements();
+     // this.props.moreinfoactions.loadRequirements();
     }
     this.setState({
       activeStep: activeStep + 1,
@@ -201,7 +199,7 @@ updateClientState(event) {
           ) : (
             <div>
               
-              <Typography className={classes.instructions}>{getStepContent(activeStep, this.state.client, this.updateClientState, this.props.moreinfo.requirements)}</Typography>
+              <Typography className={classes.instructions}>{getStepContent(activeStep, this.state.client, this.updateClientState,this.props.moreinfo.requirements)}</Typography>
               <div className={classes.float}>
                 <Button
                   disabled={activeStep === 0}
@@ -209,6 +207,13 @@ updateClientState(event) {
                   className={classes.button}
                 >
                   Back
+                </Button>
+                <Button
+                  disabled={activeStep === 1}
+                  onClick={this.handleBack}
+                  className={classes.button}
+                >
+                  Finish and Close Wizard
                 </Button>
                 {this.isStepOptional(activeStep) && (
                   <Button

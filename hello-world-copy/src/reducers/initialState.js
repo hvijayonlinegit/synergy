@@ -16,6 +16,7 @@ export default {
       documents: [],
     },
     docmoreinfo :{
+        document:{},
         documents: [],
         filelink:''
     },

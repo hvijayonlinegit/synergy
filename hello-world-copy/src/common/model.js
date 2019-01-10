@@ -87,4 +87,15 @@ var candidate = {
     visaStatus: '',
     zipCode: ''
 }
-module.exports= {client: client, requirement:requirement, candidate:candidate}
+var document = {
+    name: '',
+    type: '',
+    issueDate: '',
+    expiryDate: '',
+    attachedBy: '',
+    updatedBY: '',
+    documentOwner:'',
+    notes:'',
+    document_id: ''
+}
+module.exports= {client: client, requirement:requirement, candidate:candidate, document:document}

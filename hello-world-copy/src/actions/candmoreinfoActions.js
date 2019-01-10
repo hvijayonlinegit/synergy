@@ -4,7 +4,7 @@ import * as docmoreinfoActions from '../actions/docmoreinfoActions';
 
 import * as clientActions from '../actions/clientActions';
 
-
+import * as spinnerActions from'./spinnerActions';
 export function loadCandUpdateSuccess(candidate){
   return {type: types.LOAD_CAND_UPDATE_SUCCESS, candidate};
 }
@@ -14,22 +14,27 @@ export function loadCandMoreInfoSuccess(selectedCandidate){
 export function loadCandMoreinfofailure(){
   return {type: types.LOAD_CAND_MOREINFO_FAILURE};
 }
-
+export function loadDocUploadSuccess(documents){
+  return {type: types.LOAD_DOC_UPLOAD_SUCCESS, documents};
+}
 export function loadCandMoreinfo(doclink, selectedCandidate) {
   return function(dispatch) {
-    console.log('Selected candiate '+ doclink);
-    
+    //1.  Attach spinner for loading 
+     dispatch(spinnerActions.loadSpinner(true));
+    // 2. get list of documents  associated to selected candidate
     return documentsApi.getAllDocuments(doclink).then(documents => {
+    // 3.  Default behavior to load the list of documents  in sort order and their detials.
       if(!documents.message){
         if(documents._embedded.documents.length === 0){
          dispatch(docmoreinfoActions.loadDocMoreinfofailure());
+         dispatch(spinnerActions.loadSpinner(false));
         }else{
           dispatch(docmoreinfoActions.loadDocMoreInfoSuccess(documents._embedded.documents));
           
         }
-        selectedCandidate.documents =documents._embedded
+        selectedCandidate.documents =documents._embedded.documents
         dispatch(loadCandMoreInfoSuccess(selectedCandidate));
-        
+        dispatch(spinnerActions.loadSpinner(false));
       }
       else{
         if(documents.status === 401){
@@ -43,6 +48,7 @@ export function loadCandMoreinfo(doclink, selectedCandidate) {
         {
           dispatch(clientActions.loadNeedAdminAccess(documents.message))
         }
+        dispatch(spinnerActions.loadSpinner(false));
       }
     }).catch(error => {
       throw(error);
@@ -52,6 +58,7 @@ export function loadCandMoreinfo(doclink, selectedCandidate) {
 }
 export function fileUpload(file, id) {
   return function (dispatch) {
+    dispatch(spinnerActions.loadSpinner(true));
     return documentsApi.upload(file, id).then(response => {
       if(!response.message){
         //console.log(response.json)
@@ -59,7 +66,8 @@ export function fileUpload(file, id) {
         if (response.ok) {
           response.json().then(json => {
             console.log(json);
-            dispatch(docmoreinfoActions.loadDocUploadSuccess(json));
+            dispatch(loadDocUploadSuccess(json));
+            dispatch(spinnerActions.loadSpinner(false));
           });
         }
        
@@ -67,6 +75,7 @@ export function fileUpload(file, id) {
       }
       else{
        // dispatch(loadCatsFailure(response.message))
+       dispatch(spinnerActions.loadSpinner(false));
       }
       
     }).catch(error => {

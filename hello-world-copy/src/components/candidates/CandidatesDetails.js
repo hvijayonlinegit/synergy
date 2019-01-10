@@ -44,9 +44,9 @@ const styles = theme => ({
     width: 50,
   },
   formControl: {
-		margin: theme.spacing.unit,
-		minWidth: 40,
-	},
+    margin: theme.spacing.unit,
+    minWidth: 40,
+  },
   header: {
     width: '100%',
     backgroundColor: 'aliceblue',
@@ -105,10 +105,10 @@ class CandidateDetails extends React.Component {
       state: '',
       visaStatus: '',
       zipCode: '',
-      createdBy:'',
-			updatedAt:'',
-      updatedBy:'',
-      createdAt:''
+      createdBy: '',
+      updatedAt: '',
+      updatedBy: '',
+      createdAt: ''
     }
   }
   componentWillReceiveProps(_nextProps) {
@@ -153,53 +153,53 @@ class CandidateDetails extends React.Component {
           <form className={classes.container} noValidate autoComplete="off">
             <Card className={classes.card}>
               <CardContent className={classes.content}>
-                <CardHeader title='Candidate Info' parentMehod={this.updateCandidate}></CardHeader>
+                <CardHeader  parentMehod={this.updateCandidate}></CardHeader>
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
-                  placeholder="Enter Client name"
+                  ////placeholder="Enter Client name"
                   name="firstName"
                   label="First Name"
                   fullWidth
-                  className={classes.textField}
+                  className={classes.textFieldMax}
                   value={this.state.firstName}
                   onChange={this.handleChange('firstName')}
                   required />
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
-                  placeholder="Enter middleName"
+                  ////placeholder="Enter middleName"
                   name="middleName"
                   label="MI.Name"
                   fullWidth
-                  className={classes.textFieldMin}
+                  className={classes.textFieldMax}
                   value={this.state.middleName}
                   onChange={this.handleChange('middleName')}
                 />
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
-                  placeholder="Enter lastName"
+                  ////placeholder="Enter lastName"
                   name="lastName"
                   label="Last Name"
                   fullWidth
-                  className={classes.textField}
+                  className={classes.textFieldMax}
                   value={this.state.lastName}
                   onChange={this.handleChange('lastName')}
                 />
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
-                  placeholder="Enter emailAddress"
+                  ////placeholder="Enter emailAddress"
                   name="emailAddress"
                   label="Email"
                   fullWidth
-                  className={classes.textField}
-                  multiline= "true"
-                  rowsMax="1"
+                  className={classes.textFieldMax}
+
+
                   value={this.state.emailAddress}
                   onChange={this.handleChange('emailAddress')}
                   required
                 />
                 {/* <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
-                  placeholder="Enter mobileNumber"
+                  //placeholder="Enter mobileNumber"
                   name="mobileNumber"
                   label="Mobile Number"
                   fullWidth
@@ -210,7 +210,7 @@ class CandidateDetails extends React.Component {
                 /> */}
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
-                  placeholder="Enter phoneNumber"
+                  //placeholder="Enter phone #"
                   name="phoneNumber"
                   label="Phone #"
                   fullWidth
@@ -221,7 +221,7 @@ class CandidateDetails extends React.Component {
                 />
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
-                  placeholder="Enter skypeId"
+                  //placeholder="Enter skypeId"
                   name="skypeId"
                   label="Skype Id  "
                   fullWidth
@@ -232,40 +232,27 @@ class CandidateDetails extends React.Component {
                 />
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
-                  placeholder="Enter linkedinUrl"
+                  //placeholder="Enter linkedinUrl"
                   name="linkedinUrl"
                   label="Linkedin Id  "
                   fullWidth
-                  className={classes.textField}
+                  className={classes.textFieldMax}
                   value={this.state.linkedinUrl}
                   onChange={this.handleChange('linkedinUrl')}
 
                 />
-                 <TextField InputLabelProps={{ shrink: true }}
+                <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
-                  placeholder="Enter availableFrom"
+                  //placeholder="Enter availableFrom"
                   name="availableFrom"
                   label="Available From "
                   fullWidth
-                  className={classes.textField}
+                  type="date"
+                  className={classes.textFieldMax}
                   value={this.state.availableFrom}
                   onChange={this.handleChange('availableFrom')}
                 />
-                <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="noticePeriod" shrink>Notice Period</InputLabel>
-                  <NativeSelect
-                    value={this.state.noticePeriod}
-                    onChange={this.handleChange('noticePeriod')}
-                    input={<Input name="noticePeriod" id="noticePeriod" />}
-                  >
-                    <option value="-1">--Select--</option>
-                    <option value="I">Immediate</option>
-                    <option value="1W">1 Week</option>
-                    <option value="2W">2 Weeks</option>
-                    <option value="1M">1 Month</option>
-                    <option value="C">Custom</option>
-                  </NativeSelect>
-                </FormControl>
+                
                 <FormControl className={classes.formControl}>
                   <InputLabel htmlFor="sourceFrom" shrink>Sourced From</InputLabel>
                   <NativeSelect
@@ -284,7 +271,7 @@ class CandidateDetails extends React.Component {
                     <option value="jn">Naukri</option>
                     <option value="jt">Times Job</option>
                     <option value="jtf"> TechFetch</option>
-                    <option value="mr">Mail response to Requirement List</option>
+                    <option value="mr">Mail response</option>
                     <option value="na">N/A</option>
                     <option value="or">Other</option>
                     <option value="rb">Referred By</option>
@@ -312,9 +299,9 @@ class CandidateDetails extends React.Component {
                     <option value="4935">Admin Admin</option>
                   </NativeSelect>
                 </FormControl>
-                <TextField InputLabelProps={{ shrink: true }}
+                <TextField 
                   margin="dense"
-                  placeholder="Enter sourceInfo"
+                  //placeholder="Enter sourceInfo"
                   name="sourceInfo"
                   label="SSN "
                   fullWidth
@@ -324,21 +311,32 @@ class CandidateDetails extends React.Component {
                 />
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
-                  placeholder="Enter licenseNumber"
+                  //placeholder="Enter dateOfBirth"
+                  name="dateOfBirth"
+                  label="Date of Birth "
+                  fullWidth
+                  className={classes.textFieldMax}
+                  value={this.state.dateOfBirth}
+                  type="Date"
+                  onChange={this.handleChange('dateOfBirth')}
+                />
+                <TextField InputLabelProps={{ shrink: true }}
+                  margin="dense"
+                  //placeholder="Enter licenseNumber"
                   name="licenseNumber"
                   label="License No"
                   fullWidth
-                  className={classes.textField}
+                  className={classes.textFieldMax}
                   value={this.state.licenseNumber}
                   onChange={this.handleChange('licenseNumber')}
                 />
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
-                  placeholder="Enter passportNumber"
+                  //placeholder="Enter passportNumber"
                   name="passportNumber"
                   label="Passport No"
                   fullWidth
-                  className={classes.textField}
+                  className={classes.textFieldMax}
                   value={this.state.passportNumber}
                   onChange={this.handleChange('passportNumber')}
                 />
@@ -360,20 +358,10 @@ class CandidateDetails extends React.Component {
                     <option value="-1">Other</option>
                   </NativeSelect>
                 </FormControl>
-                <TextField InputLabelProps={{ shrink: true }}
+
+                {/* <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
-                  placeholder="Enter dateOfBirth"
-                  name="dateOfBirth"
-                  label="Date of Birth "
-                  fullWidth
-                  className={classes.textFieldMax}
-                  value={this.state.dateOfBirth}
-                  type="Date"
-                  onChange={this.handleChange('dateOfBirth')}
-                />
-                <TextField InputLabelProps={{ shrink: true }}
-                  margin="dense"
-                  placeholder="Enter preferredLocation1"
+                  //placeholder="Enter preferredLocation1"
                   name="preferredLocation1"
                   label="Preferred Location1 "
                   fullWidth
@@ -384,7 +372,7 @@ class CandidateDetails extends React.Component {
                 />
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
-                  placeholder="Enter preferredLocation2"
+                  //placeholder="Enter preferredLocation2"
                   name="preferredLocation2"
                   label="Preferred Location2 "
                   fullWidth
@@ -392,7 +380,7 @@ class CandidateDetails extends React.Component {
                   value={this.state.preferredLocation2}
                   onChange={this.handleChange('preferredLocation2')}
 
-                />
+                /> */}
                 <FormControl className={classes.formControl}>
                   <InputLabel htmlFor="candidateStatus" shrink>Candidate Status</InputLabel>
                   <NativeSelect
@@ -401,23 +389,31 @@ class CandidateDetails extends React.Component {
                     input={<Input name="candidateStatus" id="candidateStatus" />}
                   >
                     <option value="--select--">-- select --</option>
-                    <option value={10}>My Team</option>
-                    <option value={20}>Private</option>
-                    <option value={30}>Public</option>
+                    <option value="CRS">Active</option>
+                    <option value="OH">On Hold</option>
+                    <option value="SC">Screened/Contacted</option>
+                    <option value="WPI">In Pipeline</option>
                   </NativeSelect>
                 </FormControl>
-                <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="country" shrink>Country</InputLabel>
-                  <NativeSelect
-                    value={this.state.country}
-                    onChange={this.handleChange('country')}
-                    input={<Input name="country" id="country" />}
-                  >
-                    <option value="0">--Select Country--</option>
-                    <option value="1">United States</option>
-                  </NativeSelect>
+                <TextField InputLabelProps={{ shrink: true }}
+                  margin="dense"
+                  ////placeholder="Enter address"
+                  name="address"
+                  label="Address"
+                  fullWidth
+                  className={classes.textField}
+                  value={this.state.address}
+                  onChange={this.handleChange('address')}
 
-                </FormControl>
+                />
+                <TextField InputLabelProps={{ shrink: true }}
+                  margin="dense"
+                  ////placeholder="Enter city name"
+                  name="city"
+                  label="City"
+                  value={this.state.city}
+                  onChange={this.handleChange('city')}
+                />
                 <FormControl className={classes.formControl}>
                   <InputLabel htmlFor="state" shrink>State</InputLabel>
                   <NativeSelect
@@ -478,29 +474,21 @@ class CandidateDetails extends React.Component {
                     <option value="WY">Wyoming</option>
                   </NativeSelect>
                 </FormControl>
-                <TextField InputLabelProps={{ shrink: true }}
-                  margin="dense"
-                  placeholder="Enter city name"
-                  name="city"
-                  label="City"
-                  value={this.state.city}
-                  onChange={this.handleChange('city')}
-                />
-                <TextField InputLabelProps={{ shrink: true }}
-                  margin="dense"
-                  placeholder="Enter address"
-                  name="address"
-                  label="Address"
-                  fullWidth
-                  className={classes.textField}
-                  value={this.state.address}
-                  onChange={this.handleChange('address')}
+                <FormControl className={classes.formControl}>
+                  <InputLabel htmlFor="country" shrink>Country</InputLabel>
+                  <NativeSelect
+                    value={this.state.country}
+                    onChange={this.handleChange('country')}
+                    input={<Input name="country" id="country" />}
+                  >
+                    <option value="0">--Select Country--</option>
+                    <option value="1">United States</option>
+                  </NativeSelect>
 
-                />
-                
+                </FormControl>
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
-                  placeholder="Enter zipCode"
+                  ////placeholder="Enter zipCode"
                   name="zipCode"
                   label="Zip Code "
                   fullWidth
@@ -509,20 +497,34 @@ class CandidateDetails extends React.Component {
                   onChange={this.handleChange('zipCode')}
 
                 />
-                
-                
+                <FormControl className={classes.formControl}>
+                  <InputLabel htmlFor="noticePeriod" shrink>Notice Period</InputLabel>
+                  <NativeSelect
+                    value={this.state.noticePeriod}
+                    onChange={this.handleChange('noticePeriod')}
+                    input={<Input name="noticePeriod" id="noticePeriod" />}
+                  >
+                    <option value="-1">--Select--</option>
+                    <option value="I">Immediate</option>
+                    <option value="1W">1 Week</option>
+                    <option value="2W">2 Weeks</option>
+                    <option value="1M">1 Month</option>
+                    <option value="C">Custom</option>
+                  </NativeSelect>
+                </FormControl>
+
                 <CardActions>
                 </CardActions>
               </CardContent>
             </Card>
-            <Card className={classes.card}>
+            {/* <Card className={classes.card}>
               <CardContent className={classes.content}>
                 <CardHeader title='Additional Information' ></CardHeader>
-                
-                
+
+
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
-                  placeholder="Enter sourcing"
+                  ////placeholder="Enter sourcing"
                   name="sourcing"
                   label="Sourcing "
                   fullWidth
@@ -530,12 +532,12 @@ class CandidateDetails extends React.Component {
                   value={this.state.sourcing}
                   onChange={this.handleChange('sourcing')}
                 />
-                
-               
-                
+
+
+
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
-                  placeholder="Enter fax"
+                  ////placeholder="Enter fax"
                   name="fax"
                   label="Fax"
                   fullWidth
@@ -543,7 +545,7 @@ class CandidateDetails extends React.Component {
                   value={this.state.fax}
                   onChange={this.handleChange('fax')}
                 />
-                
+
                 <CardActions>
                 </CardActions>
               </CardContent>
@@ -565,7 +567,7 @@ class CandidateDetails extends React.Component {
                 </FormControl>
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
-                  placeholder="Enter fatherName"
+                  ////placeholder="Enter fatherName"
                   name="fatherName"
                   label="Father Name "
                   fullWidth
@@ -575,7 +577,7 @@ class CandidateDetails extends React.Component {
                 />
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
-                  placeholder="Enter motherName"
+                  ////placeholder="Enter motherName"
                   name="motherName"
                   label="Mother Name "
                   fullWidth
@@ -585,7 +587,7 @@ class CandidateDetails extends React.Component {
                 />
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
-                  placeholder="Enter nationality"
+                  ////placeholder="Enter nationality"
                   name="nationality"
                   label="Nationality  "
                   fullWidth
@@ -595,7 +597,7 @@ class CandidateDetails extends React.Component {
                 />
                 <TextField InputLabelProps={{ shrink: true }}
                   margin="dense"
-                  placeholder="Enter hobbies"
+                  ////placeholder="Enter hobbies"
                   name="hobbies"
                   label="Hobbies  "
                   fullWidth
@@ -620,8 +622,8 @@ class CandidateDetails extends React.Component {
                 <CardActions>
                 </CardActions>
               </CardContent>
-            </Card>
-            <Audit createdBy={this.state.createdBy} createdAt={this.state.createdAt} updatedBy={this.state.updatedBy} updatedAt= {this.state.updatedAt}></Audit>
+            </Card> */}
+            <Audit createdBy={this.state.createdBy} createdAt={this.state.createdAt} updatedBy={this.state.updatedBy} updatedAt={this.state.updatedAt}></Audit>
           </form>
         </div>
       );
